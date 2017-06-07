@@ -3,8 +3,9 @@
 const User = require('../models/user');
 const bodyParser = require('body-parser');
 const airbnb = require('airapi');
-const request = require ('request');
-const cheerio = require('cheerio');
+// const google = require('google');
+const scraper = require ('../helpers/scraper');
+const google = require ('../helpers/google');
 
 
 module.exports = (app) => {
@@ -30,28 +31,9 @@ module.exports = (app) => {
 
 
   app.get("/api/festival",(req,res) => {
-    const url = "https://www.residentadvisor.net/event.aspx?934368";
-    request(url, (err,resp,body) => {
-      const $ = cheerio.load(body);
-      const event = $('.onsale');
-      const eventSale = event.children().children().children().text();
-      if (eventSale) {
-        const priceBreakdown = eventSale.split(/[£*$*€*\+*]/);
-        let ticketPrice = priceBreakdown[1];
-        let bookingFee = priceBreakdown[3];
-
-        // Euro symbol is placed after price in the RA website
-        if (eventSale.includes('€')) {
-          ticketPrice = priceBreakdown[0];
-          bookingFee = priceBreakdown[2];
-        }
-
-        // Check if booking fee is specified
-        bookingFee ? console.log(eval(`${ticketPrice} + ${bookingFee}`)) : console.log(ticketPrice)
-      } else {
-        console.log('Event has probably sold out.');
-      }
-    })
+    google.getEventLink('Junction 2 ra').then(url => {
+      scraper.getPrice(url);
+    });
   })
-  
+
 }
