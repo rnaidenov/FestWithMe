@@ -26,6 +26,18 @@ function getPrice(url) {
   })
 }
 
+function getCity (url) {
+  return new Promise((resolve, reject) => {
+    request(url, (err, resp, body) => {
+      const $ = cheerio.load(body);
+      const eventListings = $('.circle-left').children().text();
+      const city = eventListings.replace('Listings','');
+      resolve(city);
+    })
+  })
+}
+
 module.exports = {
-  getPrice
+  getPrice,
+  getCity
 };
