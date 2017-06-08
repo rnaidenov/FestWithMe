@@ -19,9 +19,7 @@ function getPrice(url) {
         ticketPrice = priceBreakdown[0];
         bookingFee = priceBreakdown[2];
       }
-
-      // Check if booking fee is specified
-      bookingFee ? console.log(eval(`${ticketPrice} + ${bookingFee}`)) : console.log(ticketPrice)
+      bookingFee ? console.log(parseInt(ticketPrice) + parseInt(bookingFee)) : console.log(ticketPrice)
     } else {
       console.log('Event has probably sold out.');
     }

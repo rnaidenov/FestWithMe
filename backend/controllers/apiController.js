@@ -30,8 +30,8 @@ module.exports = (app) => {
   })
 
 
-  app.get("/api/festival",(req,res) => {
-    google.getEventLink('Junction 2 ra').then(url => {
+  app.get("/api/prices/events",(req,res) => {
+    google.getEventLink(`${req.query.eventName} ra`).then(url => {
       scraper.getPrice(url);
     });
   })

@@ -9,8 +9,10 @@ function getEventLink (eventName) {
       if (err) console.error(err)
       for (var i = 0; i < res.links.length; ++i) {
         var link = res.links[i];
-        if (link.href.includes('https://www.residentadvisor.net/event.aspx'))
-        resolve(link.href);
+        if (link.href.includes('https://www.residentadvisor.net/event.aspx')) {
+          resolve(link.href);
+          break;
+        }
       }
     })
   })
