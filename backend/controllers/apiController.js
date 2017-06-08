@@ -33,9 +33,9 @@ module.exports = (app) => {
   app.get("/api/prices/events",(req,res) => {
     // google.getEventLink(`${req.query.eventName} ra`).then(url => {
     //   scraper.getPrice(url);
-      scraper.getCity("https://www.residentadvisor.net/event.aspx?946666").then(city => {
-        console.log(city);
-      });
+    scraper.getCountry("https://www.residentadvisor.net/event.aspx?939616").then(country => {
+      console.log(country);
+    });
     // });
   })
 

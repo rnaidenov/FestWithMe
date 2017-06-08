@@ -3,7 +3,7 @@
 const request = require ('request');
 const cheerio = require('cheerio');
 
-
+// Get price of the ticket for the event
 function getPrice(url) {
   request(url, (err,resp,body) => {
     const $ = cheerio.load(body);
@@ -26,6 +26,7 @@ function getPrice(url) {
   })
 }
 
+// Get the name of the city, where the event will be held
 function getCity (url) {
   return new Promise((resolve, reject) => {
     request(url, (err, resp, body) => {
@@ -37,7 +38,20 @@ function getCity (url) {
   })
 }
 
+// Get the name of the country, where the event will be held
+function getCountry (url) {
+  return new Promise((resolve,reject) => {
+    request(url, (err, resp, body) => {
+      const $ = cheerio.load(body);
+      const countryTag = $('.fl');
+      const countryName = countryTag[0].next.data.trim();
+      resolve(countryName);
+    })
+  })
+}
+
 module.exports = {
   getPrice,
-  getCity
+  getCity,
+  getCountry
 };
