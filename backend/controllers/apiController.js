@@ -3,7 +3,6 @@
 const User = require('../models/user');
 const bodyParser = require('body-parser');
 const airbnb = require('airapi');
-// const google = require('google');
 const scraper = require ('../helpers/scraper');
 const google = require ('../helpers/google');
 
@@ -31,12 +30,18 @@ module.exports = (app) => {
 
 
   app.get("/api/prices/events",(req,res) => {
-    // google.getEventLink(`${req.query.eventName} ra`).then(url => {
-    //   scraper.getPrice(url);
-    scraper.getCountry("https://www.residentadvisor.net/event.aspx?939616").then(country => {
-      console.log(country);
-    });
-    // });
-  })
+    google.getEventLink(req.query.eventName).then(url => {
+       scraper.getPrice(url);
+       scraper.getCity(url).then(city => {
+         console.log("City : ",city);
+       scraper.getCountry(url).then(country => {
+         console.log("Country : ",country);
+       });
+       scraper.getDate(url).then(date => {
+         console.log("Date : ", date);
+       });
+      });
+    })
+  });
 
 }

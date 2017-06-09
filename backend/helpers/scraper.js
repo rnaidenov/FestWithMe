@@ -50,8 +50,27 @@ function getCountry (url) {
   })
 }
 
+function getDate (url) {
+  return new Promise((resolve,reject) => {
+    request(url, (err, resp, body) => {
+      const $ = cheerio.load(body);
+      const mainHtml = $('#detail','.clearfix');
+      const parentTag = mainHtml.children().children()['0'].children;
+
+      for (const tag of parentTag) {
+        if (tag.name == 'a') {
+          const eventDate = tag.children[0].data;
+          resolve(eventDate);
+          break;
+        }
+      }
+    })
+  })
+}
+
 module.exports = {
   getPrice,
   getCity,
-  getCountry
+  getCountry,
+  getDate
 };
