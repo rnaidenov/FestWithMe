@@ -2,9 +2,10 @@
 
 const User = require('../models/user');
 const bodyParser = require('body-parser');
-const airbnb = require('airapi');
+// const airbnb = require('airapi');
 const scraper = require ('../helpers/scraper');
 const google = require ('../helpers/google');
+const flights = require('../helpers/flights');
 
 
 module.exports = (app) => {
@@ -27,6 +28,10 @@ module.exports = (app) => {
       res.send(searchResults)
     });
   })
+
+  app.get("/api/prices/flights",(req, res) => {
+    console.log(flights.getCityCode(req.query.city, req.query.country));
+  });
 
 
   app.get("/api/prices/events",(req,res) => {
