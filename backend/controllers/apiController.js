@@ -30,7 +30,9 @@ module.exports = (app) => {
   })
 
   app.get("/api/prices/flights",(req, res) => {
-    console.log(flights.getCityCode(req.query.city, req.query.country));
+    flights.getFlightPrices('SOF','NYC','2017-09-03').then(data => {
+      console.log(data);
+    });
   });
 
 
