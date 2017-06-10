@@ -5,24 +5,27 @@ const cheerio = require('cheerio');
 
 // Get price of the ticket for the event
 function getPrice(url) {
-  request(url, (err,resp,body) => {
-    const $ = cheerio.load(body);
-    const event = $('.onsale');
-    const eventSale = event.children().children().children().text();
-    if (eventSale) {
-      const priceBreakdown = eventSale.split(/[£*$*€*\+*]/);
-      let ticketPrice = priceBreakdown[1];
-      let bookingFee = priceBreakdown[3];
+  return new Promise ((resolve, reject) => {
 
-      // Euro symbol is placed after price in the RA website
-      if (eventSale.includes('€')) {
-        ticketPrice = priceBreakdown[0];
-        bookingFee = priceBreakdown[2];
+    request(url, (err,resp,body) => {
+      const $ = cheerio.load(body);
+      const event = $('.onsale');
+      const eventSale = event.children().children().children().text();
+      if (eventSale) {
+        const priceBreakdown = eventSale.split(/[£*$*€*\+*]/);
+        let ticketPrice = priceBreakdown[1];
+        let bookingFee = priceBreakdown[3];
+
+        // Euro symbol is placed after price in the RA website
+        if (eventSale.includes('€')) {
+          ticketPrice = priceBreakdown[0];
+          bookingFee = priceBreakdown[2];
+        }
+        bookingFee ? resolve(parseInt(ticketPrice) + parseInt(bookingFee)) : resolve(parseInt(ticketPrice))
+      } else {
+        resolve('Event has probably sold out.');
       }
-      bookingFee ? console.log(parseInt(ticketPrice) + parseInt(bookingFee)) : console.log(ticketPrice)
-    } else {
-      console.log('Event has probably sold out.');
-    }
+    })
   })
 }
 
@@ -50,6 +53,7 @@ function getCountry (url) {
   })
 }
 
+// Get the date of the event
 function getDate (url) {
   return new Promise((resolve,reject) => {
     request(url, (err, resp, body) => {
@@ -68,9 +72,22 @@ function getDate (url) {
   })
 }
 
+// Get the event details
+function getEventDetails (url) {
+  return new Promise((resolve, reject) => {
+    Promise.all([getPrice(url),getCity(url),getCountry(url),getDate(url)]).then(data => {
+      const [price, city, country, date] = data;
+      resolve({
+        price,
+        city,
+        country,
+        date
+      })
+    })
+  })
+
+}
+
 module.exports = {
-  getPrice,
-  getCity,
-  getCountry,
-  getDate
+  getEventDetails
 };

@@ -31,17 +31,10 @@ module.exports = (app) => {
 
   app.get("/api/prices/events",(req,res) => {
     google.getEventLink(req.query.eventName).then(url => {
-       scraper.getPrice(url);
-       scraper.getCity(url).then(city => {
-         console.log("City : ",city);
-       scraper.getCountry(url).then(country => {
-         console.log("Country : ",country);
-       });
-       scraper.getDate(url).then(date => {
-         console.log("Date : ", date);
-       });
+      scraper.getEventDetails(url).then(eventDetails => {
+        res.send(eventDetails);
       });
-    })
+    });
   });
 
 }
