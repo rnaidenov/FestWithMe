@@ -6,6 +6,7 @@ const scraper = require ('../helpers/scraper');
 const google = require ('../helpers/google');
 const flights = require('../helpers/flights');
 const airbnb = require('../helpers/airbnb');
+const Festivals = require('../models/festivalModel');
 
 
 module.exports = (app) => {
@@ -15,6 +16,13 @@ module.exports = (app) => {
 
   app.use(bodyParser.urlencoded({extended: true}));
 
+
+  app.get("/api/festivals/",(req,res) => {
+    Festivals.find({},function (err,todos) {
+        if(err) throw err;
+        res.send(todos);
+      });
+  });
 
   app.get("/api/prices/housing",(req,res) => {
     airbnb.getPrice(req.query.location, req.query.checkInDate).then(housingDetails => {
