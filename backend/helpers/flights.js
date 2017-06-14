@@ -32,7 +32,6 @@ function getFlightPrices (origin, destination, date) {
   const originIata = getIataCode(cityOrigin,countryOrigin);
   const destinationIata = getIataCode(cityDest, countryDest);
   const flightDate = formatter.formatDate(date,'flights');
-  console.log(originIata, destinationIata, flightDate);
   const body = {
     "request": {
       "passengers": { "adultCount": 1 },
@@ -68,7 +67,9 @@ function getFlightPrices (origin, destination, date) {
 
       resolve({
         duration,
-        price : flightPrice
+        price : flightPrice,
+        origin : originIata,
+        destination : destinationIata
       });
     })
   });
