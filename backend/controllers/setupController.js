@@ -1,4 +1,4 @@
-const Festival = require ('../models/festival');
+const Festival = require ('../models/festivalModel');
 
 module.exports = (app) => {
 
