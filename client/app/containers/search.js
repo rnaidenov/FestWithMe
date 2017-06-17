@@ -1,96 +1,75 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { searchFestival, handleInput } from '../actions/searchActions';
-import { coroutine as co} from 'bluebird';
+import { loadFestivals, updateInput, searchFestival } from '../actions/searchActions';
+import AutoComplete from 'material-ui/AutoComplete';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Paper from 'material-ui/Paper';
+import '../styles/search.css';
+import { Grid, Col, Row} from 'react-bootstrap';
+import IconButton from 'material-ui/IconButton';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 
 
-const apiKey = 'AIzaSyBtSws0VCIlzHDhXOpn9KR_3Juw9pIxe1Q';
-const apiKey2 = 'AIzaSyD8yemJXcjTgYV7d_goyxKuwKNpd35VhXw';
-
-
+@connect(store => {
+  return {
+    festivals : store.festivals,
+    festivalInput : store.festivalInput,
+    searchResults : store.searchResults
+  }
+})
 
 class Search extends React.Component {
 
 
 
   componentDidMount() {
-    co(function * (){
-      let eventDetails = yield fetch('http://localhost:3000/api/prices/events?eventName=Afterlife Barcelona');
-      const eventDetails_json = yield eventDetails.json();
-      let destination = `${eventDetails_json.city},${eventDetails_json.country}`;
-      console.log(eventDetails_json);
-      const origin = 'Sofia,Bulgaria';
-      let date = eventDetails_json.date;
-      console.log(date);
-      let flightDetails = yield fetch(`http://localhost:3000/api/prices/flights?origin=${origin}&destination=${destination}&date=${date}`);
-      const flightDetails_json = yield flightDetails.json();
-      let housingDetails = yield fetch(`http://localhost:3000/api/prices/housing?location=${destination}&checkInDate=${date}`);
-      const housingDetails_json = yield housingDetails.json();
-      const obj = {
-        eventDetails_json,
-        flightDetails_json,
-        housingDetails_json
-      }
+    injectTapEventPlugin();
 
-      console.log(obj);
-    }).bind(this)();
+    this.props.dispatch(loadFestivals());
+  }
+
+  updateSearchInput (e) {
+    this.props.dispatch(updateInput(e));
+  }
+
+  bratle(e) {
+    console.log(e.target.value);
   }
 
   render () {
-
-
-    // ---- Getting data from database ----- //
-
-    // const users = fetch('/api/users');
-
-    // users.then(data => {
-    //   data.json().then(what => {
-    //     console.log(what);
-    //   })
-    // })
-
-
-
-
-
-
-    const festivalName = this.props.festivalInput;
-
-    let selectedFestival;
-
-    if (!this.props.selectedFestival) {
-      selectedFestival = "Search for a festival";
-    } else {
-      selectedFestival = JSON.stringify(this.props.selectedFestival);
-    }
+    console.log(this.props.searchResults);
 
     return (
-      <div>
-        <input placeholder = 'Search for a festival' onBlur = {(e) => this.props.handleInput(e)}></input>
-        <button onClick = {() => this.props.searchFestival({festivalName})}> Go </button>
+      <div >
+        <Grid className = 'searchWrap'>
+            <MuiThemeProvider>
+               <Row>
+                <Col md={4} sm={10} mdOffset={3}>
+                   <Paper zDepth={1} className = 'searchContainer'>
+                      <AutoComplete
+                        id="festivals_textInput"
+                        dataSource={this.props.festivals}
+                        filter={AutoComplete.caseInsensitiveFilter}
+                        fullWidth={true}
+                        onBlur = {(e) => {this.updateSearchInput(e)}}
+                      />
+                    </Paper>
+                  </Col>
+                  <Col md={2} sm={2}>
+                    <IconButton className='searchBtn' onClick = {() => this.props.dispatch(searchFestival(this.props.festivalInput))}>
+                      <i class="material-icons">search</i>
+                    </IconButton>
+                  </Col>
+              </Row>
+            </MuiThemeProvider>
 
-        {selectedFestival}
-
+            {this.props.searchResults}
+        </Grid>
       </div>
     )
   }
 
 }
 
-function mapStateToProps (state) {
-  return {
-    festivalInput : state.festivalInput,
-    selectedFestival : state.selectedFestival
-  }
-}
-
-function matchDispatchToProps (dispatch) {
-  return bindActionCreators(
-    {
-      handleInput : handleInput,
-      searchFestival : searchFestival
-    },dispatch);
-}
-
-export default connect(mapStateToProps, matchDispatchToProps)(Search);
+export default Search;

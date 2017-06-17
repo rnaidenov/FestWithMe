@@ -14,12 +14,15 @@ module.exports = {
         loaders: [
             {
                 test: /\.js$/,
-                loaders: ['babel-loader'],
+                loader: 'babel-loader',
+                query: {
+                  plugins: ['react-html-attrs', 'transform-class-properties', 'transform-decorators-legacy'],
+                },
                 exclude: /node_modules/
             },
             {
-                test: /\.scss/,
-                loader: 'style-loader!css-loader!sass-loader'
+                test: /\.css$/,
+                loaders: ['style-loader','css-loader']
             },
             {
               test: /\.json$/,

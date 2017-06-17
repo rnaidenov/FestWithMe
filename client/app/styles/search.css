@@ -1,0 +1,19 @@
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.searchWrap {
+  margin-top: 10%;
+  text-align: center;
+}
+
+.searchContainer {
+  width: 100% !important;
+  margin: auto !important;
+}
+
+.searchBtn {
+  background-color: #bc7871 !important;
+  border-radius: 50% !important;
+}
