@@ -47,18 +47,17 @@ function getIataCode (cityName, countryName) {
     let airportsArrPromise = getAirports(cityName, countryName);
 
     airportsArrPromise.then(airportsArr => {
-      const firstAirport = airportsArr[0].attributes.iata;
+      let firstAirport = airportsArr[0].attributes.iata;
       if (airportsArr.length > 1) {
         for (let airportInfo of airportsArr) {
           const {attributes : airport} = airportInfo;
           if (airport.name == 'All Airports') {
-            resolve(airport.iata);
+            firstAirport = airport.iata;
             break;
           }
         }
-      } else {
-        resolve(firstAirport);
       }
+      resolve(firstAirport);
     })
   })
 }
@@ -95,8 +94,6 @@ function getFlightPrices (origin, destination, date) {
 
   return new Promise ((resolve, reject) => {
     generateSearchQuery(origin, destination, date).then(body => {
-
-
         qpx.getInfo(body, (err,data) => {
           const {trips : { tripOption : tripsArr } } = data;
           const cheapestFlight = tripsArr[0];
@@ -115,7 +112,7 @@ function getFlightPrices (origin, destination, date) {
               break;
             }
           }
-
+          
           const {origin, destination} = body.request.slice[0];
           resolve({
             duration,
