@@ -17,10 +17,21 @@ function formatDate (date,format) {
     ['December', '12'],
   ]);
 
-  const mm = months.get(month);
+  let mm = months.get(month);
+
+  if(!mm) {
+    for (let m of months.keys()) {
+      if (m.includes(month)) {
+        mm = months.get(m);
+        break;
+      }
+    }
+  }
+
 
   let formattedDate;
   format == 'flights' ? formattedDate = `${year}-${mm}-${day}` : formattedDate = `${day}/${mm}/${year}`
+  console.log(formattedDate);
   return formattedDate;
 }
 
