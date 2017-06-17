@@ -34,14 +34,21 @@ export function searchFestival (festivalName) {
     dispatch({type: 'FESTIVAL_SEARCH_START'});
 
     co(function * () {
+      console.log(`http://localhost:3000/api/prices/events?eventName=${festivalName}`);
       const eventDetails_response = yield fetch(`http://localhost:3000/api/prices/events?eventName=${festivalName}`);
       const eventDetails = yield eventDetails_response.json();
+      console.log(eventDetails);
       const origin = 'Sofia,Bulgaria';
       const destination = `${eventDetails.city},${eventDetails.country}`;
       const date = eventDetails.date;
+      dispatch({type: 'FLIGHTS_SEARCH_START'});
       const flightDetails_response = yield fetch(`http://localhost:3000/api/prices/flights?origin=${origin}&destination=${destination}&date=${date}`);
+      dispatch({type: 'FLIGHTS_SEARCH_FINISH'});
       const flightDetails = yield flightDetails_response.json();
+      console.log(flightDetails);
+      dispatch({type: 'HOUSING_SEARCH_START'});
       const housingDetails_response = yield fetch(`http://localhost:3000/api/prices/housing?location=${destination}&checkInDate=${date}`);
+      dispatch({type: 'HOUSING_SEARCH_FINISH'});
       const housingDetails = yield housingDetails_response.json();
 
       const pricingDetails = {

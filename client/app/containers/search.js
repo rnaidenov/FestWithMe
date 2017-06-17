@@ -9,6 +9,7 @@ import '../styles/search.css';
 import { Grid, Col, Row} from 'react-bootstrap';
 import IconButton from 'material-ui/IconButton';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import CircularProgress from 'material-ui/CircularProgress';
 
 
 @connect(store => {
@@ -37,8 +38,48 @@ class Search extends React.Component {
     console.log(e.target.value);
   }
 
+
+
   render () {
     console.log(this.props.searchResults);
+    const {searchResults} = this.props;
+    const {text, color} = searchResults || {};
+
+    const loadingPhase = (
+      <div>
+        <CircularProgress
+          size={100}
+          thickness={3}
+          color={color || {}}
+          className='loadingCircle'/>
+        <p>{text || ''}</p>
+      </div>
+    )
+
+    const finishedPhase = (
+      <div>
+        <Paper zDepth={1}>
+          <img
+            src={require('../public/success.svg')}
+            className = 'successCircle'
+          />
+        </Paper>
+      </div>
+    )
+
+    const getResults = () => {
+      if (!searchResults) {
+        return null;
+      } else if (searchResults.status = 'loading') {
+        return (
+          loadingPhase
+        )
+      } else if (searchResults.status = 'finished') {
+        return (
+          finishedPhase
+        )
+      }
+    }
 
     return (
       <div >
@@ -61,10 +102,11 @@ class Search extends React.Component {
                       <i class="material-icons">search</i>
                     </IconButton>
                   </Col>
+                  <Col md = {12} >
+                    {getResults()}
+                  </Col>
               </Row>
-            </MuiThemeProvider>
-
-            {this.props.searchResults}
+          </MuiThemeProvider>
         </Grid>
       </div>
     )

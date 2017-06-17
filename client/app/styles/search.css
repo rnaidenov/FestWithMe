@@ -17,3 +17,12 @@
   background-color: #bc7871 !important;
   border-radius: 50% !important;
 }
+
+.loadingCircle {
+  margin-top: 5%;
+}
+
+.successCircle {
+  width: 40px;
+  height: 40px;
+}
