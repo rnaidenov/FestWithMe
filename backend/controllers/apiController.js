@@ -5,8 +5,10 @@ const bodyParser = require('body-parser');
 const scraper = require ('../helpers/scraper');
 const google = require ('../helpers/google');
 const flights = require('../helpers/flights');
+const amadeus = require('../helpers/amadeus');
 const airbnb = require('../helpers/airbnb');
 const Festivals = require('../models/festivalModel');
+
 
 
 module.exports = (app) => {
@@ -31,7 +33,7 @@ module.exports = (app) => {
   })
 
   app.get("/api/prices/flights",(req, res) => {
-    flights.getFlightPrices(req.query.origin,req.query.destination,req.query.date).then(flightDetails => {
+    amadeus.getFlightPrices("Sofia,Bulgaria","London,United Kingdom","21 June 2017").then(flightDetails => {
       res.send(flightDetails)
     });
   });
@@ -40,6 +42,7 @@ module.exports = (app) => {
   app.get("/api/prices/events",(req,res) => {
     google.getEventLink(req.query.eventName).then(url => {
       scraper.getEventDetails(url).then(eventDetails => {
+        console.log(eventDetails);
         res.send(eventDetails);
       });
     });

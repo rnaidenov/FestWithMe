@@ -31,7 +31,6 @@ function formatDate (date,format) {
 
   let formattedDate;
   format == 'flights' ? formattedDate = `${year}-${mm}-${day}` : formattedDate = `${day}/${mm}/${year}`
-  console.log(formattedDate);
   return formattedDate;
 }
 
