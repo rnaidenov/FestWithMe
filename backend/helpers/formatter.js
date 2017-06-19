@@ -28,9 +28,12 @@ function formatDate (date,format) {
     }
   }
 
+  // If day is before the 10th it needs to have a 0 in the beginning
+  let dd;
+  day.charAt(0) != '0' && day < 10 ? dd = `0${day}` : dd = day
 
   let formattedDate;
-  format == 'flights' ? formattedDate = `${year}-${mm}-${day}` : formattedDate = `${day}/${mm}/${year}`
+  format == 'flights' ? formattedDate = `${year}-${mm}-${dd}` : formattedDate = `${day}/${mm}/${year}`
   return formattedDate;
 }
 
