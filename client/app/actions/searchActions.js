@@ -8,40 +8,18 @@ const handleInput = (e) => {
 };
 
 
-// co(function * (){
-//   let eventDetails = yield fetch('http://localhost:3000/api/prices/events?eventName=Afterlife Barcelona');
-//   const eventDetails_json = yield eventDetails.json();
-//   let destination = `${eventDetails_json.city},${eventDetails_json.country}`;
-//   console.log(eventDetails_json);
-//   const origin = 'Sofia,Bulgaria';
-//   let date = eventDetails_json.date;
-//   console.log(date);
-//   let flightDetails = yield fetch(`http://localhost:3000/api/prices/flights?origin=${origin}&destination=${destination}&date=${date}`);
-//   const flightDetails_json = yield flightDetails.json();
-//   let housingDetails = yield fetch(`http://localhost:3000/api/prices/housing?location=${destination}&checkInDate=${date}`);
-//   const housingDetails_json = yield housingDetails.json();
-//   const obj = {
-//     eventDetails_json,
-//     flightDetails_json,
-//     housingDetails_json
-//   }
-//
-//   console.log(obj);
-// }).bind(this)();
-
 export function searchFestival (festivalName) {
   return function (dispatch) {
     dispatch({type: 'FESTIVAL_SEARCH_START'});
 
     co(function * () {
-      console.log(`http://localhost:3000/api/prices/events?eventName=${festivalName}`);
       const eventDetails_response = yield fetch(`http://localhost:3000/api/prices/events?eventName=${festivalName}`);
       const eventDetails = yield eventDetails_response.json();
       console.log(eventDetails);
       const origin = 'Sofia,Bulgaria';
       const destination = `${eventDetails.city},${eventDetails.country}`;
       const date = eventDetails.date;
-      dispatch({type: 'FLIGHTS_SEARCH_START'});
+      dispatch({type: 'FLIGHTS_SEARCH_START',payload: eventDetails.city});
       const flightDetails_response = yield fetch(`http://localhost:3000/api/prices/flights?origin=${origin}&destination=${destination}&date=${date}`);
       dispatch({type: 'FLIGHTS_SEARCH_FINISH'});
       const flightDetails = yield flightDetails_response.json();
@@ -65,10 +43,10 @@ export function searchFestival (festivalName) {
   }
 }
 
-export const updateInput = (e) => {
+export const updateInput = (festivalName) => {
   return {
     type: 'FESTIVAL_INPUT_UPDATE',
-    payload: e.target.value
+    payload: festivalName
   }
 }
 

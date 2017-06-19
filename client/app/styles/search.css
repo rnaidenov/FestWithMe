@@ -1,6 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:300');
+
 * {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+}
+
+p {
+  font-family: 'Lato', sans-serif !important;
 }
 
 .searchWrap {
@@ -18,11 +24,37 @@
   border-radius: 50% !important;
 }
 
-.loadingCircle {
+.determinateCircle {
   margin-top: 5%;
+  z-index: 2;
+}
+
+.indeterminateCircle {
+  margin-top: 5%;
+  position: absolute;
+  margin-left: -100px;
+  z-index: 1;
 }
 
 .successCircle {
-  width: 40px;
-  height: 40px;
+  width: 100px;
+  height: 100px;
+  margin-top: 6%;
+}
+
+#searchReadyText {
+  margin-top: 1%;
+}
+
+#resultsLabel {
+  color:#435565;
+  margin-top: 1%;
+}
+
+.priceBreakdown {
+  color:#7a96af;
+}
+
+#priceBreakdownLabel {
+  margin-bottom: -0.3%;
 }

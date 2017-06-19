@@ -10,7 +10,7 @@ import { Grid, Col, Row} from 'react-bootstrap';
 import IconButton from 'material-ui/IconButton';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import CircularProgress from 'material-ui/CircularProgress';
-
+import Results from './results';
 
 @connect(store => {
   return {
@@ -22,64 +22,23 @@ import CircularProgress from 'material-ui/CircularProgress';
 
 class Search extends React.Component {
 
-
+  constructor(props) {
+    super(props);
+    this.state={searchQuery:''}
+  }
 
   componentDidMount() {
     injectTapEventPlugin();
-
     this.props.dispatch(loadFestivals());
   }
 
-  updateSearchInput (e) {
-    this.props.dispatch(updateInput(e));
+  updateSearchInput (festivalName) {
+    this.setState({searchQuery:festivalName});
+    this.props.dispatch(updateInput(festivalName));
   }
-
-  bratle(e) {
-    console.log(e.target.value);
-  }
-
-
 
   render () {
-    console.log(this.props.searchResults);
-    const {searchResults} = this.props;
-    const {text, color} = searchResults || {};
 
-    const loadingPhase = (
-      <div>
-        <CircularProgress
-          size={100}
-          thickness={3}
-          color={color || {}}
-          className='loadingCircle'/>
-        <p>{text || ''}</p>
-      </div>
-    )
-
-    const finishedPhase = (
-      <div>
-        <Paper zDepth={1}>
-          <img
-            src={require('../public/success.svg')}
-            className = 'successCircle'
-          />
-        </Paper>
-      </div>
-    )
-
-    const getResults = () => {
-      if (!searchResults) {
-        return null;
-      } else if (searchResults.status = 'loading') {
-        return (
-          loadingPhase
-        )
-      } else if (searchResults.status = 'finished') {
-        return (
-          finishedPhase
-        )
-      }
-    }
 
     return (
       <div >
@@ -93,9 +52,12 @@ class Search extends React.Component {
                         dataSource={this.props.festivals}
                         filter={AutoComplete.caseInsensitiveFilter}
                         fullWidth={true}
-                        onBlur = {(e) => {this.updateSearchInput(e)}}
+                        onUpdateInput = {(festivalName) => {this.updateSearchInput(festivalName)}}
                       />
                     </Paper>
+                  </Col>
+                  <Col mdHidden={true} lgHidden={true}>
+                    <div>&nbsp;</div>
                   </Col>
                   <Col md={2} sm={2}>
                     <IconButton className='searchBtn' onClick = {() => this.props.dispatch(searchFestival(this.props.festivalInput))}>
@@ -103,7 +65,7 @@ class Search extends React.Component {
                     </IconButton>
                   </Col>
                   <Col md = {12} >
-                    {getResults()}
+                    <Results festivalName={this.state.searchQuery}/>
                   </Col>
               </Row>
           </MuiThemeProvider>
