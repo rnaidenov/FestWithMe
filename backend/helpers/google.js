@@ -10,10 +10,9 @@ function getEventLink (eventName) {
     fetch(reqUrl).then(response =>{
       response.json().then(results => {
 
-        // console.log(results);
         for (result of results.items) {
           if (result.link.includes('https://www.residentadvisor.net/event.aspx')) {
-          
+
             resolve(result.link);
             break;
           }
