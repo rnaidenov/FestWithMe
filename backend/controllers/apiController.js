@@ -1,11 +1,11 @@
 'use strict';
 
-const User = require('../models/user');
 const bodyParser = require('body-parser');
 const scraper = require ('../helpers/scraper');
 const google = require ('../helpers/google');
 const amadeus = require('../helpers/amadeus');
 const airbnb = require('../helpers/airbnb');
+const currencies = require('../helpers/currencies');
 const Festivals = require('../models/festivalModel');
 
 
@@ -43,6 +43,12 @@ module.exports = (app) => {
         console.log(eventDetails);
         res.send(eventDetails);
       });
+    });
+  });
+
+  app.get("/api/currencies",(req, res) => {
+    currencies.convert(req.query.from,req.query.to,req.query.amount).then(convertedAmount => {
+      res.send(convertedAmount);
     });
   });
 
