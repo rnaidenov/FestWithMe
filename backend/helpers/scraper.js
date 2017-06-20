@@ -13,15 +13,25 @@ function getPrice(url) {
       const eventSale = event.children().children().children().text();
       if (eventSale) {
         const priceBreakdown = eventSale.split(/[£*$*€*\+*]/);
+        const currencyBreakdown = eventSale.split(/\d/);
+
         let ticketPrice = priceBreakdown[1];
         let bookingFee = priceBreakdown[3];
+        let currency = currencyBreakdown[0];
 
         // Euro symbol is placed after price in the RA website
         if (eventSale.includes('€')) {
           ticketPrice = priceBreakdown[0];
           bookingFee = priceBreakdown[2];
+          currency = currencyBreakdown[currencyBreakdown.length -1].trim();
         }
-        bookingFee ? resolve(parseInt(ticketPrice) + parseInt(bookingFee)) : resolve(parseInt(ticketPrice))
+        let ticketPrice_total;
+        bookingFee ? ticketPrice_total = parseInt(ticketPrice) + parseInt(bookingFee) : ticketPrice_total = parseInt(ticketPrice)
+
+        resolve({
+          ticketPrice_total,
+          currency
+        });
       } else {
         resolve('Event has probably sold out.');
       }

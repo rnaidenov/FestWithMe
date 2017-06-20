@@ -6,5 +6,6 @@ module.exports = {
   },
   amadeusAPIKey : configValues.amadeusAPIKey,
   googleAPIKey : configValues.googleAPIKey,
-  googleCSE : configValues.googleCSE
+  googleCSE : configValues.googleCSE,
+  exchangeRatesAPIKey : configValues.exchangeRatesAPIKey
 }
