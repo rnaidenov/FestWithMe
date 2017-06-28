@@ -53,13 +53,16 @@ function getTotalPrice (eventDetails, flightDetails, housingDetails) {
   const {sharedRoom, privateRoom, entireHome} = housingDetails;
 
   return new Promise ((resolve, reject) => {
-    const {price : {ticketPrice_total : ticketPrice, currency : ticketCurrency}} = eventDetails;
-    fetch(`http://localhost:3000/api/currencies?from=${ticketCurrency}&to=$&amount=${ticketPrice}`).then(conversionRes => {
+    const {price : {ticketPrice_total : ticketPrice} } = eventDetails;
+    const ticketCurrency = ticketPrice.charAt(0);
+    const ticketPriceAmount = ticketPrice.split(ticketCurrency)[1];
+    fetch(`http://localhost:3000/api/currencies?from=${ticketCurrency}&to=$&amount=${ticketPriceAmount}`).then(conversionRes => {
       conversionRes.json().then(data => {
         const ticketPriceUSD = data.convertedAmount;
+        console.log(ticketPriceUSD);
         const totalPrice = ticketPriceUSD + flightPrice + privateRoom;
         resolve({
-          ticketPrice : ticketPriceUSD,
+          ticketPrice : `$${ticketPriceUSD}`,
           flight : flightDetails,
           housingDetails,
           totalPrice
