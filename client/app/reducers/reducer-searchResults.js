@@ -16,7 +16,10 @@ export default (state = null, action) => {
       return {text: 'You\'re all set!',status: 'finished',loaderValue:98};
       break;
     case 'FESTIVAL_SEARCH_FINISHED':
-      return {results : action.payload,status: 'finished',loaderValue:100};
+      return {prices : action.payload,status: 'finished',loaderValue:100};
+      break;
+    case 'EVENT_SOLD_OUT':
+      return {prices : action.payload,status: 'finished',loaderValue:100};
       break;
   }
   return state;

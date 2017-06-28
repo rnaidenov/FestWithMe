@@ -33,6 +33,7 @@
     "node-fetch": "^1.7.1",
     "node-libs-browser": "^1.0.0",
     "node-sass": "^3.8.0",
+    "nuka-carousel": "^2.0.4",
     "react": "^15.1.0",
     "react-addons-test-utils": "^15.1.0",
     "react-bootstrap": "^0.31.0",
