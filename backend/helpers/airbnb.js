@@ -16,14 +16,18 @@ function getPrice (location, date) {
       const {'Shared room' : sharedRoom, 'Private room' : privateRoom, 'Entire home/apt' : entireHome} = avgPrice;
 
       // If there is no information about a particular room, don't return currency symbol
-      sharedRoom ? `$${sharedRoom}` : sharedRoom
-      privateRoom ? `$${privateRoom}` : privateRoom
-      entireHome ? `$${entireHome}` : entireHome
+      let sharedRoomUSD;
+      let privateRoomUSD;
+      let entireHomeUSD;
+
+      sharedRoom ? sharedRoomUSD = `$${sharedRoom}` : sharedRoomUSD = sharedRoom
+      privateRoom ? privateRoomUSD = `$${privateRoom}` : privateRoomUSD = privateRoom
+      entireHome ? entireHomeUSD = `$${entireHome}` : entireHomeUSD = entireHome
 
       resolve({
-        sharedRoom,
-        privateRoom,
-        entireHome
+        sharedRoom : sharedRoomUSD,
+        privateRoom : privateRoomUSD,
+        entireHome : entireHomeUSD
       });
     });
   });
