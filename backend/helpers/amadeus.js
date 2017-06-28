@@ -14,7 +14,11 @@ function generateSearchQuery (origin,destination,date) {
 
     originIataPromise.then(originIata => {
       destinationIataPromise.then(destinationIata => {
-        resolve(`${amadeusAPI}&origin=${originIata}&destination=${destinationIata}&departure_date=${flightDate}`);
+        resolve({
+          link: `${amadeusAPI}&origin=${originIata}&destination=${destinationIata}&departure_date=${flightDate}`,
+          origin: originIata,
+          destination: destinationIata
+        });
       })
     })
   })
@@ -24,12 +28,14 @@ function generateSearchQuery (origin,destination,date) {
 function getFlightPrices (origin,destination,date) {
   return new Promise ((resolve, reject) => {
     generateSearchQuery(origin,destination,date).then(searchQuery => {
-      fetch(searchQuery).then(response => {
+      fetch(searchQuery.link).then(response => {
         response.json().then(data => {
           const {results} = data;
-          const {fare : {total_price : flightPrice}} = results[0];
+          const {fare : {total_price : ticketPrice}} = results[0];
           resolve({
-            flightPrice
+            flightPrice : `$${parseInt(ticketPrice)}`,
+            origin : searchQuery.origin,
+            destination : searchQuery.destination
           });
         });
       });

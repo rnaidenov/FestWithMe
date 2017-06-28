@@ -29,8 +29,7 @@ function getPrice(url) {
         bookingFee ? ticketPrice_total = parseInt(ticketPrice) + parseInt(bookingFee) : ticketPrice_total = parseInt(ticketPrice)
 
         resolve({
-          ticketPrice_total,
-          currency
+          ticketPrice_total : `${currency}${ticketPrice_total}`
         });
       } else {
         resolve('Event has probably sold out.');

@@ -14,6 +14,12 @@ function getPrice (location, date) {
     }).then(function(searchResults) {
       const {avg_price : avgPrice} = searchResults.results_json.metadata.avg_price_by_room_type;
       const {'Shared room' : sharedRoom, 'Private room' : privateRoom, 'Entire home/apt' : entireHome} = avgPrice;
+
+      // If there is no information about a particular room, don't return currency symbol
+      sharedRoom ? `$${sharedRoom}` : sharedRoom
+      privateRoom ? `$${privateRoom}` : privateRoom
+      entireHome ? `$${entireHome}` : entireHome
+
       resolve({
         sharedRoom,
         privateRoom,
