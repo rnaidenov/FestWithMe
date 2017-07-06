@@ -10,6 +10,8 @@ import { Grid, Col, Row} from 'react-bootstrap';
 import IconButton from 'material-ui/IconButton';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import CircularProgress from 'material-ui/CircularProgress';
+import TextField from 'material-ui/TextField';
+
 import Results from './results';
 
 @connect(store => {
@@ -24,7 +26,7 @@ class Search extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state={searchQuery:''}
+    this.state={searchQuery:'',location:'location_off'}
   }
 
   componentDidMount() {
@@ -37,39 +39,46 @@ class Search extends React.Component {
     this.props.dispatch(updateInput(festivalName));
   }
 
+  toggleLocation () {
+    this.state.location === 'location_on' ? this.setState({location:'location_off'}) : this.setState({location:'location_on'})
+  }
+
+
   render () {
 
+    const hintStyle = {marginLeft:'2%'};
+
+    const location= this.state.location;
+    console.log(location);
 
     return (
       <div >
-        <Grid className = 'searchWrap'>
-            <MuiThemeProvider>
-               <Row>
-                <Col md={4} sm={10} mdOffset={3}>
-                   <Paper zDepth={1} className = 'searchContainer'>
-                      <AutoComplete
-                        id="festivals_textInput"
-                        dataSource={this.props.festivals}
-                        filter={AutoComplete.caseInsensitiveFilter}
-                        fullWidth={true}
-                        onUpdateInput = {(festivalName) => {this.updateSearchInput(festivalName)}}
-                      />
-                    </Paper>
-                  </Col>
-                  <Col mdHidden={true} lgHidden={true}>
-                    <div>&nbsp;</div>
-                  </Col>
-                  <Col md={2} sm={2}>
-                    <IconButton className='searchBtn' onClick = {() => this.props.dispatch(searchFestival(this.props.festivalInput))}>
-                      <i class="material-icons">search</i>
-                    </IconButton>
-                  </Col>
-                  <Col md = {12} >
-                    <Results festivalName={this.state.searchQuery}/>
-                  </Col>
-              </Row>
+          <MuiThemeProvider>
+            <div className="searchWrap">
+              <p className="inlineLabel">Going to</p>
+              <Paper zDepth={1} className = 'searchContainer'>
+                <AutoComplete
+                  dataSource={this.props.festivals}
+                  filter={AutoComplete.caseInsensitiveFilter}
+                  hintText="Festival"
+                  hintStyle={hintStyle}
+                  fullWidth={true}
+                  onUpdateInput = {(festivalName) => {this.updateSearchInput(festivalName)}}
+                />
+              </Paper>
+              <p  className="inlineLabel">from</p>
+              <Paper  zDepth={1} className = 'searchContainer'>
+                <TextField
+                  hintText="City"
+                  hintStyle={hintStyle}
+                  fullWidth={true}
+                />
+                <i className="material-icons locationIcon" id={location} onClick = {() => this.toggleLocation()}>{location}</i>
+              </Paper>
+
+              <Results festivalName={this.state.searchQuery}/>
+            </div>
           </MuiThemeProvider>
-        </Grid>
       </div>
     )
   }

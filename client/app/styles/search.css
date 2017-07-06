@@ -14,9 +14,11 @@ p {
   text-align: center;
 }
 
+
 .searchContainer {
-  width: 100% !important;
+  width: 20% !important;
   margin: auto !important;
+  display: inline-block;
 }
 
 .searchBtn {
@@ -42,6 +44,11 @@ p {
   margin-top: 6%;
 }
 
+.inlineLabel{
+  display: inline-block;
+  margin:0% 1%;
+}
+
 #searchReadyText {
   margin-top: 1%;
 }
@@ -49,6 +56,26 @@ p {
 #resultsLabel {
   color:#435565;
   margin-top: 2%;
+}
+
+.locationIcon {
+  position: absolute;
+  margin-left: -1.6%;
+  margin-top: 0.8%;
+}
+
+#location_off {
+  color: #d0cbcb;
+}
+
+#location_on {
+  color: #844d4d;
+  animation: bounceUp 1000ms linear both;
+}
+
+.locationIcon:hover {
+  color:#e26d6d;
+  z-index: 2;
 }
 
 .priceBreakdown {

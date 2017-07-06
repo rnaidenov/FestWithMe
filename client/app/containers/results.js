@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import { loadFestivals, updateInput, searchFestival } from '../actions/searchActions';
 import Paper from 'material-ui/Paper';
 import '../styles/search.css';
 import { Grid, Col, Row} from 'react-bootstrap';

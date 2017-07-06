@@ -45,7 +45,7 @@ function PriceBreakdown ({ticketPrice, flightDetails, accommodation}) {
     <div>
         <h1 className='priceBreakdownHeading'>Accommodation</h1>
         <Row>
-          <Col md={12} sm={3}>
+          <Col md={12} sm={12}>
             <Row className='accommodationTypeWrap'>
               <Col md={4}><img src={require('../public/privateRoom.svg')} className='homeTypeIcon'/></Col>
                 <Col md={4} className='typeAndPriceWrap'><p>Private room</p></Col>
