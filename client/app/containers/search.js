@@ -11,6 +11,8 @@ import IconButton from 'material-ui/IconButton';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import CircularProgress from 'material-ui/CircularProgress';
 import TextField from 'material-ui/TextField';
+import {geolocated} from 'react-geolocated';
+
 
 import Results from './results';
 
@@ -43,6 +45,14 @@ class Search extends React.Component {
     this.state.location === 'location_on' ? this.setState({location:'location_off'}) : this.setState({location:'location_on'})
   }
 
+  hoverLocation () {
+    this.state.location == 'location_off' ? this.setState({hoverLocation:true}) : null;
+  }
+
+  hoverOutLocation () {
+    this.setState({hoverLocation:false});
+  }
+
 
   render () {
 
@@ -50,6 +60,15 @@ class Search extends React.Component {
 
     const location= this.state.location;
     console.log(location);
+
+    const toolTip = (
+      <div class="toolTipBox">
+        <div class="body">
+          <span class="tip tip-down"></span>
+          <p className="toolTipMessage">Click here to automatically detect and add your location</p>
+        </div>
+      </div>
+    )
 
     return (
       <div >
@@ -73,9 +92,15 @@ class Search extends React.Component {
                   hintStyle={hintStyle}
                   fullWidth={true}
                 />
-                <i className="material-icons locationIcon" id={location} onClick = {() => this.toggleLocation()}>{location}</i>
+                <i className="material-icons locationIcon" id={location}
+                  onMouseEnter={() => this.hoverLocation()}
+                  onClick = {() => this.toggleLocation()}
+                  onMouseLeave = {() => this.hoverOutLocation()}
+                >
+                  {location}
+                </i>
               </Paper>
-
+              {this.state.hoverLocation ? toolTip : null}
               <Results festivalName={this.state.searchQuery}/>
             </div>
           </MuiThemeProvider>
