@@ -6,6 +6,7 @@ const google = require ('../helpers/google');
 const amadeus = require('../helpers/amadeus');
 const airbnb = require('../helpers/airbnb');
 const currencies = require('../helpers/currencies');
+const location = require('../helpers/iplocation');
 const Festivals = require('../models/festivalModel');
 
 
@@ -50,6 +51,12 @@ module.exports = (app) => {
     currencies.convert(req.query.from,req.query.to,req.query.amount).then(convertedAmount => {
       res.send(convertedAmount);
     });
+  });
+
+  app.get("/api/location",(req, res) => {
+    location.findLocaton().then(location => {
+      res.send(location);
+    })
   });
 
 }

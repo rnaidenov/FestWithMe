@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Lato:300|BenchNine|Hammersmith+One|Quicksand');
+@import url('https://fonts.googleapis.com/css?family=Lato:300|family=Roboto:300|BenchNine|Hammersmith+One|Quicksand');
 
 * {
   -webkit-box-sizing: border-box;
@@ -298,4 +298,8 @@ p {
   font-size: 14px;
   line-height: 1.5;
   color: #797979;
+}
+
+.locationTextField {
+  font-family: 'Roboto', sans-serif !important;
 }

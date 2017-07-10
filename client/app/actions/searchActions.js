@@ -79,18 +79,31 @@ export const updateInput = (festivalName) => {
   }
 }
 
+export function getLocation () {
+  return function(dispatch) {
+    fetch("http://localhost:3000/api/location")
+    .then(data => {
+        data.json().then(location => {
+          const {city, country} = location;
+          dispatch({type:'SEARCHING_LOCATION_FINISH',payload:`${city},${country}`});
+        })
+    })
+  }
+}
+
+
 export function loadFestivals () {
   return function (dispatch) {
     dispatch({type: 'LOAD_FESTIVALS_START'});
 
     fetch("http://localhost:3000/api/festivals")
-      .then(data =>{
-        data.json().then(festivals => {
-          dispatch({type: 'LOAD_FESTIVALS_FINISH', payload: festivals});
-        })
+    .then(data =>{
+      data.json().then(festivals => {
+        dispatch({type: 'LOAD_FESTIVALS_FINISH', payload: festivals});
       })
-      .catch(err => {
-        dispatch({type: 'LOAD_FESTIVALS_ERROR', payload: err});
-      })
+    })
+    .catch(err => {
+      dispatch({type: 'LOAD_FESTIVALS_ERROR', payload: err});
+    })
   }
 }

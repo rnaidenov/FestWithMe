@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { loadFestivals, updateInput, searchFestival } from '../actions/searchActions';
+import { loadFestivals, updateInput, searchFestival, getLocation } from '../actions/searchActions';
 import AutoComplete from 'material-ui/AutoComplete';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Paper from 'material-ui/Paper';
@@ -20,7 +20,8 @@ import Results from './results';
   return {
     festivals : store.festivals,
     festivalInput : store.festivalInput,
-    searchResults : store.searchResults
+    searchResults : store.searchResults,
+    location : store.location
   }
 })
 
@@ -28,7 +29,7 @@ class Search extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state={searchQuery:'',location:'location_off'}
+    this.state={searchQuery:'',location:'location_off',locationField:''}
   }
 
   componentDidMount() {
@@ -42,7 +43,13 @@ class Search extends React.Component {
   }
 
   toggleLocation () {
-    this.state.location === 'location_on' ? this.setState({location:'location_off'}) : this.setState({location:'location_on'})
+    if (this.state.location === 'location_on') {
+      this.setState({location:'location_off'})
+    } else {
+      this.setState({location:'location_on',locationField:''});
+      this.setState({locationField:this.props.location});
+      this.props.dispatch(getLocation());
+    }
   }
 
   hoverLocation () {
@@ -53,13 +60,18 @@ class Search extends React.Component {
     this.setState({hoverLocation:false});
   }
 
+  updateLocationField (e) {
+    this.setState({locationField:e.target.value});
+  }
+
 
   render () {
 
     const hintStyle = {marginLeft:'2%'};
 
     const location= this.state.location;
-    console.log(location);
+
+
 
     const toolTip = (
       <div class="toolTipBox">
@@ -88,9 +100,12 @@ class Search extends React.Component {
               <p  className="inlineLabel">from</p>
               <Paper  zDepth={1} className = 'searchContainer'>
                 <TextField
-                  hintText="City"
+                  hintText='City'
+                  className='locationTextField'
                   hintStyle={hintStyle}
                   fullWidth={true}
+                  onChange={(e) => this.updateLocationField(e)}
+                  value={this.state.locationField}
                 />
                 <i className="material-icons locationIcon" id={location}
                   onMouseEnter={() => this.hoverLocation()}
