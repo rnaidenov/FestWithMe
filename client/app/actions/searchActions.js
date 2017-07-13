@@ -8,7 +8,7 @@ const handleInput = (e) => {
 };
 
 
-export function searchFestival (festivalName) {
+export function searchFestival (origin, festivalName) {
   return function (dispatch) {
     dispatch({type: 'FESTIVAL_SEARCH_START'});
 
@@ -16,7 +16,6 @@ export function searchFestival (festivalName) {
       const eventDetails_response = yield fetch(`http://localhost:3000/api/prices/events?eventName=${festivalName}`);
       const eventDetails = yield eventDetails_response.json();
       if (typeof(eventDetails.price) == 'object') {
-        const origin = 'Sofia,Bulgaria';
         const destination = `${eventDetails.city},${eventDetails.country}`;
         const date = eventDetails.date;
         dispatch({type: 'FLIGHTS_SEARCH_START',payload: eventDetails.city});

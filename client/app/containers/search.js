@@ -50,7 +50,7 @@ class Search extends React.Component {
       this.setState({location:'location_on'});
       setTimeout(() => {
         this.setState({locationField:this.props.location});
-      },200);
+      },400);
     }
   }
 
@@ -71,7 +71,9 @@ class Search extends React.Component {
 
     const hintStyle = {marginLeft:'2%'};
 
-    const location= this.state.location;
+    const {locationField : locationInput,location} = this.state;
+    console.log("location : ",locationInput);
+    const festivalInput = this.props.festivalInput;
 
     console.log(this.props.location);
 
@@ -117,7 +119,12 @@ class Search extends React.Component {
                   {location}
                 </i>
               </Paper>
-              {this.state.hoverLocation ? toolTip : null}
+
+
+              <IconButton className='searchBtn' onClick = {() => this.props.dispatch(searchFestival(locationInput,festivalInput))}>
+                <i class="material-icons">search</i>
+              </IconButton>
+
               <Results festivalName={this.state.searchQuery}/>
             </div>
           </MuiThemeProvider>

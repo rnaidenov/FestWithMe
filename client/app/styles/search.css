@@ -24,6 +24,7 @@ p {
 .searchBtn {
   background-color: #bc7871 !important;
   border-radius: 50% !important;
+  margin-left: 2% !important;
 }
 
 .determinateCircle {
