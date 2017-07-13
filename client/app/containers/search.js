@@ -46,9 +46,11 @@ class Search extends React.Component {
     if (this.state.location === 'location_on') {
       this.setState({location:'location_off'})
     } else {
-      this.setState({location:'location_on',locationField:''});
-      this.setState({locationField:this.props.location});
       this.props.dispatch(getLocation());
+      this.setState({location:'location_on'});
+      setTimeout(() => {
+        this.setState({locationField:this.props.location});
+      },200);
     }
   }
 
@@ -71,7 +73,7 @@ class Search extends React.Component {
 
     const location= this.state.location;
 
-
+    console.log(this.props.location);
 
     const toolTip = (
       <div class="toolTipBox">
