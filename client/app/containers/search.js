@@ -89,8 +89,9 @@ class Search extends React.Component {
     return (
       <div >
           <MuiThemeProvider>
+            <div>
             <div className="searchWrap">
-              <p className="inlineLabel">Going to</p>
+              <p className="inlineLabel" id="goingToLabel">Going to</p>
               <Paper zDepth={1} className = 'searchContainer'>
                 <AutoComplete
                   dataSource={this.props.festivals}
@@ -121,12 +122,14 @@ class Search extends React.Component {
               </Paper>
 
 
-              <IconButton className='searchBtn' onClick = {() => this.props.dispatch(searchFestival(locationInput,festivalInput))}>
-                <i class="material-icons">search</i>
-              </IconButton>
 
-              <Results festivalName={this.state.searchQuery}/>
             </div>
+            <IconButton className='searchBtn' onClick = {() => this.props.dispatch(searchFestival(locationInput,festivalInput))}>
+              <i class="material-icons">search</i>
+            </IconButton>
+
+            <Results festivalName={this.state.searchQuery}/>
+          </div>
           </MuiThemeProvider>
       </div>
     )
