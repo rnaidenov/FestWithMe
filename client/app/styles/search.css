@@ -9,58 +9,95 @@ p {
   font-family: 'Lato', sans-serif !important;
 }
 
+
+/*----------- Small screen size -----------*/
+
 @media screen and (max-width: 599px) {
-  .searchWrap{
-    /*background-color: red;*/
-    margin-top: 10%;
-    width: 100% !important;
-    text-align: center;
-    display: flex;
-    flex-wrap: wrap;
-  }
+
   .inlineLabel {
     width: 100% !important;
     margin-bottom: 3%;
-    /*background-color: green;*/
   }
   .searchContainer {
     width:100% !important;
     margin-bottom: 3%;
-    /*ma*/
-    /*background-color: blue !important;*/
+  }
+  .priceBreakdownContainer {
+    -webkit-transform: translate(0px,180px);
+    transform: translate(0px,180px);
+    transition: transform 0.5s ease-in-out;
+    display: none;
+  }
+  .priceBreakdownContainer.selected {
+    -webkit-transform: translate(0px,-180px);
+    transform: translate(0px,-180px);
+    display: block;
+  }
+  .homeTypeIcon {
+    height: 60px;
+    width: 12%;
+    margin-left: 5%;
+  }
+
+
+  .accommodationTypeWrap{
+    margin-bottom: 5%;
+    width:100%;
+    display: flex;
+  }
+
+  .typeAndPriceWrap {
+    margin-top: 5%;
+    width: 40%;
   }
 }
 
+/*----------- Medium screen size -----------*/
+
 @media screen and (min-width: 600px) {
   .searchWrap{
-    /*background-color: red;*/
     margin-top: 20%;
-    width: 100% !important;
-    text-align: center;
-    display: flex;
-    flex-wrap: wrap;
   }
   .inlineLabel {
     width: 15% !important;
     margin-bottom: 6%;
-    /*background-color: green;*/
   }
   .searchContainer {
-    width:85% !important;
+    width:60% !important;
     margin-bottom: 6%;
-    /*ma*/
-    /*background-color: blue !important;*/
+  }
+  .btnWrap {
+    width:25% !important;
+    order:2;
+  }
+  #goingToLabel {
+    order:0;
+  }
+  #festivalField {
+    order: 1;
+  }
+  #fromLabel {
+    order:3;
+  }
+  #cityField {
+    order: 4;
+  }
+  .priceBreakdownContainer {
+    width:50% !important;
+  }
+  .accomodationWrap {
+    margin: auto;
   }
 }
 
+
+/*----------- Big screen size -----------*/
 
 @media screen and (min-width:900px) {
 
   .searchWrap {
     margin-top: 10%;
     width:60% !important;
-    text-align: center;
-    display: flex;
     margin-left: auto;
     margin-right: auto;
   }
@@ -68,20 +105,53 @@ p {
     width: 10% !important;
     margin-bottom: 6%;
     padding-top: 6% !important;
-    /*background-color: green;*/
   }
 
   .searchContainer {
-    width: 40% !important;
-    margin: auto !important;
+    width: 32.5% !important;
+    margin: auto;
     display: inline-block;
   }
+  #goingToLabel {
+    order:0;
+  }
+  #festivalField {
+    order: 1;
+  }
+  #fromLabel {
+    order:2;
+  }
+  #cityField {
+    order: 3;
+  }
+  .btnWrap {
+    width:15% !important;
+    order:4;
+    padding: 4.5% !important;
+  }
+  .priceBreakdownContainer {
+    width:25% !important;
+  }
+}
+
+
+.searchWrap {
+  width: 100%;
+  margin-top:10%;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.btnWrap {
+  width:100%;
+  text-align: center;
+  padding-top:5%;
 }
 
 .searchBtn {
   background-color: #bc7871 !important;
-  border-radius: 50% !important;
-  margin-left: 2% !important;
+  border-radius: 50%;
 }
 
 .determinateCircle {
@@ -180,7 +250,8 @@ p {
 }
 
 .finishedResultsWrap {
-  height: 500px;
+  width:100%;
+  text-align:center;
 }
 
 @keyframes bounceUp {
@@ -213,13 +284,14 @@ p {
 }
 
 .priceBreakdownContainer {
-  width: 300px;
-  height: 300px;
+  width: 100%;
   margin: auto;
+  text-align: center;
   padding-top: 2%;
 }
 
 .priceBreakdownHeading {
+  width:100%;
   font-family: 'Quicksand', sans-serif;
   font-size: 30px;
   margin-bottom: 8%;
@@ -286,17 +358,28 @@ p {
     animation-delay: 0.1s;
 }
 
-.homeTypeIcon {
-  width: 50px;
-  height: 50px;
+.accomodationWrap {
+  display: flex;
+  flex-wrap: wrap;
 }
 
+/*at least for small screens*/
+.homeTypeIcon {
+  height: 60px;
+  width: 12%;
+  margin-left: 5%;
+}
+
+
 .accommodationTypeWrap{
-  margin-bottom: 8%;
+  margin-bottom: 5%;
+  width:100%;
+  display: flex;
 }
 
 .typeAndPriceWrap {
   margin-top: 5%;
+  width: 40%;
 }
 
 .slider-frame {

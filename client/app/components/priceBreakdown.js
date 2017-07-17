@@ -4,7 +4,7 @@ import Paper from 'material-ui/Paper';
 import CustomCarousel from '../components/customCarousel';
 
 
-function PriceBreakdown ({ticketPrice, flightDetails, accommodation}) {
+function PriceBreakdown ({cssClass ,ticketPrice, flightDetails, accommodation}) {
 
 
   const festival = (
@@ -42,27 +42,23 @@ function PriceBreakdown ({ticketPrice, flightDetails, accommodation}) {
   )
 
   const housing = (
-    <div>
+    <div className="accomodationWrap">
         <h1 className='priceBreakdownHeading'>Accommodation</h1>
-        <Row>
-          <Col md={12} sm={12}>
-            <Row className='accommodationTypeWrap'>
-              <Col md={4}><img src={require('../public/privateRoom.svg')} className='homeTypeIcon'/></Col>
-                <Col md={4} className='typeAndPriceWrap'><p>Private room</p></Col>
-                <Col md={4} className='typeAndPriceWrap'><p>{accommodation.privateRoom || noInfo}</p></Col>
-            </Row>
-            <Row className='accommodationTypeWrap'>
-              <Col md={4}><img src={require('../public/sharedRoom.svg')} className='homeTypeIcon'/></Col>
-                <Col md={4}  className='typeAndPriceWrap'><p>Shared room</p></Col>
-                <Col md={4}  className='typeAndPriceWrap'><p>{accommodation.sharedRoom || noInfo}</p></Col>
-            </Row>
-            <Row className='accommodationTypeWrap'>
-              <Col md={4}><img src={require('../public/entireHome.svg')} className='homeTypeIcon'/></Col>
-              <Col md={4}  className='typeAndPriceWrap'><p>Entire home</p></Col>
-              <Col md={4}  className='typeAndPriceWrap'><p>{accommodation.entireHome || noInfo}</p></Col>
-            </Row>
-          </Col>
-        </Row>
+            <div className='accommodationTypeWrap'>
+              <img src={require('../public/privateRoom.svg')} className='homeTypeIcon'/>
+              <div md={4} className='typeAndPriceWrap'><p>Private room</p></div>
+              <div md={4} className='typeAndPriceWrap'><p>{accommodation.privateRoom || noInfo}</p></div>
+            </div>
+            <div className='accommodationTypeWrap'>
+              <img src={require('../public/sharedRoom.svg')} className='homeTypeIcon'/>
+              <div md={4}  className='typeAndPriceWrap'><p>Shared room</p></div>
+              <div md={4}  className='typeAndPriceWrap'><p>{accommodation.sharedRoom || noInfo}</p></div>
+            </div>
+            <div className='accommodationTypeWrap'>
+              <img src={require('../public/entireHome.svg')} className='homeTypeIcon'/>
+              <div md={4}  className='typeAndPriceWrap'><p>Entire home</p></div>
+              <div md={4}  className='typeAndPriceWrap'><p>{accommodation.entireHome || noInfo}</p></div>
+            </div>
     </div>
   )
 
@@ -74,7 +70,7 @@ function PriceBreakdown ({ticketPrice, flightDetails, accommodation}) {
 
 
   return (
-    <Paper zDepth={1} className='priceBreakdownContainer'>
+    <Paper zDepth={1} className={cssClass}>
       <CustomCarousel
         slideWidth={1}
         content={content}

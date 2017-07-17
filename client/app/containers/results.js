@@ -16,6 +16,16 @@ import PriceBreakdown  from '../components/priceBreakdown';
 
 class Results extends React.Component {
 
+  constructor (props) {
+    super(props);
+    this.state = {priceBreakdownClass:'priceBreakdownContainer'}
+  }
+
+  showPriceBreakdown () {
+    console.log("what");
+      this.setState({priceBreakdownClass: 'priceBreakdownContainer selected'});
+  }
+
   render () {
 
     const {searchResults, festivalName} = this.props;
@@ -81,11 +91,17 @@ class Results extends React.Component {
         <div>
            <p
              className="priceBreakdown"
-             id="priceBreakdownLabel">
+             id="priceBreakdownLabel"
+            >
              Price breakdown
            </p>
-           <span className="priceBreakdown" id='carretDropdown'> &#9660;</span>
+              <span className="priceBreakdown" id='carretDropdown'
+                onClick={() => this.showPriceBreakdown()}
+              > 
+                &#9660;
+              </span>
            <PriceBreakdown
+             cssClass = {this.state.priceBreakdownClass}
              flightDetails={flight || {}}
              ticketPrice={ticketPrice}
              accommodation={housingDetails || {}}
@@ -107,7 +123,7 @@ class Results extends React.Component {
 
     return (
       <div>
-        {results}
+        {finishedPhase}
       </div>
     )
   }

@@ -92,7 +92,7 @@ class Search extends React.Component {
             <div>
             <div className="searchWrap">
               <p className="inlineLabel" id="goingToLabel">Going to</p>
-              <Paper zDepth={1} className = 'searchContainer'>
+              <Paper zDepth={1} className = 'searchContainer' id="festivalField">
                 <AutoComplete
                   dataSource={this.props.festivals}
                   filter={AutoComplete.caseInsensitiveFilter}
@@ -102,8 +102,8 @@ class Search extends React.Component {
                   onUpdateInput = {(festivalName) => {this.updateSearchInput(festivalName)}}
                 />
               </Paper>
-              <p  className="inlineLabel">from</p>
-              <Paper  zDepth={1} className = 'searchContainer'>
+              <p  className="inlineLabel" id="fromLabel">from</p>
+              <Paper  zDepth={1} className = 'searchContainer' id="cityField">
                 <TextField
                   hintText='City'
                   className='locationTextField'
@@ -120,13 +120,12 @@ class Search extends React.Component {
                   {location}
                 </i>
               </Paper>
-
-
-
+              <div className="btnWrap">
+                <IconButton className='searchBtn' onClick = {() => this.props.dispatch(searchFestival(locationInput,festivalInput))}>
+                  <i class="material-icons">search</i>
+                </IconButton>
+              </div>
             </div>
-            <IconButton className='searchBtn' onClick = {() => this.props.dispatch(searchFestival(locationInput,festivalInput))}>
-              <i class="material-icons">search</i>
-            </IconButton>
 
             <Results festivalName={this.state.searchQuery}/>
           </div>
