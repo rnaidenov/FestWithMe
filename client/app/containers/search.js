@@ -118,6 +118,7 @@ class Search extends React.Component {
                   onMouseLeave = {() => this.hoverOutLocation()}
                 >
                   {location}
+                  {toolTip}
                 </i>
               </Paper>
               <div className="btnWrap">

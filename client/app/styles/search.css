@@ -23,6 +23,7 @@ p {
     margin-bottom: 3%;
   }
   .priceBreakdownContainer {
+    width:100% !important;
     -webkit-transform: translate(0px,180px);
     transform: translate(0px,180px);
     transition: transform 0.5s ease-in-out;
@@ -50,11 +51,21 @@ p {
     margin-top: 5%;
     width: 40%;
   }
+
+  .toolTipBox {
+    left:-780% !important;
+    top:15px !important;
+  }
+  .tip-down {
+    top:-18px !important;
+    right:4px !important;
+    transform: rotate(180deg)
+  }
 }
 
 /*----------- Medium screen size -----------*/
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 600px) and (max-width:899px) {
   .searchWrap{
     margin-top: 20%;
   }
@@ -82,11 +93,20 @@ p {
   #cityField {
     order: 4;
   }
-  .priceBreakdownContainer {
-    width:50% !important;
-  }
+
   .accomodationWrap {
     margin: auto;
+  }
+  .locationIcon {
+    left: 95%;
+  }
+  .toolTipBox {
+    transform: rotate(180deg);
+    top: 64% !important;
+    left: -385% !important;
+  }
+  .toolTipBox .toolTipMessage {
+    transform: rotate(180deg) !important;
   }
 }
 
@@ -110,7 +130,6 @@ p {
   .searchContainer {
     width: 32.5% !important;
     margin: auto;
-    display: inline-block;
   }
   #goingToLabel {
     order:0;
@@ -129,11 +148,23 @@ p {
     order:4;
     padding: 4.5% !important;
   }
-  .priceBreakdownContainer {
-    width:25% !important;
+  .finishedResultsWrap {
+    margin-top: -4%;
+  }
+  .locationIcon {
+    left: 90% !important;
+  }
+  .toolTipBox.body {
+    transform: rotate(180deg);
   }
 }
 
+
+@media screen and (min-width:1500px) {
+  .locationIcon {
+    left: 92% !important;
+  }
+}
 
 .searchWrap {
   width: 100%;
@@ -147,6 +178,10 @@ p {
   width:100%;
   text-align: center;
   padding-top:5%;
+}
+
+.searchContainer {
+  position: relative;
 }
 
 .searchBtn {
@@ -181,7 +216,7 @@ p {
 #goingToLabel {
   padding-right: 1%;
 }
-
+priceBreakdownContainer
 #searchReadyText {
   margin-top: 1%;
 }
@@ -193,8 +228,8 @@ p {
 
 .locationIcon {
   position: absolute;
-  margin-left: -1.6%;
-  margin-top: 0.8%;
+  left:95%;
+  top:24%;
 }
 
 #location_off {
@@ -284,7 +319,7 @@ p {
 }
 
 .priceBreakdownContainer {
-  width: 100%;
+  width: 350px;
   margin: auto;
   text-align: center;
   padding-top: 2%;
@@ -402,7 +437,6 @@ p {
 
 .tip-down {
   bottom: -18px;
-  left: 44%;
   border: 8px solid #d2b1b1;
   border-right-color: transparent;
   border-left-color: transparent;
@@ -411,9 +445,9 @@ p {
 
 
 .toolTipBox {
-  margin-left: 66.9%;
-  margin-top: -7.3%;
-  /*animation: showUp 0.2s linear both;*/
+  position: absolute;
+  top: -324%;
+  left: -450%;
 }
 
 @keyframes showUp {
