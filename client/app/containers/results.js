@@ -18,20 +18,32 @@ class Results extends React.Component {
 
   constructor (props) {
     super(props);
-    this.state = {priceBreakdownClass:'priceBreakdownContainer'}
+    this.state = {priceBreakdownClass:'priceBreakdownContainer',carret:'arrow_drop_up'}
   }
 
-  showPriceBreakdown () {
-    console.log("what");
-      this.setState({priceBreakdownClass: 'priceBreakdownContainer selected'});
+  togglePriceBreakdown () {
+    console.log("click");
+      if (this.state.carret.includes('down')) {
+        console.log("mnogo laina");
+        this.setState({priceBreakdownClass: 'priceBreakdownContainer unselected',carret:'arrow_drop_up'}, () => {
+          setTimeout(() => {
+            this.setState({priceBreakdownClass:'priceBreakdownContainer'})
+          },1000)
+        });
+      } else {
+        console.log("laina");
+        this.setState({priceBreakdownClass: 'priceBreakdownContainer selected',carret:'arrow_drop_down'});
+      }
   }
 
   render () {
 
     const {searchResults, festivalName} = this.props;
+    const {carret} = this.state;
     const {text, color, loaderValue, prices} = searchResults || {};
     const {details} = prices || {};
     const {flight, ticketPrice, housingDetails} = details || {};
+
 
     let results;
 
@@ -95,11 +107,12 @@ class Results extends React.Component {
             >
              Price breakdown
            </p>
-              <span className="priceBreakdown" id='carretDropdown'
-                onClick={() => this.showPriceBreakdown()}
-              > 
-                &#9660;
-              </span>
+           <i class="material-icons priceBreakdown"
+             id='carretDropdown'
+             onClick={() => this.togglePriceBreakdown()}>
+             {carret}
+           </i>
+
            <PriceBreakdown
              cssClass = {this.state.priceBreakdownClass}
              flightDetails={flight || {}}
