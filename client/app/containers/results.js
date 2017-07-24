@@ -116,7 +116,7 @@ class Results extends React.Component {
            <PriceBreakdown
              cssClass = {this.state.priceBreakdownClass}
              flightDetails={flight || {}}
-             ticketPrice={ticketPrice}
+             ticketPrice={ticketPrice }
              accommodation={housingDetails || {}}
            />
        </div>

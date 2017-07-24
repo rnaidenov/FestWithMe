@@ -8,32 +8,22 @@ function PriceBreakdown ({cssClass ,ticketPrice, flightDetails, accommodation}) 
 
 
   const festival = (
-    <div>
+    <div className="priceDetailsWrap">
       <h1 className='priceBreakdownHeading'>Festival ticket</h1>
       <img src={require('../public/ticket.svg')} id='ticketIcon'/>
-      <p className='priceLabel'>{ticketPrice}</p>
+      <p className='priceLabel'>{ticketPrice || '$42'}</p>
     </div>
   )
 
   const travel = (
-    <div>
+    <div className="priceDetailsWrap">
       <h1 className='priceBreakdownHeading'>Plane ticket</h1>
-      <Row className='pathWrap'>
-        <Col md={4}>
-          <span className='iataCodes'>{flightDetails.origin}</span>
-        </Col>
-        <Col md={4}>
-          <span className='wind-wave'></span>
-          <span className='wind-wave second'></span>
+        <div className="routeWrap">
+          <span className='iataCodes'>{flightDetails.origin || 'SOF'}</span>
           <img src={require('../public/airplane.svg')} className='planeIcon'/>
-          <span className='wind-wave'></span>
-          <span className='wind-wave second'></span>
-        </Col>
-        <Col md={4}>
-          <span className='iataCodes'>{flightDetails.destination}</span>
-        </Col>
-      </Row>
-      <p className='priceLabel'>{flightDetails.flightPrice}</p>
+          <span className='iataCodes'>{flightDetails.destination || 'LDN'}</span>
+        </div>
+      <p className='priceLabel'>{flightDetails.flightPrice || '$33'}</p>
     </div>
   )
 
@@ -52,12 +42,12 @@ function PriceBreakdown ({cssClass ,ticketPrice, flightDetails, accommodation}) 
             <div className='accommodationTypeWrap'>
               <img src={require('../public/sharedRoom.svg')} className='homeTypeIcon'/>
               <div md={4}  className='typeAndPriceWrap'><p>Shared room</p></div>
-              <div md={4}  className='typeAndPriceWrap'><p>{accommodation.sharedRoom || noInfo}</p></div>
+              <div md={4}  className='typeAndPriceWrap'><p>{accommodation.sharedRoom || '$90'}</p></div>
             </div>
             <div className='accommodationTypeWrap'>
               <img src={require('../public/entireHome.svg')} className='homeTypeIcon'/>
               <div md={4}  className='typeAndPriceWrap'><p>Entire home</p></div>
-              <div md={4}  className='typeAndPriceWrap'><p>{accommodation.entireHome || noInfo}</p></div>
+              <div md={4}  className='typeAndPriceWrap'><p>{accommodation.entireHome || '$24'}</p></div>
             </div>
     </div>
   )
