@@ -34,7 +34,7 @@ function getFlightPrices (origin,destination,date) {
           const {results} = data;
           const {fare : {total_price : ticketPrice}} = results[0];
           resolve({
-            flightPrice : `$${parseInt(ticketPrice)}`,
+            flightPriceAmount : parseInt(ticketPrice),
             origin : searchQuery.origin,
             destination : searchQuery.destination
           });

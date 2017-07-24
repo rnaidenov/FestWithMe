@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Lato:300|family=Roboto:300|BenchNine|Hammersmith+One|Quicksand');
+@import url('https://fonts.googleapis.com/css?family=Lato:300|family=Roboto:300|BenchNine|Hammersmith+One|Quicksand|Yanone+Kaffeesatz');
 
 * {
   -webkit-box-sizing: border-box;
@@ -72,6 +72,12 @@ p {
     top:-18px !important;
     right:4px !important;
     transform: rotate(180deg)
+  }
+  .festivalNameLabel {
+    font-size: 18px !important;
+  }
+  .totalPriceLabel {
+    font-size: 26px !important;
   }
 }
 
@@ -218,12 +224,10 @@ p {
 }
 
 .determinateCircle {
-  margin-top: 5%;
   z-index: 2;
 }
 
 .indeterminateCircle {
-  margin-top: 5%;
   position: absolute;
   margin-left: -100px;
   z-index: 1;
@@ -380,6 +384,12 @@ priceBreakdownContainer
   100% { opacity: 1;-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
 }
 
+.loaderWrap {
+  margin-top: 5%;
+  width: 100%;
+  text-align: center;
+}
+
 .priceBreakdownContainer {
   width: 350px;
   margin: auto;
@@ -387,7 +397,16 @@ priceBreakdownContainer
   padding-top: 2%;
 }
 
+.festivalNameLabel {
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-size: 26px
+}
 
+.totalPriceLabel {
+  font-size: 32px;
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  color: #237b4b;
+}
 
 .priceBreakdownContainer {
   display:none;

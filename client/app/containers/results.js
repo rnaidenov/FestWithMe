@@ -42,13 +42,13 @@ class Results extends React.Component {
     const {carret} = this.state;
     const {text, color, loaderValue, prices} = searchResults || {};
     const {details} = prices || {};
-    const {flight, ticketPrice, housingDetails} = details || {};
+    const {flight, ticketPrice, housingDetails,currency, totalPrice} = details || {};
 
 
     let results;
 
     const loadingPhase = (
-      <div>
+      <div className="loaderWrap">
         <CircularProgress
           size={100}
           mode="determinate"
@@ -98,7 +98,7 @@ class Results extends React.Component {
          <p className='smiley' id='happy'>:D</p>
        </div>
        <p id='resultsLabel'>
-         Going to {festivalName} will cost you loads.
+         Going to <span className="festivalNameLabel">{festivalName}</span> will cost you <span className="totalPriceLabel">{currency}{totalPrice}</span>.
        </p>
         <div>
            <p
@@ -118,6 +118,8 @@ class Results extends React.Component {
              flightDetails={flight || {}}
              ticketPrice={ticketPrice }
              accommodation={housingDetails || {}}
+             totalPrice = {totalPrice || ''}
+             currency = {currency || ''}
            />
        </div>
       </div>
@@ -136,7 +138,7 @@ class Results extends React.Component {
 
     return (
       <div>
-        {finishedPhase}
+        {results}
       </div>
     )
   }

@@ -4,14 +4,16 @@ import Paper from 'material-ui/Paper';
 import CustomCarousel from '../components/customCarousel';
 
 
-function PriceBreakdown ({cssClass ,ticketPrice, flightDetails, accommodation}) {
+function PriceBreakdown ({cssClass ,ticketPrice, flightDetails, accommodation,currency,totalPrice}) {
 
+  const {flightPriceAmount,flightPriceCurrency, origin, destination} = flightDetails;
+  const {housingCurrency,sharedRoom,privateRoom,entireHome} = accommodation;
 
   const festival = (
     <div className="priceDetailsWrap">
       <h1 className='priceBreakdownHeading'>Festival ticket</h1>
       <img src={require('../public/ticket.svg')} id='ticketIcon'/>
-      <p className='priceLabel'>{ticketPrice || '$42'}</p>
+      <p className='priceLabel'>{ticketPrice}</p>
     </div>
   )
 
@@ -19,11 +21,11 @@ function PriceBreakdown ({cssClass ,ticketPrice, flightDetails, accommodation}) 
     <div className="priceDetailsWrap">
       <h1 className='priceBreakdownHeading'>Plane ticket</h1>
         <div className="routeWrap">
-          <span className='iataCodes'>{flightDetails.origin || 'SOF'}</span>
+          <span className='iataCodes'>{origin}</span>
           <img src={require('../public/airplane.svg')} className='planeIcon'/>
-          <span className='iataCodes'>{flightDetails.destination || 'LDN'}</span>
+          <span className='iataCodes'>{destination}</span>
         </div>
-      <p className='priceLabel'>{flightDetails.flightPrice || '$33'}</p>
+      <p className='priceLabel'>{currency}{flightPriceAmount}</p>
     </div>
   )
 
@@ -37,17 +39,17 @@ function PriceBreakdown ({cssClass ,ticketPrice, flightDetails, accommodation}) 
             <div className='accommodationTypeWrap'>
               <img src={require('../public/privateRoom.svg')} className='homeTypeIcon'/>
               <div md={4} className='typeAndPriceWrap'><p>Private room</p></div>
-              <div md={4} className='typeAndPriceWrap'><p>{accommodation.privateRoom || noInfo}</p></div>
+              <div md={4} className='typeAndPriceWrap'><p>{`${currency}${privateRoom}` || noInfo}</p></div>
             </div>
             <div className='accommodationTypeWrap'>
               <img src={require('../public/sharedRoom.svg')} className='homeTypeIcon'/>
               <div md={4}  className='typeAndPriceWrap'><p>Shared room</p></div>
-              <div md={4}  className='typeAndPriceWrap'><p>{accommodation.sharedRoom || '$90'}</p></div>
+              <div md={4}  className='typeAndPriceWrap'><p>{`${currency}${sharedRoom}`|| noInfo}</p></div>
             </div>
             <div className='accommodationTypeWrap'>
               <img src={require('../public/entireHome.svg')} className='homeTypeIcon'/>
               <div md={4}  className='typeAndPriceWrap'><p>Entire home</p></div>
-              <div md={4}  className='typeAndPriceWrap'><p>{accommodation.entireHome || '$24'}</p></div>
+              <div md={4}  className='typeAndPriceWrap'><p>{`${currency}${entireHome}`|| noInfo}</p></div>
             </div>
     </div>
   )
