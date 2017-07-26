@@ -100,7 +100,7 @@ class Results extends React.Component {
        <p id='resultsLabel'>
          Going to <span className="festivalNameLabel">{festivalName}</span> will cost you <span className="totalPriceLabel">{currency}{totalPrice}</span>.
        </p>
-        <div>
+        <div className="priceBreakdownWrap">
            <p
              className="priceBreakdown"
              id="priceBreakdownLabel"

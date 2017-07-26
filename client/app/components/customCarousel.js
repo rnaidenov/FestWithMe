@@ -29,6 +29,7 @@ function CustomCarousel({ content, decorators, slidesToShow, slideWidth, classNa
       slidesToShow={slidesToShow}
       slideWidth={slideWidth}
       className={className}
+      wrapAround={true}
     >
       {carouselContent}
     </Carousel>
