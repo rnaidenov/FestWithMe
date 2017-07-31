@@ -26,10 +26,13 @@ export function searchFestival (origin, festivalName) {
         const destination = `${eventDetails.city},${eventDetails.country}`;
         const date = eventDetails.date;
         dispatch({type: 'FLIGHTS_SEARCH_START',payload: eventDetails.city});
-        const flightDetails_response = yield fetch(`http://localhost:3000/api/prices/flights?origin=${origin}&destination=${destination}&date=${date}`);
-        dispatch({type: 'FLIGHTS_SEARCH_FINISH'});
-        const flightDetails = yield flightDetails_response.json();
-        console.log(flightDetails);
+        try {
+          const flightDetails_response = yield fetch(`http://localhost:3000/api/prices/flights?origin=${origin}&destination=${destination}&date=${date}`);
+          dispatch({type: 'FLIGHTS_SEARCH_FINISH'});
+          const flightDetails = yield flightDetails_response.json();
+        } catch (err) {
+          dispatch({type: 'FLIGHTS_SEARCH_ERROR',payload:'Something went wrong when looking for the flight '});
+        }
         dispatch({type: 'HOUSING_SEARCH_START'});
         const housingDetails_response = yield fetch(`http://localhost:3000/api/prices/housing?location=${destination}&checkInDate=${date}`);
         dispatch({type: 'HOUSING_SEARCH_FINISH'});

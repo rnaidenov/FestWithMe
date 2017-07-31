@@ -10,10 +10,11 @@ function getCityCode (location) {
     getCoordinates(location).then(geocode => {
       const {lat, lng} = geocode;
       fetch(`${amadeusAPI}&latitude=${lat}&longitude=${lng}`).then(response => {
-        response.json().then(data => {
-          const {city : cityCode} = data[0];
-          resolve(cityCode);
-        });
+        response.json()
+          .then(data => {
+            const {city : cityCode} = data[0];
+            resolve(cityCode)
+          })
       });
     });
   });
@@ -28,7 +29,7 @@ function getCoordinates (location) {
       resolve({
         lat,
         lng
-      })
+      });
     })
   })
 }

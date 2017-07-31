@@ -32,19 +32,26 @@ module.exports = (app) => {
   })
 
   app.get("/api/prices/flights",(req, res) => {
-    amadeus.getFlightPrices(req.query.origin,req.query.destination,req.query.date).then(flightDetails => {
-      res.send(flightDetails)
-    });
+    amadeus.getFlightPrices(req.query.origin,req.query.destination,req.query.date)
+      .then(flightDetails => {
+        res.send(flightDetails)
+      })
+      .catch(error => {
+        res.status(500).send(error);
+      })
   });
 
 
   app.get("/api/prices/events",(req,res) => {
-    google.getEventLink(req.query.eventName).then(url => {
-      scraper.getEventDetails(url).then(eventDetails => {
-        console.log(eventDetails);
-        res.send(eventDetails);
-      });
-    });
+    google.getEventLink(req.query.eventName)
+      .then(url => {
+        scraper.getEventDetails(url).then(eventDetails => {
+            res.send(eventDetails);
+          })
+      })
+      .catch(error => {
+        res.status(400).send(error);
+      })
   });
 
   app.get("/api/currencies",(req, res) => {

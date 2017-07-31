@@ -42,10 +42,11 @@ function getPrice(url) {
 function getCity (url) {
   return new Promise((resolve, reject) => {
     request(url, (err, resp, body) => {
-      const $ = cheerio.load(body);
-      const eventListings = $('.circle-left').children().text();
-      const city = eventListings.replace('Listings','');
-      resolve(city);
+        const $ = cheerio.load(body);
+        const eventListings = $('.circle-left').children().text();
+        const city = eventListings.replace('Listings','');
+        console.log("city is : " + city);
+        resolve(city);
     })
   })
 }
@@ -84,13 +85,17 @@ function getDate (url) {
 // Get the event details
 function getEventDetails (url) {
   return new Promise((resolve, reject) => {
-    Promise.all([getPrice(url),getCity(url),getCountry(url),getDate(url)]).then(data => {
-      const [price, city, country, date] = data;
-      resolve({
-        price,
-        city,
-        country,
-        date
+    Promise.all([getPrice(url),getCity(url),getCountry(url),getDate(url)])
+      .then(data => {
+        const [price, city, country, date] = data;
+        resolve({
+          price,
+          city,
+          country,
+          date
+        })
+      .catch(err => {
+        reject('Unable to fetch event details.')
       })
     })
   })

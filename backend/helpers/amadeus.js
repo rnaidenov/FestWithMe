@@ -8,7 +8,6 @@ const amadeusAPI = `https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search
 // Generates the body for the amadeus search query
 function generateSearchQuery (origin,destination,date) {
   return new Promise((resolve, reject) => {
-    console.log("MADAFAKA : ", origin);
     const originIataPromise = airports.getCityCode(origin);
     const destinationIataPromise = airports.getCityCode(destination);
     const flightDate = formatter.formatDate(date,'flights');
@@ -38,9 +37,12 @@ function getFlightPrices (origin,destination,date) {
             origin : searchQuery.origin,
             destination : searchQuery.destination
           });
-        });
-      });
-    });
+        })
+        .catch(err => {
+          reject('Unable to fetch price details for flight ticket.')
+        })
+      })
+    })
   });
 }
 
