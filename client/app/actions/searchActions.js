@@ -10,7 +10,14 @@ const handleInput = (e) => {
 
 export function searchFestival (origin, festivalName) {
   return function (dispatch) {
-    dispatch({type: 'FESTIVAL_SEARCH_START'});
+    dispatch({type: 'FESTIVAL_SEARCH_START1'});
+    setTimeout(() => {
+      dispatch({type: 'FESTIVAL_SEARCH_START2'});
+    },500);
+    setTimeout(() => {
+      dispatch({type: 'FESTIVAL_SEARCH_START3'});
+    },800);
+
 
     co(function * () {
       const eventDetails_response = yield fetch(`http://localhost:3000/api/prices/events?eventName=${festivalName}`);

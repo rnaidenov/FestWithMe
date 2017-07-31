@@ -72,10 +72,7 @@ class Search extends React.Component {
     const hintStyle = {marginLeft:'2%'};
 
     const {locationField : locationInput,location} = this.state;
-    console.log("location : ",locationInput);
     const festivalInput = this.props.festivalInput;
-
-    console.log(this.props.location);
 
     const toolTip = (
       <div class="toolTipBox">
@@ -118,7 +115,7 @@ class Search extends React.Component {
                   onMouseLeave = {() => this.hoverOutLocation()}
                 >
                   {location}
-                  {this.state.hoverLocation ? toolTip : null} 
+                  {this.state.hoverLocation ? toolTip : null}
                 </i>
               </Paper>
               <div className="btnWrap">

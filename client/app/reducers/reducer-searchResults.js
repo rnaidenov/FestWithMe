@@ -1,6 +1,12 @@
 export default (state = null, action) => {
   switch (action.type) {
-    case 'FESTIVAL_SEARCH_START':
+    case 'FESTIVAL_SEARCH_START1':
+      return {text: 'Getting event details', color : '#4b6677',status: 'searching',loaderValue:5};
+      break;
+    case 'FESTIVAL_SEARCH_START2':
+      return {text: 'Getting event details', color : '#4b6677',status: 'searching',loaderValue:8};
+      break;
+    case 'FESTIVAL_SEARCH_START3':
       return {text: 'Getting event details', color : '#4b6677',status: 'searching',loaderValue:10};
       break;
     case 'FLIGHTS_SEARCH_START':

@@ -22,7 +22,6 @@ class Results extends React.Component {
   }
 
   togglePriceBreakdown () {
-    console.log("click");
       if (this.state.carret.includes('down')) {
         console.log("mnogo laina");
         this.setState({priceBreakdownClass: 'priceBreakdownContainer unselected',carret:'arrow_drop_up'}, () => {
