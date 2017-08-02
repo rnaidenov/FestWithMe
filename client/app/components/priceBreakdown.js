@@ -9,6 +9,10 @@ function PriceBreakdown ({cssClass ,ticketPrice, flightDetails, accommodation,cu
   const {flightPriceAmount,flightPriceCurrency, origin, destination} = flightDetails;
   const {housingCurrency,sharedRoom,privateRoom,entireHome} = accommodation;
 
+
+  console.log("Flight price is : " ,flightPriceAmount);
+
+
   const festival = (
     <div className="priceDetailsWrap">
       <h1 className='priceBreakdownHeading'>Festival ticket</h1>
@@ -38,18 +42,18 @@ function PriceBreakdown ({cssClass ,ticketPrice, flightDetails, accommodation,cu
         <h1 className='priceBreakdownHeading'>Accommodation</h1>
             <div className='accommodationTypeWrap'>
               <img src={require('../public/privateRoom.svg')} className='homeTypeIcon'/>
-              <div md={4} className='typeAndPriceWrap'><p>Private room</p></div>
-              <div md={4} className='typeAndPriceWrap'><p>{`${currency}${privateRoom}` || noInfo}</p></div>
+              <div className='typeAndPriceWrap'><p>Private room</p></div>
+              <div className='typeAndPriceWrap'><p>{`${currency}${privateRoom}` || noInfo}</p></div>
             </div>
             <div className='accommodationTypeWrap'>
               <img src={require('../public/sharedRoom.svg')} className='homeTypeIcon'/>
-              <div md={4}  className='typeAndPriceWrap'><p>Shared room</p></div>
-              <div md={4}  className='typeAndPriceWrap'><p>{`${currency}${sharedRoom}`|| noInfo}</p></div>
+              <div className='typeAndPriceWrap'><p>Shared room</p></div>
+              <div className='typeAndPriceWrap'><p>{`${currency}${sharedRoom}`|| noInfo}</p></div>
             </div>
             <div className='accommodationTypeWrap'>
               <img src={require('../public/entireHome.svg')} className='homeTypeIcon'/>
-              <div md={4}  className='typeAndPriceWrap'><p>Entire home</p></div>
-              <div md={4}  className='typeAndPriceWrap'><p>{`${currency}${entireHome}`|| noInfo}</p></div>
+              <div className='typeAndPriceWrap'><p>Entire home</p></div>
+              <div className='typeAndPriceWrap'><p>{`${currency}${entireHome}`|| noInfo}</p></div>
             </div>
     </div>
   )

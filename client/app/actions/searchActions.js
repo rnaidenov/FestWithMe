@@ -8,6 +8,56 @@ const handleInput = (e) => {
 };
 
 
+
+function getFlightDetails (origin,destination,date) {
+  return new Promise ((resolve, reject) => {
+      fetch(`http://localhost:3000/api/prices/flights?origin=${origin}&destination=${destination}&date=${date}`).then(response => {
+          response.json()
+            .then(flightDetails => {
+              resolve(flightDetails)
+            })
+            .catch(err => {
+                reject("Fetching flight details failed.",err);
+            })
+        })
+    });
+}
+
+function getHousingDetails (dispatch,destination,date) {
+  return new Promise ((resolve,reject) => {
+    fetch(`http://localhost:3000/api/prices/housing?location=${destination}&checkInDate=${date}`).then(response => {
+      try {
+        response.json()
+          .then(housingDetails => {
+            resolve(housingDetails);
+          })
+      }
+      catch (e) {
+        reject("Fetching accommodation details failed.");
+      }
+    });
+  });
+}
+
+
+function getEventDetails (festivalName) {
+
+  return new Promise ((resolve,reject) => {
+    fetch(`http://localhost:3000/api/prices/events?eventName=${festivalName}`).then(response => {
+      try {
+        response.json()
+          .then(housingDetails => {
+            resolve(housingDetails);
+          })
+      }
+      catch (e) {
+        reject("Fetching event details failed.");
+      }
+    });
+  });
+}
+
+
 export function searchFestival (origin, festivalName) {
   return function (dispatch) {
     dispatch({type: 'FESTIVAL_SEARCH_START1'});
@@ -20,24 +70,21 @@ export function searchFestival (origin, festivalName) {
 
 
     co(function * () {
-      const eventDetails_response = yield fetch(`http://localhost:3000/api/prices/events?eventName=${festivalName}`);
-      const eventDetails = yield eventDetails_response.json();
-      if (typeof(eventDetails.price) == 'object') {
+
+      const eventDetails = yield getEventDetails(festivalName);
+      if (eventDetails.price) {
         const destination = `${eventDetails.city},${eventDetails.country}`;
         const date = eventDetails.date;
-        dispatch({type: 'FLIGHTS_SEARCH_START',payload: eventDetails.city});
+        let flightDetails;
         try {
-          const flightDetails_response = yield fetch(`http://localhost:3000/api/prices/flights?origin=${origin}&destination=${destination}&date=${date}`);
-          dispatch({type: 'FLIGHTS_SEARCH_FINISH'});
-          const flightDetails = yield flightDetails_response.json();
-        } catch (err) {
-          dispatch({type: 'FLIGHTS_SEARCH_ERROR',payload:'Something went wrong when looking for the flight '});
+          dispatch({type: 'FLIGHTS_SEARCH_START',payload: eventDetails.city});
+          flightDetails = yield getFlightDetails(origin,destination,date);
+        } catch (e) {
+          flightDetails = {flightPriceAmount:0,flightPriceCurrency:null}
         }
+
         dispatch({type: 'HOUSING_SEARCH_START'});
-        const housingDetails_response = yield fetch(`http://localhost:3000/api/prices/housing?location=${destination}&checkInDate=${date}`);
-        dispatch({type: 'HOUSING_SEARCH_FINISH'});
-        const housingDetails = yield housingDetails_response.json();
-        console.log(housingDetails);
+        const housingDetails = yield getHousingDetails(destination,date);
         const details = yield getTotalPrice(eventDetails,flightDetails,housingDetails);
 
         const pricingDetails = {

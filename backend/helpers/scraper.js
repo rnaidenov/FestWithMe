@@ -32,7 +32,7 @@ function getPrice(url) {
           ticketPrice_total : `${currency}${ticketPrice_total}`
         });
       } else {
-        resolve('Event has probably sold out.');
+        resolve(null);
       }
     })
   })

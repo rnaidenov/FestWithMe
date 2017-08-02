@@ -318,11 +318,12 @@ priceBreakdownContainer
 }
 
 .soldOutWrap {
-  height: 150px;
+  width: 100%;
+  text-align: center;
 }
 
 #soldOutLabel {
-  margin-top: 1%;
+  padding-top: 2%;
 }
 
 .finishedResultsWrap {

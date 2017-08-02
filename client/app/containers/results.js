@@ -39,20 +39,12 @@ class Results extends React.Component {
 
     const {searchResults, festivalName} = this.props;
     const {carret} = this.state;
-    const {text, color, loaderValue, prices,flightError} = searchResults || {};
+    const {text, color, loaderValue, prices} = searchResults || {};
     const {details} = prices || {};
     const {flight, ticketPrice, housingDetails,currency, totalPrice} = details || {};
 
 
     let results;
-
-    console.log("Flight error is " + flightError);
-
-    const badSearch = (
-      <div>
-        <p>{flightError}</p>
-      </div>
-    )
 
     const loadingPhase = (
       <div className="loaderWrap">
@@ -138,10 +130,7 @@ class Results extends React.Component {
       results = null;
     } else if (searchResults.status == 'searching') {
       results = loadingPhase;
-    } else if (flightError) {
-      results = badSearch;
-    }
-    else {
+    } else {
       typeof(searchResults.prices) == 'string' ? results = soldOutEvent : results = finishedPhase;
     }
 
