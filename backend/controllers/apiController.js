@@ -17,7 +17,6 @@ module.exports = (app) => {
 
   app.use(bodyParser.urlencoded({extended: true}));
 
-
   app.get("/api/festivals/",(req,res) => {
     Festivals.find({},function (err,todos) {
         if(err) throw err;

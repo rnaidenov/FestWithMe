@@ -9,9 +9,23 @@ function PriceBreakdown ({cssClass ,ticketPrice, flightDetails, accommodation,cu
   const {flightPriceAmount,flightPriceCurrency, origin, destination} = flightDetails;
   const {housingCurrency,sharedRoom,privateRoom,entireHome} = accommodation;
 
+  const noInfo = (
+    <p id='noInfoLabel'>No information</p>
+  )
 
-  console.log("Flight price is : " ,flightPriceAmount);
+  //TODO: Figure out why property values are messed up
+  const accommodationTypes = accommodation.map(propertyType => {
+    let price;
+    propertyType.currency ? price = `${propertyType.currency} ${propertyType.price}` : price = undefined;
 
+    return (
+      <div className='accommodationTypeWrap'>
+        <img src={require(`../public/${propertyType.icon}`)} className='homeTypeIcon'/>
+        <div className='typeAndPriceWrap'><p>propertyType.type</p></div>
+        <div className='typeAndPriceWrap'><p>{price || noInfo}</p></div>
+      </div>
+    )
+  });
 
   const festival = (
     <div className="priceDetailsWrap">
@@ -33,28 +47,28 @@ function PriceBreakdown ({cssClass ,ticketPrice, flightDetails, accommodation,cu
     </div>
   )
 
-  const noInfo = (
-    <p id='noInfoLabel'>No information</p>
-  )
+
+
+  // <div className='accommodationTypeWrap'>
+  //   <img src={require('../public/privateRoom.svg')} className='homeTypeIcon'/>
+  //   <div className='typeAndPriceWrap'><p>Private room</p></div>
+  //   <div className='typeAndPriceWrap'><p>{`${currency}${privateRoom}` || noInfo}</p></div>
+  // </div>
+  // <div className='accommodationTypeWrap'>
+  //   <img src={require('../public/sharedRoom.svg')} className='homeTypeIcon'/>
+  //   <div className='typeAndPriceWrap'><p>Shared room</p></div>
+  //   <div className='typeAndPriceWrap'><p>{`${currency}${sharedRoom}`|| noInfo}</p></div>
+  // </div>
+  // <div className='accommodationTypeWrap'>
+  //   <img src={require('../public/entireHome.svg')} className='homeTypeIcon'/>
+  //   <div className='typeAndPriceWrap'><p>Entire home</p></div>
+  //   <div className='typeAndPriceWrap'><p>{`${currency}${entireHome}`|| noInfo}</p></div>
+  // </div>
 
   const housing = (
     <div className="accomodationWrap">
         <h1 className='priceBreakdownHeading'>Accommodation</h1>
-            <div className='accommodationTypeWrap'>
-              <img src={require('../public/privateRoom.svg')} className='homeTypeIcon'/>
-              <div className='typeAndPriceWrap'><p>Private room</p></div>
-              <div className='typeAndPriceWrap'><p>{`${currency}${privateRoom}` || noInfo}</p></div>
-            </div>
-            <div className='accommodationTypeWrap'>
-              <img src={require('../public/sharedRoom.svg')} className='homeTypeIcon'/>
-              <div className='typeAndPriceWrap'><p>Shared room</p></div>
-              <div className='typeAndPriceWrap'><p>{`${currency}${sharedRoom}`|| noInfo}</p></div>
-            </div>
-            <div className='accommodationTypeWrap'>
-              <img src={require('../public/entireHome.svg')} className='homeTypeIcon'/>
-              <div className='typeAndPriceWrap'><p>Entire home</p></div>
-              <div className='typeAndPriceWrap'><p>{`${currency}${entireHome}`|| noInfo}</p></div>
-            </div>
+        {accommodationTypes}
     </div>
   )
 
