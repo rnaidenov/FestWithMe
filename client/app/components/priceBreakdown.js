@@ -1,7 +1,7 @@
 import React from 'react';
-import { Grid, Col, Row} from 'react-bootstrap';
 import Paper from 'material-ui/Paper';
-import CustomCarousel from '../components/customCarousel';
+import Price from './price';
+import CustomCarousel from './customCarousel';
 
 
 function PriceBreakdown ({cssClass ,ticketPrice, flightDetails, accommodation,currency,totalPrice}) {
@@ -14,14 +14,14 @@ function PriceBreakdown ({cssClass ,ticketPrice, flightDetails, accommodation,cu
   )
 
   //TODO: Figure out why property values are messed up
-  const accommodationTypes = accommodation.map(propertyType => {
+  const accommodationTypes = accommodation.map((propertyType,key) => {
     let price;
     propertyType.currency ? price = `${propertyType.currency} ${propertyType.price}` : price = undefined;
-
+    console.log("Icon is : " + propertyType.icon);
     return (
-      <div className='accommodationTypeWrap'>
+      <div key={key} className='accommodationTypeWrap'>
         <img src={require(`../public/${propertyType.icon}`)} className='homeTypeIcon'/>
-        <div className='typeAndPriceWrap'><p>propertyType.type</p></div>
+        <div className='typeAndPriceWrap'><p>{propertyType.type}</p></div>
         <div className='typeAndPriceWrap'><p>{price || noInfo}</p></div>
       </div>
     )
@@ -35,6 +35,8 @@ function PriceBreakdown ({cssClass ,ticketPrice, flightDetails, accommodation,cu
     </div>
   )
 
+
+
   const travel = (
     <div className="priceDetailsWrap">
       <h1 className='priceBreakdownHeading'>Plane ticket</h1>
@@ -43,27 +45,9 @@ function PriceBreakdown ({cssClass ,ticketPrice, flightDetails, accommodation,cu
           <img src={require('../public/airplane.svg')} className='planeIcon'/>
           <span className='iataCodes'>{destination}</span>
         </div>
-      <p className='priceLabel'>{currency}{flightPriceAmount}</p>
+      <p className='priceLabel'><Price amount={flightPriceAmount} currency={currency}/> </p>
     </div>
   )
-
-
-
-  // <div className='accommodationTypeWrap'>
-  //   <img src={require('../public/privateRoom.svg')} className='homeTypeIcon'/>
-  //   <div className='typeAndPriceWrap'><p>Private room</p></div>
-  //   <div className='typeAndPriceWrap'><p>{`${currency}${privateRoom}` || noInfo}</p></div>
-  // </div>
-  // <div className='accommodationTypeWrap'>
-  //   <img src={require('../public/sharedRoom.svg')} className='homeTypeIcon'/>
-  //   <div className='typeAndPriceWrap'><p>Shared room</p></div>
-  //   <div className='typeAndPriceWrap'><p>{`${currency}${sharedRoom}`|| noInfo}</p></div>
-  // </div>
-  // <div className='accommodationTypeWrap'>
-  //   <img src={require('../public/entireHome.svg')} className='homeTypeIcon'/>
-  //   <div className='typeAndPriceWrap'><p>Entire home</p></div>
-  //   <div className='typeAndPriceWrap'><p>{`${currency}${entireHome}`|| noInfo}</p></div>
-  // </div>
 
   const housing = (
     <div className="accomodationWrap">

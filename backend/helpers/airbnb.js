@@ -38,7 +38,7 @@ function getPropertiesDetails (properties) {
       propertyDetails.currency='$'
     } else {
       propertyDetails.price=null;
-      propertyDetails.currency=null;
+      propertyDetails.currency=0;
     }
     accommodationTypes.push(propertyDetails);
   }

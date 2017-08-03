@@ -75,14 +75,8 @@ export function searchFestival (origin, festivalName) {
       if (eventDetails.price) {
         const destination = `${eventDetails.city},${eventDetails.country}`;
         const date = eventDetails.date;
-        let flightDetails;
-        try {
-          dispatch({type: 'FLIGHTS_SEARCH_START',payload: eventDetails.city});
-          flightDetails = yield getFlightDetails(origin,destination,date);
-        } catch (e) {
-          flightDetails = {flightPriceAmount:0,flightPriceCurrency:null}
-        }
-
+        dispatch({type: 'FLIGHTS_SEARCH_START',payload: eventDetails.city});
+        const flightDetails = yield getFlightDetails(origin,destination,date);
         dispatch({type: 'HOUSING_SEARCH_START'});
         const housingDetails = yield getHousingDetails(destination,date);
         const details = yield getTotalPrice(eventDetails,flightDetails,housingDetails);
@@ -106,7 +100,7 @@ export function searchFestival (origin, festivalName) {
 
 function getTotalPrice (eventDetails, flightDetails, housingDetails) {
   const {flightPriceCurrency, flightPriceAmount} = flightDetails;
-  const {sharedRoom, privateRoom, entireHome} = housingDetails;
+  const [sharedRoom, privateRoom, entireHome] = housingDetails;
 
   return new Promise ((resolve, reject) => {
     const {price : {ticketPrice_total : ticketPrice} } = eventDetails;
@@ -115,7 +109,7 @@ function getTotalPrice (eventDetails, flightDetails, housingDetails) {
     fetch(`http://localhost:3000/api/currencies?from=${ticketCurrency}&to=$&amount=${ticketPriceAmount}`).then(conversionRes => {
       conversionRes.json().then(data => {
         const ticketPriceUSD = data.convertedAmount;
-        const totalPrice = ticketPriceUSD + flightPriceAmount + privateRoom;
+        const totalPrice = ticketPriceUSD + flightPriceAmount + privateRoom.price;
         resolve({
           ticketPrice : `$${ticketPriceUSD}`,
           flight : flightDetails,

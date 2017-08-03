@@ -39,7 +39,10 @@ function getFlightPrices (origin,destination,date) {
           });
         })
         .catch(err => {
-          reject('Unable to fetch price details for flight ticket.')
+          reject({
+            flightPriceAmount:0,
+            error:'Unable to fetch price details for flight ticket.'
+          })
         })
       })
     })
