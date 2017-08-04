@@ -29,7 +29,7 @@ class Search extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state={searchQuery:'',location:'location_off',locationField:''}
+    this.state={searchQuery:'',hintStyle:'',location:'location_off',locationField:'',festivalHint:'Festival',locationHint:'City'}
   }
 
   componentDidMount() {
@@ -67,13 +67,24 @@ class Search extends React.Component {
     this.setState({locationField:e.target.value});
   }
 
+  lookUpFestival (locationInput,festivalInput) {
+    if (!locationInput && !festivalInput) {
+      this.setState({locationHint:'Please enter a valid location',festivalHint:'Please select a festival'});
+    } else if (!locationInput && festivalInput) {
+      this.setState({locationHint:'Please enter a valid location'});
+    } else if (locationInput && !festivalInput) {
+      this.setState({festivalHint:'Please select a festival'});
+    } else {
+      this.props.dispatch(searchFestival(locationInput,festivalInput));
+    }
+  }
+
 
   render () {
-
-    const hintStyle = {marginLeft:'2%'};
-
-    const {locationField : locationInput,location} = this.state;
+    const {locationField : locationInput,location,festivalHint,locationHint,hintStyle} = this.state;
     const {festivalInput} = this.props;
+    console.log('location field ', locationInput);
+    console.log('festival input ', festivalInput);
 
     const toolTip = (
       <div class="toolTipBox">
@@ -94,8 +105,8 @@ class Search extends React.Component {
                 <AutoComplete
                   dataSource={this.props.festivals}
                   filter={AutoComplete.caseInsensitiveFilter}
-                  hintText="Festival"
-                  hintStyle={hintStyle}
+                  hintText={festivalHint}
+                  className={hintStyle}
                   fullWidth={true}
                   onUpdateInput = {(festivalName) => {this.updateSearchInput(festivalName)}}
                 />
@@ -103,7 +114,7 @@ class Search extends React.Component {
               <p  className="inlineLabel" id="fromLabel">from</p>
               <Paper  zDepth={1} className = 'searchContainer' id="cityField">
                 <TextField
-                  hintText='City'
+                  hintText={locationHint}
                   className='locationTextField'
                   hintStyle={hintStyle}
                   fullWidth={true}
@@ -120,7 +131,7 @@ class Search extends React.Component {
                 </i>
               </Paper>
               <div className="btnWrap">
-                <IconButton className='searchBtn' onClick = {() => this.props.dispatch(searchFestival(locationInput,festivalInput))}>
+                <IconButton className='searchBtn' onClick = {() => this.lookUpFestival(locationInput,festivalInput)}>
                   <i class="material-icons">search</i>
                 </IconButton>
               </div>
