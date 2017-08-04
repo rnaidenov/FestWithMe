@@ -24,8 +24,6 @@ function FlightPrice ({details,currency}) {
     </div>
   )
 
-
-
 }
 
 export default FlightPrice;

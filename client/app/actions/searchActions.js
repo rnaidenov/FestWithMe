@@ -9,7 +9,7 @@ const handleInput = (e) => {
 
 
 
-function getFlightDetails (origin,destination,date) {
+function _getFlightDetails (origin,destination,date) {
   return new Promise ((resolve, reject) => {
       fetch(`http://localhost:3000/api/prices/flights?origin=${origin}&destination=${destination}&date=${date}`).then(response => {
           response.json()
@@ -23,7 +23,7 @@ function getFlightDetails (origin,destination,date) {
     });
 }
 
-function getHousingDetails (dispatch,destination,date) {
+function _getHousingDetails (dispatch,destination,date) {
   return new Promise ((resolve,reject) => {
     fetch(`http://localhost:3000/api/prices/housing?location=${destination}&checkInDate=${date}`).then(response => {
       try {
@@ -40,7 +40,7 @@ function getHousingDetails (dispatch,destination,date) {
 }
 
 
-function getEventDetails (festivalName) {
+function _getEventDetails (festivalName) {
 
   return new Promise ((resolve,reject) => {
     fetch(`http://localhost:3000/api/prices/events?eventName=${festivalName}`).then(response => {
@@ -58,28 +58,21 @@ function getEventDetails (festivalName) {
 }
 
 
+
 export function searchFestival (origin, festivalName) {
   return function (dispatch) {
-    dispatch({type: 'FESTIVAL_SEARCH_START1'});
-    setTimeout(() => {
-      dispatch({type: 'FESTIVAL_SEARCH_START2'});
-    },500);
-    setTimeout(() => {
-      dispatch({type: 'FESTIVAL_SEARCH_START3'});
-    },800);
-
-
+    _increaseLoader(dispatch,'FESTIVAL_SEARCH_START');
     co(function * () {
 
-      const eventDetails = yield getEventDetails(festivalName);
+      const eventDetails = yield _getEventDetails(festivalName);
       if (eventDetails.price) {
         const destination = `${eventDetails.city},${eventDetails.country}`;
         const date = eventDetails.date;
-        dispatch({type: 'FLIGHTS_SEARCH_START',payload: eventDetails.city});
-        const flightDetails = yield getFlightDetails(origin,destination,date);
-        dispatch({type: 'HOUSING_SEARCH_START'});
-        const housingDetails = yield getHousingDetails(destination,date);
-        const details = yield getTotalPrice(eventDetails,flightDetails,housingDetails);
+        _increaseLoader(dispatch,'FLIGHTS_SEARCH_START',eventDetails.city);
+        const flightDetails = yield _getFlightDetails(origin,destination,date);
+        _increaseLoader(dispatch,'HOUSING_SEARCH_START');
+        const housingDetails = yield _getHousingDetails(destination,date);
+        const details = yield _getTotalPrice(eventDetails,flightDetails,housingDetails);
 
         const pricingDetails = {
           details
@@ -98,7 +91,7 @@ export function searchFestival (origin, festivalName) {
   }
 }
 
-function getTotalPrice (eventDetails, flightDetails, housingDetails) {
+function _getTotalPrice (eventDetails, flightDetails, housingDetails) {
   const {flightPriceCurrency, flightPriceAmount} = flightDetails;
   const [sharedRoom, privateRoom, entireHome] = housingDetails;
 
@@ -120,6 +113,20 @@ function getTotalPrice (eventDetails, flightDetails, housingDetails) {
       })
     })
   });
+}
+
+
+function _increaseLoader(dispatch,type,payload) {
+  dispatch({type: `${type}1`,payload});
+  setTimeout(() => {
+    dispatch({type:  `${type}2`,payload});
+  },500);
+  setTimeout(() => {
+    dispatch({type:  `${type}3`,payload});
+  },800);
+  setTimeout(() => {
+    dispatch({type:  `${type}4`,payload});
+  },900);
 }
 
 export const updateInput = (festivalName) => {

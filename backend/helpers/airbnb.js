@@ -1,8 +1,8 @@
 const airbnb = require('airapi');
 const formatter = require('./formatter');
 
+// Gets the details for the accommodation
 function getPrice (location, date) {
-
   const checkInDate = formatter.formatDate(date,'housing');
   return new Promise ((resolve,reject) => {
     airbnb.search({
@@ -20,6 +20,7 @@ function getPrice (location, date) {
   });
 }
 
+// Returns an array of property objects
 function getPropertiesDetails (properties) {
   const types = ['Shared room','Private room','Entire home'];
   const icons = ['sharedRoom.svg','privateRoom.svg','entireHome.svg'];

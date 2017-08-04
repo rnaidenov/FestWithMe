@@ -73,8 +73,7 @@ class Search extends React.Component {
     const hintStyle = {marginLeft:'2%'};
 
     const {locationField : locationInput,location} = this.state;
-    console.log("Location field : " + locationInput);
-    const festivalInput = this.props.festivalInput;
+    const {festivalInput} = this.props;
 
     const toolTip = (
       <div class="toolTipBox">

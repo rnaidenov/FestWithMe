@@ -11,7 +11,6 @@ app.use(cors());
 
 var port = process.env.PORT || 3000;
 
-// console.log(config.getDBConnectionString());
 mongoose.connect(config.getDBConnectionString());
 setupController(app);
 apiController(app);

@@ -1,11 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Paper from 'material-ui/Paper';
-import '../styles/search.css';
-import { Grid, Col, Row} from 'react-bootstrap';
 import IconButton from 'material-ui/IconButton';
 import CircularProgress from 'material-ui/CircularProgress';
 import PriceBreakdown  from '../components/priceBreakdown';
+import '../styles/search.css';
 
 
 @connect(store => {

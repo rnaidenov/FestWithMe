@@ -13,11 +13,9 @@ function PriceBreakdown ({cssClass ,ticketPrice, flightDetails, accommodation,cu
     <p id='noInfoLabel'>No information</p>
   )
 
-
   const accommodationTypes = accommodation.map((propertyType,key) => {
     let price;
     propertyType.currency ? price = `${propertyType.currency} ${propertyType.price}` : price = undefined;
-    console.log("Icon is : " + propertyType.icon);
     return (
       <div key={key} className='accommodationTypeWrap'>
         <img src={require(`../public/${propertyType.icon}`)} className='homeTypeIcon'/>
@@ -34,8 +32,6 @@ function PriceBreakdown ({cssClass ,ticketPrice, flightDetails, accommodation,cu
       <p className='priceLabel'>{ticketPrice}</p>
     </div>
   )
-
-
 
   const travel = (
     <div>
