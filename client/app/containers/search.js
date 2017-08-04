@@ -63,6 +63,7 @@ class Search extends React.Component {
   }
 
   updateLocationField (e) {
+    console.log("Updating field ...");
     this.setState({locationField:e.target.value});
   }
 
@@ -72,6 +73,7 @@ class Search extends React.Component {
     const hintStyle = {marginLeft:'2%'};
 
     const {locationField : locationInput,location} = this.state;
+    console.log("Location field : " + locationInput);
     const festivalInput = this.props.festivalInput;
 
     const toolTip = (

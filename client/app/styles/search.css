@@ -421,12 +421,6 @@ priceBreakdownContainer
   display:none;
 }
 
-
-.priceDetailsWrap {
-  display: flex;
-  flex-wrap: wrap;
-}
-
 .priceBreakdownHeading {
   width:100%;
   font-family: 'Quicksand', sans-serif;
@@ -477,7 +471,21 @@ priceBreakdownContainer
   height: 50px;
   width: 50%;
   position: relative;
-   animation: fly 800ms ease-in-out 0s infinite alternate;
+  animation: fly 800ms ease-in-out 0s infinite alternate;
+}
+
+.errorIcon {
+  width: 30%;
+}
+
+.flightDetailsError {
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 5%;
+  font-size: 20px;
+  font-family: 'Yanone Kaffeesatz', sans-serif !important;
+  color: #893333;
 }
 
 .accomodationWrap {

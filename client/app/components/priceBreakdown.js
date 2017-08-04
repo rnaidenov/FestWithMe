@@ -1,19 +1,19 @@
 import React from 'react';
 import Paper from 'material-ui/Paper';
-import Price from './price';
+import FlightPrice from './flightPrice';
 import CustomCarousel from './customCarousel';
 
 
 function PriceBreakdown ({cssClass ,ticketPrice, flightDetails, accommodation,currency,totalPrice}) {
 
-  const {flightPriceAmount,flightPriceCurrency, origin, destination} = flightDetails;
+
   const {housingCurrency,sharedRoom,privateRoom,entireHome} = accommodation;
 
   const noInfo = (
     <p id='noInfoLabel'>No information</p>
   )
 
-  //TODO: Figure out why property values are messed up
+
   const accommodationTypes = accommodation.map((propertyType,key) => {
     let price;
     propertyType.currency ? price = `${propertyType.currency} ${propertyType.price}` : price = undefined;
@@ -28,7 +28,7 @@ function PriceBreakdown ({cssClass ,ticketPrice, flightDetails, accommodation,cu
   });
 
   const festival = (
-    <div className="priceDetailsWrap">
+    <div>
       <h1 className='priceBreakdownHeading'>Festival ticket</h1>
       <img src={require('../public/ticket.svg')} id='ticketIcon'/>
       <p className='priceLabel'>{ticketPrice}</p>
@@ -38,14 +38,9 @@ function PriceBreakdown ({cssClass ,ticketPrice, flightDetails, accommodation,cu
 
 
   const travel = (
-    <div className="priceDetailsWrap">
+    <div>
       <h1 className='priceBreakdownHeading'>Plane ticket</h1>
-        <div className="routeWrap">
-          <span className='iataCodes'>{origin}</span>
-          <img src={require('../public/airplane.svg')} className='planeIcon'/>
-          <span className='iataCodes'>{destination}</span>
-        </div>
-      <p className='priceLabel'><Price amount={flightPriceAmount} currency={currency}/> </p>
+      <FlightPrice details={flightDetails} currency={currency}/>
     </div>
   )
 

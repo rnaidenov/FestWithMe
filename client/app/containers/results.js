@@ -30,7 +30,6 @@ class Results extends React.Component {
           },1000)
         });
       } else {
-        console.log("laina");
         this.setState({priceBreakdownClass: 'priceBreakdownContainer selected',carret:'arrow_drop_down'});
       }
   }
