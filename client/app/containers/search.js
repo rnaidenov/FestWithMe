@@ -83,8 +83,6 @@ class Search extends React.Component {
   render () {
     const {locationField : locationInput,location,festivalHint,locationHint,hintStyle} = this.state;
     const {festivalInput} = this.props;
-    console.log('location field ', locationInput);
-    console.log('festival input ', festivalInput);
 
     const toolTip = (
       <div class="toolTipBox">
