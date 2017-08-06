@@ -1,6 +1,9 @@
 {
   "name": "react-redux-template",
   "version": "1.0.0",
+  "engines":{  
+    "node":"4.2.6" 
+   },
   "main": "index.js",
   "scripts": {
     "dev": "webpack",
@@ -50,10 +53,8 @@
     "webpack": "^1.13.1",
     "webpack-dev-middleware": "^1.6.1",
     "webpack-dev-server": "^1.14.1",
-    "webpack-hot-middleware": "^2.11.0"
-  },
-  "devDependencies": {
-    "babel-plugin-react-transform": "^2.0.2",
+    "webpack-hot-middleware": "^2.11.0",
+ "babel-plugin-react-transform": "^2.0.2",
     "babel-preset-stage-0": "^6.5.0",
     "css-loader": "^0.23.1",
     "json-loader": "^0.5.4",
