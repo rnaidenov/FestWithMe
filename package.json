@@ -1,9 +1,6 @@
 {
   "name": "react-redux-template",
   "version": "1.0.0",
-  "engines":{  
-    "node":"4.2.6" 
-   },
   "main": "index.js",
   "scripts": {
     "dev": "webpack",
@@ -30,7 +27,6 @@
     "expect": "^1.20.1",
     "express": "^4.14.0",
     "geocoder": "^0.2.3",
-    "history": "^4.6.3",
     "iplocation": "^5.0.0",
     "jquery": "^3.2.1",
     "material-ui": "^0.18.3",
@@ -45,7 +41,6 @@
     "react-dom": "^15.1.0",
     "react-geolocated": "^2.0.0",
     "react-redux": "^4.4.5",
-    "react-router-dom": "^4.1.2",
     "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.5.2",
     "redux-logger": "^2.6.1",
@@ -54,11 +49,13 @@
     "webpack-dev-middleware": "^1.6.1",
     "webpack-dev-server": "^1.14.1",
     "webpack-hot-middleware": "^2.11.0",
- "babel-plugin-react-transform": "^2.0.2",
-    "babel-preset-stage-0": "^6.5.0",
+	"mongoose": "^4.10.4",
+	"babel-plugin-react-transform": "^2.0.2",
+    "babel-preset-stage-0": "^6.5.0"		
+  },
+  "devDependencies": {
     "css-loader": "^0.23.1",
     "json-loader": "^0.5.4",
-    "mongoose": "^4.10.4",
     "nodemon": "^1.11.0",
     "react-transform-hmr": "^1.0.4",
     "sass-loader": "^4.1.1",
