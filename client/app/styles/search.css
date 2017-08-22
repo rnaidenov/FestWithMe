@@ -9,6 +9,20 @@ p {
   font-family: 'Lato', sans-serif !important;
 }
 
+.background {
+  background-image: url('../public/party_background.jpg');
+  background-size: cover;                     
+  background-repeat: no-repeat;
+  /* background-position: center center;  */
+}
+
+.overlay {
+    background-color: rgba(245, 245, 245,0.65);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
 @media screen and (max-width: 380px) {
   .locationIcon {
     left: 91% !important;
@@ -224,11 +238,20 @@ p {
 
 .searchContainer {
   position: relative;
+  height: 40px;
 }
 
 .searchBtn {
-  background-color: #bc7871 !important;
+  background-color: #826c72 !important;
   border-radius: 50%;
+}
+
+.searchBtn:hover{
+  background-color: #988086 !important;
+}
+
+.searchBtnIcon{
+  color:white;
 }
 
 .determinateCircle {
