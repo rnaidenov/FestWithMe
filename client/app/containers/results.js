@@ -94,7 +94,10 @@ class Results extends React.Component {
          <p className='smiley' id='happy'>:D</p>
        </div>
        <p id='resultsLabel'>
-         Going to <span className="festivalNameLabel">{festivalName}</span> will cost you <span className="totalPriceLabel">{currency}{totalPrice}</span>.
+         <span className="resultText">Going to </span>
+         <span className="festivalNameLabel">{festivalName}</span> 
+         <span className="resultText"> will cost you </span>
+         <span className="totalPriceLabel">{currency}{totalPrice}</span>.
        </p>
         <div className="priceBreakdownWrap">
            <p

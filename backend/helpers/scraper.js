@@ -9,8 +9,9 @@ function getPrice(url) {
 
     request(url, (err,resp,body) => {
       const $ = cheerio.load(body);
-      const event = $('.onsale');
+      const event = $('#tickets');
       const eventSale = event.children().children().children().text();
+      console.log("Event : " , event.children());
       if (eventSale) {
         const priceBreakdown = eventSale.split(/[£*$*€*\+*]/);
         const currencyBreakdown = eventSale.split(/\d/);
@@ -18,6 +19,9 @@ function getPrice(url) {
         let ticketPrice = priceBreakdown[1];
         let bookingFee = priceBreakdown[3];
         let currency = currencyBreakdown[0];
+        console.log("Ticket price  : " , ticketPrice);
+        console.log("Booking fee  : " , bookingFee);
+        console.log("Currency  : " , currency);
 
         // Euro symbol is placed after price in the RA website
         if (eventSale.includes('€')) {
@@ -45,7 +49,6 @@ function getCity (url) {
         const $ = cheerio.load(body);
         const eventListings = $('.circle-left').children().text();
         const city = eventListings.replace('Listings','');
-        console.log("city is : " + city);
         resolve(city);
     })
   })
@@ -74,6 +77,7 @@ function getDate (url) {
       for (const tag of parentTag) {
         if (tag.name == 'a') {
           const eventDate = tag.children[0].data;
+          console.log(eventDate)
           resolve(eventDate);
           break;
         }
@@ -87,6 +91,7 @@ function getEventDetails (url) {
   return new Promise((resolve, reject) => {
     Promise.all([getPrice(url),getCity(url),getCountry(url),getDate(url)])
       .then(data => {
+        console.log(data);
         const [price, city, country, date] = data;
         resolve({
           price,

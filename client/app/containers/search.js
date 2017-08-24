@@ -83,6 +83,7 @@ class Search extends React.Component {
   render () {
     const {locationField : locationInput,location,festivalHint,locationHint,hintStyle} = this.state;
     const {festivalInput} = this.props;
+    const inputStyle={paddingLeft:'12px'};
 
     const toolTip = (
       <div class="toolTipBox">
@@ -106,6 +107,8 @@ class Search extends React.Component {
                   hintText={festivalHint}
                   className={hintStyle}
                   fullWidth={true}
+                  inputStyle={inputStyle}
+                  hintStyle={inputStyle}
                   onUpdateInput = {(festivalName) => {this.updateSearchInput(festivalName)}}
                 />
               </Paper>
@@ -116,6 +119,8 @@ class Search extends React.Component {
                   className='locationTextField'
                   hintStyle={hintStyle}
                   fullWidth={true}
+                  inputStyle={inputStyle}
+                  hintStyle={inputStyle}
                   onChange={(e) => this.updateLocationField(e)}
                   value={this.state.locationField}
                 />

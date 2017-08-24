@@ -43,17 +43,19 @@ function _getHousingDetails (dispatch,destination,date) {
 function _getEventDetails (festivalName) {
 
   return new Promise ((resolve,reject) => {
-    fetch(`http://localhost:3000/api/prices/events?eventName=${festivalName}`).then(response => {
-      try {
-        response.json()
-          .then(housingDetails => {
-            resolve(housingDetails);
-          })
+    try {
+        fetch(`http://localhost:3000/api/prices/events?eventName=${festivalName}`).then(response => {
+        
+          response.json()
+            .then(eventDetails => {
+              console.log(eventDetails);
+              resolve(eventDetails);
+            })
+        })
       }
-      catch (e) {
+    catch (e) {
         reject("Fetching event details failed.");
       }
-    });
   });
 }
 
