@@ -13,6 +13,8 @@ function getPrice (location, date) {
       currency: 'USD'
     }).then(function(searchResults) {
       const {avg_price : avgPrice} = searchResults.results_json.metadata.avg_price_by_room_type;
+      
+      console.log("Laina ? ",searchResults.results_json.metadata);
       const {'Shared room' : sharedRoom, 'Private room' : privateRoom, 'Entire home/apt' : entireHome} = avgPrice;
       const properties = [sharedRoom, privateRoom, entireHome];
       resolve(getPropertiesDetails(properties));

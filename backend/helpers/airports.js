@@ -5,7 +5,6 @@ const amadeusAPI = `https://api.sandbox.amadeus.com/v1.2//airports/nearest-relev
 
 // Returns a 3-letter code of city, where nearest airport is located
 function getCityCode (location) {
-  console.log(location);
   return new Promise((resolve, reject) => {
     getCoordinates(location).then(geocode => {
       const {lat, lng} = geocode;

@@ -9,37 +9,34 @@ function getPrice(url) {
 
     request(url, (err,resp,body) => {
       const $ = cheerio.load(body);
-      const event = $('#tickets');
-      const eventSale = event.children().children().children().text();
-      console.log("Event : " , event.children());
-      if (eventSale) {
-        const priceBreakdown = eventSale.split(/[£*$*€*\+*]/);
-        const currencyBreakdown = eventSale.split(/\d/);
-
-        let ticketPrice = priceBreakdown[1];
-        let bookingFee = priceBreakdown[3];
-        let currency = currencyBreakdown[0];
-        console.log("Ticket price  : " , ticketPrice);
-        console.log("Booking fee  : " , bookingFee);
-        console.log("Currency  : " , currency);
-
-        // Euro symbol is placed after price in the RA website
-        if (eventSale.includes('€')) {
-          ticketPrice = priceBreakdown[0];
-          bookingFee = priceBreakdown[2];
-          currency = currencyBreakdown[currencyBreakdown.length -1].trim();
+      const event = $('.onsale');
+        const eventPrice = event.children().children().children().text();
+        if (!eventPrice) {
+          resolve(false);
+        } else {
+          resolve(_formatPrice(eventPrice));
         }
-        let ticketPrice_total;
-        bookingFee ? ticketPrice_total = parseInt(ticketPrice) + parseInt(bookingFee) : ticketPrice_total = parseInt(ticketPrice)
-
-        resolve({
-          ticketPrice_total : `${currency}${ticketPrice_total}`
-        });
-      } else {
-        resolve(null);
-      }
     })
   })
+}
+
+function _formatPrice(price) {
+  const priceBreakdown = price.split(/[£*$*€*\+*]/);
+  const currencyBreakdown = price.split(/\d/);
+
+  let ticketPrice = priceBreakdown[1];
+  let bookingFee = priceBreakdown[3];
+  let currency = currencyBreakdown[0];
+
+  // Euro symbol is placed after price in the RA website
+  if (price.includes('€')) {
+    ticketPrice = priceBreakdown[0];
+    bookingFee = priceBreakdown[2];
+    currency = currencyBreakdown[currencyBreakdown.length -1].trim();
+  }
+  let ticketPrice_total;
+  bookingFee ? ticketPrice_total = parseInt(ticketPrice) + parseInt(bookingFee) : ticketPrice_total = parseInt(ticketPrice)
+  return `${currency}${ticketPrice_total}`;
 }
 
 // Get the name of the city, where the event will be held
@@ -100,7 +97,7 @@ function getEventDetails (url) {
           date
         })
       .catch(err => {
-        reject('Unable to fetch event details.')
+        reject('Unable to fetch event details.', err)
       })
     })
   })

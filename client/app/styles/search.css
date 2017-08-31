@@ -435,11 +435,11 @@ priceBreakdownContainer
 
 .festivalNameLabel {
   font-family: 'Yanone Kaffeesatz', sans-serif;
-  font-size: 26px
+  font-size: 36px
 }
 
 .totalPriceLabel {
-  font-size: 42px;
+  font-size: 40px;
   font-family: 'Yanone Kaffeesatz', sans-serif;
   color: #618973;
 }

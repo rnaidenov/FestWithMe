@@ -54,6 +54,9 @@ module.exports = (app) => {
       },
       {
         name: "Mysteryland 2017"
+      },
+      {
+        name: "ABODE in The Park"
       }
     ]
 
