@@ -33,6 +33,7 @@ module.exports = (app) => {
   app.get("/api/prices/flights",(req, res) => {
     amadeus.getFlightPrices(req.query.origin,req.query.destination,req.query.date)
       .then(flightDetails => {
+        console.log(flightDetails);
         res.send(flightDetails)
       })
       .catch(error => {
@@ -45,7 +46,7 @@ module.exports = (app) => {
     // google.getEventLink(req.query.eventName)
     //   .then(url => {
         //TODO: Pass the url
-        scraper.getEventDetails("https://www.residentadvisor.net/events/923306").then(eventDetails => {
+        scraper.getEventDetails("https://www.residentadvisor.net/events/927102").then(eventDetails => {
             res.send(eventDetails);
           })
       // })

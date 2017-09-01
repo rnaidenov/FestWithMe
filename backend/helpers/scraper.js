@@ -1,21 +1,44 @@
 'use strict';
 
-const request = require ('request');
+const request = require('request');
 const cheerio = require('cheerio');
 
 // Get price of the ticket for the event
 function getPrice(url) {
-  return new Promise ((resolve, reject) => {
+  return new Promise((resolve, reject) => {
+    _scrapePrice(url).then(price => {
+      if (price) {
+        const ticketAndBookingFee = price.children[1].children[0].children[0].children[0].data;
+        resolve(_formatPrice(ticketAndBookingFee));
+      } else {
+        resolve(price);
+      }
+    })
+  })
+}
 
-    request(url, (err,resp,body) => {
+function _scrapePrice(url) {
+  return new Promise((resolve, reject) => {
+    request(url, (err, resp, body) => {
       const $ = cheerio.load(body);
-      const event = $('.onsale');
-        const eventPrice = event.children().children().children().text();
-        if (!eventPrice) {
+      const tickets = $('#tickets');
+      try {
+        if (tickets.children().attr().id == 'ticket-sales-have-ended') {
           resolve(false);
-        } else {
-          resolve(_formatPrice(eventPrice));
         }
+        else {
+          // Getting the different types of tickets wrapped within <li/>
+          tickets.children().get(1).children.forEach(item => {
+            if (item.type == 'tag' && item.name == 'li' && item.attribs.class !== 'closed') {
+              resolve(item);
+            }
+          })
+        }
+        resolve(false);
+      }
+      catch (err) {
+        resolve(false)
+      }
     })
   })
 }
@@ -32,7 +55,7 @@ function _formatPrice(price) {
   if (price.includes('€')) {
     ticketPrice = priceBreakdown[0];
     bookingFee = priceBreakdown[2];
-    currency = currencyBreakdown[currencyBreakdown.length -1].trim();
+    currency = currencyBreakdown[currencyBreakdown.length - 1].trim();
   }
   let ticketPrice_total;
   bookingFee ? ticketPrice_total = parseInt(ticketPrice) + parseInt(bookingFee) : ticketPrice_total = parseInt(ticketPrice)
@@ -40,20 +63,20 @@ function _formatPrice(price) {
 }
 
 // Get the name of the city, where the event will be held
-function getCity (url) {
+function getCity(url) {
   return new Promise((resolve, reject) => {
     request(url, (err, resp, body) => {
-        const $ = cheerio.load(body);
-        const eventListings = $('.circle-left').children().text();
-        const city = eventListings.replace('Listings','');
-        resolve(city);
+      const $ = cheerio.load(body);
+      const eventListings = $('.circle-left').children().text();
+      const city = eventListings.replace('Listings', '');
+      resolve(city);
     })
   })
 }
 
 // Get the name of the country, where the event will be held
-function getCountry (url) {
-  return new Promise((resolve,reject) => {
+function getCountry(url) {
+  return new Promise((resolve, reject) => {
     request(url, (err, resp, body) => {
       const $ = cheerio.load(body);
       const countryTag = $('.fl');
@@ -64,11 +87,11 @@ function getCountry (url) {
 }
 
 // Get the date of the event
-function getDate (url) {
-  return new Promise((resolve,reject) => {
+function getDate(url) {
+  return new Promise((resolve, reject) => {
     request(url, (err, resp, body) => {
       const $ = cheerio.load(body);
-      const mainHtml = $('#detail','.clearfix');
+      const mainHtml = $('#detail', '.clearfix');
       const parentTag = mainHtml.children().children()['0'].children;
 
       for (const tag of parentTag) {
@@ -84,9 +107,9 @@ function getDate (url) {
 }
 
 // Get the event details
-function getEventDetails (url) {
+function getEventDetails(url) {
   return new Promise((resolve, reject) => {
-    Promise.all([getPrice(url),getCity(url),getCountry(url),getDate(url)])
+    Promise.all([getPrice(url), getCity(url), getCountry(url), getDate(url)])
       .then(data => {
         console.log(data);
         const [price, city, country, date] = data;
@@ -96,10 +119,10 @@ function getEventDetails (url) {
           country,
           date
         })
-      .catch(err => {
-        reject('Unable to fetch event details.', err)
+          .catch(err => {
+            reject('Unable to fetch event details.', err)
+          })
       })
-    })
   })
 
 }

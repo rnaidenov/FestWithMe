@@ -23,7 +23,7 @@ function _getFlightDetails (origin,destination,date) {
     });
 }
 
-function _getHousingDetails (dispatch,destination,date) {
+function _getHousingDetails (destination,date) {
   return new Promise ((resolve,reject) => {
     fetch(`http://localhost:3000/api/prices/housing?location=${destination}&checkInDate=${date}`).then(response => {
       try {
@@ -48,7 +48,6 @@ function _getEventDetails (festivalName) {
         
           response.json()
             .then(eventDetails => {
-              console.log(eventDetails);
               resolve(eventDetails);
             })
         })
@@ -75,7 +74,6 @@ export function searchFestival (origin, festivalName) {
         _increaseLoader(dispatch,'HOUSING_SEARCH_START');
         const housingDetails = yield _getHousingDetails(destination,date);
         const details = yield _getTotalPrice(eventDetails,flightDetails,housingDetails);
-
         const pricingDetails = {
           details
         }
@@ -98,7 +96,7 @@ function _getTotalPrice (eventDetails, flightDetails, housingDetails) {
   const [sharedRoom, privateRoom, entireHome] = housingDetails;
 
   return new Promise ((resolve, reject) => {
-    const {price : {ticketPrice_total : ticketPrice} } = eventDetails;
+    const {price : ticketPrice} = eventDetails;
     const ticketCurrency = ticketPrice.charAt(0);
     const ticketPriceAmount = ticketPrice.split(ticketCurrency)[1];
     fetch(`http://localhost:3000/api/currencies?from=${ticketCurrency}&to=$&amount=${ticketPriceAmount}`).then(conversionRes => {

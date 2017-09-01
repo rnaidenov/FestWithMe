@@ -7,7 +7,7 @@ import CustomCarousel from './customCarousel';
 function PriceBreakdown ({cssClass ,ticketPrice, flightDetails, accommodation,currency,totalPrice}) {
 
 
-  const {housingCurrency,sharedRoom,privateRoom,entireHome} = accommodation;
+  const {sharedRoom,privateRoom,entireHome} = accommodation;
 
   const noInfo = (
     <p id='noInfoLabel'>No information</p>
@@ -15,7 +15,9 @@ function PriceBreakdown ({cssClass ,ticketPrice, flightDetails, accommodation,cu
 
   const accommodationTypes = accommodation.map((propertyType,key) => {
     let price;
-    propertyType.currency ? price = `${propertyType.currency} ${propertyType.price}` : price = undefined;
+    if(propertyType.price) {
+       price = `${propertyType.price.currency} ${propertyType.price.amount}`
+    }
     return (
       <div key={key} className='accommodationTypeWrap'>
         <img src={require(`../public/${propertyType.icon}`)} className='homeTypeIcon'/>
