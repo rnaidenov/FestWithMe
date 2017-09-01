@@ -97,7 +97,6 @@ function getDate(url) {
       for (const tag of parentTag) {
         if (tag.name == 'a') {
           const eventDate = tag.children[0].data;
-          console.log(eventDate)
           resolve(eventDate);
           break;
         }
@@ -111,7 +110,6 @@ function getEventDetails(url) {
   return new Promise((resolve, reject) => {
     Promise.all([getPrice(url), getCity(url), getCountry(url), getDate(url)])
       .then(data => {
-        console.log(data);
         const [price, city, country, date] = data;
         resolve({
           price,

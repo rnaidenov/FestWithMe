@@ -14,7 +14,7 @@ function getPrice (location, date) {
       currency: 'USD'
     }).then(function(searchResults) {
       const average_price = searchResults.results_json.metadata.price_histogram.average_price;
-      resolve(getPropertiesDetails(null));
+      resolve(getPropertiesDetails(average_price));
     });
   });
 }

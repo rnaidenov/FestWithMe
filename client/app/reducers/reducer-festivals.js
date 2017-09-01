@@ -1,7 +1,6 @@
 export default (state = [],action) => {
   switch (action.type) {
     case "LOAD_FESTIVALS_START":
-      console.log("Fetching festivals ...");
       break;
     case "LOAD_FESTIVALS_FINISH":
       let festivalNames = [];

@@ -41,11 +41,9 @@ function _getHousingDetails (destination,date) {
 
 
 function _getEventDetails (festivalName) {
-
   return new Promise ((resolve,reject) => {
     try {
-        fetch(`http://localhost:3000/api/prices/events?eventName=${festivalName}`).then(response => {
-        
+        fetch(`http://localhost:3000/api/prices/events?eventName=${festivalName}`).then(response => { 
           response.json()
             .then(eventDetails => {
               resolve(eventDetails);
@@ -93,7 +91,7 @@ export function searchFestival (origin, festivalName) {
 
 function _getTotalPrice (eventDetails, flightDetails, housingDetails) {
   const {flightPriceCurrency, flightPriceAmount} = flightDetails;
-  const [sharedRoom, privateRoom, entireHome] = housingDetails;
+  const [ ,privateRoom, ] = housingDetails;
 
   return new Promise ((resolve, reject) => {
     const {price : ticketPrice} = eventDetails;
@@ -102,7 +100,7 @@ function _getTotalPrice (eventDetails, flightDetails, housingDetails) {
     fetch(`http://localhost:3000/api/currencies?from=${ticketCurrency}&to=$&amount=${ticketPriceAmount}`).then(conversionRes => {
       conversionRes.json().then(data => {
         const ticketPriceUSD = data.convertedAmount;
-        const totalPrice = ticketPriceUSD + flightPriceAmount + privateRoom.price;
+        const totalPrice = ticketPriceUSD + flightPriceAmount + privateRoom.price.amount;
         resolve({
           ticketPrice : `$${ticketPriceUSD}`,
           flight : flightDetails,

@@ -63,6 +63,7 @@ class Search extends React.Component {
   }
 
   updateLocationField (e) {
+    console.log("Updating field ...");
     this.setState({locationField:e.target.value});
   }
 
@@ -121,7 +122,7 @@ class Search extends React.Component {
                   inputStyle={inputStyle}
                   hintStyle={inputStyle}
                   onChange={(e) => this.updateLocationField(e)}
-                  value={this.state.locationField || "sese"}
+                  value={this.state.locationField}
                 />
                 <i className="material-icons locationIcon" id={location}
                   onMouseEnter={() => this.hoverLocation()}
@@ -133,7 +134,7 @@ class Search extends React.Component {
                 </i>
               </Paper>
               <div className="btnWrap">
-                <IconButton className='searchBtn' onClick = {() => this.lookUpFestival('Glasgow',festivalInput)}>
+                <IconButton className='searchBtn' onClick = {() => this.lookUpFestival(locationInput,festivalInput)}>
                   <i class="material-icons searchBtnIcon">search</i>
                 </IconButton>
               </div>

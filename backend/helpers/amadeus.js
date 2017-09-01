@@ -32,7 +32,6 @@ function getFlightPrices (origin,destination,date) {
         response.json().then(data => {
           const {results} = data;
           const {fare : {total_price : ticketPrice}} = results[0];
-          console.log(ticketPrice);
           resolve({
             flightPriceAmount : parseInt(ticketPrice),
             origin : searchQuery.origin,
