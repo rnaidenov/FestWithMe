@@ -75,6 +75,7 @@ class Search extends React.Component {
     } else if (locationInput && !festivalInput) {
       this.setState({festivalHint:'Please select a festival'});
     } else {
+      this.setState({festivalToSearch: festivalInput});
       this.props.dispatch(searchFestival(locationInput,festivalInput));
     }
   }
@@ -140,7 +141,7 @@ class Search extends React.Component {
               </div>
             </div>
 
-            <Results festivalName={this.state.searchQuery}/>
+            <Results festivalName={this.state.festivalToSearch}/>
           </div>
           </MuiThemeProvider>
       </div>
