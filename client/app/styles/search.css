@@ -10,10 +10,9 @@ p {
 }
 
 .background {
-  background-image: url('../public/party_background.jpg');
   background-size: cover;                     
   background-repeat: no-repeat;
-  /* background-position: center center;  */
+  height: 100vh; 
 }
 
 .overlay {
@@ -31,6 +30,10 @@ p {
 /*----------- Small screen size -----------*/
 
 @media screen and (max-width: 599px) {
+
+  .background {
+    background-image: url('../public/party_background_mobile.jpg');
+  }
 
   .inlineLabel {
     width: 100% !important;
@@ -103,6 +106,11 @@ p {
 /*----------- Medium screen size -----------*/
 
 @media screen and (min-width:600px)  {
+
+  .background {
+    background-image: url('../public/party_background_tablet.jpg');
+  }
+
   .priceBreakdownContainer.selected {
     display: block;
     animation: fadeInDown 2500ms linear both;
@@ -164,6 +172,9 @@ p {
 
 @media screen and (min-width:900px) {
 
+  .background {
+    background-image: url('../public/party_background.jpg');
+  }
   .searchWrap {
     margin-top: 10%;
     width:60% !important;
