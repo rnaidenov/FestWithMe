@@ -50,15 +50,14 @@ class Results extends React.Component {
           mode="determinate"
           thickness={3}
           value={loaderValue}
-          color="#7f3e5d"
+          color={color}
           className='determinateCircle'/>
           <CircularProgress
             size={100}
             thickness={3}
-            color="#b27290"
+            color="#7c5652"
             className='indeterminateCircle'/>
-        <p
-          style={{color:`${color}`}}>
+        <p>
           {text || ''}
         </p>
       </div>
@@ -88,7 +87,7 @@ class Results extends React.Component {
            value={100}
            size={100}
            thickness={3}
-           color="#603248"
+           color="#47140e"
            className='determinateCircle'
          />
          <p className='smiley' id='happy'>:D</p>

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Lato:300|family=Roboto:300|BenchNine|Hammersmith+One|Saira+Extra+Condensed|Quicksand|Yanone+Kaffeesatz');
+@import url('https://fonts.googleapis.com/css?family=Lato:300|family=Roboto:300|Yantramanav:100|BenchNine|Hammersmith+One|Rajdhani|Saira+Extra+Condensed|Quicksand|Yanone+Kaffeesatz');
 
 * {
   -webkit-box-sizing: border-box;
@@ -17,7 +17,7 @@ p {
 }
 
 .overlay {
-    background-color: rgba(205, 205, 205, 0.65);
+    background-color: rgba(165, 165, 165, 0.65);
     position: absolute;
     width: 100%;
     height: 100%;
@@ -44,7 +44,7 @@ p {
   }
 
   .priceBreakdownWrap {
-    max-height: 100px;
+     max-height: 100px; 
   }
 
   .priceBreakdownContainer {
@@ -64,7 +64,7 @@ p {
 
   .homeTypeIcon {
     height: 60px;
-    width: 12%;
+    width: 35%;
     margin-left: 7%;
   }
 
@@ -242,12 +242,12 @@ p {
 }
 
 .searchBtn {
-  background-color: #76686c !important;
+  background-color: #414141 !important;
   border-radius: 50%;
 }
 
 .searchBtn:hover{
-  background-color: #988086 !important;
+  background-color: #6d6d6d !important;
 }
 
 .searchBtnIcon{
@@ -285,7 +285,7 @@ priceBreakdownContainer
 }
 
 #resultsLabel {
-  color:#435565;
+  color:#984b43;
   margin-top: 2%;
 }
 
@@ -310,16 +310,19 @@ priceBreakdownContainer
 }
 
 .priceBreakdown {
-  color:#7a96af;
+  color:white;
 }
 
 #priceBreakdownLabel {
   margin-bottom: -0.3%;
+  color: #dfdfdf;
+  font-size: 16px;
+  font-family: 'Rajdhani', sans-serif;
 }
 
 .smiley {
   font-size: 70px;
-  color:#482636;
+  color:#373535;
   margin-top: -100%;
 }
 
@@ -441,7 +444,7 @@ priceBreakdownContainer
 .totalPriceLabel {
   font-size: 40px;
   font-family: 'Yanone Kaffeesatz', sans-serif;
-  color: #618973;
+  color: #105755;
 }
 
 .priceBreakdownContainer {
@@ -463,7 +466,7 @@ priceBreakdownContainer
 .resultText {
   font-family: 'Saira Extra Condensed', sans-serif;
   font-size: 28px;
-  color: #786262;
+  color: #18121E;
 }
 
 .priceLabel {
@@ -529,7 +532,7 @@ priceBreakdownContainer
 /*at least for small screens*/
 .homeTypeIcon {
   height: 60px;
-  width: 12%;
+  width: 35%;
   margin-left: 8%;
 }
 
@@ -565,7 +568,7 @@ priceBreakdownContainer
 
 .tip-down {
   bottom: -18px;
-  border: 8px solid #d2b1b1;
+  border: 8px solid #413435;
   border-right-color: transparent;
   border-left-color: transparent;
   border-bottom-color: transparent;
@@ -584,18 +587,19 @@ priceBreakdownContainer
 .toolTipBox .body {
   position: relative;
   width: 200px;
-  background-color: #dccfcf;
+  background-color: #66494b;
   border-radius: 4px;
-  border: 2px solid #dccdcd;
+  border: 2px solid #5a4546;
   white-space: normal;
 }
 
 .toolTipBox .toolTipMessage {
   min-height: 30px;
   border-radius: 3px;
-  font-family: Arial;
-  font-size: 14px;
-  color: #797979;
+  font-family: 'Yantramanav', sans-serif !important;
+  font-size: 15px;
+  padding-top: 2%;
+  color: whitesmoke;
 }
 
 .locationTextField {

@@ -20,7 +20,9 @@ function PriceBreakdown ({cssClass ,ticketPrice, flightDetails, accommodation,cu
     }
     return (
       <div key={key} className='accommodationTypeWrap'>
-        <img src={require(`../public/${propertyType.icon}`)} className='homeTypeIcon'/>
+        <div className="propertyTypeIconWrap">
+          <img src={require(`../public/${propertyType.icon}`)} className='homeTypeIcon'/>
+        </div>
         <div className='typeAndPriceWrap'><p>{propertyType.type}</p></div>
         <div className='typeAndPriceWrap'><p>{price || noInfo}</p></div>
       </div>
