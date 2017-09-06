@@ -7,7 +7,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack",
-    "prod": "echo what",
+    "prod": "cd backend && SET NODE_ENV=production && node app.js",
     "build": "cd client && webpack --config webpack.prod.config.js -p --progress --colors",   
     "start": "cd client && webpack-dev-server",
     "postinstall": "cd client && webpack --config webpack.prod.config.js -p --progress --colors",    
