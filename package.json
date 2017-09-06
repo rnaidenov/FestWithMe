@@ -10,7 +10,7 @@
     "prod": "cd backend && SET NODE_ENV=production & node app.js",
     "build": "cd client && webpack --config webpack.prod.config.js -p --progress --colors",   
     "start": "cd client && webpack-dev-server",
-    "postinstall": "webpack --config webpack.prod.config.js -p --progress --colors",    
+    "postinstall": "cd client && webpack --config webpack.prod.config.js -p --progress --colors",    
     "backend": "cd backend && nodemon app.js"
   },
   
