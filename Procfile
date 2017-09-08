@@ -1,1 +1,1 @@
-web: cd backend && node app.js NODE_ENV=production
+web: sh -c 'cd ./backend/ && node app.js'
