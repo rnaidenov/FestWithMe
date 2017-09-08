@@ -11,7 +11,7 @@ const handleInput = (e) => {
 
 function _getFlightDetails (origin,destination,date) {
   return new Promise ((resolve, reject) => {
-      fetch(`http://localhost:3000/api/prices/flights?origin=${origin}&destination=${destination}&date=${date}`).then(response => {
+      fetch(`/api/prices/flights?origin=${origin}&destination=${destination}&date=${date}`).then(response => {
           response.json()
             .then(flightDetails => {
               resolve(flightDetails)
@@ -25,7 +25,7 @@ function _getFlightDetails (origin,destination,date) {
 
 function _getHousingDetails (destination,date) {
   return new Promise ((resolve,reject) => {
-    fetch(`http://localhost:3000/api/prices/housing?location=${destination}&checkInDate=${date}`).then(response => {
+    fetch(`/api/prices/housing?location=${destination}&checkInDate=${date}`).then(response => {
       try {
         response.json()
           .then(housingDetails => {
@@ -43,7 +43,7 @@ function _getHousingDetails (destination,date) {
 function _getEventDetails (festivalName) {
   return new Promise ((resolve,reject) => {
     try {
-        fetch(`http://localhost:3000/api/prices/events?eventName=${festivalName}`).then(response => { 
+        fetch(`/api/prices/events?eventName=${festivalName}`).then(response => { 
           response.json()
             .then(eventDetails => {
               resolve(eventDetails);
@@ -97,7 +97,7 @@ function _getTotalPrice (eventDetails, flightDetails, housingDetails) {
     const {price : ticketPrice} = eventDetails;
     const ticketCurrency = ticketPrice.charAt(0);
     const ticketPriceAmount = ticketPrice.split(ticketCurrency)[1];
-    fetch(`http://localhost:3000/api/currencies?from=${ticketCurrency}&to=$&amount=${ticketPriceAmount}`).then(conversionRes => {
+    fetch(`/api/currencies?from=${ticketCurrency}&to=$&amount=${ticketPriceAmount}`).then(conversionRes => {
       conversionRes.json().then(data => {
         const ticketPriceUSD = data.convertedAmount;
         const totalPrice = ticketPriceUSD + flightPriceAmount + privateRoom.price.amount;
@@ -136,7 +136,7 @@ export const updateInput = (festivalName) => {
 
 export function getLocation () {
   return function(dispatch) {
-    fetch("http://localhost:3000/api/location")
+    fetch("/api/location")
     .then(data => {
         data.json().then(location => {
           const {city, country} = location;
@@ -151,7 +151,7 @@ export function loadFestivals () {
   return function (dispatch) {
     dispatch({type: 'LOAD_FESTIVALS_START'});
 
-    fetch("http://localhost:3000/api/festivals")
+    fetch("/api/festivals")
     .then(data =>{
       data.json().then(festivals => {
         dispatch({type: 'LOAD_FESTIVALS_FINISH', payload: festivals});
