@@ -12,7 +12,7 @@ app.use(cors());
 
 var port = process.env.PORT || 3000;
 
-mongoose.connect(process.env.MONGOLAB_URI);
+mongoose.connect(process.env.MONGODB_URI);
 setupController(app);
 apiController(app);
 
