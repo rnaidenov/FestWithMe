@@ -8,56 +8,23 @@ module.exports = (app) => {
 
     const festivals = [
       {
-        name: "Glastonbury Festival 2017"
+        name: "No Bounds Festival"
       },
       {
-        name: "Awakenings Festival 2017 - Day 1"
+        name: "DGTL × Paradise with Jamie Jones, Dubfire ..."
       },
       {
-        name: "Awakenings Festival 2017 - Day 2"
+        name: "HYTE ADE Pres. Frrc with Ricardo Villalobos ..."
       },
       {
-        name: "Noname 2017 • Music & Art Festival"
+        name: "VERKNIPT ADE Special - Day 1"
       },
       {
-        name: "EXIT Festival 2017"
+        name: "VERKNIPT ADE Special - Day 2"
       },
       {
-        name: "Kappa FuturFestival 2017"
+        name: "25 Years of RAM Records"
       },
-      {
-        name: "Full Moon Fest 2017"
-      },
-      {
-        name: "Crossroads 2017"
-      },
-      {
-        name: "Farr Festival 2017"
-      },
-      {
-        name: "DGTL Barcelona 2017"
-      },
-      {
-        name: "Sunfall Festival 2017"
-      },
-      {
-        name: "Lost Village 2017"
-      },
-      {
-        name: "South West Four 2017 - Day One"
-      },
-      {
-        name: "South West Four 2017 - Day Two"
-      },
-      {
-        name: "Sub Club Soundsystem 2017"
-      },
-      {
-        name: "Mysteryland 2017"
-      },
-      {
-        name: "ABODE in The Park"
-      }
     ]
 
 
