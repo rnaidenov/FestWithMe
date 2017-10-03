@@ -12,7 +12,7 @@ app.use(cors());
 
 var port = process.env.PORT || 3000;
 
-mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect("mongodb://festwithmeadmin:XSza3Ytpp420pP@ds161001.mlab.com:61001/fest-with-me");
 setupController(app);
 apiController(app);
 

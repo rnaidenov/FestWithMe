@@ -7,12 +7,7 @@ function getEventLink (eventName) {
     fetch(reqUrl).then(response =>{
       response.json().then(results => {
         if (results.items) {
-          for (result of results.items) {
-            if (result.link.includes('https://www.residentadvisor.net/events/')) {
-              resolve(result.link);
-              break;
-            }
-          }
+          resolve(results.items[0].link);
         }
         else {
           reject('Invalid event name.')

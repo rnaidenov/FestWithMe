@@ -75,12 +75,6 @@ p {
     margin-top:8%;
   }
 
-  .accommodationTypeWrap{
-    margin-bottom: 5%;
-    width:100%;
-    display: flex;
-  }
-
   .typeAndPriceWrap {
     margin-top: 5%;
     width: 40%;
@@ -221,9 +215,6 @@ p {
   .toolTipBox.body {
     transform: rotate(180deg);
   }
-  .priceBreakdownContainer {
-    padding-top: 1% !important;
-  }
 }
 
 
@@ -322,6 +313,12 @@ priceBreakdownContainer
 
 .priceBreakdown {
   color:white;
+}
+
+.accommodationTypeWrap{
+  width:100%;
+  display: flex;
+  margin-bottom: 3%;
 }
 
 #priceBreakdownLabel {
@@ -442,18 +439,18 @@ priceBreakdownContainer
 
 .priceBreakdownContainer {
   width: 350px;
+  height: 300px;
   margin: auto;
   text-align: center;
-  padding-top: 2%;
 }
 
 .festivalNameLabel {
   font-family: 'Yanone Kaffeesatz', sans-serif;
-  font-size: 36px
+  font-size: 38px
 }
 
 .totalPriceLabel {
-  font-size: 40px;
+  font-size: 38px;
   font-family: 'Yanone Kaffeesatz', sans-serif;
   color: #105755;
 }
@@ -466,7 +463,8 @@ priceBreakdownContainer
   width:100%;
   font-family: 'Quicksand', sans-serif;
   font-size: 30px;
-  margin-bottom: 8%;
+  padding-top:5%;
+  margin-bottom: 5%;
 }
 
 #ticketIcon {
@@ -547,12 +545,6 @@ priceBreakdownContainer
   margin-left: 8%;
 }
 
-
-.accommodationTypeWrap{
-  margin-bottom: 5%;
-  width:100%;
-  display: flex;
-}
 
 .typeAndPriceWrap {
   margin-top: 5%;

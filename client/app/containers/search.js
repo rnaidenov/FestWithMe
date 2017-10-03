@@ -108,6 +108,7 @@ class Search extends React.Component {
                   hintText={festivalHint}
                   className={hintStyle}
                   fullWidth={true}
+                  value="sese"
                   inputStyle={inputStyle}
                   hintStyle={inputStyle}
                   onUpdateInput = {(festivalName) => {this.updateSearchInput(festivalName)}}
@@ -122,6 +123,7 @@ class Search extends React.Component {
                   fullWidth={true}
                   inputStyle={inputStyle}
                   hintStyle={inputStyle}
+                  value="sese"
                   onChange={(e) => this.updateLocationField(e)}
                   value={this.state.locationField}
                 />
@@ -135,7 +137,8 @@ class Search extends React.Component {
                 </i>
               </Paper>
               <div className="btnWrap">
-                <IconButton className='searchBtn' onClick = {() => this.lookUpFestival(locationInput,festivalInput)}>
+                {/* locationInput,festivalInput */}
+                <IconButton className='searchBtn' onClick = {() => this.lookUpFestival('London','25 Years Of Ram Records')}>
                   <i class="material-icons searchBtnIcon">search</i>
                 </IconButton>
               </div>

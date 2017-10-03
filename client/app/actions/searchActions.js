@@ -1,4 +1,4 @@
-import { coroutine as co} from 'bluebird';
+import { coroutine as co } from 'bluebird';
 
 const handleInput = (e) => {
   return {
@@ -9,23 +9,23 @@ const handleInput = (e) => {
 
 
 
-function _getFlightDetails (origin,destination,date) {
-  return new Promise ((resolve, reject) => {
-      fetch(`/api/prices/flights?origin=${origin}&destination=${destination}&date=${date}`).then(response => {
-          response.json()
-            .then(flightDetails => {
-              resolve(flightDetails)
-            })
-            .catch(err => {
-                reject("Fetching flight details failed.",err);
-            })
+function _getFlightDetails(origin, destination, date) {
+  return new Promise((resolve, reject) => {
+    fetch(`http://localhost:3000/api/prices/flights?origin=${origin}&destination=${destination}&date=${date}`).then(response => {
+      response.json()
+        .then(flightDetails => {
+          resolve(flightDetails)
         })
-    });
+        .catch(err => {
+          reject("Fetching flight details failed.", err);
+        })
+    })
+  });
 }
 
-function _getHousingDetails (destination,date) {
-  return new Promise ((resolve,reject) => {
-    fetch(`/api/prices/housing?location=${destination}&checkInDate=${date}`).then(response => {
+function _getHousingDetails(destination, date) {
+  return new Promise((resolve, reject) => {
+    fetch(`http://localhost:3000/api/prices/housing?location=${destination}&checkInDate=${date}`).then(response => {
       try {
         response.json()
           .then(housingDetails => {
@@ -40,38 +40,38 @@ function _getHousingDetails (destination,date) {
 }
 
 
-function _getEventDetails (festivalName) {
-  return new Promise ((resolve,reject) => {
+function _getEventDetails(festivalName) {
+  return new Promise((resolve, reject) => {
     try {
-        fetch(`/api/prices/events?eventName=${festivalName}`).then(response => { 
-          response.json()
-            .then(eventDetails => {
-              resolve(eventDetails);
-            })
-        })
-      }
+      fetch(`http://localhost:3000/api/prices/events?eventName=${festivalName}`).then(response => {
+        response.json()
+          .then(eventDetails => {
+            resolve(eventDetails);
+          })
+      })
+    }
     catch (e) {
-        reject("Fetching event details failed.");
-      }
+      reject("Fetching event details failed.");
+    }
   });
 }
 
 
 
-export function searchFestival (origin, festivalName) {
+export function searchFestival(origin, festivalName) {
   return function (dispatch) {
-    _increaseLoader(dispatch,'FESTIVAL_SEARCH_START');
-    co(function * () {
+    _increaseLoader(dispatch, 'FESTIVAL_SEARCH_START');
+    co(function* () {
 
       const eventDetails = yield _getEventDetails(festivalName);
       if (eventDetails.price) {
         const destination = `${eventDetails.city},${eventDetails.country}`;
         const date = eventDetails.date;
-        _increaseLoader(dispatch,'FLIGHTS_SEARCH_START',eventDetails.city);
-        const flightDetails = yield _getFlightDetails(origin,destination,date);
-        _increaseLoader(dispatch,'HOUSING_SEARCH_START');
-        const housingDetails = yield _getHousingDetails(destination,date);
-        const details = yield _getTotalPrice(eventDetails,flightDetails,housingDetails);
+        _increaseLoader(dispatch, 'FLIGHTS_SEARCH_START', eventDetails.city);
+        const flightDetails = yield _getFlightDetails(origin, destination, date);
+        _increaseLoader(dispatch, 'HOUSING_SEARCH_START');
+        const housingDetails = yield _getHousingDetails(destination, date);
+        const details = yield _getTotalPrice(eventDetails, flightDetails, housingDetails);
         const pricingDetails = {
           details
         }
@@ -89,24 +89,24 @@ export function searchFestival (origin, festivalName) {
   }
 }
 
-function _getTotalPrice (eventDetails, flightDetails, housingDetails) {
-  const {flightPriceCurrency, flightPriceAmount} = flightDetails;
-  const [ ,privateRoom, ] = housingDetails;
+function _getTotalPrice(eventDetails, flightDetails, housingDetails) {
+  const { flightPriceCurrency, flightPriceAmount } = flightDetails;
+  const [, privateRoom,] = housingDetails;
 
-  return new Promise ((resolve, reject) => {
-    const {price : ticketPrice} = eventDetails;
+  return new Promise((resolve, reject) => {
+    const { price: ticketPrice } = eventDetails;
     const ticketCurrency = ticketPrice.charAt(0);
     const ticketPriceAmount = ticketPrice.split(ticketCurrency)[1];
-    fetch(`/api/currencies?from=${ticketCurrency}&to=$&amount=${ticketPriceAmount}`).then(conversionRes => {
+    fetch(`http://localhost:3000/api/currencies?from=${ticketCurrency}&to=$&amount=${ticketPriceAmount}`).then(conversionRes => {
       conversionRes.json().then(data => {
         const ticketPriceUSD = data.convertedAmount;
         const totalPrice = ticketPriceUSD + flightPriceAmount + privateRoom.price.amount;
         resolve({
-          ticketPrice : `$${ticketPriceUSD}`,
-          flight : flightDetails,
+          ticketPrice: `$${ticketPriceUSD}`,
+          flight: flightDetails,
           housingDetails,
           totalPrice,
-          currency:'$'
+          currency: '$'
         })
       })
     })
@@ -114,17 +114,17 @@ function _getTotalPrice (eventDetails, flightDetails, housingDetails) {
 }
 
 
-function _increaseLoader(dispatch,type,payload) {
-  dispatch({type: `${type}1`,payload});
+function _increaseLoader(dispatch, type, payload) {
+  dispatch({ type: `${type}1`, payload });
   setTimeout(() => {
-    dispatch({type:  `${type}2`,payload});
-  },500);
+    dispatch({ type: `${type}2`, payload });
+  }, 500);
   setTimeout(() => {
-    dispatch({type:  `${type}3`,payload});
-  },800);
+    dispatch({ type: `${type}3`, payload });
+  }, 800);
   setTimeout(() => {
-    dispatch({type:  `${type}4`,payload});
-  },900);
+    dispatch({ type: `${type}4`, payload });
+  }, 900);
 }
 
 export const updateInput = (festivalName) => {
@@ -134,31 +134,36 @@ export const updateInput = (festivalName) => {
   }
 }
 
-export function getLocation () {
-  return function(dispatch) {
-    fetch("/api/location")
-    .then(data => {
-        data.json().then(location => {
-          const {city, country} = location;
-          dispatch({type:'SEARCHING_LOCATION_FINISH',payload:`${city},${country}`});
-        })
-    })
-  }
-}
-
-
-export function loadFestivals () {
+export function getLocation() {
   return function (dispatch) {
-    dispatch({type: 'LOAD_FESTIVALS_START'});
-
-    fetch("/api/festivals")
-    .then(data =>{
-      data.json().then(festivals => {
-        dispatch({type: 'LOAD_FESTIVALS_FINISH', payload: festivals});
+    fetch("http://localhost:3000/api/location")
+      .then(data => {
+        data.json().then(location => {
+          const { city, country } = location;
+          dispatch({ type: 'SEARCHING_LOCATION_FINISH', payload: `${city},${country}` });
+        })
       })
-    })
-    .catch(err => {
-      dispatch({type: 'LOAD_FESTIVALS_ERROR', payload: err});
-    })
   }
 }
+
+
+export function loadFestivals() {
+  return function (dispatch) {
+    dispatch({ type: 'LOAD_FESTIVALS_START' });
+
+    fetch("http://localhost:3000/api/festivals")
+      .then(data => {
+        data.json().then(festivals => {
+          dispatch({ type: 'LOAD_FESTIVALS_FINISH', payload: festivals });
+        })
+      })
+      .catch(err => {
+        dispatch({ type: 'LOAD_FESTIVALS_ERROR', payload: err });
+      })
+  }
+}
+
+
+
+
+      
