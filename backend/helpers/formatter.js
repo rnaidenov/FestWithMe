@@ -1,6 +1,6 @@
 'use strict';
 
-function formatDate (date,format) {
+function formatDate (date) {
     const [day, month, year] = date.split(/\s/);
     const months = new Map ([
       ['January', '01'],
@@ -32,9 +32,7 @@ function formatDate (date,format) {
     let dd;
     day.charAt(0) != '0' && day < 10 ? dd = `0${day}` : dd = day
 
-    let formattedDate;
-    format == 'flights' ? formattedDate = `${year}-${mm}-${dd}` : formattedDate = `${day}/${mm}/${year}`
-    return formattedDate;
+    return `${year}-${mm}-${dd}`;
 }
 
 module.exports = {

@@ -137,8 +137,7 @@ class Search extends React.Component {
                 </i>
               </Paper>
               <div className="btnWrap">
-                {/* locationInput,festivalInput */}
-                <IconButton className='searchBtn' onClick = {() => this.lookUpFestival('London','25 Years Of Ram Records')}>
+                <IconButton className='searchBtn' onClick = {() => this.lookUpFestival(locationInput,festivalInput)}>
                   <i class="material-icons searchBtnIcon">search</i>
                 </IconButton>
               </div>

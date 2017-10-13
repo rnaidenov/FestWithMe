@@ -10,7 +10,7 @@ function generateSearchQuery (origin,destination,date) {
   return new Promise((resolve, reject) => {
     const originIataPromise = airports.getCityCode(origin);
     const destinationIataPromise = airports.getCityCode(destination);
-    const flightDate = formatter.formatDate(date,'flights');
+    const flightDate = formatter.formatDate(date);
 
     originIataPromise.then(originIata => {
       destinationIataPromise.then(destinationIata => {
