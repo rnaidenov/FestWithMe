@@ -23,9 +23,9 @@ function _getFlightDetails(origin, destination, date) {
   });
 }
 
-function _getHousingDetails(destination, date) {
+function _getHousingDetails(destination, date, nights, numPeople) {
   return new Promise((resolve, reject) => {
-    fetch(`http://localhost:3000/api/prices/housing?location=${destination}&checkInDate=${date}`).then(response => {
+    fetch(`http://localhost:3000/api/prices/housing?location=${destination}&date=${date}&nights=${nights}&numPeople=${numPeople}`).then(response => {
       try {
         response.json()
           .then(housingDetails => {

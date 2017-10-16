@@ -18,16 +18,21 @@ module.exports = (app) => {
   app.use(bodyParser.urlencoded({extended: true}));
 
   app.get("/api/festivals/",(req,res) => {
-    Festivals.find({},function (err,todos) {
+    Festivals.find({},function (err,festivals) {
         if(err) throw err;
-        res.send(todos);
+        res.send(festivals);
       });
   });
 
   app.get("/api/prices/housing",(req,res) => {
-    airbnb.getPrice(req.query.location, req.query.checkInDate).then(housingDetails => {
-      res.send(housingDetails)
-    });
+    airbnb.getPrice(req.query.location, req.query.date,req.query.nights,req.query.numPeople)
+      .then(housingDetails => {
+        console.log(housingDetails);
+          res.send(housingDetails)
+        })
+      .catch(error => {
+        res.status(500).send(error);
+      })
   })
 
   app.get("/api/prices/flights",(req, res) => {

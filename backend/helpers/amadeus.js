@@ -10,7 +10,7 @@ function generateSearchQuery (origin,destination,date) {
   return new Promise((resolve, reject) => {
     const originIataPromise = airports.getCityCode(origin);
     const destinationIataPromise = airports.getCityCode(destination);
-    const flightDate = formatter.formatDate(date);
+    const flightDate = formatter.formatDate(date,{more:false,days:1});
 
     originIataPromise.then(originIata => {
       destinationIataPromise.then(destinationIata => {
@@ -47,6 +47,7 @@ function getFlightPrices (origin,destination,date) {
     })
   });
 }
+
 
 module.exports = {
   getFlightPrices
