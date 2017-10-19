@@ -3,25 +3,29 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { loadFestivals, updateInput, searchFestival, getLocation } from '../actions/searchActions';
 import AutoComplete from 'material-ui/AutoComplete';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Paper from 'material-ui/Paper';
 import '../styles/search.css';
-import { Grid, Col, Row} from 'react-bootstrap';
+import { Grid, Col, Row } from 'react-bootstrap';
 import IconButton from 'material-ui/IconButton';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import CircularProgress from 'material-ui/CircularProgress';
 import TextField from 'material-ui/TextField';
-import {geolocated} from 'react-geolocated';
+import { geolocated } from 'react-geolocated';
+import PeopleSelector from './peopleSelector';
+import NightsSelector from './NightsSelector';
 
 
 import Results from './results';
 
 @connect(store => {
   return {
-    festivals : store.festivals,
-    festivalInput : store.festivalInput,
-    searchResults : store.searchResults,
-    location : store.location
+    festivals: store.festivals,
+    festivalInput: store.festivalInput,
+    searchResults: store.searchResults,
+    location: store.location
   }
 })
 
@@ -29,7 +33,8 @@ class Search extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state={searchQuery:'',hintStyle:'',location:'location_off',locationField:'',festivalHint:'Festival',locationHint:'City'}
+    this.state = { searchQuery: '', hintStyle: '', location: 'location_off', locationField: '',
+                   festivalHint: 'Festival', locationHint: 'City', nightsOfStay: '1'}
   }
 
   componentDidMount() {
@@ -37,54 +42,56 @@ class Search extends React.Component {
     this.props.dispatch(loadFestivals());
   }
 
-  updateSearchInput (festivalName) {
-    this.setState({searchQuery:festivalName});
+  updateSearchInput(festivalName) {
+    this.setState({ searchQuery: festivalName });
     this.props.dispatch(updateInput(festivalName));
   }
 
-  toggleLocation () {
+  toggleLocation() {
     if (this.state.location === 'location_on') {
-      this.setState({location:'location_off'})
+      this.setState({ location: 'location_off' })
     } else {
       this.props.dispatch(getLocation());
-      this.setState({location:'location_on'});
+      this.setState({ location: 'location_on' });
       setTimeout(() => {
-        this.setState({locationField:this.props.location});
-      },400);
+        this.setState({ locationField: this.props.location });
+      }, 400);
     }
   }
 
-  hoverLocation () {
-    this.state.location == 'location_off' ? this.setState({hoverLocation:true}) : null;
+  hoverLocation() {
+    this.state.location == 'location_off' ? this.setState({ hoverLocation: true }) : null;
   }
 
-  hoverOutLocation () {
-    this.setState({hoverLocation:false});
+  hoverOutLocation() {
+    this.setState({ hoverLocation: false });
   }
 
-  updateLocationField (e) {
-    console.log("Updating field ...");
-    this.setState({locationField:e.target.value});
+  updateLocationField(e) {
+    this.setState({ locationField: e.target.value });
   }
 
-  lookUpFestival (locationInput,festivalInput) {
+  updateNightsField(e) {
+     this.setState({ nightsOfStay: e.target.value });
+  }
+
+  lookUpFestival(locationInput, festivalInput) {
     if (!locationInput && !festivalInput) {
-      this.setState({locationHint:'Please enter a valid location',festivalHint:'Please select a festival'});
+      this.setState({ locationHint: 'Please enter a valid location', festivalHint: 'Please select a festival' });
     } else if (!locationInput && festivalInput) {
-      this.setState({locationHint:'Please enter a valid location'});
+      this.setState({ locationHint: 'Please enter a valid location' });
     } else if (locationInput && !festivalInput) {
-      this.setState({festivalHint:'Please select a festival'});
+      this.setState({ festivalHint: 'Please select a festival' });
     } else {
-      this.setState({festivalToSearch: festivalInput});
-      this.props.dispatch(searchFestival(locationInput,festivalInput));
+      this.setState({ festivalToSearch: festivalInput });
+      this.props.dispatch(searchFestival(locationInput, festivalInput));
     }
   }
 
-
-  render () {
-    const {locationField : locationInput,location,festivalHint,locationHint,hintStyle} = this.state;
-    const {festivalInput} = this.props;
-    const inputStyle={paddingLeft:'12px'};
+  render() {
+    const { locationField: locationInput, location, festivalHint, locationHint, hintStyle } = this.state;
+    const { festivalInput } = this.props;
+    const inputStyle = { paddingLeft: '12px' };
 
     const toolTip = (
       <div class="toolTipBox">
@@ -97,11 +104,12 @@ class Search extends React.Component {
 
     return (
       <div >
-          <MuiThemeProvider>
-            <div>
+        <MuiThemeProvider>
+          <div>
             <div className="searchWrap">
-              <p className="inlineLabel" id="goingToLabel">Going to</p>
-              <Paper zDepth={1} className = 'searchContainer' id="festivalField">
+              <PeopleSelector/>
+              <p className="inlineLabel" id="goingToLabel">going to</p>
+              <Paper zDepth={1} className='searchContainer' id="festivalField">
                 <AutoComplete
                   dataSource={this.props.festivals}
                   filter={AutoComplete.caseInsensitiveFilter}
@@ -111,11 +119,11 @@ class Search extends React.Component {
                   value="sese"
                   inputStyle={inputStyle}
                   hintStyle={inputStyle}
-                  onUpdateInput = {(festivalName) => {this.updateSearchInput(festivalName)}}
+                  onUpdateInput={(festivalName) => { this.updateSearchInput(festivalName) }}
                 />
               </Paper>
-              <p  className="inlineLabel" id="fromLabel">from</p>
-              <Paper  zDepth={1} className = 'searchContainer' id="cityField">
+              <p className="inlineLabel" id="fromLabel">from</p>
+              <Paper zDepth={1} className='searchContainer' id="cityField">
                 <TextField
                   hintText={locationHint}
                   className='locationTextField'
@@ -129,23 +137,35 @@ class Search extends React.Component {
                 />
                 <i className="material-icons locationIcon" id={location}
                   onMouseEnter={() => this.hoverLocation()}
-                  onClick = {() => this.toggleLocation()}
-                  onMouseLeave = {() => this.hoverOutLocation()}
+                  onClick={() => this.toggleLocation()}
+                  onMouseLeave={() => this.hoverOutLocation()}
                 >
                   {location}
-                  {this.state.hoverLocation ? toolTip : null} 
+                  {this.state.hoverLocation ? toolTip : null}
                 </i>
               </Paper>
+              <p className="inlineLabel" id="forLabel">for</p>
+              <Paper zDepth={1} className='searchContainer' id="nightsField">
+                <TextField
+                    fullWidth={true}
+                    inputStyle={inputStyle}
+                    style={{width:'40%'}}
+                    onChange={(e) => this.updateNightsField(e)}
+                    underlineShow={false}
+                    value={this.state.nightsOfStay}
+                />
+                <p className='nightsLabel'>{this.state.nightsOfStay > 1 ? 'nights' : 'night'}</p>
+              </Paper>
               <div className="btnWrap">
-                <IconButton className='searchBtn' onClick = {() => this.lookUpFestival(locationInput,festivalInput)}>
+                <IconButton className='searchBtn' onClick={() => this.lookUpFestival(locationInput, festivalInput)}>
                   <i class="material-icons searchBtnIcon">search</i>
                 </IconButton>
               </div>
             </div>
 
-            <Results festivalName={this.state.festivalToSearch}/>
+            <Results festivalName={this.state.festivalToSearch} />
           </div>
-          </MuiThemeProvider>
+        </MuiThemeProvider>
       </div>
     )
   }

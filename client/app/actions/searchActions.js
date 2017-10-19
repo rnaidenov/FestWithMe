@@ -162,8 +162,3 @@ export function loadFestivals() {
       })
   }
 }
-
-
-
-
-      

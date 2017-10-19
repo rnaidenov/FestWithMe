@@ -170,37 +170,40 @@ p {
     background-image: url('../public/party_background.jpg');
   }
   .searchWrap {
-    margin-top: 10%;
-    width:60% !important;
-    margin-left: auto;
-    margin-right: auto;
+    padding-top: 2%;
+    width:70% !important;
   }
-  .inlineLabel {
-    width: 10% !important;
-    margin-bottom: 6%;
-    padding-top: 6% !important;
-  }
-
   .searchContainer {
-    width: 32.5% !important;
-    margin: auto;
+    width: 30%;
   }
-  #goingToLabel {
+  #peopleLabel{
     order:0;
   }
-  #festivalField {
-    order: 1;
+  #peopleField{
+    order:1;
+    width:10%;
   }
-  #fromLabel {
+  #goingToLabel {
     order:2;
   }
-  #cityField {
+  #festivalField {
     order: 3;
   }
-  .btnWrap {
-    width:15% !important;
+  #fromLabel {
     order:4;
-    padding: 4.5% !important;
+  }
+  #cityField {
+    order: 5;
+  }
+  #forLabel {
+    order: 6
+  }
+  #nightsField {
+    order: 7;
+    width:6%;
+  }
+  .btnWrap {
+    order:8;
   }
   .finishedResultsWrap {
     margin-top: -4%;
@@ -226,21 +229,27 @@ p {
 
 .searchWrap {
   width: 100%;
-  margin-top:10%;
+  margin: auto;
+  padding-top:12%;
   text-align: center;
   display: flex;
   flex-wrap: wrap;
+  /* background-color: red; */
 }
 
 .btnWrap {
-  width:100%;
-  text-align: center;
-  padding-top:5%;
+  width:9%;
+  margin-top:-0.5%;
 }
 
 .searchContainer {
   position: relative;
   height: 40px;
+}
+
+.nightsLabel{
+  width:60%;
+  display: inline-block;
 }
 
 .searchBtn {
@@ -273,14 +282,10 @@ p {
 }
 
 .inlineLabel{
-  display: inline-block;
-  width: 10%;
-  padding-top:1.4%;
+  width: 5%;
+  padding-top: 1%;
 }
 
-#goingToLabel {
-  padding-right: 1%;
-}
 priceBreakdownContainer
 #searchReadyText {
   margin-top: 1%;
