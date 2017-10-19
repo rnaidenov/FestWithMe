@@ -10,12 +10,13 @@ import Paper from 'material-ui/Paper';
 import '../styles/search.css';
 import { Grid, Col, Row } from 'react-bootstrap';
 import IconButton from 'material-ui/IconButton';
-import injectTapEventPlugin from 'react-tap-event-plugin';
 import CircularProgress from 'material-ui/CircularProgress';
 import TextField from 'material-ui/TextField';
 import { geolocated } from 'react-geolocated';
-import PeopleSelector from './peopleSelector';
-import NightsSelector from './NightsSelector';
+import PeopleSelector from '../components/peopleSelector';
+import NightsSelector from '../components/nightsSelector';
+import FestivalInput from '../components/festivalInput';
+import LocationInput from '../components/locationInput';
 
 
 import Results from './results';
@@ -34,13 +35,17 @@ class Search extends React.Component {
   constructor(props) {
     super(props);
     this.state = { searchQuery: '', hintStyle: '', location: 'location_off', locationField: '',
-                   festivalHint: 'Festival', locationHint: 'City', nightsOfStay: '1'}
+                   festivalHint: 'Festival', locationHint: 'City', nightsOfStay: '1',numPeople:0}
   }
 
   componentDidMount() {
-    injectTapEventPlugin();
     this.props.dispatch(loadFestivals());
   }
+
+  selectNumPeople (event, index, numPeople) {
+      console.log(index)
+      this.setState({numPeople})
+  };
 
   updateSearchInput(festivalName) {
     this.setState({ searchQuery: festivalName });
@@ -93,69 +98,37 @@ class Search extends React.Component {
     const { festivalInput } = this.props;
     const inputStyle = { paddingLeft: '12px' };
 
-    const toolTip = (
-      <div class="toolTipBox">
-        <div class="body">
-          <span class="tip tip-down"></span>
-          <p className="toolTipMessage">Click here to automatically detect and add your location</p>
-        </div>
-      </div>
-    )
 
     return (
       <div >
         <MuiThemeProvider>
           <div>
             <div className="searchWrap">
-              <PeopleSelector/>
+              <PeopleSelector
+                numPeople={this.state.numPeople}
+                selectNumPeople={(event, idx, value) => this.selectNumPeople(event, idx, value)}
+              />
               <p className="inlineLabel" id="goingToLabel">going to</p>
-              <Paper zDepth={1} className='searchContainer' id="festivalField">
-                <AutoComplete
-                  dataSource={this.props.festivals}
-                  filter={AutoComplete.caseInsensitiveFilter}
-                  hintText={festivalHint}
-                  className={hintStyle}
-                  fullWidth={true}
-                  value="sese"
-                  inputStyle={inputStyle}
-                  hintStyle={inputStyle}
-                  onUpdateInput={(festivalName) => { this.updateSearchInput(festivalName) }}
-                />
-              </Paper>
+              <FestivalInput
+                festivals={this.props.festivals}
+                updateSearchInput={(festivalName) => this.updateSearchInput(festivalName)} 
+                style={inputStyle}
+              />
               <p className="inlineLabel" id="fromLabel">from</p>
-              <Paper zDepth={1} className='searchContainer' id="cityField">
-                <TextField
-                  hintText={locationHint}
-                  className='locationTextField'
-                  hintStyle={hintStyle}
-                  fullWidth={true}
-                  inputStyle={inputStyle}
-                  hintStyle={inputStyle}
-                  value="sese"
-                  onChange={(e) => this.updateLocationField(e)}
-                  value={this.state.locationField}
-                />
-                <i className="material-icons locationIcon" id={location}
-                  onMouseEnter={() => this.hoverLocation()}
-                  onClick={() => this.toggleLocation()}
-                  onMouseLeave={() => this.hoverOutLocation()}
-                >
-                  {location}
-                  {this.state.hoverLocation ? toolTip : null}
-                </i>
-              </Paper>
+              <LocationInput
+                locationField={locationInput}
+                location={location}
+                updateLocationField={() => this.updateLocationField}
+                toggleLocation={() => this.toggleLocation}
+                hoverLocation={() => this.hoverLocation}
+                hoverOutLocation={() => this.hoverOutLocation}
+                style={inputStyle}
+              />
               <p className="inlineLabel" id="forLabel">for</p>
-              <Paper zDepth={1} className='searchContainer' id="nightsField">
-                <TextField
-                    fullWidth={true}
-                    inputStyle={inputStyle}
-                    style={{width:'40%'}}
-                    onChange={(e) => this.updateNightsField(e)}
-                    underlineShow={false}
-                    value={this.state.nightsOfStay}
-                />
-                <p className='nightsLabel'>{this.state.nightsOfStay > 1 ? 'nights' : 'night'}</p>
-              </Paper>
+              <NightsSelector 
+                nightsOfStay={this.state.nightsOfStay} 
+                changeNights={(e) => this.updateNightsField(e)}  
+              />
               <div className="btnWrap">
                 <IconButton className='searchBtn' onClick={() => this.lookUpFestival(locationInput, festivalInput)}>
                   <i class="material-icons searchBtnIcon">search</i>
