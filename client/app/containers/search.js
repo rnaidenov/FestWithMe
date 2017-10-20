@@ -34,67 +34,44 @@ class Search extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { searchQuery: '', hintStyle: '', location: 'location_off', locationField: '',
-                   festivalHint: 'Festival', locationHint: 'City', nightsOfStay: '1',numPeople:0}
+    this.state = { nightsOfStay: '1',numPeople:0 }
   }
 
-  componentDidMount() {
-    this.props.dispatch(loadFestivals());
-  }
-
-  selectNumPeople (event, index, numPeople) {
-      console.log(index)
-      this.setState({numPeople})
+  updateNumPeople(numPeople) {
+      this.setState({ numPeople })
   };
-
-  updateSearchInput(festivalName) {
-    this.setState({ searchQuery: festivalName });
-    this.props.dispatch(updateInput(festivalName));
+  
+  updateFestivalInput(festivalName) {
+      this.setState({ festivalName });
   }
 
-  toggleLocation() {
-    if (this.state.location === 'location_on') {
-      this.setState({ location: 'location_off' })
-    } else {
-      this.props.dispatch(getLocation());
-      this.setState({ location: 'location_on' });
-      setTimeout(() => {
-        this.setState({ locationField: this.props.location });
-      }, 400);
-    }
+  updateNightsField(nightsOfStay) {
+      this.setState({ nightsOfStay });
   }
 
-  hoverLocation() {
-    this.state.location == 'location_off' ? this.setState({ hoverLocation: true }) : null;
+  updateLocationInput(locationOrigin) {
+      this.setState({ locationOrigin });
+  }
+  
+  //locationInput, festivalInput
+  lookUpFestival() {
+    const { numPeople, festivalName, nightsOfStay, locationOrigin } = this.state;
+    console.log( numPeople + "  "+ festivalName + "  "+ nightsOfStay + "  "+ locationOrigin);
+    // if (!locationInput && !festivalInput) {
+    //   this.setState({ locationHint: 'Please enter a valid location', festivalHint: 'Please select a festival' });
+    // } else if (!locationInput && festivalInput) {
+    //   this.setState({ locationHint: 'Please enter a valid location' });
+    // } else if (locationInput && !festivalInput) {
+    //   this.setState({ festivalHint: 'Please select a festival' });
+    // } else {
+    //   this.setState({ festivalToSearch: festivalInput });
+    //   this.props.dispatch(searchFestival(locationInput, festivalInput));
+    // }
   }
 
-  hoverOutLocation() {
-    this.setState({ hoverLocation: false });
-  }
-
-  updateLocationField(e) {
-    this.setState({ locationField: e.target.value });
-  }
-
-  updateNightsField(e) {
-     this.setState({ nightsOfStay: e.target.value });
-  }
-
-  lookUpFestival(locationInput, festivalInput) {
-    if (!locationInput && !festivalInput) {
-      this.setState({ locationHint: 'Please enter a valid location', festivalHint: 'Please select a festival' });
-    } else if (!locationInput && festivalInput) {
-      this.setState({ locationHint: 'Please enter a valid location' });
-    } else if (locationInput && !festivalInput) {
-      this.setState({ festivalHint: 'Please select a festival' });
-    } else {
-      this.setState({ festivalToSearch: festivalInput });
-      this.props.dispatch(searchFestival(locationInput, festivalInput));
-    }
-  }
 
   render() {
-    const { locationField: locationInput, location, festivalHint, locationHint, hintStyle } = this.state;
+    const { locationInput, location, festivalHint, locationHint, hintStyle } = this.state;
     const { festivalInput } = this.props;
     const inputStyle = { paddingLeft: '12px' };
 
@@ -105,29 +82,22 @@ class Search extends React.Component {
           <div>
             <div className="searchWrap">
               <PeopleSelector
-                numPeople={this.state.numPeople}
-                selectNumPeople={(event, idx, value) => this.selectNumPeople(event, idx, value)}
+                updateNumPeople={(numPeople) => this.updateNumPeople(numPeople)}
               />
               <p className="inlineLabel" id="goingToLabel">going to</p>
               <FestivalInput
-                festivals={this.props.festivals}
-                updateSearchInput={(festivalName) => this.updateSearchInput(festivalName)} 
-                style={inputStyle}
+                updateFestivalInput={(festivalName) => this.updateFestivalInput(festivalName)} 
+                inputStyle={inputStyle}
               />
               <p className="inlineLabel" id="fromLabel">from</p>
               <LocationInput
-                locationField={locationInput}
-                location={location}
-                updateLocationField={() => this.updateLocationField}
-                toggleLocation={() => this.toggleLocation}
-                hoverLocation={() => this.hoverLocation}
-                hoverOutLocation={() => this.hoverOutLocation}
-                style={inputStyle}
+                updateLocationInput={(location) => this.updateLocationInput(location)}
+                inputStyle={inputStyle}
               />
               <p className="inlineLabel" id="forLabel">for</p>
-              <NightsSelector 
-                nightsOfStay={this.state.nightsOfStay} 
-                changeNights={(e) => this.updateNightsField(e)}  
+              <NightsSelector
+                 updateNightsField={(numOfNights) => {this.updateNightsField(numOfNights)}}
+                 inputStyle={inputStyle}
               />
               <div className="btnWrap">
                 <IconButton className='searchBtn' onClick={() => this.lookUpFestival(locationInput, festivalInput)}>

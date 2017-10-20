@@ -5,22 +5,38 @@ import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField'
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
-const inputStyle = { paddingLeft: '12px' };
+class NightsSelector extends React.Component {
 
-function NightsSelector({ nightsOfStay, changeNights }) {
-    return (
-        <Paper zDepth={1} className='searchContainer' id="nightsField">
-            <TextField
-                fullWidth={true}
-                inputStyle={inputStyle}
-                style={{ width: '40%' }}
-                onChange={(e) => changeNights(e)}
-                underlineShow={false}
-                value={nightsOfStay}
-            />
-            <p className='nightsLabel'>{nightsOfStay > 1 ? 'nights' : 'night'}</p>
-        </Paper>
-    )
+    constructor(props) {
+        super(props);
+        this.state = { nightsOfStay: '1' };
+    }
+
+    changeNumOfNights(e) {
+        console.log(e.target.value);
+        this.setState({ nightsOfStay: e.target.value });
+        this.props.updateNightsField(this.state.nightsOfStay);
+    }
+
+    render () {
+
+        const { nightsOfStay } = this.state;
+        const { inputStyle } = this.props;
+
+        return (
+            <Paper zDepth={1} className='searchContainer' id="nightsField">
+                <TextField
+                    style={{ width: '40%' }}
+                    inputStyle={inputStyle}
+                    onChange={(e) => this.changeNumOfNights(e)}
+                    underlineShow={false}
+                    value={nightsOfStay}
+                />
+                <p className='nightsLabel'>{nightsOfStay > 1 ? 'nights' : 'night'}</p>
+            </Paper>
+        )
+    }
+
 }
 
 export default NightsSelector;
