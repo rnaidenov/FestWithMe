@@ -8,17 +8,17 @@ injectTapEventPlugin();
 
 class PeopleSelector extends React.Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state = { numPeople : 0 };
+        this.state = { numPeople: 0 };
     }
 
-    selectNumPeople (event, index, numPeople) {
-        this.setState({numPeople})
+    selectNumPeople(event, index, numPeople) {
+        this.setState({ numPeople })
         this.props.updateNumPeople(numPeople);
     };
 
-    getOptions () {
+    getOptions() {
         const options = [];
         for (let i = 1; i < 17; i++) {
             const option = i !== 1 ? `${i} people` : `${i} person`
@@ -27,12 +27,16 @@ class PeopleSelector extends React.Component {
         return options;
     }
 
-    render () {
+    render() {
 
         const { numPeople } = this.state;
-
+        const { inputStyle } = this.props;
+        
         const selectOptions = this.getOptions().map((option, idx) => {
-            return (<MenuItem value={idx} primaryText={option} />);
+            return (<MenuItem
+                value={idx}
+                primaryText={option}
+            />);
         });
 
         return (

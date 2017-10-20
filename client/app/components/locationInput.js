@@ -18,7 +18,8 @@ class LocationInput extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { location: 'location_off' };
+        this.state = { location: 'location_off', locationField:'' };
+        this.errorMessage = 'Please enter the name of the city you\'re travelling from';
     }
 
     toggleLocation() {
@@ -42,13 +43,21 @@ class LocationInput extends React.Component {
     }
 
     updateLocationField(e) {
-        this.setState({ locationField: e.target.value });
-        this.props.updateLocationInput(this.state.locationField);
+        this.setState({ locationField: e.target.value }, () => {
+            this.props.updateLocationInput(this.state.locationField);
+        });
+    }
+
+    handleEmptyInput(){
+        if (this.props.missingLocation) {
+            this.setState({ locationField:this.errorMessage });
+        }
     }
 
 
     render() {
 
+        
         const toolTip = (
             <div class="toolTipBox">
                 <div class="body">
@@ -59,8 +68,7 @@ class LocationInput extends React.Component {
         )
 
         const { locationField, location, hoverLocation } = this.state;
-        const { inputStyle } = this.props;
-
+        const { inputStyle, errorStyle, search, missingLocation } = this.props;
 
         return (
             <Paper zDepth={1} className='searchContainer' id="cityField">
@@ -71,6 +79,8 @@ class LocationInput extends React.Component {
                     inputStyle={inputStyle}
                     hintStyle={inputStyle}
                     onChange={(e) => this.updateLocationField(e)}
+                    errorText={missingLocation && this.errorMessage}
+                    errorStyle={errorStyle}
                     value={locationField}
                 />
                 <i className="material-icons locationIcon" id={location}

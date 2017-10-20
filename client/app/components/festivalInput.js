@@ -19,6 +19,7 @@ class FestivalInput extends React.Component {
     constructor(props){
         super(props);
         this.state = { festivalName : '' };
+        this.errorMessage = 'Please enter the name of the festival you\'re going to';
     }
 
     componentDidMount() {
@@ -32,7 +33,7 @@ class FestivalInput extends React.Component {
 
     render () {
 
-        const { inputStyle, festivals } = this.props;
+        const { inputStyle, errorStyle, festivals, missingFestival } = this.props;
 
         return (
             <Paper zDepth={1} className='searchContainer' id="festivalField">
@@ -43,6 +44,8 @@ class FestivalInput extends React.Component {
                     fullWidth={true}
                     inputStyle={inputStyle}
                     hintStyle={inputStyle}
+                    errorText={missingFestival && this.errorMessage}
+                    errorStyle={errorStyle}
                     onUpdateInput={(festivalName) => { this.updateFestivalField(festivalName) }}
                 />
             </Paper>

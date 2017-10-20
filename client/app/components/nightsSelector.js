@@ -13,9 +13,13 @@ class NightsSelector extends React.Component {
     }
 
     changeNumOfNights(e) {
-        console.log(e.target.value);
-        this.setState({ nightsOfStay: e.target.value });
-        this.props.updateNightsField(this.state.nightsOfStay);
+        if (e.target.value >= 1) {
+            this.setState({ nightsOfStay: e.target.value }, () => {
+                this.props.updateNightsField(this.state.nightsOfStay);
+            });
+        } else {
+            this.setState({ nightsOfStay: '' });
+        }
     }
 
     render () {

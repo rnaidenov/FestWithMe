@@ -59,7 +59,10 @@ function _formatPrice(price) {
   }
   let ticketPrice_total;
   bookingFee ? ticketPrice_total = parseInt(ticketPrice) + parseInt(bookingFee) : ticketPrice_total = parseInt(ticketPrice)
-  return `${currency}${ticketPrice_total}`;
+  return {
+    ticketCurrency:currency,
+    ticketPriceAmount:ticketPrice_total
+  };
 }
 
 // Get the name of the city, where the event will be held

@@ -58,7 +58,7 @@ function _getEventDetails(festivalName) {
 
 
 
-export function searchFestival(origin, festivalName) {
+export function searchFestival(origin, festivalName, nights, numPeople) {
   return function (dispatch) {
     _increaseLoader(dispatch, 'FESTIVAL_SEARCH_START');
     co(function* () {
@@ -70,7 +70,7 @@ export function searchFestival(origin, festivalName) {
         _increaseLoader(dispatch, 'FLIGHTS_SEARCH_START', eventDetails.city);
         const flightDetails = yield _getFlightDetails(origin, destination, date);
         _increaseLoader(dispatch, 'HOUSING_SEARCH_START');
-        const housingDetails = yield _getHousingDetails(destination, date);
+        const housingDetails = yield _getHousingDetails(destination, date, nights, numPeople);
         const details = yield _getTotalPrice(eventDetails, flightDetails, housingDetails);
         const pricingDetails = {
           details
@@ -91,20 +91,18 @@ export function searchFestival(origin, festivalName) {
 
 function _getTotalPrice(eventDetails, flightDetails, housingDetails) {
   const { flightPriceCurrency, flightPriceAmount } = flightDetails;
-  const [, privateRoom,] = housingDetails;
+  const { average_price: accommodationAvgPrice } = housingDetails;
 
   return new Promise((resolve, reject) => {
-    const { price: ticketPrice } = eventDetails;
-    const ticketCurrency = ticketPrice.charAt(0);
-    const ticketPriceAmount = ticketPrice.split(ticketCurrency)[1];
+    const { ticketCurrency, ticketPriceAmount } = eventDetails.price;
     fetch(`http://localhost:3000/api/currencies?from=${ticketCurrency}&to=$&amount=${ticketPriceAmount}`).then(conversionRes => {
       conversionRes.json().then(data => {
         const ticketPriceUSD = data.convertedAmount;
-        const totalPrice = ticketPriceUSD + flightPriceAmount + privateRoom.price.amount;
+        const totalPrice = ticketPriceUSD + flightPriceAmount + accommodationAvgPrice;
         resolve({
           ticketPrice: `$${ticketPriceUSD}`,
           flight: flightDetails,
-          housingDetails,
+          housingDetails:housingDetails.properties,
           totalPrice,
           currency: '$'
         })

@@ -10,21 +10,17 @@ function PriceBreakdown({ cssClass, ticketPrice, flightDetails, accommodation, c
   const { sharedRoom, privateRoom, entireHome } = accommodation;
 
   const noInfo = (
-    <p id='noInfoLabel'>No information</p>
+    <span id='noInfoLabel'>No information</span>
   )
 
-  const accommodationTypes = accommodation.map((propertyType, key) => {
-    let price;
-    if (propertyType.price) {
-      price = `${propertyType.price.currency} ${propertyType.price.amount}`
-    }
+  const accommodationTypes = accommodation.map((propertyType, key) => {    
     return (
       <div key={key} className='accommodationTypeWrap'>
         <div className="propertyTypeIconWrap">
           <img src={require(`../public/${propertyType.icon}`)} className='homeTypeIcon' />
         </div>
         <div className='typeAndPriceWrap'><p>{propertyType.type}</p></div>
-        <div className='typeAndPriceWrap'><p>{price || noInfo}</p></div>
+        <div className='typeAndPriceWrap'><p>{propertyType.price || noInfo}</p></div>
       </div>
     )
   });
