@@ -73,13 +73,13 @@ class LocationInput extends React.Component {
         return (
             <Paper zDepth={1} className='searchContainer' id="cityField">
                 <TextField
-                    hintText='City'
+                    hintText={ missingLocation ? '' : 'City' }
                     className='locationTextField'
                     fullWidth={true}
                     inputStyle={inputStyle}
                     hintStyle={inputStyle}
                     onChange={(e) => this.updateLocationField(e)}
-                    errorText={missingLocation && this.errorMessage}
+                    errorText={(missingLocation && !locationField.length) && this.errorMessage}
                     errorStyle={errorStyle}
                     value={locationField}
                 />

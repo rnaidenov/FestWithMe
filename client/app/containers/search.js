@@ -2,21 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { loadFestivals, updateInput, searchFestival, getLocation } from '../actions/searchActions';
-import AutoComplete from 'material-ui/AutoComplete';
-import SelectField from 'material-ui/SelectField';
-import MenuItem from 'material-ui/MenuItem';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Paper from 'material-ui/Paper';
-import '../styles/search.css';
-import { Grid, Col, Row } from 'react-bootstrap';
 import IconButton from 'material-ui/IconButton';
-import CircularProgress from 'material-ui/CircularProgress';
-import TextField from 'material-ui/TextField';
-import { geolocated } from 'react-geolocated';
 import PeopleSelector from '../components/peopleSelector';
 import NightsSelector from '../components/nightsSelector';
 import FestivalInput from '../components/festivalInput';
 import LocationInput from '../components/locationInput';
+import '../styles/search.css';
 
 
 import Results from './results';
@@ -50,7 +42,6 @@ class Search extends React.Component {
     this.setState({ locationOrigin });
   }
 
-  //locationInput, festivalInput
   lookUpFestival() {
     const { numPeople, festivalName, nightsOfStay, locationOrigin, missingLocation, missingFestival } = this.state;
     
@@ -64,8 +55,10 @@ class Search extends React.Component {
     } else {
       this.setState({ missingFestival: false });
     }
+    console.log(missingFestival,missingLocation);
     if (missingLocation===false && missingFestival===false) {
       this.setState({ festivalToSearch: festivalName });
+      console.log("bratle");
       this.props.dispatch(searchFestival(locationOrigin, festivalName, nightsOfStay, numPeople));
     }
   }
@@ -78,9 +71,10 @@ class Search extends React.Component {
     const inputStyle = {
       paddingLeft: '12px',
       fontFamily: "'Abel', sans-serif",
-      fontSize: '18px'
+      fontSize: '18px',
+      zIndex:'2'
     };
-    const errorStyle = { fontSize: '14px', color: '#841f26' }
+    const errorStyle = { fontSize: '14px', color: '#841f26',marginTop:'-7%',zIndex:'1'}
 
     return (
       <div >

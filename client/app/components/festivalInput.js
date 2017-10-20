@@ -33,6 +33,7 @@ class FestivalInput extends React.Component {
 
     render () {
 
+        const { festivalName } = this.state;
         const { inputStyle, errorStyle, festivals, missingFestival } = this.props;
 
         return (
@@ -40,11 +41,11 @@ class FestivalInput extends React.Component {
                 <AutoComplete
                     dataSource={festivals}
                     filter={AutoComplete.caseInsensitiveFilter}
-                    hintText='Festival'
+                    hintText={ missingFestival ? '' : 'Festival' }
                     fullWidth={true}
                     inputStyle={inputStyle}
                     hintStyle={inputStyle}
-                    errorText={missingFestival && this.errorMessage}
+                    errorText={(missingFestival && !festivalName.length) && this.errorMessage}
                     errorStyle={errorStyle}
                     onUpdateInput={(festivalName) => { this.updateFestivalField(festivalName) }}
                 />
