@@ -23,7 +23,7 @@ class Search extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { nightsOfStay: '1', numPeople: 1}
+    this.state = { nightsOfStay: '1', numPeople: 1, missingFestival:'', missingLocation:''}
   }
 
   updateNumPeople(numPeople) {
@@ -43,7 +43,7 @@ class Search extends React.Component {
   }
 
   lookUpFestival() {
-    const { numPeople, festivalName, nightsOfStay, locationOrigin, missingLocation, missingFestival } = this.state;
+    const { numPeople, festivalName, nightsOfStay, locationOrigin } = this.state;
     
     if (locationOrigin == null || locationOrigin.trim() === '') {
       this.setState({ missingLocation: true });
@@ -55,12 +55,15 @@ class Search extends React.Component {
     } else {
       this.setState({ missingFestival: false });
     }
-    console.log(missingFestival,missingLocation);
-    if (missingLocation===false && missingFestival===false) {
-      this.setState({ festivalToSearch: festivalName });
-      console.log("bratle");
-      this.props.dispatch(searchFestival(locationOrigin, festivalName, nightsOfStay, numPeople));
-    }
+    
+    setTimeout(() => {
+      console.log(this.state);
+      
+      if (this.state.missingLocation===false && this.state.missingFestival===false) {
+        this.setState({ festivalToSearch: festivalName });
+        this.props.dispatch(searchFestival(locationOrigin, festivalName, nightsOfStay, numPeople));
+      }
+    },500);
   }
 
 
