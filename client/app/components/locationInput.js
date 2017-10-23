@@ -68,8 +68,8 @@ class LocationInput extends React.Component {
         )
 
         const { locationField, location, hoverLocation } = this.state;
-        const { inputStyle, errorStyle, search, missingLocation } = this.props;
-
+        const { inputStyle, errorStyle, inputFieldStyle, search, missingLocation } = this.props;
+        
         return (
             <Paper zDepth={1} className='searchContainer' id="cityField">
                 <TextField
@@ -78,6 +78,7 @@ class LocationInput extends React.Component {
                     fullWidth={true}
                     inputStyle={inputStyle}
                     hintStyle={inputStyle}
+                    style={inputFieldStyle}
                     onChange={(e) => this.updateLocationField(e)}
                     errorText={(missingLocation && !locationField.length) && this.errorMessage}
                     errorStyle={errorStyle}

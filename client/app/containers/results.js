@@ -3,42 +3,42 @@ import { connect } from 'react-redux';
 import Paper from 'material-ui/Paper';
 import IconButton from 'material-ui/IconButton';
 import CircularProgress from 'material-ui/CircularProgress';
-import PriceBreakdown  from '../components/priceBreakdown';
+import PriceBreakdown from '../components/priceBreakdown';
 import '../styles/search.css';
 
 
 @connect(store => {
   return {
-    searchResults : store.searchResults
+    searchResults: store.searchResults
   }
 })
 
 class Results extends React.Component {
 
-  constructor (props) {
+  constructor(props) {
     super(props);
-    this.state = {priceBreakdownClass:'priceBreakdownContainer',carret:'arrow_drop_up'}
+    this.state = { priceBreakdownClass: 'priceBreakdownContainer', carret: 'arrow_drop_up' }
   }
 
-  togglePriceBreakdown () {
-      if (this.state.carret.includes('down')) {
-        this.setState({priceBreakdownClass: 'priceBreakdownContainer unselected',carret:'arrow_drop_up'}, () => {
-          setTimeout(() => {
-            this.setState({priceBreakdownClass:'priceBreakdownContainer'})
-          },1000)
-        });
-      } else {
-        this.setState({priceBreakdownClass: 'priceBreakdownContainer selected',carret:'arrow_drop_down'});
-      }
+  togglePriceBreakdown() {
+    if (this.state.carret.includes('down')) {
+      this.setState({ priceBreakdownClass: 'priceBreakdownContainer unselected', carret: 'arrow_drop_up' }, () => {
+        setTimeout(() => {
+          this.setState({ priceBreakdownClass: 'priceBreakdownContainer' })
+        }, 1000)
+      });
+    } else {
+      this.setState({ priceBreakdownClass: 'priceBreakdownContainer selected', carret: 'arrow_drop_down' });
+    }
   }
 
-  render () {
+  render() {
 
-    const {searchResults, festivalName} = this.props;
-    const {carret} = this.state;
-    const {text, color, loaderValue, prices} = searchResults || {};
-    const {details} = prices || {};
-    const {flight, ticketPrice, housingDetails,currency, totalPrice} = details || {};
+    const { searchResults, festivalName } = this.props;
+    const { carret, priceBreakdownClass } = this.state;
+    const { text, color, loaderValue, prices } = searchResults || {};
+    const { details } = prices || {};
+    const { flight, ticketPrice, housingDetails, currency, totalPrice } = details || {};
 
 
     let results;
@@ -51,12 +51,12 @@ class Results extends React.Component {
           thickness={3}
           value={loaderValue}
           color={color}
-          className='determinateCircle'/>
-          <CircularProgress
-            size={100}
-            thickness={3}
-            color="#7c5652"
-            className='indeterminateCircle'/>
+          className='determinateCircle' />
+        <CircularProgress
+          size={100}
+          thickness={3}
+          color="#7c5652"
+          className='indeterminateCircle' />
         <p>
           {text || ''}
         </p>
@@ -72,8 +72,8 @@ class Results extends React.Component {
             thickness={3}
             value={100}
             color="#7f3e5d"
-            className='determinateCircle'/>
-            <p className='smiley' id='sad'>:(</p>
+            className='determinateCircle' />
+          <p className='smiley' id='sad'>:(</p>
         </div>
         <p id='soldOutLabel'>{prices || null}</p>
       </div>
@@ -83,43 +83,42 @@ class Results extends React.Component {
       <div className='finishedResultsWrap'>
         <div className='loaderSmileyWrap'>
           <CircularProgress
-           mode="determinate"
-           value={100}
-           size={100}
-           thickness={3}
-           color="#47140e"
-           className='determinateCircle'
-         />
-         <p className='smiley' id='happy'>:D</p>
-       </div>
-       <p id='resultsLabel'>
-         <span className="resultText">Going to </span>
-         <span className="festivalNameLabel">{festivalName}</span> 
-         <span className="resultText"> will cost you </span>
-         <span className="totalPriceLabel">{currency}{totalPrice}</span>.
+            mode="determinate"
+            value={100}
+            size={100}
+            thickness={3}
+            color="#47140e"
+            className='determinateCircle'
+          />
+          <p className='smiley' id='happy'>:D</p>
+        </div>
+        <p id='resultsLabel'>
+          <span className="resultText">Going to </span>
+          <span className="festivalNameLabel">{festivalName}</span>
+          <span className="resultText"> will cost you </span>
+          <span className="totalPriceLabel">{currency}{totalPrice}</span>.
        </p>
         <div className="priceBreakdownWrap">
-           <p
-             className="priceBreakdown"
-             id="priceBreakdownLabel"
-            >
-             Price breakdown
+          <p
+            className="priceBreakdown"
+            id="priceBreakdownLabel"
+          >
+            Price breakdown
            </p>
-           <i class="material-icons priceBreakdown"
-             id='carretDropdown'
-             onClick={() => this.togglePriceBreakdown()}>
-             {carret}
-           </i>
-
-           <PriceBreakdown
-             cssClass = {this.state.priceBreakdownClass}
-             flightDetails={flight || {}}
-             ticketPrice={ticketPrice }
-             accommodation={housingDetails || {}}
-             totalPrice = {totalPrice || ''}
-             currency = {currency || ''}
-           />
-       </div>
+          <i class="material-icons priceBreakdown"
+            id='carretDropdown'
+            onClick={() => this.togglePriceBreakdown()}>
+            {carret}
+          </i>
+          <PriceBreakdown
+            cssClass={priceBreakdownClass}
+            flightDetails={flight || {}}
+            ticketPrice={ticketPrice}
+            accommodation={housingDetails || {}}
+            totalPrice={totalPrice || ''}
+            currency={currency || ''}
+          />
+        </div>
       </div>
     )
 
@@ -130,7 +129,7 @@ class Results extends React.Component {
     } else if (searchResults.status == 'searching') {
       results = loadingPhase;
     } else {
-      typeof(searchResults.prices) == 'string' ? results = soldOutEvent : results = finishedPhase;
+      typeof (searchResults.prices) == 'string' ? results = soldOutEvent : results = finishedPhase;
     }
 
 

@@ -23,7 +23,11 @@ class Search extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { nightsOfStay: '1', numPeople: 1, missingFestival:'', missingLocation:''}
+    this.state = { nightsOfStay: '1', numPeople: 1, missingFestival:'', missingLocation:'', locationOrigin:'Sofia', festivalName:'25 years of ram records'}
+  }
+
+  updateWindowWidth() {
+    this.setState({ width: window.innerWidth });
   }
 
   updateNumPeople(numPeople) {
@@ -66,7 +70,6 @@ class Search extends React.Component {
     },500);
   }
 
-
   render() {
     const { locationInput, location, festivalHint,
             locationHint, hintStyle, missingFestival, missingLocation } = this.state;
@@ -107,8 +110,10 @@ class Search extends React.Component {
                 updateNightsField={(numOfNights) => { this.updateNightsField(numOfNights) }}
                 inputStyle={inputStyle}
               />
-              <div className="btnWrap">
-                <IconButton className='searchBtn' onClick={() => this.lookUpFestival(locationInput, festivalInput)}>
+              <div className="btnWrap"
+                   onClick={() => this.closePriceBreakdown()}
+              >
+                <IconButton className='searchBtn' onClick={() => this.lookUpFestival()}>
                   <i class="material-icons searchBtnIcon">search</i>
                 </IconButton>
               </div>
