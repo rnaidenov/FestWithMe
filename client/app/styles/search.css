@@ -24,12 +24,13 @@ p {
 
 /*----------- Small screen size -----------*/
 
-@media screen and (max-width: 599px) {
+@media screen and (max-width: 499px) {
 
 
   .searchWrap{
     width: 100%;
     padding-top:6%;
+    height: calc(100vh - 42vh);
   }
 
   .background {
@@ -64,12 +65,17 @@ p {
     bottom:0 !important;
   }
 
+  .slider-frame{
+    height: 40vh !important;
+  }
+
   .priceBreakdownContainer.selected {
-    animation: fadeInUp 1000ms linear both;
+    animation: fadeInUp 2000ms linear both;
     display: block;
   }
 
   .priceBreakdownContainer.unselected {
+    animation: fadeOutDown 700ms linear both;
     display: block;
   }
 
@@ -89,9 +95,12 @@ p {
     margin-top: 5%;
     width: 40%;
   }
-
+  .accommodationTypeWrap{
+    padding-top:0% !important;
+    margin-bottom: 1% !important;
+  }
   .toolTipBox {
-    right:-2px;
+    right:-0.5vw;
     top:37px;
   }
   .tip-down {
@@ -100,19 +109,20 @@ p {
     transform: rotate(180deg)
   }
   .resultText{
-    font-size:24px;
+    font-size:6vw;
   }
   .festivalNameLabel {
-    font-size: 32px;
+    font-size: 8vw;
   }
   .totalPriceLabel {
-    font-size: 32px;
+    font-size: 10vw;
   }
 }
 
 /*----------- Medium screen size -----------*/
 
-@media screen and (min-width:600px)  {
+
+@media screen and (min-width: 500px) and (max-width:1099px) {
 
   .background {
     background-image: url('../public/party_background_tablet.jpg');
@@ -127,9 +137,7 @@ p {
     display: block;
     animation: fadeOutUp 2000ms linear both;
   }
-}
 
-@media screen and (min-width: 600px) and (max-width:1099px) {
   .searchWrap{
     padding-top: 20%;
     width:90% !important;
@@ -244,8 +252,8 @@ p {
     margin-top:-0.5%;
   }
   .toolTipBox {
-    top: -55px;
-    left: -97px;
+    top: -45px;
+    right: -80px;
   }
   .toolTipBox.body {
     transform: rotate(180deg);
@@ -328,7 +336,7 @@ priceBreakdownContainer
 }
 
 #location_off {
-  color: #d0cbcb;
+  color: rgba(128, 80, 80, 0.7);
 }
 
 #location_on {
@@ -393,39 +401,6 @@ priceBreakdownContainer
   width:100%;
   text-align:center;
 }
-
-
-
-@keyframes showPriceBreakdown {
-  0% { -webkit-transform: matrix3d(0.25, 0, 0, 0, 0, 0.25, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(0.25, 0, 0, 0, 0, 0.25, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  3.4% { -webkit-transform: matrix3d(0.487, 0, 0, 0, 0, 0.487, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(0.487, 0, 0, 0, 0, 0.487, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  3.92% { -webkit-transform: matrix3d(0.538, 0, 0, 0, 0, 0.538, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(0.538, 0, 0, 0, 0, 0.538, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  6.81% { -webkit-transform: matrix3d(0.844, 0, 0, 0, 0, 0.844, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(0.844, 0, 0, 0, 0, 0.844, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  7.84% { -webkit-transform: matrix3d(0.95, 0, 0, 0, 0, 0.95, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(0.95, 0, 0, 0, 0, 0.95, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  10.21% { -webkit-transform: matrix3d(1.148, 0, 0, 0, 0, 1.148, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.148, 0, 0, 0, 0, 1.148, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  11.76% { -webkit-transform: matrix3d(1.232, 0, 0, 0, 0, 1.232, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.232, 0, 0, 0, 0, 1.232, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  13.61% { -webkit-transform: matrix3d(1.28, 0, 0, 0, 0, 1.28, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.28, 0, 0, 0, 0, 1.28, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  15.6% { -webkit-transform: matrix3d(1.275, 0, 0, 0, 0, 1.275, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.275, 0, 0, 0, 0, 1.275, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  17.52% { -webkit-transform: matrix3d(1.231, 0, 0, 0, 0, 1.231, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.231, 0, 0, 0, 0, 1.231, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  20.27% { -webkit-transform: matrix3d(1.138, 0, 0, 0, 0, 1.138, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.138, 0, 0, 0, 0, 1.138, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  21.32% { -webkit-transform: matrix3d(1.101, 0, 0, 0, 0, 1.101, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.101, 0, 0, 0, 0, 1.101, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  24.94% { -webkit-transform: matrix3d(0.995, 0, 0, 0, 0, 0.995, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(0.995, 0, 0, 0, 0, 0.995, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  25.23% { -webkit-transform: matrix3d(0.989, 0, 0, 0, 0, 0.989, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(0.989, 0, 0, 0, 0, 0.989, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  29.03% { -webkit-transform: matrix3d(0.941, 0, 0, 0, 0, 0.941, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(0.941, 0, 0, 0, 0, 0.941, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  29.61% { -webkit-transform: matrix3d(0.939, 0, 0, 0, 0, 0.939, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(0.939, 0, 0, 0, 0, 0.939, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  34.2% { -webkit-transform: matrix3d(0.953, 0, 0, 0, 0, 0.953, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(0.953, 0, 0, 0, 0, 0.953, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  36.74% { -webkit-transform: matrix3d(0.972, 0, 0, 0, 0, 0.972, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(0.972, 0, 0, 0, 0, 0.972, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  43.46% { -webkit-transform: matrix3d(1.011, 0, 0, 0, 0, 1.011, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.011, 0, 0, 0, 0, 1.011, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  44.44% { -webkit-transform: matrix3d(1.013, 0, 0, 0, 0, 1.013, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.013, 0, 0, 0, 0, 1.013, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  52.72% { -webkit-transform: matrix3d(1.006, 0, 0, 0, 0, 1.006, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.006, 0, 0, 0, 0, 1.006, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  59.86% { -webkit-transform: matrix3d(0.997, 0, 0, 0, 0, 0.997, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(0.997, 0, 0, 0, 0, 0.997, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  71.24% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  75.28% { -webkit-transform: matrix3d(1.001, 0, 0, 0, 0, 1.001, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.001, 0, 0, 0, 0, 1.001, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  83.33% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  90.69% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-  100% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-}
-
 
 
 @keyframes bounceUp {
@@ -567,10 +542,6 @@ priceBreakdownContainer
   width: 40%;
 }
 
-.slider-frame {
-  height: 300px !important;
-}
-
 #noInfoLabel {
   color: darkred;
   font-size: 12px;
@@ -593,7 +564,6 @@ priceBreakdownContainer
   border-bottom-color: transparent;
 }
 
-
 .toolTipBox {
   position: absolute;
 }
@@ -610,14 +580,13 @@ priceBreakdownContainer
   border-radius: 4px;
   border: 2px solid #5a4546;
   white-space: normal;
+  max-height: 31px;
 }
 
 .toolTipBox .toolTipMessage {
-  min-height: 30px;
   border-radius: 3px;
   font-family: 'Yantramanav', sans-serif !important;
   font-size: 15px;
-  padding-top: 2%;
   color: whitesmoke;
 }
 
@@ -665,4 +634,9 @@ priceBreakdownContainer
   62.36% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 10.068, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 10.068, 0, 1); }
   84.68% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 9.992, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 9.992, 0, 1); }
   100% { opacity:1;-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 10, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 10, 0, 1); }
+}
+
+@keyframes fadeOutDown { 
+  0% { opacity:1; }
+  100% { opacity: 0; transform: translateY(500px)}
 }

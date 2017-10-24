@@ -83,7 +83,6 @@ class Search extends React.Component {
     const errorStyle = { fontSize: '14px', color: '#841f26',marginTop:'-7%',zIndex:'1'}
 
     return (
-      <div >
         <MuiThemeProvider>
           <div>
             <div className="searchWrap">
@@ -110,9 +109,7 @@ class Search extends React.Component {
                 updateNightsField={(numOfNights) => { this.updateNightsField(numOfNights) }}
                 inputStyle={inputStyle}
               />
-              <div className="btnWrap"
-                   onClick={() => this.closePriceBreakdown()}
-              >
+              <div className="btnWrap">
                 <IconButton className='searchBtn' onClick={() => this.lookUpFestival()}>
                   <i class="material-icons searchBtnIcon">search</i>
                 </IconButton>
@@ -122,7 +119,6 @@ class Search extends React.Component {
             <Results festivalName={this.state.festivalToSearch} />
           </div>
         </MuiThemeProvider>
-      </div>
     )
   }
 

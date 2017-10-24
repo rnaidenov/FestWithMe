@@ -90,7 +90,8 @@ class LocationInput extends React.Component {
                     onMouseLeave={() => this.hoverOutLocation()}
                 >
                     {location}
-                    {hoverLocation ? toolTip : null}
+                    {toolTip}
+                    {/* {hoverLocation ? toolTip : null} */}
                 </i>
             </Paper>
         )

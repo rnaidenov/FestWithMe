@@ -45,6 +45,7 @@ class PeopleSelector extends React.Component {
                     value={numPeople}
                     onChange={(event, idx, value) => this.selectNumPeople(event, idx, value)}
                     style={{ width: '100%' }}
+                    labelStyle={{ float:'left', paddingLeft: '12px' }}
                 >
                     {selectOptions}
                 </SelectField>

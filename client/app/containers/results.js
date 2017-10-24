@@ -17,18 +17,41 @@ class Results extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { priceBreakdownClass: 'priceBreakdownContainer', carret: 'arrow_drop_up' }
+    this.state = { priceBreakdownClass: 'priceBreakdownContainer', carret: 'arrow_drop_up' };
+    this.SMARTPHONE_MAX_WIDTH_PIXELS = 500;
+    this.closePriceBreakdownMobile = this.closePriceBreakdownMobile.bind(this);
+  }
+
+
+  componentDidMount() {
+    document.addEventListener('mousedown', this.closePriceBreakdownMobile);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this.closePriceBreakdownMobile);
+  }
+
+  closePriceBreakdown() {
+    this.setState({ priceBreakdownClass: 'priceBreakdownContainer unselected', carret: 'arrow_drop_up' }, () => {
+      setTimeout(() => {
+        this.setState({ priceBreakdownClass: 'priceBreakdownContainer' })
+      }, 1000)
+    });
   }
 
   togglePriceBreakdown() {
     if (this.state.carret.includes('down')) {
-      this.setState({ priceBreakdownClass: 'priceBreakdownContainer unselected', carret: 'arrow_drop_up' }, () => {
-        setTimeout(() => {
-          this.setState({ priceBreakdownClass: 'priceBreakdownContainer' })
-        }, 1000)
-      });
+      this.closePriceBreakdown();
     } else {
       this.setState({ priceBreakdownClass: 'priceBreakdownContainer selected', carret: 'arrow_drop_down' });
+    }
+  }
+
+  closePriceBreakdownMobile(e) {
+    if (this.wrapperRef && !this.wrapperRef.contains(e.target) && window.innerWidth < this.SMARTPHONE_MAX_WIDTH_PIXELS) {
+      if (this.state.carret.includes('down')) {
+        this.closePriceBreakdown();
+      }
     }
   }
 
@@ -110,14 +133,15 @@ class Results extends React.Component {
             onClick={() => this.togglePriceBreakdown()}>
             {carret}
           </i>
-          <PriceBreakdown
-            cssClass={priceBreakdownClass}
-            flightDetails={flight || {}}
-            ticketPrice={ticketPrice}
-            accommodation={housingDetails || {}}
-            totalPrice={totalPrice || ''}
-            currency={currency || ''}
-          />
+          <div ref={(wrapper) => { this.wrapperRef = wrapper }}>
+            <PriceBreakdown
+              cssClass={priceBreakdownClass}
+              flightDetails={flight || {}}
+              ticketPrice={ticketPrice}
+              accommodation={housingDetails || {}}
+              currency={currency || ''}
+            />
+          </div>
         </div>
       </div>
     )
