@@ -120,7 +120,7 @@ class Results extends React.Component {
           <span className="resultText">Going to </span>
           <span className="festivalNameLabel">{festivalName}</span>
           <span className="resultText"> will cost you </span>
-          <span className="totalPriceLabel">{currency}420</span>.
+          <span className="totalPriceLabel">{currency}{totalPrice}</span>.
        </p>
         <div className="priceBreakdownWrap">
           <p
@@ -160,7 +160,7 @@ class Results extends React.Component {
 
     return (
       <div>
-        {finishedPhase}
+        {results}
       </div>
     )
   }

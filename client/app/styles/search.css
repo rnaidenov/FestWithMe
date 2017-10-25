@@ -267,6 +267,16 @@ p {
   .resultText{
     font-size: 28px;
   }
+
+  .priceBreakdownContainer.selected {
+    display: block;
+    animation: fadeInDown 2500ms linear both;
+  }
+
+  .priceBreakdownContainer.unselected {
+    display: block;
+    animation: fadeOutUp 2000ms linear both;
+  }
 }
 
 .searchWrap {
