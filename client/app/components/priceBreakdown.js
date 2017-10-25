@@ -17,17 +17,43 @@ class PriceBreakdown extends React.Component {
     const { sharedRoom, privateRoom, entireHome } = accommodation;
 
 
-    const accommodationTypes = accommodation.map((propertyType, key) => {
-      return (
-        <div key={key} className='accommodationTypeWrap'>
+    // const accommodationTypes = accommodation.map((propertyType, key) => {
+    //   return (
+    //     <div key={key} className='accommodationTypeWrap'>
+    //       <div className="propertyTypeIconWrap">
+    //         <img src={require(`../public/${propertyType.icon}`)} className='homeTypeIcon' />
+    //       </div>
+    //       <div className='typeAndPriceWrap'><p>{propertyType.type}</p></div>
+    //       <div className='typeAndPriceWrap'><p>{propertyType.price || noInfo}</p></div>
+    //     </div>
+    //   )
+    // });
+
+    const accommodationTypes = (
+      <div>
+        <div key='1' className='accommodationTypeWrap'>
           <div className="propertyTypeIconWrap">
-            <img src={require(`../public/${propertyType.icon}`)} className='homeTypeIcon' />
+            <img src={require(`../public/sharedRoom.svg`)} className='homeTypeIcon' />
           </div>
-          <div className='typeAndPriceWrap'><p>{propertyType.type}</p></div>
-          <div className='typeAndPriceWrap'><p>{propertyType.price || noInfo}</p></div>
+          <div className='typeAndPriceWrap'><p>Shared room</p></div>
+          <div className='typeAndPriceWrap'><p>32</p></div>
         </div>
-      )
-    });
+        <div key='2' className='accommodationTypeWrap'>
+          <div className="propertyTypeIconWrap">
+            <img src={require(`../public/privateRoom.svg`)} className='homeTypeIcon' />
+          </div>
+          <div className='typeAndPriceWrap'><p>Private room</p></div>
+          <div className='typeAndPriceWrap'><p>45</p></div>
+        </div>
+        <div key='3' className='accommodationTypeWrap'>
+          <div className="propertyTypeIconWrap">
+            <img src={require(`../public/entireHome.svg`)} className='homeTypeIcon' />
+          </div>
+          <div className='typeAndPriceWrap'><p>Entire home/apt</p></div>
+          <div className='typeAndPriceWrap'><p>78</p></div>
+        </div>
+      </div>
+    )
 
     const festival = (
       <div>

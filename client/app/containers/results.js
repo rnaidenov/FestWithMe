@@ -17,13 +17,14 @@ class Results extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { priceBreakdownClass: 'priceBreakdownContainer', carret: 'arrow_drop_up' };
+    this.DEFAULT_CURRENCY = '$';
+    this.state = { priceBreakdownClass: 'priceBreakdownContainer', carret: 'arrow_drop_up', currency: this.DEFAULT_CURRENCY };
     this.SMARTPHONE_MAX_WIDTH_PIXELS = 500;
     this.closePriceBreakdownMobile = this.closePriceBreakdownMobile.bind(this);
   }
 
-
   componentDidMount() {
+    window.changeCurrency=this.changeCurrency;
     document.addEventListener('mousedown', this.closePriceBreakdownMobile);
   }
 
@@ -58,10 +59,10 @@ class Results extends React.Component {
   render() {
 
     const { searchResults, festivalName } = this.props;
-    const { carret, priceBreakdownClass } = this.state;
+    const { carret, priceBreakdownClass, currency } = this.state;
     const { text, color, loaderValue, prices } = searchResults || {};
     const { details } = prices || {};
-    const { flight, ticketPrice, housingDetails, currency, totalPrice } = details || {};
+    const { flight, ticketPrice, housingDetails, totalPrice } = details || {};
 
 
     let results;
@@ -119,7 +120,7 @@ class Results extends React.Component {
           <span className="resultText">Going to </span>
           <span className="festivalNameLabel">{festivalName}</span>
           <span className="resultText"> will cost you </span>
-          <span className="totalPriceLabel">{currency}{totalPrice}</span>.
+          <span className="totalPriceLabel">{currency}420</span>.
        </p>
         <div className="priceBreakdownWrap">
           <p
@@ -159,7 +160,7 @@ class Results extends React.Component {
 
     return (
       <div>
-        {results}
+        {finishedPhase}
       </div>
     )
   }

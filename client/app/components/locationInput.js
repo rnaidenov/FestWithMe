@@ -18,16 +18,18 @@ class LocationInput extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { location: 'location_off', locationField:'' };
+        this.state = { location: 'location_off', locationField: '' };
         this.errorMessage = 'Please enter the name of the city you\'re travelling from';
+        this.locationOn = 'location_on';
+        this.locationOff = 'location_off';
     }
 
     toggleLocation() {
-        if (this.state.location === 'location_on') {
-            this.setState({ location: 'location_off' })
+        if (this.state.autoLocate === true) {
+            this.setState({ autoLocate:false, location: this.locationOff });
         } else {
             this.props.dispatch(getLocation());
-            this.setState({ location: 'location_on' });
+            this.setState({ autoLocate:true, location: this.locationOn });
             setTimeout(() => {
                 this.setState({ locationField: this.props.location });
             }, 400);
@@ -35,7 +37,7 @@ class LocationInput extends React.Component {
     }
 
     hoverLocation() {
-        this.state.location == 'location_off' ? this.setState({ hoverLocation: true }) : null;
+        this.state.location == this.locationOff ? this.setState({ hoverLocation: true }) : null;
     }
 
     hoverOutLocation() {
@@ -48,16 +50,16 @@ class LocationInput extends React.Component {
         });
     }
 
-    handleEmptyInput(){
+    handleEmptyInput() {
         if (this.props.missingLocation) {
-            this.setState({ locationField:this.errorMessage });
+            this.setState({ locationField: this.errorMessage });
         }
     }
 
 
     render() {
 
-        
+
         const toolTip = (
             <div class="toolTipBox">
                 <div class="body">
@@ -67,13 +69,13 @@ class LocationInput extends React.Component {
             </div>
         )
 
-        const { locationField, location, hoverLocation } = this.state;
+        const { locationField, location, hoverLocation, autoLocate } = this.state;
         const { inputStyle, errorStyle, inputFieldStyle, search, missingLocation } = this.props;
-        
+
         return (
             <Paper zDepth={1} className='searchContainer' id="cityField">
                 <TextField
-                    hintText={ missingLocation ? '' : 'City' }
+                    hintText={missingLocation ? '' : 'City'}
                     className='locationTextField'
                     fullWidth={true}
                     inputStyle={inputStyle}
@@ -90,8 +92,7 @@ class LocationInput extends React.Component {
                     onMouseLeave={() => this.hoverOutLocation()}
                 >
                     {location}
-                    {toolTip}
-                    {/* {hoverLocation ? toolTip : null} */}
+                    {(hoverLocation && !autoLocate) ? toolTip : null}
                 </i>
             </Paper>
         )

@@ -336,7 +336,7 @@ priceBreakdownContainer
 }
 
 #location_off {
-  color: rgba(128, 80, 80, 0.7);
+  color: hsla(0, 23%, 41%, 0.5);
 }
 
 #location_on {
@@ -345,7 +345,7 @@ priceBreakdownContainer
 }
 
 #location_off:hover {
-  color:#d0aaaa;
+  color:rgba(128, 80, 80, 0.8);
   z-index: 2;
 }
 
