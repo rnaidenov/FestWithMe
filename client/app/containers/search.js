@@ -61,7 +61,6 @@ class Search extends React.Component {
     }
     
     setTimeout(() => {
-      console.log(this.state);
       
       if (this.state.missingLocation===false && this.state.missingFestival===false) {
         this.setState({ festivalToSearch: festivalName });

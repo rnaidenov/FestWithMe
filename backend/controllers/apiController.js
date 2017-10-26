@@ -27,7 +27,6 @@ module.exports = (app) => {
   app.get("/api/prices/housing",(req,res) => {
     airbnb.getPrice(req.query.location, req.query.date,req.query.nights,req.query.numPeople)
       .then(housingDetails => {
-        console.log(housingDetails);
           res.send(housingDetails)
         })
       .catch(error => {

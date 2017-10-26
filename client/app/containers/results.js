@@ -4,12 +4,14 @@ import Paper from 'material-ui/Paper';
 import IconButton from 'material-ui/IconButton';
 import CircularProgress from 'material-ui/CircularProgress';
 import PriceBreakdown from '../components/priceBreakdown';
+import { changeCurrency } from '../actions/priceBreakdownActions';
 import '../styles/search.css';
 
 
 @connect(store => {
   return {
-    searchResults: store.searchResults
+    searchResults: store.searchResults,
+    convertedPrices: store.currencyChanger
   }
 })
 
@@ -21,6 +23,15 @@ class Results extends React.Component {
     this.state = { priceBreakdownClass: 'priceBreakdownContainer', carret: 'arrow_drop_up', currency: this.DEFAULT_CURRENCY };
     this.SMARTPHONE_MAX_WIDTH_PIXELS = 500;
     this.closePriceBreakdownMobile = this.closePriceBreakdownMobile.bind(this);
+  }
+
+  changeCurrency(toCurrency) {
+    const { details } = this.props.searchResults.prices;
+    const { currency: fromCurrency } = this.state;
+
+    this.props.dispatch(changeCurrency(fromCurrency,toCurrency,details));
+
+    this.setState({ toCurrency });
   }
 
   componentDidMount() {
@@ -57,14 +68,16 @@ class Results extends React.Component {
   }
 
   render() {
-
-    const { searchResults, festivalName } = this.props;
+    
+    const { searchResults, festivalName, convertedPrices } = this.props;
     const { carret, priceBreakdownClass, currency } = this.state;
     const { text, color, loaderValue, prices } = searchResults || {};
     const { details } = prices || {};
     const { flight, ticketPrice, housingDetails, totalPrice } = details || {};
-
-
+    const { ticketPriceConverted, flightDetailsConverted, 
+            housingDetailsConverted, totalPriceConverted } = convertedPrices.details || {};
+    
+    console.log(convertedPrices);
     let results;
 
     const loadingPhase = (
@@ -120,8 +133,20 @@ class Results extends React.Component {
           <span className="resultText">Going to </span>
           <span className="festivalNameLabel">{festivalName}</span>
           <span className="resultText"> will cost you </span>
-          <span className="totalPriceLabel">{currency}{totalPrice}</span>.
+          <span className="totalPriceLabel">{currency}{!convertedPrices ? totalPrice : totalPriceConverted}</span>.
        </p>
+       <button
+        onClick={() => this.changeCurrency('€')}>
+          € 
+       </button>
+       <button
+        onClick={() => this.changeCurrency('$')}>
+          $
+       </button>
+       <button
+        onClick={() => this.changeCurrency('£')}>
+          £
+       </button>
         <div className="priceBreakdownWrap">
           <p
             className="priceBreakdown"
@@ -137,10 +162,10 @@ class Results extends React.Component {
           <div ref={(wrapper) => { this.wrapperRef = wrapper }}>
             <PriceBreakdown
               cssClass={priceBreakdownClass}
-              flightDetails={flight || {}}
-              ticketPrice={ticketPrice}
-              accommodation={housingDetails || {}}
-              currency={currency || ''}
+              flightDetails={!convertedPrices ? flight : flightDetailsConverted }
+              ticketPrice={!convertedPrices ? ticketPrice : ticketPriceConverted }
+              accommodation={!convertedPrices ? housingDetails : housingDetailsConverted }
+              currency={currency}
             />
           </div>
         </div>

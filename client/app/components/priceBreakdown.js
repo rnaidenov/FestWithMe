@@ -5,7 +5,13 @@ import CustomCarousel from './customCarousel';
 
 class PriceBreakdown extends React.Component {
   constructor(props) {
-    super(props);
+      super(props);
+      this.state={currency:this.props.currency};
+  }
+
+
+  componentWillReceiveProps (newProps) {
+    this.setState({currency:newProps.currency});
   }
 
   render() {
@@ -13,9 +19,8 @@ class PriceBreakdown extends React.Component {
       <span id='noInfoLabel'>No information</span>
     )
 
-    const { cssClass, ticketPrice, flightDetails, accommodation, currency } = this.props;
-    const { sharedRoom, privateRoom, entireHome } = accommodation;
-
+    const { cssClass, ticketPrice, flightDetails, accommodation } = this.props;
+    const { currency } = this.state;
 
     const accommodationTypes = accommodation.map((propertyType, key) => {
       return (
@@ -24,7 +29,7 @@ class PriceBreakdown extends React.Component {
             <img src={require(`../public/${propertyType.icon}`)} className='homeTypeIcon' />
           </div>
           <div className='typeAndPriceWrap'><p>{propertyType.type}</p></div>
-          <div className='typeAndPriceWrap'><p>{propertyType.price || noInfo}</p></div>
+          <div className='typeAndPriceWrap'><p>{currency}{propertyType.price}</p></div>
         </div>
       )
     });
@@ -59,7 +64,7 @@ class PriceBreakdown extends React.Component {
       <div>
         <h1 className='priceBreakdownHeading'>Festival ticket</h1>
         <img src={require('../public/ticket.svg')} id='ticketIcon' />
-        <p className='priceLabel'>{ticketPrice}</p>
+        <p className='priceLabel'>{currency}{ticketPrice}</p>
       </div>
     )
 

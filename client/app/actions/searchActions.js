@@ -100,11 +100,10 @@ function _getTotalPrice(eventDetails, flightDetails, housingDetails) {
         const ticketPriceUSD = data.convertedAmount;
         const totalPrice = ticketPriceUSD + flightPriceAmount + accommodationAvgPrice;
         resolve({
-          ticketPrice: `$${ticketPriceUSD}`,
+          ticketPrice: `${ticketPriceUSD}`,
           flight: flightDetails,
           housingDetails:housingDetails.properties,
-          totalPrice,
-          currency: '$'
+          totalPrice
         })
       })
     })
