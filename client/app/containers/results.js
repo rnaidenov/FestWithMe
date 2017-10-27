@@ -20,12 +20,23 @@ class Results extends React.Component {
   constructor(props) {
     super(props);
     this.DEFAULT_CURRENCY = '$';
-    this.state = { priceBreakdownClass: 'priceBreakdownContainer', carret: 'arrow_drop_up', currency: this.DEFAULT_CURRENCY };
+    this.state = { priceBreakdownClass: 'priceBreakdownContainer', carret: 'arrow_drop_up',smileyClass:'smileyContentWrapper',chatBubbleClass:'chatBubble right', currency: this.DEFAULT_CURRENCY };
     this.SMARTPHONE_MAX_WIDTH_PIXELS = 500;
     this.closePriceBreakdownMobile = this.closePriceBreakdownMobile.bind(this);
   }
 
   componentWillUpdate(newProps) {
+
+    if (newProps.searchResults.prices!=null && this.state.smileyClass!=='smileyContentWrapper right') {
+        setTimeout(() => {
+            this.setState({ smileyClass: 'smileyContentWrapper right'}, () => {
+              setTimeout(()=>{
+                this.setState({ chatBubbleClass: 'chatBubble visible'});
+              },750);
+            })
+        },2000);
+    }
+
     const convertedPrices = newProps.convertedPrices.details;
     if (convertedPrices != null && this.state.currency !== convertedPrices.currencySymbol) {
       this.setState({ currency: convertedPrices.currencySymbol });
@@ -79,7 +90,7 @@ class Results extends React.Component {
   render() {
 
     const { searchResults, festivalName, convertedPrices } = this.props;
-    const { carret, priceBreakdownClass, currency } = this.state;
+    const { carret, priceBreakdownClass, smileyClass, chatBubbleClass, currency } = this.state;
     const { text, color, loaderValue, prices } = searchResults || {};
     const { details } = prices || {};
     const { flight, ticketPrice, housingDetails, totalPrice } = details || {};
@@ -126,15 +137,24 @@ class Results extends React.Component {
     let finishedPhase = (
       <div className='finishedResultsWrap'>
         <div className='loaderSmileyWrap'>
-          <CircularProgress
-            mode="determinate"
-            value={100}
-            size={100}
-            thickness={3}
-            color="#47140e"
-            className='determinateCircle'
-          />
-          <p className='smiley' id='happy'>:D</p>
+            <div className="smileyWrapper">
+              <div className={smileyClass}>
+                <CircularProgress
+                  mode="determinate"
+                  value={100}
+                  size={100}
+                  thickness={3}
+                  color="#47140e"
+                  className='determinateCircle'
+                />
+                <p className='smiley' id='happy'>:D</p>
+              </div>
+            </div>
+          <div class={chatBubbleClass}>
+            <div class="talktext">
+              <p>Would you like to change the currency?</p>
+            </div>
+          </div>
         </div>
         <p id='resultsLabel'>
           <span className="resultText">Going to </span>
@@ -192,7 +212,7 @@ class Results extends React.Component {
 
     return (
       <div>
-        {results}
+        {finishedPhase}
       </div>
     )
   }
