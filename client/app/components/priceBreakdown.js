@@ -6,12 +6,6 @@ import CustomCarousel from './customCarousel';
 class PriceBreakdown extends React.Component {
   constructor(props) {
       super(props);
-      this.state={currency:this.props.currency};
-  }
-
-
-  componentWillReceiveProps (newProps) {
-    this.setState({currency:newProps.currency});
   }
 
   render() {
@@ -19,8 +13,8 @@ class PriceBreakdown extends React.Component {
       <span id='noInfoLabel'>No information</span>
     )
 
-    const { cssClass, ticketPrice, flightDetails, accommodation } = this.props;
-    const { currency } = this.state;
+    const { cssClass, ticketPrice, flightDetails, accommodation, currency } = this.props;
+    
 
     const accommodationTypes = accommodation.map((propertyType, key) => {
       return (

@@ -14,8 +14,7 @@ function convert(from, to, amount) {
         const {base, rates} = latestData;
         fx.base = base;
         fx.rates = rates;
-        const convertedAmount = Math.floor(fx.convert(amount,{from:fromCurrency,to:toCurrency}));
-        console.log(`${amount} ${fromCurrency} = ${convertedAmount} ${toCurrency}`);
+        const convertedAmount = Math.round(fx.convert(amount,{from:fromCurrency,to:toCurrency}));
         resolve({
           convertedAmount,
           currency: toCurrency

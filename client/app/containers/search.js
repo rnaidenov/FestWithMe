@@ -23,7 +23,7 @@ class Search extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { nightsOfStay: '1', numPeople: 1, missingFestival:'', missingLocation:'', locationOrigin:'Sofia', festivalName:'25 years of ram records'}
+    this.state = { nightsOfStay: '1', numPeople: 1, missingFestival:'', missingLocation:'', locationOrigin:'Sofia', festivalName:'Len Faki, Francois X, ATEQ'}
   }
 
   updateWindowWidth() {
