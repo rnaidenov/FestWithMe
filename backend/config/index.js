@@ -8,5 +8,6 @@ module.exports = {
   googleAPIKey : configValues.googleAPIKey,
   googleCSE : configValues.googleCSE,
   exchangeRatesAPIKey : configValues.exchangeRatesAPIKey,
-  googleMapsKey : configValues.googleMapsKey
+  googleMapsKey : configValues.googleMapsKey,
+  testsMaxTimeout: configValues.testsMaxTimeout
 }

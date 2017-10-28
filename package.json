@@ -12,7 +12,8 @@
     "start": "cd client && webpack-dev-server",
     "postinstall": "cd client && webpack --config webpack.prod.config.js -p --progress --colors",
     "backend": "cd backend && nodemon app.js",
-    "currency": "cd backend && nodemon helpers/currencies.js"
+    "currency": "cd backend && nodemon helpers/currencies.js",
+    "test": "mocha backend/test/flight.test.js"
   },
   "license": "ISC",
   "dependencies": {
@@ -51,16 +52,19 @@
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-0": "^6.5.0",
     "babel-register": "^6.9.0",
+    "chai": "^4.1.2",
     "css-loader": "^0.23.1",
     "express": "^4.14.0",
+    "mocha": "^4.0.1",
     "nodemon": "^1.11.0",
+    "redux-logger": "^2.6.1",
     "sass-loader": "^4.1.1",
+    "sinon": "^4.0.2",
     "style-loader": "^0.13.2",
     "url-loader": "^0.5.9",
     "webpack": "^1.13.1",
     "webpack-dev-middleware": "^1.6.1",
     "webpack-dev-server": "^1.14.1",
-    "webpack-hot-middleware": "^2.11.0",
-    "redux-logger": "^2.6.1"
+    "webpack-hot-middleware": "^2.11.0"
   }
 }

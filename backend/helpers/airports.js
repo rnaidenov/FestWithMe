@@ -15,7 +15,7 @@ function getCityCode(location) {
         response.json()
           .then(data => {
             const { city: cityCode } = data[0];
-            resolve(cityCode)
+            resolve(cityCode);
           })
       });
     });
