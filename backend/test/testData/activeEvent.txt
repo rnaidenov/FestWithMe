@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en,ja,es">
+<head id="_x1"><title>
+        RA Tickets: Трип 2 London x Oval Space at Oval Space, London
+</title><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><meta http-equiv="content-language" content="en,ja,es" /><meta name="Description" content="RA: Resident Advisor" /><meta name="Keywords" content="RA, residentadvisor, resident, advisor, music, tickets, трип, 2, london, x, oval, space, at, oval, space, london" /><meta name="Author" content="Resident Advisor" /><meta property="og:site_name" content="Resident Advisor" /><meta property="fb:app_id" content="712773712080127" /><link href="/bundles/default-css?v=d-K3MFOJrAlZmZa49H6QojDpNj9lLVPhLv4P3JzGzPs1" rel="stylesheet" />
+<meta name='apple-itunes-app' content='app-id=981952703, app-argument=ra-guide://search'><link href="/bundles/cat-listings-css?v=Tafv8zYvDrjnwCAWRxsBa-roDBoArqMGb0GisOyTZzw1" rel="stylesheet" />
+<link rel="icon" href="/favicon.ico" type="image/vnd.microsoft.icon" /><link rel="mask-icon" href="/images/ra_icon.svg" color="#000000" /><script src="/bundles/default-js?v=hWZ9FceULRVhBJjlyoe3zQkHYFnFFJtHOSPjVvwIUrI1"></script>
+<script>
+        googletag.cmd.push(function () { googletag.pubads().setTargeting("Page", "/events/1021924").setTargeting("Category", "Listings").setTargeting("Section", "Events").setTargeting("Country", "UK").setTargeting("Area", "London"); });
+    if (window.screen.availWidth < 663 && window.screen.width < window.screen.height) {
+        document.write('<meta name="viewport" content="width=328" />');
+    } else {
+        document.write('<meta name="viewport" content="width=device-width, initial-scale=1" />');
+    }
+    console.info('Interested in our code? Join us and help write it - https://www.residentadvisor.net/about/jobs');
+</script>
+<meta Property="og:url" Content="https://www.residentadvisor.net/events/1021924" /><meta Property="og:title" Content="Трип 2 London x Oval Space" /><meta Property="og:type" Content="article" /><meta Property="og:description" Content="Friday, 03 November 2017 - London" /><meta Property="og:image" Content="https://www.residentadvisor.net/images/events/flyer/2017/11/uk-1103-1021924-1014792-front.jpg" /><meta name="twitter:card" content="summary" /><meta name="twitter:site" content="@residentadvisor" /><meta name="twitter:title" content="Трип 2 London x Oval Space" /><meta name="twitter:description" content="Friday, 03 November 2017 - London" /><meta name="twitter:image" Content="https://www.residentadvisor.net/images/events/flyer/2017/11/uk-1103-1021924-1014792-front.jpg" /><meta name="twitter:image:alt" content="Трип 2 London x Oval Space" /></head>
+<body id="body">
+<input type='hidden' name='user-id' id='user-id' value='0' />
+<input type="hidden" name='see-ngc' id='see-ngc' value='false' />
+<a name="top"></a>
+<header id="header" role="header"><div class="pnlLeaderWrapper"><div id="pnlLeader">
+<aside class="div-gpt-ad-1452773484957-6 leader"><div id='div-gpt-ad-1452773484957-6' class="ad"></div></aside>
+</div>
+</div>
+<nav id="user" class="clearfix">
+<ul style="-moz-user-select: -moz-none; -khtml-user-select: none; -webkit-user-select: none;">
+<li id="basket" class="but dark arrow-down">
+Basket
+<div class="count basket" style="display:none;"><span></span></div>
+</li>
+<li id="profile" class="but arrow-down temp login">Login / Register</li>
+</ul>
+</nav>
+<ul id="profile-panel" class="bbox panel">
+<li><a href="https://www.residentadvisor.net/login">Login</a></li>
+<li><a href="https://www.residentadvisor.net/register">Register</a></li>
+</ul>
+<div id="basket-panel" class="bbox panel bbox generic clearfix">
+<div class="items"></div><div class="basket-but but myra"></div>
+</div>
+<div id="notificationPanel" class="notificationPanel bbox clearfix events col3"></div><div id="navContainer" class="null">
+<div id="navbar">
+<div id="logo"><a href="/" class="icon">Resident Advisor</a></div>
+<div id="search-bar" class="modal-full-screen">
+<span class="modal-close">&times;</span>
+<div id="search-bar-internal" class="modal-body">
+<span class="f24 mobile-only search-header">Search</span>
+<div id="search-box-div">
+<input type="text" id="search-box" placeholder="Artists, Clubs, Promoters, Cities" />
+</div>
+<div id="search-button" class="but large">
+<a id="search" title="Search">Submit</a>
+</div>
+<div class="grey pt16 search-helper" style="display: none;">Did you mean</div>
+</div>
+</div>
+<nav id="nav" role="navigation" class="modal-full-screen">
+<div class="modal-close">&times;</div>
+<ul id="links" data-display="0" class="modal-body">
+<li class="mobile-only tablet-off">
+<div id="logo-modal-nav">
+<a href="/" class="icon">Resident Advisor</a>
+</div>
+</li>
+<li id="mMagazine">
+<span>
+Magazine</span>
+<ul>
+<li id="mNews"><a href="/news.aspx">
+News</a></li>
+<li id="mReviews"><a href="/reviews.aspx">
+Reviews</a></li>
+<li id="mFeatures"><a href="/features.aspx">
+Features</a></li>
+<li id="mFilms"><a href="/films.aspx">
+Films</a></li>
+</ul>
+</li>
+<li id="mListings" data-selected="1">
+<span>
+Listings</span>
+<ul>
+<li id="mEvents" data-selected="1"><a href="/events">
+Events</a></li>
+<li id="mClubs"><a href="/clubs.aspx">
+Clubs</a></li>
+<li id="mFestivals"><a href="/festivals.aspx">
+Festivals</a></li>
+<li id="mPhotos"><a href="/photos.aspx">
+Photos</a></li>
+</ul>
+</li>
+<li id="mMusic">
+<span>
+Music</span>
+<ul>
+<li id="mDjpages"><a href="/dj.aspx">
+Artists</a></li>
+<li id="mNewTracks"><a href="/tracks">
+New Tracks</a></li>
+<li id="mCharts"><a href="/dj-charts.aspx">
+DJ Charts</a></li>
+<li id="mPodcast"><a href="/podcast.aspx">
+Podcasts</a></li>
+</ul>
+</li>
+<li id="mSearch">
+<a href="#">
+Search</a>
+</li>
+</ul>
+</nav>
+<div id="but-links">
+<div class="icon"></div>
+</div>
+<div id="but-search">
+<div class="icon"></div>
+</div>
+</div>
+<div id="sectionHead" class="add-space">
+<div id="breadcrumb" class="clearfix">
+<ul>
+<li class="but circle-left bbox"><a href="/guide/uk/london">London</a></li><li class="space">/</li><li class="but circle-left bbox"><a href="/events.aspx?ai=13">Listings</a></li>
+</ul>
+</div>
+<h1>Трип 2 London x Oval Space</h1>
+</div>
+<link href="/bundles/autocomplete-css?v=LgsUcPmpTNV0nNOC1wz8x1BB-Dw1HtLyGXWG1QRD1nI1" rel="stylesheet" />
+<script src="/bundles/autocomplete?v=9CXuxbT9YbaB7zpnAzo5lVqTeNDSDleb1sRNuIdlhFg1"></script>
+</div></header>
+<main id="main">
+<script src="/bundles/comments-plugin-js?v=Rne1DhYM54xECNDBajbgGuU9tpCCVE72vSlequWNIZ81"></script>
+<script>
+        var flag;
+
+        $(document)
+            .ready(function () {
+                moveShareButtons();
+                $('.slide').scrollSnap({ page: 'event' });
+            });
+
+        $(window)
+            .resize(moveShareButtons);
+
+        function moveShareButtons() {
+            var windowWidth = $(window).width();
+            if (flag !== false && windowWidth < 980) {
+                $("#share").insertAfter("#detail .clearfix li:first-child");
+                flag = false;
+            }
+            else if (flag !== true && windowWidth >= 980) {
+                $("#share").insertBefore("#event-item .links");
+                flag = true;
+            }
+        }
+    </script>
+<script src="/bundles/analytics-js?v=Xs59x1FtN8yPMXEKRjXu_d_xOCdL1etMJaLlqHzBArI1" async></script>
+<div id="LightBox" class="hidden">
+<div id="darkLightboxBackground"></div>
+<div id="RollcallContent" class="lightbox hidden">
+<header class="lightbox-header">
+<h1>
+Roll call - <span id='MembersAttendingCount'></span> members attending</h1>
+<img src="/images/buts/close.png" class="closeLightBoxButton" alt="Close Rollcall" />
+</header>
+<section id="Rollcall" class="lightbox-content" data-non-friends-displayed-so-far="0">
+<section>
+<h1 id="FriendsAttendingCount" class='heading'>friends</h1>
+<ul id='FriendsAttending'></ul>
+</section>
+<section>
+<h1 id="NonFriendsAttendingCount" class='heading'>members</h1>
+<ul id='NonFriendsAttending'></ul>
+</section>
+</section>
+<footer class="lightbox-footer">
+<div class="but rollcall">
+<a href="" id="LoadMoreButton">
+Load more</a>
+</div>
+</footer>
+</div>
+<div id="InviteFriendsContent" class="lightbox hidden" data-loaded="false">
+<header class="lightbox-header">
+<h1>
+Invite friends</h1>
+<img src="/images/buts/close.png" class="closeLightBoxButton" alt="Close Invite Friends" />
+</header>
+<section class="lightbox-content invite-friends">
+<section id="AlreadyGoing">
+<h1 id="FriendsAlreadyAttendingHeading" class="heading">friends already attending</h1>
+</section>
+<section id="InviteOthers" class="invite-others">
+<h1 id="InviteOtherFriendsHeading" class="heading">Invite other friends</h1>
+<div id="SelectFriendsInEventAreaDiv" class="but invite-friends myra hidden">
+<a href="" id="SelectFriendsInAreaButton">Select friends in ...</a>
+</div>
+<ul id="InviteOthersList"></ul>
+</section>
+</section>
+<footer class="lightbox-footer">
+<div class="but invite-friends">
+<a href="" id="InviteSelectedButton">
+Invite selected</a>
+</div>
+<span id="Information"></span>
+</footer>
+</div>
+</div>
+<ul class="content-list events-border">
+<li class="nobreak">
+<section class="contentDetail clearfix">
+<div class="clearfix">
+<div class="plus8">
+<div class="fl col4-6 small">
+<aside id="detail" class="clearfix">
+<ul class="clearfix">
+<li><div>Date /</div>Friday<br /><a href="/events/uk/london/day/2017-11-03" class="cat-rev">3 Nov 2017</a><br />21:00 - 07:00</li><li class="wide"><div>Venue /</div><a href="/club.aspx?id=60356" class="cat-rev" title="Club profile of Oval Space">Oval Space</a><br /> 29-32 The Oval; Bethnal Green; London E2 9DT;<br /><a href=/local.aspx?ai=13><div class=fl><img src="/images/flags/UK.gif" alt="United Kingdom" title="United Kingdom" border=0 width=22 height=15 /></div>&nbsp; United Kingdom</a></li><li><div>Minimum age /</div>18+</li><li><div>Promoters /</div><a href=/promoter.aspx?id=29213>Oval Space</a></li>
+</ul>
+</aside>
+</div>
+<div class="fl col2">
+<div class="pr8">
+<div class="pb1">
+<div id="pnlButton" class="dark">
+<div class="fav button clearfix">
+<ul>
+<li id="liFriendFavourites" style="display:none;">
+<div>
+Friends favourite
+/</div>
+<h1 id="FriendsFavouriteCount">
+</h1>
+</li>
+<li id="liMembersFavourites">
+<div>
+Members attending
+/</div>
+<h1 id="MembersFavouriteCount" class="favCount">
+396</h1>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="myra but members" id="ShowRollCallLightbox"><a href="#">View members attending</a></div>
+</div>
+</div>
+</div>
+</div>
+<div class="grey-bg clearfix pb8 mb8" style="display: none;" id="InviteFriendsPanel">
+<div class="generic myra">
+<h1 class="heading small">Invite friends</h1>
+<div>
+</div>
+</div>
+</div>
+<div id="TicketControl" class="add clearfix">
+<script src="/bundles/add-ticket-js?v=0sxGC15SAgXPEuT6QrnErSSGZihOTyDuTJMYD1UgZVc1"></script>
+<div id="AddTicketsModal" class="modal-full-screen">
+<span class="modal-close" data-role="modal-close">&times;
+</span>
+<div id="AddTickets" class="clearfix modal-body" data-eventid="1021924" data-currencyid="1" data-gettickets="Get tickets" data-buytickets="Buy tickets">
+<ul class="clearfix">
+<li>
+<img src="/images/ra-tickets.png" alt="RA Tickets" width="85" height="50" border="0" />
+</li>
+<li id="tickets" class="bbox">
+<h2>
+Ticket + booking fee
+/</h2>
+<ul>
+<li class="closed" id="ticket-1st release (entry before 11PM)" data-info="Ticket sales have ended"><p><span>£15.00</span>1st release (entry before 11PM)</p></li><li class="closed" id="ticket-2nd release (entry before 11PM)" data-info="Ticket sales have ended"><p><span>£20.00</span>2nd release (entry before 11PM)</p></li><li class="closed" id="ticket-Early bird" data-info="Ticket sales have ended"><p><span>£20.00</span>Early bird</p></li><li class="closed" id="ticket-1st release" data-info="Ticket sales have ended"><p><span>£25.00</span>1st release</p></li><li class="closed" id="ticket-2nd release" data-info="Ticket sales have ended"><p><span>£27.50</span>2nd release</p></li><li class="onsale but" id="ticket-3rd release" data-info="Sales close: Fri, 3 Nov 21:00" data-resale-tickets-available='0' data-zeropriced="0"><input type="radio" id="tickettype224151" name="tickettypes" value="224151" data-shiptype='[{"id":227186,"sid":8}]' /><label for="tickettype224151"><p><span>£30.00 + £3.00</span>3rd release</p></label></li>
+</ul>
+<p id="tickets-info" class="col2 inline pr16">&nbsp;</p><p id="promoter-resale-info" class="inline tickets-info" style="float:right;">&nbsp;</p>
+</li>
+<li id="quantity">
+<h2>
+Quantity
+/</h2>
+<div class="dropdown but arrow-down mini" data-autopostback="False" data-autosize="True">
+<span>1</span>
+<ul style="display: none;">
+<li id='quantity-1' data-id="1" class="selected">1</li><li id='quantity-2' data-id="2">2</li><li id='quantity-3' data-id="3">3</li><li id='quantity-4' data-id="4">4</li><li id='quantity-5' data-id="5">5</li><li id='quantity-6' data-id="6">6</li>
+</ul>
+</div>
+</li>
+<li id="type" style="display: none">
+<h2>
+Ticket type
+/</h2>
+<ul class="single"><li class="but"><input type="radio" id="shiptype8" name="shiptypes" disabled="disabled" /><label for="shiptype8"><p>Barcode - free</p></label></li></ul>
+</li>
+<li id="add-button">
+<div class="but large">
+<a id="buynow" href="#" title="Buy tickets">Buy tickets</a>
+</div>
+<div class="grey" id="item-added"></div>
+</li>
+<li id="checkout-button" style="display: none;">
+<div class="but large">
+<a id="checkout" href="#" title="Checkout">Checkout</a>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div id="add_button_sticky">
+<div class="but large">
+<a id="buynowSticky" title="Buy tickets">Buy tickets</a>
+</div>
+</div>
+</div>
+<input type="hidden" id="resaleMessage" name="promoter-resale-info" value="">
+</section>
+</li>
+<li id="event-detail" class="alt">
+<div class="content clearfix">
+<div id="event-item">
+<div class="clearfix right">
+<section id="share">
+<script src="/bundles/share-js?v=0n1sgKW8ZrP7dQSdLl83e0g0s7uqFwm9EYrxclGkYfc1"></script>
+<span id='shareTitle' class="f12 grey">Share</span><span id='shareTitleShareType' class="f12 grey"></span>
+<ul data-savesharedata='1'><li><a id="aFacebook" title="Facebook" class="op-but" data-url="https://www.residentadvisor.net/event.aspx?1021924"><img src="/images/gen/icon-facebook.gif" width="73" height="36" border="0" /><span id="facebookShares"></span></a></li><li><a id="aTwitter" href="#" title="Twitter" class="op-but" onclick="popup(event, 'https://twitter.com/share?url=https%3a%2f%2fwww.residentadvisor.net%2fevent.aspx%3f1021924&text=%d0%a2%d1%80%d0%b8%d0%bf+2+London+x+Oval+Space',720,400,1);"><img src="/images/gen/icon-twitter.gif" width="73" height="36" border="0" /></a></li></ul><div class="clearfix"></div>
+</section>
+<div class="links">
+<div class=pb16></div><ul><li class="f12 grey">RA News /</li><li><a href="/news.aspx?id=40154">Nina Kraviz's трип announces events at Helsinki water tower, Oval Space in London</a></li></ul><ul><li class="f12 grey">Event admin /</li><li><a href="/profile/ovalspace">OvalSpace</a></li><li><a href=/event-revisions.aspx?id=1021924>Update this event</a></li></ul>
+<ul><li class="f12 grey">Promotional links / </li><li><a href="http://ovalspace.co.uk " target=_blank>http://ovalspace.co.uk</a></li></ul>
+</div>
+</div>
+<div class="flyer">
+<a href="/images/events/flyer/2017/11/uk-1103-1021924-1014792-front.jpg" target=_blank title="View the Трип 2 London x Oval Space flyer"><img src="/images/events/flyer/2017/11/uk-1103-1021924-1014792-front.jpg" border=0 width=464 /></a>
+</div>
+<div class="left">
+<span class="f12 grey">Line-up /</span>
+<p class="lineup large"><a href="/dj/ninakraviz">Nina Kraviz</a> <br />
+<a href="/dj/djrush">DJ Rush</a><br />
+<a href="/dj/bjarki">Bjarki</a> <br />
+<a href="/dj/exos">Exos</a><br />
+<a href="/dj/romazuckerman">Roma Zuckerman</a> </p>
+<p>
+On 3rd November, Nina Kraviz brings her трип label to Oval Space for трип 2 London. Nina will play an extended set, joined by Chicago techno legend DJ Rush and close трип affiliates Roma Zuckerman, Exos and Bjarki, who will play live.<br />
+<br />
+Nina Kraviz’s road to international superstardom hasn’t been straightforward. Born and raised in the harsh & unforgiving Siberian plains, Nina moved to Moscow to pursue a career in dentistry, all the while developing a deep and sincere appreciation for house & techno. Having broken onto the scene in 2009, with a series of well-received EPs on Naif, Underground Quality and Rekids, Nina rose to prominence with her self-titled album and founded трип in 2014. Today, Kraviz is one of the most celebrated DJs in dance music, but she’s so much more than a famous face. Nina has a deep passion for her craft and constantly pushes herself to greater heights; culminating in her ‘fabric 91’ mix last December, one of our favourite mixes of the past decade. <br />
+<br />
+Joining Nina, in a rare appearance, is bonafide Chi-town legend DJ Rush, who’ll play his first London show in nearly 10 years and drop a record on трип in the next month. Rush is a truly enigmatic presence: a 6 ft 6" tall self-styled freak who often combines brutal techno with fishnets and stilettos, Rush is a sometime crossdressing techno savant, whose skills behind a pair of turntables are spoken of in hushed voices amongst those who know. A regular at the Chicago clubs that started it all (Warehouse, Music Box, Power House), Rush was there at the very beginning, and, rare for an old-skool US dance music artist, is still as on-point now as he was 30 years ago. <br />
+<br />
+He’s joined by two Icelandic artists, representing the old guard and new school - Bjarki and Exos. Bjarki has been on our minds since blowing the roof off The Pickle Factory last year. If Bjarki is the shooting star of Icelandic techno, then Exos is the producer who laid the blueprint - his early productions have passed into dub techno myth. Alongside his many appearances on трип, Exos most recently founded his own label X/OZ. Russian artist Roma Zuckerman rounds out the lineup having featured on three трип concept albums to date, with a solo EP for the label coming in November.<br />
+<br />
+---<br />
+<br />
+Nina Kraviz <br />
+<br />
+DJ Rush<br />
+<br />
+Bjarki <br />
+<br />
+Exos<br />
+<br />
+Roma Zuckerman <br />
+<br />
+---<br />
+<br />
+Admission to Oval Space is at management's sole discretion, pre-purchased tickets do not guarantee entry. If entry is refused to a ticket holder you can obtain a full refund (minus booking fee) by contacting Oval Space after the event.<br />
+<br />
+This event is 18+, ID required
+</p>
+</div>
+</div>
+</div>
+<div class="banner">
+<div id="pnlLeaderInpage">
+<aside class="div-gpt-ad-1452773484957-5 leader" style="padding-bottom:16px;"><div id='div-gpt-ad-1452773484957-5' class="ad"></div></aside>
+</div>
+</div>
+<span>0<span data-role="counter"></span>/</span>
+</li>
+<li class="comments ">
+<div id="comment-container" class="comments-loading" data-per-page="20" data-per-first-page="8" data-section="Event" data-topic-id="319748" data-content-id="1021924">
+<section id="comments" class="content clearfix">
+<h1>Comments loading</h1>
+</section>
+</div>
+<span>0<span data-role="counter"></span>/ #319748</span>
+</li>
+<li class="alt">
+<section class="clearfix">
+<style>
+    .border { border-color: #6b96c2; }
+</style>
+<section class="content">
+<div class="mobile-pr24">
+<h1 class="heading">More on Oval Space</h1>
+</div>
+<ul id="related-list" class="list">
+<li class="related mobile-pr24">
+<article id="short-profile" class="clearfix">
+<div id="divExcerpt" class="excerpt">
+<a href="/club.aspx?id=60356"><img src="/images/clubs/uk-london-ovalspace.jpg" alt="Oval Space" /></a>
+<p>Oval Space is a multi-use arts space in Bethnal Green that has become synonymous with the capital’s most forward-thinking and exciting programme of music events.<br /><a href="/club.aspx?id=60356">View the venue listing</a></p>
+</div>
+</article>
+</li>
+<li class="related clearfix">
+<h1 class="heading listing-heading small">Upcoming events</h1>
+<div class="strip small slide" id="events-listing" data-type="events">
+<ul class="list small" style="padding: 0;">
+<li class="">
+<article class="highlight-top">
+<p>Fri, 3 Nov 2017</p>
+<a href="/events/1021924"><img src="/images/events/flyer/2017/11/uk-1103-1021924-list.jpg"></a>
+<p class="counter ">
+<span>396</span> attending
+</p>
+<a href="/events/1021924">
+<h1>
+Трип 2 London x Oval Space
+</h1>
+</a>
+<p class="copy ">
+</p>
+</article>
+</li><li class="">
+<article class="highlight-top">
+<p>Sat, 4 Nov 2017</p>
+<a href="/events/1017014"><img src="/images/events/flyer/2017/11/uk-1104-1017014-list.jpg"></a>
+<p class="counter ">
+<span>217</span> attending
+</p>
+<a href="/events/1017014">
+<h1>
+East London Funk &amp; Soul Fireworks Night Special
+</h1>
+</a>
+<p class="copy ">
+</p>
+</article>
+</li><li class="">
+<article class="highlight-top">
+<p>Wed, 8 Nov 2017</p>
+<a href="/events/1008704"><img src="/images/events/flyer/2017/11/uk-1108-1008704-list.jpg"></a>
+<p class="counter ">
+<span>17</span> attending
+</p>
+<a href="/events/1008704">
+<h1>
+Com Truise
+</h1>
+</a>
+<p class="copy ">
+</p>
+</article>
+</li><li class="">
+<article class="highlight-top">
+<p>Sat, 11 Nov 2017</p>
+<a href="/events/1026261"><img src="/images/events/flyer/2017/11/uk-1111-1026261-list.jpg"></a>
+<p class="counter ">
+<span>110</span> attending
+</p>
+<a href="/events/1026261">
+<h1>
+Livin Proof 10th Birthday
+</h1>
+</a>
+<p class="copy ">
+</p>
+</article>
+</li><li class="">
+<article class="highlight-top">
+<p>Fri, 17 Nov 2017</p>
+<a href="/events/1011172"><img src="/images/events/flyer/2017/11/uk-1117-1011172-list.jpg"></a>
+<p class="counter ">
+<span>152</span> attending
+</p>
+<a href="/events/1011172">
+<h1>
+Oval Space Music presents Lorenzo Senni, S.O.N.S, Lanark Artefax, Gabber Eleganza Hakke Show
+</h1>
+ </a>
+<p class="copy ">
+</p>
+</article>
+</li><li class="">
+<article class="highlight-top">
+<p>Fri, 17 Nov 2017</p>
+<a href="/events/1007839"><img src="/images/events/flyer/2017/11/uk-1117-1007839-list.jpg"></a>
+<p class="counter ">
+<span>109</span> attending
+</p>
+<a href="/events/1007839">
+<h1>
+Vitalic Live
+</h1>
+</a>
+<p class="copy ">
+</p>
+</article>
+</li><li class="">
+<article class="highlight-top">
+<p>Fri, 24 Nov 2017</p>
+<a href="/events/1010652"><img src="/images/events/flyer/2017/11/uk-1124-1010652-list.jpg"></a>
+<p class="counter ">
+<span>101</span> attending
+</p>
+<a href="/events/1010652">
+<h1>
+Oval Space Music presents DJ Nobu &amp; Dr Rubinstein (Extended Sets)
+</h1>
+</a>
+<p class="copy ">
+</p>
+</article>
+</li><li class="">
+<article class="highlight-top">
+<p>Sat, 25 Nov 2017</p>
+<a href="/events/1006894"><img src="/images/events/flyer/2017/11/uk-1125-1006894-list.jpg"></a>
+<p class="counter ">
+<span>21</span> attending
+</p>
+<a href="/events/1006894">
+<h1>
+Sofrito + Mo Kolours + Analog Africa + Special Guest
+</h1>
+</a>
+<p class="copy ">
+</p>
+</article>
+</li> </ul>
+</div>
+<div class="link-more mobile-only tablet-off">
+<a></a>
+</div>
+</li>
+</ul>
+</section>
+</section>
+<span>0<span data-role="counter"></span>/</span>
+</li>
+<li class="alt">
+<section class="content clearfix events">
+<div class="plus8">
+<div class="pr8">
+<h1 class="heading listing-heading">Popular events</h1>
+<div class="but heading-more mobile-off">
+<a href="/events.aspx?ai=13">More events</a>
+</div>
+<div class="strip small slide" id="events-listing" data-type="events">
+<ul class="list small clearfix popular" style="padding: 0;">
+<li class="min-height-small">
+<article class="highlight-top">
+<p>Fri, 3 Nov 2017</p>
+<a href="/events/993291"><img src="/images/events/flyer/2017/11/uk-1103-993291-list.jpg" class=nohide></a>
+<p class="counter nohide">
+<span>640</span> attending
+</p>
+<a href="/events/993291">
+<h1>
+Spearhead presents
+</h1>
+</a>
+<p class="copy nohide">
+<a href="\club.aspx?id=874">Egg London</a>
+</p>
+</article>
+</li><li class="min-height-small">
+<article class="highlight-top">
+<p>Sat, 4 Nov 2017</p>
+<a href="/events/1008651"><img src="/images/events/flyer/2017/11/uk-1104-1008651-list.jpg" class=nohide></a>
+ <p class="counter nohide">
+<span>1594</span> attending
+</p>
+<a href="/events/1008651">
+<h1>
+Tale Of Us present Afterlife
+</h1>
+</a>
+<p class="copy nohide">
+<a href="\club.aspx?id=127337">Printworks</a>
+</p>
+</article>
+</li><li class="min-height-small">
+<article class="highlight-top">
+<p>Sat, 4 Nov 2017</p>
+<a href="/events/951446"><img src="/images/events/flyer/2017/11/uk-1104-951446-list.jpg" class=nohide></a>
+<p class="counter nohide">
+<span>615</span> attending
+</p>
+<a href="/events/951446">
+<h1>
+HOUSE OF SILK - Bonfire Special in the Tunnels
+</h1>
+</a>
+<p class="copy nohide">
+<a href="\club.aspx?id=39364">Great Suffolk St Warehouse</a>
+</p>
+</article>
+</li><li class="min-height-small">
+<article class="highlight-top">
+<p>Sat, 11 Nov 2017</p>
+<a href="/events/1008655"><img src="/images/events/flyer/2017/11/uk-1111-1008655-list.jpg" class=nohide></a>
+<p class="counter nohide">
+<span>819</span> attending
+</p>
+<a href="/events/1008655">
+<h1>
+Printworks present… In Association with Relentless
+</h1>
+</a>
+<p class="copy nohide">
+<a href="\club.aspx?id=127337">Printworks</a>
+</p>
+</article>
+</li><li class="min-height-small">
+<article class="highlight-top">
+<p>Fri, 17 Nov 2017</p>
+<a href="/events/1027789"><img src="/images/events/flyer/2017/11/uk-1117-1027789-list.jpg" class=nohide></a>
+<p class="counter nohide">
+<span>1138</span> attending
+</p>
+<a href="/events/1027789">
+<h1>
+Garage Special: DJ Luck &amp; MC Neat , Shola Ama (Live) &amp; Marky B
+</h1>
+</a>
+<p class="copy nohide">
+<a href="\club.aspx?id=874">Egg London</a>
+</p>
+</article>
+</li><li class="min-height-small">
+<article class="highlight-top">
+<p>Sat, 18 Nov 2017</p>
+<a href="/events/1008209"><img src="/images/events/flyer/2017/11/uk-1118-1008209-list.jpg" class=nohide></a>
+<p class="counter nohide">
+<span>1153</span> attending
+</p>
+<a href="/events/1008209">
+<h1>
+The Hydra present Blueprint with Clark, Marcel Dettmann, James Ruskin and More
+</h1>
+</a>
+<p class="copy nohide">
+<a href="\club.aspx?id=127337">Printworks</a>
+</p>
+</article>
+</li><li class="min-height-small">
+<article class="highlight-top">
+<p>Sun, 19 Nov 2017</p>
+<a href="/events/1026270"><img src="/images/events/flyer/2017/11/uk-1119-1026270-list.jpg" class=nohide></a>
+<p class="counter nohide">
+<span>596</span> attending
+</p>
+<a href="/events/1026270">
+<h1>
+Ten Years Of LoveJuice
+</h1>
+</a>
+<p class="copy nohide">
+<a href="\club.aspx?id=52120">Electric Brixton</a>
+</p>
+</article>
+</li><li class="min-height-small">
+<article class="highlight-top">
+<p>Sat, 25 Nov 2017</p>
+<a href="/events/1008659"><img src="/images/events/flyer/2017/11/uk-1125-1008659-list.jpg" class=nohide></a>
+<p class="counter nohide">
+<span>573</span> attending
+</p>
+<a href="/events/1008659">
+<h1>
+Paradise London
+</h1>
+</a>
+<p class="copy nohide">
+<a href="\club.aspx?id=127337">Printworks</a>
+</p>
+</article>
+</li> </ul>
+</div>
+<div class="link-more mobile-only tablet-off">
+<a href="/events.aspx?ai=13">More events</a>
+</div>
+</div>
+</div>
+</section>
+<span>0<span data-role="counter"></span>/</span>
+</li>
+</ul>
+<script src="/bundles/lightbox-js?v=nNed9sjHXmAR6Mf65rb_5VdwGiRd83UgdKnn801bXf41"></script>
+<div style="display: none;">
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1832257140341010');
+fbq('track', "PageView");</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1832257140341010&ev=PageView&noscript=1"
+/></noscript>
+</div>
+</main>
+<footer class="clearfix"><ul class="content-list">
+<li>
+<div class="content clearfix">
+<div class="clearfix plus8">
+<div class="fl col2-3">
+<ul class="pb32">
+<li id="logo-footer"><a href="/">RA</a></li>
+<li class="f12 grey pt16">Copyright &copy; 2017 Resident Advisor Ltd.</li>
+<li class="f12 grey">All rights reserved.</li>
+<li class="f12 grey"><a href="/privacy">Privacy</a> & <a href="/terms">Terms</a></li>
+</ul>
+</div>
+<div class="fl col4-5 pt60">
+<div class="fl col1 footer-category">
+<ul>
+<li class="f12 grey">Resident Advisor /</li> <li><a href="/about">About</a></li>
+<li><a href="/about/advertising">Advertise</a></li>
+<li><a href="/about/jobs">Jobs</a></li>
+<li><a href="https://www.residentadvisor.net/promoter.aspx?id=890">RA Events</a></li>
+<li><br /></li> </ul>
+</div>
+<div class="fl col1 footer-category">
+<ul>
+<li class="f12 grey">RA Tickets /</li> <li><a href="/shop/history">My Tickets</a></li> <li><a href="/shop/faq">Ticketing FAQ</a></li> <li><a href="/submit-event.aspx">Submit event</a></li>
+<li><a href="/tickets/sell">Sell tickets on RA</a></li>
+<li><br /></li>
+</ul>
+</div>
+<div class="fl col1 footer-category">
+<ul>
+<li class="f12 grey">Apps /</li> <li><a href="/ra-guide">RA Guide</a></li>
+<li><a href="tickets/scanner">RA Ticket Scanner</a></li> </ul>
+</div>
+<div class="fl col1 footer-category">
+<ul>
+<li class="f12 grey">Elsewhere /</li>
+<li><a href="http://www.youtube.com/user/residentadvisor?sub_confirmation=1">Watch on YouTube</a></li>
+<li><a href="http://www.facebook.com/residentadvisor">Follow on Facebook</a></li>
+<li><a href="https://itunes.apple.com/gb/curator/resident-advisor/id996091687">Listen on Apple Music</a></li>
+<li><a href="https://open.spotify.com/user/residentadvisor">Stream on Spotify</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li class="nobreak">
+<div class="content clearfix">
+<div class="clearfix plus8">
+<div class="fl col3">
+<a href="https://jp.residentadvisor.net/"><a href="https://jp.residentadvisor.net/">RA is also available in Japanese. 日本版</a></a>
+</div>
+<ul id="social" class="col1p5">
+<li class="ytb"><a href="http://www.youtube.com/residentadvisor">RA on YouTube</a></li>
+<li class="fcb"><a href="http://www.facebook.com/residentadvisor">RA on Facebook</a></li>
+<li class="twt"><a href="http://www.twitter.com/residentadvisor">RA on Twitter</a></li>
+<li class="gpl"><a href="http://www.google.com/+residentadvisor">RA on Google+</a></li>
+<li class="ins"><a href="http://instagram.com/resident_advisor">RA on Instagram</a></li>
+<li class="snd"><a href="http://www.soundcloud.com/resident-advisor">RA on Soundcloud</a></li>
+</ul>
+</div>
+</div>
+</li>
+</ul></footer>
+<script type="text/javascript">
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-313318-1', 'residentadvisor.net');ga('require','displayfeatures');ga('send','pageview');ga('require', 'eventTracker');
+        </script>
+</body>
+</html>

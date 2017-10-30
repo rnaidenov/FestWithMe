@@ -65,12 +65,11 @@ function _formatPrice(price) {
 }
 
 // Get the name of the city, where the event will be held
-function getCity(body) {
+function getCity(body) { 
   return new Promise((resolve, reject) => {
     try {
       const $ = cheerio.load(body);
-      const eventListings = $('.circle-left').children().text();
-      const city = eventListings.replace('Listings', '');
+      const city = $('.circle-left')[0].children[0].children[0].data;
       resolve(city);
     } catch (err) {
       reject('Unable to get the city name for the event. ', err);
@@ -145,7 +144,6 @@ function getEventDetails(url) {
     })
   })
 }
-
 
 module.exports = {
   getEventDetails,
