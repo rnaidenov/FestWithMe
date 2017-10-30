@@ -1,18 +1,20 @@
-function getFlightData () {
-    const monthNames = ["Jan", "Feb", "Mar","Apr", "May", "Jun", 
-    "Jul", "Aug", "Sep", "Oct","Nov", "Dec"];
 
+const path = require('path');
+const fs = require('fs');
 
-    const todaysDate = new Date();
-    const currMonth = todaysDate.getMonth();
-    todaysDate.setMonth(currMonth + 1);
-    const nextMonth =  todaysDate.getMonth();
-    const day = todaysDate.getDate();
-    const year = todaysDate.getFullYear();
+const MOCK_DATA_FILEPATH_BASE =  path.resolve(__dirname,'./testData/');
 
-    console.log(typeof(42));
-
-    console.log(`${day} ${monthNames[nextMonth]} ${year}`);
+function _getMockResponse(filename) {
+    const eventDataPath = path.resolve(MOCK_DATA_FILEPATH_BASE,filename);
+    console.log(eventDataPath);
+    // return new Promise((resolve, reject) => {
+    return fs.readFileSync(eventDataPath, 'utf8');
 }
 
-getFlightData();
+console.log(1+1);
+console.log(_getMockResponse('activeEvent.txt'));
+console.log(_getMockResponse('activeEvent.txt'));
+console.log(2+2);
+console.log(2+2);
+console.log(2+2);
+console.log(2+2);

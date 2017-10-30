@@ -4,9 +4,9 @@ const request = require('request');
 const cheerio = require('cheerio');
 
 // Get price of the ticket for the event
-function getPrice(url) {
+function getPrice(body) {
   return new Promise((resolve, reject) => {
-    _scrapePrice(url).then(price => {
+    _scrapePrice(body).then(price => {
       if (price) {
         const ticketAndBookingFee = price.children[1].children[0].children[0].children[0].data;
         resolve(_formatPrice(ticketAndBookingFee));
@@ -17,29 +17,28 @@ function getPrice(url) {
   })
 }
 
-function _scrapePrice(url) {
+function _scrapePrice(body) {
   return new Promise((resolve, reject) => {
-    request(url, (err, resp, body) => {
-      const $ = cheerio.load(body);
-      const tickets = $('#tickets');
-      try {
-        if (tickets.children().attr().id == 'ticket-sales-have-ended') {
-          resolve(false);
-        }
-        else {
-          // Getting the different types of tickets wrapped within <li/>
-          tickets.children().get(1).children.forEach(item => {
-            if (item.type == 'tag' && item.name == 'li' && item.attribs.class !== 'closed') {
-              resolve(item);
-            }
-          })
-        }
+    const $ = cheerio.load(body);
+    // console.log("Body is : [ " + body + " ]");
+    const tickets = $('#tickets');
+    try {
+      if (tickets.children().attr().id == 'ticket-sales-have-ended') {
         resolve(false);
       }
-      catch (err) {
-        resolve(false)
+      else {
+        // Getting the different types of tickets wrapped within <li/>
+        tickets.children().get(1).children.forEach(item => {
+          if (item.type == 'tag' && item.name == 'li' && item.attribs.class !== 'closed') {
+            resolve(item);
+          }
+        })
       }
-    })
+      resolve(false);
+    }
+    catch (err) {
+      resolve(false)
+    }
   })
 }
 
@@ -60,39 +59,43 @@ function _formatPrice(price) {
   let ticketPrice_total;
   bookingFee ? ticketPrice_total = parseInt(ticketPrice) + parseInt(bookingFee) : ticketPrice_total = parseInt(ticketPrice)
   return {
-    ticketCurrency:currency,
-    ticketPriceAmount:ticketPrice_total
+    ticketCurrency: currency,
+    ticketPriceAmount: ticketPrice_total
   };
 }
 
 // Get the name of the city, where the event will be held
-function getCity(url) {
+function getCity(body) {
   return new Promise((resolve, reject) => {
-    request(url, (err, resp, body) => {
+    try {
       const $ = cheerio.load(body);
       const eventListings = $('.circle-left').children().text();
       const city = eventListings.replace('Listings', '');
       resolve(city);
-    })
+    } catch (err) {
+      reject('Unable to get the city name for the event. ', err);
+    }
   })
 }
 
 // Get the name of the country, where the event will be held
-function getCountry(url) {
+function getCountry(body) {
   return new Promise((resolve, reject) => {
-    request(url, (err, resp, body) => {
+    try {
       const $ = cheerio.load(body);
       const countryTag = $('.fl');
-      const countryName = countryTag[0].next.data.trim();
+      const countryName = countryTag[1].next.data.trim();
       resolve(countryName);
-    })
+    } catch (err) {
+      reject('Unable to get the country name for the event. ', err);
+    }
   })
 }
 
 // Get the date of the event
-function getDate(url) {
+function getDate(body) {
   return new Promise((resolve, reject) => {
-    request(url, (err, resp, body) => {
+    try {
       const $ = cheerio.load(body);
       const mainHtml = $('#detail', '.clearfix');
       const parentTag = mainHtml.children().children()['0'].children;
@@ -104,30 +107,50 @@ function getDate(url) {
           break;
         }
       }
-    })
+    } catch (err) {
+      reject('Unable to get the date of the event. ', err);
+    }
   })
+}
+
+function _getEventBody(url) {
+  return new Promise((resolve, reject) => {
+    request(url, (err, resp, body) => {
+      if (!err) {
+        resolve(body)
+      } else {
+        reject(`Unable to get html body for "${url}". ${err}`);
+      }
+    });
+  });
 }
 
 // Get the event details
 function getEventDetails(url) {
   return new Promise((resolve, reject) => {
-    Promise.all([getPrice(url), getCity(url), getCountry(url), getDate(url)])
-      .then(data => {
-        const [price, city, country, date] = data;
-        resolve({
-          price,
-          city,
-          country,
-          date
-        })
-          .catch(err => {
-            reject('Unable to fetch event details.', err)
+    _getEventBody(url).then(body => {
+      Promise.all([getPrice(body), getCity(body), getCountry(body), getDate(body)])
+        .then(data => {
+          const [price, city, country, date] = data;
+          resolve({
+            price,
+            city,
+            country,
+            date
           })
-      })
+        })
+        .catch(err => {
+          reject(err)
+        })
+    })
   })
-
 }
 
+
 module.exports = {
-  getEventDetails
+  getEventDetails,
+  getPrice,
+  getCity,
+  getCountry,
+  getDate
 };
