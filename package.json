@@ -12,8 +12,8 @@
     "start": "cd client && webpack-dev-server",
     "postinstall": "cd client && webpack --config webpack.prod.config.js -p --progress --colors",
     "backend": "cd backend && nodemon app.js",
-    "test": "mocha backend/test/**.test.js",
-    "thingy":"cd backend && nodemon helpers/airbnb.js"
+    "what": "cd backend && nodemon helpers/airbnb.js",
+    "test": "mocha backend/test/**.test.js"
   },
   "license": "ISC",
   "dependencies": {

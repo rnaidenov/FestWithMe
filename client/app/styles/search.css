@@ -459,7 +459,8 @@ priceBreakdownContainer
   top: 45px;
 	bottom: auto;
 	border: 12px solid black;
-	border-color: transparent transparent transparent #795e5b;
+  border-color: transparent transparent transparent #795e5b;
+  color:white;
 }
 
 .chatBubble {

@@ -27,11 +27,13 @@ class Results extends React.Component {
 
   componentWillUpdate(newProps) {
 
-    if (newProps.searchResults.prices!=null && this.state.smileyClass!=='smileyContentWrapper right') {
+    const { searchResults } = newProps;
+
+    if (searchResults!=null && searchResults.prices!=null && this.state.smileyClass!=='smileyContentWrapper right') {
         setTimeout(() => {
             this.setState({ smileyClass: 'smileyContentWrapper right'}, () => {
               setTimeout(()=>{
-                this.setState({ chatBubbleClass: 'chatBubble visible'});
+                this.setState({ chatBubbleClass: 'chatBubble right visible'});
               },750);
             })
         },2000);
@@ -95,7 +97,7 @@ class Results extends React.Component {
     const { details } = prices || {};
     const { flight, ticketPrice, housingDetails, totalPrice } = details || {};
     const { ticketPriceConverted, flightDetailsConverted,
-      housingDetailsConverted, totalPriceConverted } = convertedPrices.details || {};
+            housingDetailsConverted, totalPriceConverted } = convertedPrices.details || {};
     let results;
 
     const loadingPhase = (
@@ -212,7 +214,7 @@ class Results extends React.Component {
 
     return (
       <div>
-        {finishedPhase}
+        {results}
       </div>
     )
   }

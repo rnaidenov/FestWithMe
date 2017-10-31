@@ -32,14 +32,12 @@ function getFlightPrices (origin,destination,date) {
         response.json().then(data => {
           const {results} = data;
           const {fare : {total_price : ticketPrice}} = results[0];
-          console.log(ticketPrice);
           resolve({
             flightPriceAmount : parseInt(ticketPrice),
             origin : searchQuery.origin,
             destination : searchQuery.destination
           });
         }).catch(err => {
-          console.log(err);
           reject({
             flightPriceAmount:0,
             error:'Unable to fetch price details for flight ticket.'
