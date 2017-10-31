@@ -5,6 +5,7 @@ import IconButton from 'material-ui/IconButton';
 import CircularProgress from 'material-ui/CircularProgress';
 import PriceBreakdown from '../components/priceBreakdown';
 import { changeCurrency } from '../actions/priceBreakdownActions';
+import CurrencyDropdown from '../components/currencyDropdown';
 import '../styles/search.css';
 
 
@@ -140,7 +141,7 @@ class Results extends React.Component {
       <div className='finishedResultsWrap'>
         <div className='loaderSmileyWrap'>
             <div className="smileyWrapper">
-              <div className={smileyClass}>
+              <div className={'smileyContentWrapper right'}>
                 <CircularProgress
                   mode="determinate"
                   value={100}
@@ -152,9 +153,11 @@ class Results extends React.Component {
                 <p className='smiley' id='happy'>:D</p>
               </div>
             </div>
-          <div class={chatBubbleClass}>
+          <div class={'chatBubble right visible'}>
             <div class="talktext">
               <p>Would you like to change the currency?</p>
+              <CurrencyDropdown
+                changeCurrency={(symbol) => this.changeCurrency(symbol)}/>
             </div>
           </div>
         </div>
@@ -164,18 +167,6 @@ class Results extends React.Component {
           <span className="resultText"> will cost you </span>
           <span className="totalPriceLabel">{currency}{!convertedPrices ? totalPrice : totalPriceConverted}</span>.
        </p>
-        <button
-          onClick={() => this.changeCurrency('€')}>
-          €
-       </button>
-        <button
-          onClick={() => this.changeCurrency('$')}>
-          $
-       </button>
-        <button
-          onClick={() => this.changeCurrency('£')}>
-          £
-       </button>
         <div className="priceBreakdownWrap">
           <p
             className="priceBreakdown"
@@ -214,7 +205,7 @@ class Results extends React.Component {
 
     return (
       <div>
-        {results}
+        {finishedPhase}
       </div>
     )
   }

@@ -149,6 +149,20 @@ p {
     100% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); } 
   }
   
+  .currencyLabel {
+    display: inline-block;
+    margin-right: 10px;
+  }
+
+  .currencyFlagIconSmall {
+    height: 35px;
+    width: 35px;
+  }
+
+  .currencyFlagIconBig {
+    height: 45px;
+    width: 45px;
+  }
 
   
 }
@@ -460,7 +474,6 @@ priceBreakdownContainer
 	bottom: auto;
 	border: 12px solid black;
   border-color: transparent transparent transparent #795e5b;
-  color:white;
 }
 
 .chatBubble {
@@ -468,13 +481,15 @@ priceBreakdownContainer
 }
 
 .chatBubble.visible {
-  display: inline-block;
+  display: block;
   position: relative;
   width: 65%;
   margin-right: 5%;
-  height: 80px;
+  height: 90px;
   background-color: #795e5b;
   animation:bounceUp 1s linear both;
+  color:white;
+  font-size: 1.1em;
 }
 
 
