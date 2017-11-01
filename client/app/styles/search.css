@@ -160,8 +160,9 @@ p {
   }
 
   .currencyFlagIconBig {
-    height: 45px;
-    width: 45px;
+    height: 40px;
+    width: 100%;
+    margin-top:-33px;
   }
 
   
@@ -472,8 +473,8 @@ priceBreakdownContainer
 	right: -24px;
   top: 45px;
 	bottom: auto;
-	border: 12px solid black;
-  border-color: transparent transparent transparent #795e5b;
+  border: 12px solid black;
+  border-color: transparent transparent transparent rgba(0, 0, 0, 0.75);
 }
 
 .chatBubble {
@@ -486,10 +487,11 @@ priceBreakdownContainer
   width: 65%;
   margin-right: 5%;
   height: 90px;
-  background-color: #795e5b;
+  background-color: rgba(0, 0, 0, 0.7);
   animation:bounceUp 1s linear both;
   color:white;
   font-size: 1.1em;
+  padding-top: 1.5%;
 }
 
 

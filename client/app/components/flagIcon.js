@@ -8,6 +8,8 @@ const FlagIcon = ({ currencyName, countryName, customStyle }) => {
             <img
                 className={customStyle || 'currencyFlagIconSmall'}
                 src={require(`../public/${countryName}.svg`)} />
+                <i class="material-icons priceBreakdown"
+                    id='carretDropdown'/>
         </span>
     )
 }
