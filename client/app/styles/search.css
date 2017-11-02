@@ -154,17 +154,21 @@ p {
     margin-right: 10px;
   }
 
-  .currencyFlagIconSmall {
+  .currencyFlagIconMenu {
     height: 35px;
     width: 35px;
   }
 
-  .currencyFlagIconBig {
-    height: 40px;
+  .currencyFlagIconSelected {
+    height: 45px;
     width: 100%;
     margin-top:-33px;
   }
 
+  .currencyDropdownWrap{
+    margin-top: -32px;
+    width: 65%;
+  }
   
 }
 

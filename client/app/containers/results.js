@@ -156,11 +156,13 @@ class Results extends React.Component {
           <div class={'chatBubble right visible'}>
             <div class="talktext">
               <p>Would you like to change the currency?</p>
-              <CurrencyDropdown
-                changeCurrency={(symbol) => this.changeCurrency(symbol)}/>
             </div>
           </div>
-        </div>
+          <div className='currencyDropdownWrap'>
+            <CurrencyDropdown
+                  changeCurrency={(symbol) => this.changeCurrency(symbol)}/>
+            </div>
+          </div>
         <p id='resultsLabel'>
           <span className="resultText">Going to </span>
           <span className="festivalNameLabel">{festivalName}</span>

@@ -19,8 +19,9 @@ class CurrencyDropdown extends React.Component {
     }
 
     changeCurrency(event, currencyValue) {
+        console.log(currencyValue.name);
         this.setState({currencyValue});
-        this.props.changeCurrency(currencyValue.symbol)
+        // this.props.changeCurrency(currencyValue.symbol)
     }
 
 
@@ -40,22 +41,20 @@ class CurrencyDropdown extends React.Component {
 
 
         return(
-            <div className='currencyDropdownWrap'>
-                <IconMenu
-                    iconButtonElement={<IconButton style={{width:'100%', marginTop:'-15px'}}>
-                                                    <FlagIcon 
-                                                        currencyName={currencyValue.name} 
-                                                        countryName={currencyValue.icon} 
-                                                        customStyle={'currencyFlagIconBig'}
-                                                    />
-                                        </IconButton>}
-                    onChange={(event, currencyValue) => this.changeCurrency(event, currencyValue)}
-                    value={this.state.currencyValue}
-                    menuStyle={{width:'100px',overflow:'hidden'}}
-                >
-                {currencyChoices}
-                </IconMenu>
-             </div>
+            <IconMenu
+                iconButtonElement={<IconButton style={{marginTop:'-15px',width:'65px'}}>
+                                                <FlagIcon 
+                                                    currencyName={currencyValue.name} 
+                                                    countryName={currencyValue.icon} 
+                                                    isSelectedIcon={true}
+                                                />
+                                    </IconButton>}
+                onChange={(event, currencyValue) => this.changeCurrency(event, currencyValue)}
+                value={this.state.currencyValue}
+                menuStyle={{width:'100px',overflow:'hidden'}}
+            >
+            {currencyChoices}
+            </IconMenu>
         )
     }
 }
