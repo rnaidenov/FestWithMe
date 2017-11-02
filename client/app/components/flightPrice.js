@@ -3,7 +3,7 @@ import React from 'react';
 
 function FlightPrice ({details,currency}) {
 
-  // const {flightPriceAmount : amount, origin, destination} = details;
+  const {flightPriceAmount : amount, origin, destination} = details;
 
   // <div>
   //   <div className="routeWrap">
@@ -25,15 +25,15 @@ function FlightPrice ({details,currency}) {
   // </div>
   
   // add amount
-  if (1==1) {
+  if (amount) {
     return (
       <div>
         <div className="routeWrap">
-          <span className='iataCodes'>SOF</span>
+          <span className='iataCodes'>{origin}</span>
           <img src={require('../public/airplane.svg')} className='planeIcon'/>
-          <span className='iataCodes'>LON</span>
+          <span className='iataCodes'>{destination}</span>
         </div>
-        <p className='priceLabel'>$25</p>
+        <p className='priceLabel'>{currency} {amount}</p>
       </div>
     )
   }

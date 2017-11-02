@@ -19,9 +19,8 @@ class CurrencyDropdown extends React.Component {
     }
 
     changeCurrency(event, currencyValue) {
-        console.log(currencyValue.name);
         this.setState({currencyValue});
-        // this.props.changeCurrency(currencyValue.symbol)
+        this.props.changeCurrency(currencyValue.symbol)
     }
 
 

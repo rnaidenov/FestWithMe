@@ -307,6 +307,11 @@ p {
     margin-top: 4.5%;
     margin-left: -8%;
   }
+
+  .priceBreakdownHeading {
+    padding-top:2%;
+  }
+  
 }
 
 
@@ -423,6 +428,10 @@ p {
   .currencyCarret{
     margin-top: 4.5%;
     margin-left: -8%;
+  }
+
+  .priceBreakdownHeading {
+    padding-top:2%;
   }
 
 }
@@ -653,7 +662,6 @@ priceBreakdownContainer
   width:100%;
   font-family: 'Quicksand', sans-serif;
   font-size: 30px;
-  padding-top:2%;
   margin-bottom: 5%;
 }
 

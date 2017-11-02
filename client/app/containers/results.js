@@ -33,9 +33,9 @@ class Results extends React.Component {
     if (searchResults!=null && searchResults.prices!=null && this.state.smileyClass!=='smileyContentWrapper right') {
         setTimeout(() => {
             this.setState({ smileyClass: 'smileyContentWrapper right'}, () => {
-              setTimeout(()=>{
+              // setTimeout(()=>{
                 this.setState({ chatBubbleClass: 'chatBubble right visible'});
-              },750);
+              // },750);
             })
         },2000);
     }
@@ -141,7 +141,7 @@ class Results extends React.Component {
       <div className='finishedResultsWrap'>
         <div className='loaderSmileyWrap'>
             <div className="smileyWrapper">
-              <div className={'smileyContentWrapper right'}>
+              <div className={smileyClass}>
                 <CircularProgress
                   mode="determinate"
                   value={100}
@@ -153,14 +153,15 @@ class Results extends React.Component {
                 <p className='smiley' id='happy'>:D</p>
               </div>
             </div>
-          <div class={'chatBubble right visible'}>
+          <div class={chatBubbleClass}>
             <div class="talktext">
               <p>Would you like to change the currency?</p>
             </div>
           </div>
-          <div className='currencyDropdownWrap'>
-            <CurrencyDropdown
-                  changeCurrency={(symbol) => this.changeCurrency(symbol)}/>
+            <div className='currencyDropdownWrap'>
+              {chatBubbleClass === 'chatBubble right visible' 
+                ? <CurrencyDropdown changeCurrency={(symbol) => this.changeCurrency(symbol)}/>
+                : null}
             </div>
           </div>
         <p id='resultsLabel'>
@@ -207,7 +208,7 @@ class Results extends React.Component {
 
     return (
       <div>
-        {finishedPhase}
+        {results}
       </div>
     )
   }

@@ -13,47 +13,47 @@ class PriceBreakdown extends React.Component {
       <span id='noInfoLabel'>No information</span>
     )
 
-    // const { cssClass, ticketPrice, flightDetails, accommodation, currency } = this.props;
-    const { cssClass,currency } = this.props;
-    const ticketPrice = 25;
+    const { cssClass, ticketPrice, flightDetails, accommodation, currency } = this.props;
+    // const { cssClass,currency } = this.props;
+    // const ticketPrice = 25;
 
-    // const accommodationTypes = accommodation.map((propertyType, key) => {
-    //   return (
-    //     <div key={key} className='accommodationTypeWrap'>
+    const accommodationTypes = accommodation.map((propertyType, key) => {
+      return (
+        <div key={key} className='accommodationTypeWrap'>
+          <div className="propertyTypeIconWrap">
+            <img src={require(`../public/${propertyType.icon}`)} className='homeTypeIcon' />
+          </div>
+          <div className='typeAndPriceWrap'><p>{propertyType.type}</p></div>
+          <div className='typeAndPriceWrap'><p>{currency}{propertyType.price}</p></div>
+        </div>
+      )
+    });
+
+    // const accommodationTypes = (
+    //   <div>
+    //     <div key='1' className='accommodationTypeWrap'>
     //       <div className="propertyTypeIconWrap">
-    //         <img src={require(`../public/${propertyType.icon}`)} className='homeTypeIcon' />
+    //         <img src={require(`../public/sharedRoom.svg`)} className='homeTypeIcon' />
     //       </div>
-    //       <div className='typeAndPriceWrap'><p>{propertyType.type}</p></div>
-    //       <div className='typeAndPriceWrap'><p>{currency}{propertyType.price}</p></div>
+    //       <div className='typeAndPriceWrap'><p>Shared room</p></div>
+    //       <div className='typeAndPriceWrap'><p>32</p></div>
     //     </div>
-    //   )
-    // });
-
-    const accommodationTypes = (
-      <div>
-        <div key='1' className='accommodationTypeWrap'>
-          <div className="propertyTypeIconWrap">
-            <img src={require(`../public/sharedRoom.svg`)} className='homeTypeIcon' />
-          </div>
-          <div className='typeAndPriceWrap'><p>Shared room</p></div>
-          <div className='typeAndPriceWrap'><p>32</p></div>
-        </div>
-        <div key='2' className='accommodationTypeWrap'>
-          <div className="propertyTypeIconWrap">
-            <img src={require(`../public/privateRoom.svg`)} className='homeTypeIcon' />
-          </div>
-          <div className='typeAndPriceWrap'><p>Private room</p></div>
-          <div className='typeAndPriceWrap'><p>45</p></div>
-        </div>
-        <div key='3' className='accommodationTypeWrap'>
-          <div className="propertyTypeIconWrap">
-            <img src={require(`../public/entireHome.svg`)} className='homeTypeIcon' />
-          </div>
-          <div className='typeAndPriceWrap'><p>Entire home/apt</p></div>
-          <div className='typeAndPriceWrap'><p>78</p></div>
-        </div>
-      </div>
-    )
+    //     <div key='2' className='accommodationTypeWrap'>
+    //       <div className="propertyTypeIconWrap">
+    //         <img src={require(`../public/privateRoom.svg`)} className='homeTypeIcon' />
+    //       </div>
+    //       <div className='typeAndPriceWrap'><p>Private room</p></div>
+    //       <div className='typeAndPriceWrap'><p>45</p></div>
+    //     </div>
+    //     <div key='3' className='accommodationTypeWrap'>
+    //       <div className="propertyTypeIconWrap">
+    //         <img src={require(`../public/entireHome.svg`)} className='homeTypeIcon' />
+    //       </div>
+    //       <div className='typeAndPriceWrap'><p>Entire home/apt</p></div>
+    //       <div className='typeAndPriceWrap'><p>78</p></div>
+    //     </div>
+    //   </div>
+    // )
 
     const festival = (
       <div>
@@ -63,19 +63,19 @@ class PriceBreakdown extends React.Component {
       </div>
     )
 
-    // const travel = (
-    //   <div>
-    //     <h1 className='priceBreakdownHeading'>Plane ticket</h1>
-    //     <FlightPrice details={flightDetails} currency={currency} />
-    //   </div>
-    // )
-
     const travel = (
       <div>
         <h1 className='priceBreakdownHeading'>Plane ticket</h1>
-        <FlightPrice currency={currency} />
+        <FlightPrice details={flightDetails} currency={currency} />
       </div>
     )
+
+    // const travel = (
+    //   <div>
+    //     <h1 className='priceBreakdownHeading'>Plane ticket</h1>
+    //     <FlightPrice currency={currency} />
+    //   </div>
+    // )
 
     const housing = (
       <div className="accomodationWrap">
