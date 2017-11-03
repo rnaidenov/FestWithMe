@@ -1,6 +1,5 @@
 const fx = require('money');
 const fetch = require('node-fetch');
-const apiKey = require('../config').exchangeRatesAPIKey;
 
 
 function convert(from, to, amount) {
@@ -8,32 +7,51 @@ function convert(from, to, amount) {
   const toCurrency = getCurrencyCode(to);
 
   return new Promise((resolve, reject) => {
-    fetch(`https://openexchangerates.org/api/latest.json?app_id=${apiKey}`).then(latestRes => {
-      latestRes.json().then(latestData => {
+    let isLatestRates = Object.keys(fx.rates).length!==0;
+    if (!isLatestRates) {
+      getLatestRates().then(() => {
+        resolve(getConversionData(fromCurrency, toCurrency, amount));
+      });
+    } else {
+        resolve(getConversionData(fromCurrency, toCurrency, amount));
+    }
+  })
+}
 
-        const {base, rates} = latestData;
+
+function getConversionData(from, to, amount) { 
+    return new Promise((resolve,reject) => {
+      const convertedAmount = Math.round(fx.convert(amount, { from, to }));     
+      resolve({
+        convertedAmount,
+        currency: to
+      });
+    });
+}
+
+function getLatestRates() {
+  return new Promise((resolve, reject) => {
+    fetch('http://api.fixer.io/latest').then(latestRes => {
+      latestRes.json().then(latestData => {
+        const { base, rates } = latestData;
         fx.base = base;
         fx.rates = rates;
-        const convertedAmount = Math.round(fx.convert(amount,{from:fromCurrency,to:toCurrency}));
-        resolve({
-          convertedAmount,
-          currency: toCurrency
-        });
+        resolve(true);
       })
     })
   })
 }
 
-function getCurrencyCode (symbol) {
-  const currencies = new Map ([
-    ['£','GBP'],
-    ['$','USD'],
-    ['€','EUR']
+
+function getCurrencyCode(symbol) {
+  const currencies = new Map([
+    ['£', 'GBP'],
+    ['$', 'USD'],
+    ['€', 'EUR']
   ]);
 
   return currencies.get(symbol);
 }
-
 
 module.exports = {
   convert

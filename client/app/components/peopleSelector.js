@@ -34,6 +34,7 @@ class PeopleSelector extends React.Component {
         
         const selectOptions = this.getOptions().map((option, idx) => {
             return (<MenuItem
+                key={idx}
                 value={idx}
                 primaryText={option}
             />);

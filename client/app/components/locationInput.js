@@ -75,6 +75,7 @@ class LocationInput extends React.Component {
         return (
             <Paper zDepth={1} className='searchContainer' id="cityField">
                 <TextField
+                    id='LOCATION_INPUT'
                     hintText={missingLocation ? '' : 'City'}
                     className='locationTextField'
                     fullWidth={true}

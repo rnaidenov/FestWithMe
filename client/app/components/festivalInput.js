@@ -39,6 +39,7 @@ class FestivalInput extends React.Component {
         return (
             <Paper zDepth={1} className='searchContainer' id="festivalField">
                 <AutoComplete
+                    id='FESTIVAL_INPUT'
                     dataSource={festivals}
                     filter={AutoComplete.caseInsensitiveFilter}
                     hintText={ missingFestival ? '' : 'Festival' }

@@ -30,6 +30,7 @@ class NightsSelector extends React.Component {
         return (
             <Paper zDepth={1} className='searchContainer' id="nightsField">
                 <TextField
+                    id='NIGHTS_SELECTOR'
                     style={{ width: '40%' }}
                     inputStyle={inputStyle}
                     onChange={(e) => this.changeNumOfNights(e)}

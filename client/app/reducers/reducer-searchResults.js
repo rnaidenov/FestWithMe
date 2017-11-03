@@ -1,4 +1,5 @@
 export default (state = null, action) => {
+  console.log("ACTION IS : " + action.type);
   switch (action.type) {
     case 'FESTIVAL_SEARCH_START1':
       return {text: 'Getting event details', color : '#b7665d',status: 'searching',loaderValue:0};
@@ -27,15 +28,15 @@ export default (state = null, action) => {
     case 'HOUSING_SEARCH_START1':
       return {text: 'Just need to find you a comfy bed.',color: '#68221a',status: 'searching',loaderValue:90};
       break;
-      case 'HOUSING_SEARCH_START2':
+    case 'HOUSING_SEARCH_START2':
       return {text: 'Just need to find you a comfy bed.',color: '#68221a',status: 'searching',loaderValue:92};
       break;
-      case 'HOUSING_SEARCH_START3':
-        return {text: 'Just need to find you a comfy bed.',color: '#5b1c15',status: 'searching',loaderValue:94};
-        break;
-      case 'HOUSING_SEARCH_START4':
-        return {text: 'Just need to find you a comfy bed.',color: '#5b1c15',status: 'searching',loaderValue:95};
-        break;
+    case 'HOUSING_SEARCH_START3':
+      return {text: 'Just need to find you a comfy bed.',color: '#5b1c15',status: 'searching',loaderValue:94};
+      break;
+    case 'HOUSING_SEARCH_START4':
+      return {text: 'Just need to find you a comfy bed.',color: '#5b1c15',status: 'searching',loaderValue:95};
+      break;
     case 'FESTIVAL_SEARCH_FINISHED':
       return {prices : action.payload,status: 'finished',loaderValue:100};
       break;

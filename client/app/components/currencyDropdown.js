@@ -32,6 +32,7 @@ class CurrencyDropdown extends React.Component {
         const currencyChoices = this.currencies.map((currency,idx) => {
             return (
                 <MenuItem 
+                    key={idx}
                     value={currency}  
                     rightIcon={<FlagIcon currencyName={currency.name} countryName={currency.icon}/>} 
                 />
