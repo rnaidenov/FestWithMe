@@ -21,7 +21,7 @@ class Results extends React.Component {
   constructor(props) {
     super(props);
     this.DEFAULT_CURRENCY = '$';
-    this.state = { priceBreakdownClass: 'priceBreakdownContainer', carret: 'arrow_drop_up',smileyClass:'smileyContentWrapper',chatBubbleClass:'chatBubble right', currency: this.DEFAULT_CURRENCY };
+    this.state = { priceBreakdownClass: 'priceBreakdownContainer', carret: 'arrow_drop_up', smileyClass: 'smileyContentWrapper', chatBubbleClass: 'chatBubble right', currency: this.DEFAULT_CURRENCY };
     this.SMARTPHONE_MAX_WIDTH_PIXELS = 500;
     this.closePriceBreakdownMobile = this.closePriceBreakdownMobile.bind(this);
   }
@@ -30,14 +30,14 @@ class Results extends React.Component {
 
     const { searchResults } = newProps;
 
-    if (searchResults!=null && searchResults.prices!=null && this.state.smileyClass!=='smileyContentWrapper right') {
-        setTimeout(() => {
-            this.setState({ smileyClass: 'smileyContentWrapper right'}, () => {
-              // setTimeout(()=>{
-                this.setState({ chatBubbleClass: 'chatBubble right visible'});
-              // },750);
-            })
-        },2000);
+    if (searchResults != null && searchResults.prices != null && this.state.smileyClass !== 'smileyContentWrapper right') {
+      setTimeout(() => {
+        this.setState({ smileyClass: 'smileyContentWrapper right' }, () => {
+          // setTimeout(()=>{
+          this.setState({ chatBubbleClass: 'chatBubble right visible' });
+          // },750);
+        })
+      }, 2000);
     }
 
     const convertedPrices = newProps.convertedPrices.details;
@@ -47,7 +47,7 @@ class Results extends React.Component {
   }
 
   changeCurrency(toCurrency) {
-    const { searchResults,convertedPrices } = this.props;
+    const { searchResults, convertedPrices } = this.props;
     const { currency: fromCurrency } = this.state;
 
     if (convertedPrices.details != null) {
@@ -94,12 +94,15 @@ class Results extends React.Component {
 
     const { searchResults, festivalName, convertedPrices } = this.props;
     const { carret, priceBreakdownClass, smileyClass, chatBubbleClass, currency } = this.state;
-    const { text, color, loaderValue, prices } = searchResults || {};
+
+    
+    const { text, color, loaderValue, searching, prices, isActive } = searchResults || {};
     const { details } = prices || {};
     const { flight, ticketPrice, housingDetails, totalPrice } = details || {};
     const { ticketPriceConverted, flightDetailsConverted,
-            housingDetailsConverted, totalPriceConverted } = convertedPrices.details || {};
+      housingDetailsConverted, totalPriceConverted } = convertedPrices.details || {};
     let results;
+
 
     const loadingPhase = (
       <div className="loaderWrap">
@@ -140,30 +143,30 @@ class Results extends React.Component {
     let finishedPhase = (
       <div className='finishedResultsWrap'>
         <div className='loaderSmileyWrap'>
-            <div className="smileyWrapper">
-              <div className={smileyClass}>
-                <CircularProgress
-                  mode="determinate"
-                  value={100}
-                  size={100}
-                  thickness={3}
-                  color="#47140e"
-                  className='determinateCircle'
-                />
-                <p className='smiley' id='happy'>:D</p>
-              </div>
+          <div className="smileyWrapper">
+            <div className={smileyClass}>
+              <CircularProgress
+                mode="determinate"
+                value={100}
+                size={100}
+                thickness={3}
+                color="#47140e"
+                className='determinateCircle'
+              />
+              <p className='smiley' id='happy'>:D</p>
             </div>
+          </div>
           <div class={chatBubbleClass}>
             <div class="talktext">
               <p>Would you like to change the currency?</p>
             </div>
           </div>
-            <div className='currencyDropdownWrap'>
-              {chatBubbleClass === 'chatBubble right visible' 
-                ? <CurrencyDropdown changeCurrency={(symbol) => this.changeCurrency(symbol)}/>
-                : null}
-            </div>
+          <div className='currencyDropdownWrap'>
+            {chatBubbleClass === 'chatBubble right visible'
+              ? <CurrencyDropdown changeCurrency={(symbol) => this.changeCurrency(symbol)} />
+              : null}
           </div>
+        </div>
         <p id='resultsLabel'>
           <span className="resultText">Going to </span>
           <span className="festivalNameLabel">{festivalName}</span>
@@ -171,10 +174,7 @@ class Results extends React.Component {
           <span className="totalPriceLabel">{currency}{!convertedPrices ? totalPrice : totalPriceConverted}</span>.
        </p>
         <div className="priceBreakdownWrap">
-          <p
-            className="priceBreakdown"
-            id="priceBreakdownLabel"
-          >
+          <p className="priceBreakdown" id="priceBreakdownLabel">
             Price breakdown
            </p>
           <i class="material-icons priceBreakdown"
@@ -195,14 +195,12 @@ class Results extends React.Component {
       </div>
     )
 
-
-
     if (!searchResults) {
       results = null;
-    } else if (searchResults.status == 'searching') {
+    } else if (searching) {
       results = loadingPhase;
     } else {
-      typeof (searchResults.prices) == 'string' ? results = soldOutEvent : results = finishedPhase;
+      results = isActive ? finishedPhase : soldOutEvent
     }
 
 
