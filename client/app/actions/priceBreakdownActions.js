@@ -4,13 +4,17 @@ export function changeCurrency(from, to, details) {
     return (dispatch => {
 
         const allPricesConverted = [];
-        let { flight, ticketPrice, housingDetails, totalPrice } = details;
-        if (details.converted) {
-            flight = details.flightDetailsConverted; 
-            ticketPrice = details.ticketPriceConverted;
-            housingDetails = details.housingDetailsConverted;
-            totalPrice = details.totalPriceConverted;
-        }
+        const { flight, ticketPrice, housingDetails, totalPrice } = details;
+        
+        
+        // if (details.converted) {
+        //     flight = details.flightDetailsConverted; 
+        //     ticketPrice = details.ticketPriceConverted;
+        //     housingDetails = details.housingDetailsConverted;
+        //     totalPrice = details.totalPriceConverted;
+        // }
+
+
         co(function* () {
             const ticketPriceRes = yield fetch(`http://localhost:3000/api/currencies/?from=${from}&to=${to}&amount=${ticketPrice}`);
             const { convertedAmount: ticketPriceConverted } = yield ticketPriceRes.json();
@@ -25,13 +29,13 @@ export function changeCurrency(from, to, details) {
                 dispatch({
                     type: 'CURRENCY_CHANGED',
                     details: {
-                        ticketPriceConverted,
-                        flightDetailsConverted,
-                        housingDetailsConverted,
-                        totalPriceConverted,
+                        ticketPrice,
+                        flightDetails,
+                        housingDetails,
+                        totalPrice,
                         currencySymbol: to,
-                        converted:true
-                    }
+                    },
+                    isConverted:true
                 });
 
         }).bind(this)();

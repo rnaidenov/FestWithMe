@@ -5,6 +5,7 @@ import IconButton from 'material-ui/IconButton';
 import CircularProgress from 'material-ui/CircularProgress';
 import PriceBreakdown from '../components/priceBreakdown';
 import { changeCurrency } from '../actions/priceBreakdownActions';
+import CurrencyConverter from './currencyConverter';
 import CurrencyDropdown from '../components/currencyDropdown';
 import '../styles/search.css';
 
@@ -21,40 +22,9 @@ class Results extends React.Component {
   constructor(props) {
     super(props);
     this.DEFAULT_CURRENCY = '$';
-    this.state = { priceBreakdownClass: 'priceBreakdownContainer', carret: 'arrow_drop_up', smileyClass: 'smileyContentWrapper', chatBubbleClass: 'chatBubble right', currency: this.DEFAULT_CURRENCY };
+    this.state = { carret: 'arrow_drop_up', isPricebreakdownSelected:false };
     this.SMARTPHONE_MAX_WIDTH_PIXELS = 500;
     this.closePriceBreakdownMobile = this.closePriceBreakdownMobile.bind(this);
-  }
-
-  componentWillUpdate(newProps) {
-
-    const { searchResults } = newProps;
-
-    if (searchResults != null && searchResults.prices != null && this.state.smileyClass !== 'smileyContentWrapper right') {
-      setTimeout(() => {
-        this.setState({ smileyClass: 'smileyContentWrapper right' }, () => {
-          // setTimeout(()=>{
-          this.setState({ chatBubbleClass: 'chatBubble right visible' });
-          // },750);
-        })
-      }, 2000);
-    }
-
-    const convertedPrices = newProps.convertedPrices.details;
-    if (convertedPrices != null && this.state.currency !== convertedPrices.currencySymbol) {
-      this.setState({ currency: convertedPrices.currencySymbol });
-    }
-  }
-
-  changeCurrency(toCurrency) {
-    const { searchResults, convertedPrices } = this.props;
-    const { currency: fromCurrency } = this.state;
-
-    if (convertedPrices.details != null) {
-      this.props.dispatch(changeCurrency(fromCurrency, toCurrency, convertedPrices.details));
-    } else {
-      this.props.dispatch(changeCurrency(fromCurrency, toCurrency, searchResults.prices.details));
-    }
   }
 
   componentDidMount() {
@@ -67,24 +37,20 @@ class Results extends React.Component {
   }
 
   closePriceBreakdown() {
-    this.setState({ priceBreakdownClass: 'priceBreakdownContainer unselected', carret: 'arrow_drop_up' }, () => {
-      setTimeout(() => {
-        this.setState({ priceBreakdownClass: 'priceBreakdownContainer' })
-      }, 1000)
-    });
+    this.setState({ isPricebreakdownSelected:false, carret: 'arrow_drop_up' });
   }
 
   togglePriceBreakdown() {
-    if (this.state.carret.includes('down')) {
+    if (this.state.isPricebreakdownSelected) {
       this.closePriceBreakdown();
     } else {
-      this.setState({ priceBreakdownClass: 'priceBreakdownContainer selected', carret: 'arrow_drop_down' });
+      this.setState({ isPricebreakdownSelected:true, carret: 'arrow_drop_down' });
     }
   }
 
   closePriceBreakdownMobile(e) {
     if (this.wrapperRef && !this.wrapperRef.contains(e.target) && window.innerWidth < this.SMARTPHONE_MAX_WIDTH_PIXELS) {
-      if (this.state.carret.includes('down')) {
+      if (this.state.isPricebreakdownSelected) {
         this.closePriceBreakdown();
       }
     }
@@ -92,15 +58,17 @@ class Results extends React.Component {
 
   render() {
 
-    const { searchResults, festivalName, convertedPrices } = this.props;
-    const { carret, priceBreakdownClass, smileyClass, chatBubbleClass, currency } = this.state;
 
-    
+    const { searchResults, festivalName, convertedPrices } = this.props;
+    const { carret, isPricebreakdownSelected } = this.state;
+
+
     const { text, color, loaderValue, searching, prices, isActive } = searchResults || {};
     const { details } = prices || {};
-    const { flight, ticketPrice, housingDetails, totalPrice } = details || {};
-    const { ticketPriceConverted, flightDetailsConverted,
-      housingDetailsConverted, totalPriceConverted } = convertedPrices.details || {};
+    const { totalPrice } = details || {};
+    const { isConverted, details: convertedDetails } = convertedPrices || {};
+    const { currencySymbol: convertedCurrency, totalPrice: totalPriceConverted  } = convertedDetails || {}; 
+  
     let results;
 
 
@@ -142,38 +110,14 @@ class Results extends React.Component {
 
     let finishedPhase = (
       <div className='finishedResultsWrap'>
-        <div className='loaderSmileyWrap'>
-          <div className="smileyWrapper">
-            <div className={smileyClass}>
-              <CircularProgress
-                mode="determinate"
-                value={100}
-                size={100}
-                thickness={3}
-                color="#47140e"
-                className='determinateCircle'
-              />
-              <p className='smiley' id='happy'>:D</p>
-            </div>
-          </div>
-          <div class={chatBubbleClass}>
-            <div class="talktext">
-              <p>Would you like to change the currency?</p>
-            </div>
-          </div>
-          <div className='currencyDropdownWrap'>
-            {chatBubbleClass === 'chatBubble right visible'
-              ? <CurrencyDropdown changeCurrency={(symbol) => this.changeCurrency(symbol)} />
-              : null}
-          </div>
-        </div>
+       <CurrencyConverter/>
         <p id='resultsLabel'>
           <span className="resultText">Going to </span>
           <span className="festivalNameLabel">{festivalName}</span>
           <span className="resultText"> will cost you </span>
-          <span className="totalPriceLabel">{currency}{!convertedPrices ? totalPrice : totalPriceConverted}</span>.
+          <span className="totalPriceLabel">{convertedCurrency || this.DEFAULT_CURRENCY}{!isConverted ? totalPrice : totalPriceConverted}</span>
        </p>
-        <div className="priceBreakdownWrap">
+        <div className="priceBreakdownWrap"> 
           <p className="priceBreakdown" id="priceBreakdownLabel">
             Price breakdown
            </p>
@@ -182,13 +126,10 @@ class Results extends React.Component {
             onClick={() => this.togglePriceBreakdown()}>
             {carret}
           </i>
-          <div ref={(wrapper) => { this.wrapperRef = wrapper }}>
+          <div  ref={(wrapper) => { this.wrapperRef = wrapper }}>
             <PriceBreakdown
-              cssClass={priceBreakdownClass}
-              flightDetails={!convertedPrices ? flight : flightDetailsConverted}
-              ticketPrice={!convertedPrices ? ticketPrice : ticketPriceConverted}
-              accommodation={!convertedPrices ? housingDetails : housingDetailsConverted}
-              currency={currency}
+              priceDetails = { !isConverted ? details : convertedDetails  }
+              isSelected = { isPricebreakdownSelected }
             />
           </div>
         </div>

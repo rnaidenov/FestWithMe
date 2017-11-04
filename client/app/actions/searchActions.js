@@ -1,5 +1,6 @@
 import { coroutine as co } from 'bluebird';
 
+
 const handleInput = (e) => {
   return {
     type: 'FESTIVAL_LOOKUP_INPUT',
@@ -103,7 +104,7 @@ function _getTotalPrice(eventDetails, flightDetails, housingDetails) {
         const totalPrice = ticketPriceUSD + flightPriceAmount + accommodationAvgPrice;
         resolve({
           ticketPrice: `${ticketPriceUSD}`,
-          flight: flightDetails,
+          flightDetails,
           housingDetails:housingDetails.properties,
           totalPrice
         })

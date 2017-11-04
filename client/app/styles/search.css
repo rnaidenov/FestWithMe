@@ -186,6 +186,12 @@ p {
     margin-left: -2%;
   }
 
+  .finishedResultsWrap{
+    position: absolute;
+    bottom: 0;
+    overflow:hidden;
+  }
+
 }
 
 /*----------- Medium screen size -----------*/
@@ -552,7 +558,6 @@ priceBreakdownContainer
   height: 100px;
   margin: auto;
   animation: bounceUp 1000ms linear both;
-  margin-top: 5%;
 }
 
 
