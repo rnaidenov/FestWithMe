@@ -27,7 +27,7 @@ function _checkAirBnbDetails (destination, checkInDate, numNights, numPeople) {
                     assert(propertyPrice!=null,`${property.type} should have a price, but it is ${propertyPrice}`);
                 });
                 
-                assert(average_price!=null,'An average price for the stay should have been returned, however average_price=',average_price);
+                assert(average_price!=null,`An average price for the stay should have been returned, however average_price=${average_price}`);
             })
             .catch(err => {
                 assert(false,err.message);

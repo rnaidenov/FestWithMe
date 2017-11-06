@@ -13,7 +13,7 @@
     "postinstall": "cd client && webpack --config webpack.prod.config.js -p --progress --colors",
     "backend": "cd backend && nodemon app.js",
     "what": "cd backend && nodemon helpers/currencies.js",
-    "test": "mocha backend/test/currencyConverter.test"
+    "test": "mocha backend/test/**.test.js"
   },
   "license": "ISC",
   "dependencies": {

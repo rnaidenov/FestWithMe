@@ -8,17 +8,17 @@ const config = require('../config');
 
 describe('Flight details', () => {
 
-    describe('Check for correct IATA codes', () => {
-        checkCityIata('Sofia', 'SOF');
-        checkCityIata('Reading, United Kingdom', 'LON');
-        checkCityIata('Amsterdam', 'AMS');
-        checkCityIata('Parco Dora, Turin', 'TRN');
-        checkCityIata('Lausanne', 'GVA');
-    });
+    // describe('Check for correct IATA codes', () => {
+    //     checkCityIata('Sofia', 'SOF');
+    //     checkCityIata('Reading, United Kingdom', 'LON');
+    //     checkCityIata('Amsterdam', 'AMS');
+    //     checkCityIata('Parco Dora, Turin', 'TRN');
+    //     checkCityIata('Lausanne', 'GVA');
+    // });
 
 
     describe('Ensure Amadeus is giving back flight data.', () => {
-        const flightDate = Utils.getDate({ days: { moreDays: true, amount: 30 } });
+        const flightDate = Utils.getDate({ days: { moreDays: true, amount: 60 } });
         getFlightData('Sofia', 'London', flightDate, false);
     });
 
@@ -62,7 +62,7 @@ function getFlightData(originCity, destinationCity, date, shouldFail) {
                     assert.equal(error, 'Unable to fetch price details for flight ticket.', 'An incorrect error message was returned.');
                     assert.equal(flightPriceAmount, 0, 'The flight price amount should have been 0.');
                 } else {
-                    assert(fail, err);
+                    assert(false, err.message);
                 }
             })
     })
