@@ -3,9 +3,7 @@ import Paper from 'material-ui/Paper';
 import FlightPrice from './flightPrice';
 import CustomCarousel from './customCarousel';
 
-
 class PriceBreakdown extends React.Component {
-
 
   constructor(props) {
     super(props);
@@ -15,16 +13,16 @@ class PriceBreakdown extends React.Component {
   componentWillUpdate(newProps) {
     const breakdownIsShown = this.state.priceBreakdownClass === 'priceBreakdownContainer selected';
 
-    if(newProps.isSelected) {
+    if (newProps.isSelected) {
       if (!breakdownIsShown) {
         this.setState({ priceBreakdownClass: 'priceBreakdownContainer selected' });
       }
     } else {
       if (breakdownIsShown) {
-        this.setState({ priceBreakdownClass: 'priceBreakdownContainer unselected'}, () => {
+        this.setState({ priceBreakdownClass: 'priceBreakdownContainer unselected' }, () => {
           setTimeout(() => {
             this.setState({ priceBreakdownClass: 'priceBreakdownContainer' });
-          },1000);
+          }, 1000);
         })
       }
     }
@@ -32,7 +30,8 @@ class PriceBreakdown extends React.Component {
 
   render() {
 
-    const { flightDetails, ticketPrice, housingDetails, totalPrice, currencySymbol: currency } = this.props.priceDetails || {};
+    const { priceDetails, defaultCurrency } = this.props;
+    const { flightDetails, ticketPrice, housingDetails, totalPrice, currencySymbol: currency } = priceDetails || {};
     const { priceBreakdownClass } = this.state;
 
     const noInfo = (
@@ -46,7 +45,7 @@ class PriceBreakdown extends React.Component {
             <img src={require(`../public/${propertyType.icon}`)} className='homeTypeIcon' />
           </div>
           <div className='typeAndPriceWrap'><p>{propertyType.type}</p></div>
-          <div className='typeAndPriceWrap'><p>{currency}{propertyType.price}</p></div>
+          <div className='typeAndPriceWrap'><p>{currency || defaultCurrency}{propertyType.price}</p></div>
         </div>
       )
     });
@@ -55,14 +54,14 @@ class PriceBreakdown extends React.Component {
       <div>
         <h1 className='priceBreakdownHeading'>Festival ticket</h1>
         <img src={require('../public/ticket.svg')} id='ticketIcon' />
-        <p className='priceLabel'>{currency}{ticketPrice}</p>
+        <p className='priceLabel'>{currency || defaultCurrency}{ticketPrice}</p>
       </div>
     )
 
     const travel = (
       <div>
         <h1 className='priceBreakdownHeading'>Plane ticket</h1>
-        <FlightPrice details={flightDetails} currency={currency} />
+        <FlightPrice details={flightDetails} currency={currency || defaultCurrency} />
       </div>
     )
 
@@ -87,4 +86,4 @@ class PriceBreakdown extends React.Component {
   }
 }
 
-  export default PriceBreakdown;
+export default PriceBreakdown;

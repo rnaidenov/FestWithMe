@@ -11,7 +11,7 @@ describe("RA scraper", () => {
         _checkCityIsCorrect(activeEventBody, 'London');
         _checkCountryIsCorrect(activeEventBody,'United Kingdom');
         _checkDateIsCorrect(activeEventBody, '3 Nov 2017');
-        _checkPriceIsCorrect(activeEventBody,'£',33);
+        _checkPriceIsCorrect(activeEventBody,'£',43);
     });
 
 
@@ -28,10 +28,8 @@ describe("RA scraper", () => {
 function _checkPriceIsCorrect(body, expectedPriceCurrency, expectedPriceAmount) {
     it("Scraped price is correct." ,() => {
         return Scrapper.getPrice(body)
-                            .then(priceDetails => { 
-                                expect(priceDetails).to.have.keys('ticketCurrency','ticketPriceAmount');
-                                const { ticketCurrency, ticketPriceAmount } = priceDetails;
-                                expect(ticketCurrency).to.equal(expectedPriceCurrency,`The scraper should have returned ${expectedPriceCurrency} for the price currency, however it returned ${ticketCurrency}.`);
+                            .then(ticketPriceAmount => { 
+                                expect(ticketPriceAmount).to.be.a('number',`Price was supposed to be a number, but it is a ${typeof(ticketPriceAmount)}.`)
                                 expect(ticketPriceAmount).to.equal(expectedPriceAmount,`The scraper should have returned ${expectedPriceAmount} for the price amount, however it returned ${ticketPriceAmount}.`);
                             })
                             .catch(err =>{

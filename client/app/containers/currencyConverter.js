@@ -1,12 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Paper from 'material-ui/Paper';
 import IconButton from 'material-ui/IconButton';
 import CircularProgress from 'material-ui/CircularProgress';
-import PriceBreakdown from '../components/priceBreakdown';
 import { changeCurrency } from '../actions/priceBreakdownActions';
 import CurrencyDropdown from '../components/currencyDropdown';
-import '../styles/search.css';
+import '../styles/currencyConverter.css';
 
 
 @connect(store => {
@@ -21,16 +19,16 @@ class CurrencyConverter extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { smileyClass: 'smileyContentWrapper', chatBubbleClass: 'chatBubble right', currency: this.props.searchResults.currencySymbol };
+        this.state = { smileyClass: 'smileyContentWrapper', chatBubbleClass: 'chatBubble right', currency: this.props.defaultCurrency };
     }
 
 
     componentDidMount() {
         setTimeout(() => {
             this.setState({ smileyClass: 'smileyContentWrapper right' }, () => {
-                // setTimeout(()=>{
-                this.setState({ chatBubbleClass: 'chatBubble right visible' });
-                // },750);
+                setTimeout(()=>{
+                    this.setState({ chatBubbleClass: 'chatBubble right visible' });
+                },250);
             })
         }, 2000);    
     }
@@ -48,7 +46,6 @@ class CurrencyConverter extends React.Component {
     changeCurrency(toCurrency) {
         const { searchResults, convertedPrices } = this.props;
         const { currency: fromCurrency } = this.state;
-
         if (convertedPrices.details != null) {
             this.props.dispatch(changeCurrency(fromCurrency, toCurrency, convertedPrices.details));
         } else {

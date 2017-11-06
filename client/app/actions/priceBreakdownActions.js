@@ -4,38 +4,27 @@ export function changeCurrency(from, to, details) {
     return (dispatch => {
 
         const allPricesConverted = [];
-        const { flight, ticketPrice, housingDetails, totalPrice } = details;
-        
-        
-        // if (details.converted) {
-        //     flight = details.flightDetailsConverted; 
-        //     ticketPrice = details.ticketPriceConverted;
-        //     housingDetails = details.housingDetailsConverted;
-        //     totalPrice = details.totalPriceConverted;
-        // }
-
+        const { flightDetails, ticketPrice, housingDetails, totalPrice } = details;
 
         co(function* () {
             const ticketPriceRes = yield fetch(`http://localhost:3000/api/currencies/?from=${from}&to=${to}&amount=${ticketPrice}`);
             const { convertedAmount: ticketPriceConverted } = yield ticketPriceRes.json();
-            const flightPriceRes = yield fetch(`http://localhost:3000/api/currencies/?from=${from}&to=${to}&amount=${flight.flightPriceAmount}`);
+            const flightPriceRes = yield fetch(`http://localhost:3000/api/currencies/?from=${from}&to=${to}&amount=${flightDetails.flightPriceAmount}`);
             const { convertedAmount: flightPriceConverted } = yield flightPriceRes.json();
-            const flightDetailsConverted = Object.assign({}, flight);
+            const flightDetailsConverted = Object.assign({}, flightDetails);
             flightDetailsConverted.flightPriceAmount = flightPriceConverted;
             const housingDetailsConverted = yield convertAccommodationPrices(from,to,housingDetails);
             const totalPriceRes = yield fetch(`http://localhost:3000/api/currencies/?from=${from}&to=${to}&amount=${totalPrice}`);
             const { convertedAmount: totalPriceConverted } = yield totalPriceRes.json();
-
                 dispatch({
                     type: 'CURRENCY_CHANGED',
                     details: {
-                        ticketPrice,
-                        flightDetails,
-                        housingDetails,
-                        totalPrice,
+                        ticketPrice: ticketPriceConverted,
+                        flightDetails: flightDetailsConverted,
+                        housingDetails: housingDetailsConverted,
+                        totalPrice: totalPriceConverted,
                         currencySymbol: to,
-                    },
-                    isConverted:true
+                    }
                 });
 
         }).bind(this)();

@@ -7,7 +7,7 @@ import PriceBreakdown from '../components/priceBreakdown';
 import { changeCurrency } from '../actions/priceBreakdownActions';
 import CurrencyConverter from './currencyConverter';
 import CurrencyDropdown from '../components/currencyDropdown';
-import '../styles/search.css';
+import '../styles/results.css';
 
 
 @connect(store => {
@@ -61,14 +61,11 @@ class Results extends React.Component {
 
     const { searchResults, festivalName, convertedPrices } = this.props;
     const { carret, isPricebreakdownSelected } = this.state;
-
-
     const { text, color, loaderValue, searching, prices, isActive } = searchResults || {};
     const { details } = prices || {};
     const { totalPrice } = details || {};
     const { isConverted, details: convertedDetails } = convertedPrices || {};
     const { currencySymbol: convertedCurrency, totalPrice: totalPriceConverted  } = convertedDetails || {}; 
-  
     let results;
 
 
@@ -110,12 +107,12 @@ class Results extends React.Component {
 
     let finishedPhase = (
       <div className='finishedResultsWrap'>
-       <CurrencyConverter/>
+       <CurrencyConverter defaultCurrency = { this.DEFAULT_CURRENCY }/>
         <p id='resultsLabel'>
           <span className="resultText">Going to </span>
           <span className="festivalNameLabel">{festivalName}</span>
           <span className="resultText"> will cost you </span>
-          <span className="totalPriceLabel">{convertedCurrency || this.DEFAULT_CURRENCY}{!isConverted ? totalPrice : totalPriceConverted}</span>
+          <span className="totalPriceLabel">{convertedCurrency || this.DEFAULT_CURRENCY}{totalPriceConverted || totalPrice}</span>
        </p>
         <div className="priceBreakdownWrap"> 
           <p className="priceBreakdown" id="priceBreakdownLabel">
@@ -128,8 +125,9 @@ class Results extends React.Component {
           </i>
           <div  ref={(wrapper) => { this.wrapperRef = wrapper }}>
             <PriceBreakdown
-              priceDetails = { !isConverted ? details : convertedDetails  }
+              priceDetails = { convertedDetails || details }
               isSelected = { isPricebreakdownSelected }
+              defaultCurrency = { this.DEFAULT_CURRENCY }
             />
           </div>
         </div>

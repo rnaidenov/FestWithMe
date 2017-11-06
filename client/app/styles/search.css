@@ -47,57 +47,12 @@ p {
     position: absolute;
     margin-bottom: 2%;
   } 
-
-  .priceBreakdownWrap{
-    width:100%;
-    display: relative;
-  }
-
-  #priceBreakdownLabel{
-    display: absolute !important;
-    bottom: 0 !important;
-  }
-
-  .priceBreakdownContainer {
-    width:100% !important;
-    display: none;
-    position: absolute !important;
-    bottom:0 !important;
-  }
-
-  .slider-frame{
-    height: 40vh !important;
-  }
-
-  .priceBreakdownContainer.selected {
-    animation: fadeInUp 2000ms linear both;
-    display: block;
-  }
-
-  .priceBreakdownContainer.unselected {
-    animation: fadeOutDown 700ms linear both;
-    display: block;
-  }
-
-  .homeTypeIcon {
-    height: 60px;
-    width: 35%;
-    margin-left: 7%;
-  }
   .nightsLabel{
     padding-left: 45%;
   }
   .btnWrap {
     margin-top:4%;
     width:100%;
-  }
-  .typeAndPriceWrap {
-    margin-top: 5%;
-    width: 40%;
-  }
-  .accommodationTypeWrap{
-    padding-top:0% !important;
-    margin-bottom: 1% !important;
   }
   .toolTipBox {
     right:-0.5vw;
@@ -108,90 +63,6 @@ p {
     right:4px !important;
     transform: rotate(180deg)
   }
-  .resultText{
-    font-size:6vw;
-  }
-  .festivalNameLabel {
-    font-size: 8vw;
-  }
-  .totalPriceLabel {
-    font-size: 10vw;
-  }
-  .loaderSmileyWrap {
-    width: 90% !important;
-    overflow: hidden;
-  }
-
-  .smileyContentWrapper.right {
-    float:right;
-    animation: moveSide 1.5s linear both;
-  }
-
-  @keyframes moveSide { 
-    0% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -139, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -139, 0, 0, 1); }
-    1.3% { -webkit-transform: matrix3d(3.905, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -109.819, 0, 0, 1); transform: matrix3d(3.905, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -109.819, 0, 0, 1); }
-    2.55% { -webkit-transform: matrix3d(4.554, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -84.696, 0, 0, 1); transform: matrix3d(4.554, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -84.696, 0, 0, 1); }
-    4.1% { -webkit-transform: matrix3d(4.025, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -58.339, 0, 0, 1); transform: matrix3d(4.025, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -58.339, 0, 0, 1); }
-    5.71% { -webkit-transform: matrix3d(3.039, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -36.88, 0, 0, 1); transform: matrix3d(3.039, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -36.88, 0, 0, 1); }
-    8.11% { -webkit-transform: matrix3d(1.82, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -14.663, 0, 0, 1); transform: matrix3d(1.82, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -14.663, 0, 0, 1); }
-    8.81% { -webkit-transform: matrix3d(1.581, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -10.119, 0, 0, 1); transform: matrix3d(1.581, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -10.119, 0, 0, 1); }
-    11.96% { -webkit-transform: matrix3d(1.034, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 2.236, 0, 0, 1); transform: matrix3d(1.034, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 2.236, 0, 0, 1); }
-    12.11% { -webkit-transform: matrix3d(1.023, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 2.562, 0, 0, 1); transform: matrix3d(1.023, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 2.562, 0, 0, 1); }
-    15.07% { -webkit-transform: matrix3d(0.947, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 5.867, 0, 0, 1); transform: matrix3d(0.947, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 5.867, 0, 0, 1); }
-    16.12% { -webkit-transform: matrix3d(0.951, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 6.026, 0, 0, 1); transform: matrix3d(0.951, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 6.026, 0, 0, 1); }
-    27.23% { -webkit-transform: matrix3d(1.001, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1.09, 0, 0, 1); transform: matrix3d(1.001, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1.09, 0, 0, 1); }
-    27.58% { -webkit-transform: matrix3d(1.001, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0.983, 0, 0, 1); transform: matrix3d(1.001, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0.983, 0, 0, 1); }
-    38.34% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -0.144, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -0.144, 0, 0, 1); }
-    40.09% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -0.135, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -0.135, 0, 0, 1); }
-    50% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -0.022, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -0.022, 0, 0, 1); }
-    60.56% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0.003, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0.003, 0, 0, 1); }
-    82.78% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-    100% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); } 
-  }
-
-  
-  .chatBubble.visible {
-    display: block;
-    position: relative;
-    width: 65%;
-    margin-right: 5%;
-    height: 90px;
-    background-color: rgba(0, 0, 0, 0.7);
-    animation:bounceUp 1s linear both;
-    color:white;
-    font-size: 1.1em;
-    padding-top: 1.5%;
-  }
-
-  .chatBubble.right:after{
-    content: ' ';
-    position: absolute;
-    width: 0;
-    height: 0;
-    left: auto;
-    right: -24px;
-    top: 45px;
-    bottom: auto;
-    border: 12px solid black;
-    border-color: transparent transparent transparent rgba(0, 0, 0, 0.75);
-  }
-
-  .currencyDropdownWrap{
-    margin-top: -32px;
-    width: 65%;
-  }
-  
-  .currencyCarret{
-    margin-top: 1.5%;
-    margin-left: -2%;
-  }
-
-  .finishedResultsWrap{
-    position: absolute;
-    bottom: 0;
-    overflow:hidden;
-  }
-
 }
 
 /*----------- Medium screen size -----------*/
@@ -201,16 +72,6 @@ p {
 
   .background {
     background-image: url('../public/party_background_tablet.jpg');
-  }
-
-  .priceBreakdownContainer.selected {
-    display: block;
-    animation: fadeInDown 2500ms linear both;
-  }
-
-  .priceBreakdownContainer.unselected {
-    display: block;
-    animation: fadeOutUp 2000ms linear both;
   }
 
   .searchWrap{
@@ -254,9 +115,6 @@ p {
     width:100%;
     order:7;
   }
-  .accomodationWrap {
-    margin: auto;
-  }
   .toolTipBox {
     transform: rotate(180deg);
     top: 36px;
@@ -264,58 +122,6 @@ p {
   }
   .toolTipBox .toolTipMessage {
     transform: rotate(180deg) !important;
-  }
-  .festivalNameLabel {
-    font-size: 34px;
-  }
-  .totalPriceLabel {
-    font-size: 34px;
-  }
-  .resultText{
-    font-size: 30px;
-  }
-
-  .chatBubble.visible {
-    display: block;
-    position: absolute;
-    width: 200px;
-    margin-right: 5%;
-    height: 90px;
-    background-color: rgba(0, 0, 0, 0.7);
-    animation:bounceUp 1s linear both;
-    color:white;
-    font-size: 1.1em;
-    padding-top: 1.5%;
-    top: 0;
-    right: 95%;
-  }
-
-  .chatBubble.right:after{
-    content: ' ';
-    position: absolute;
-    width: 0;
-    height: 0;
-    left: auto;
-    right: -24px;
-    top: 45px;
-    bottom: auto;
-    border: 12px solid black;
-    border-color: transparent transparent transparent rgba(0, 0, 0, 0.75);
-  }
-
-  .currencyDropdownWrap{
-    margin-top: -58px;
-    width: 200px;
-    margin-left: -200px;
-  }
-
-  .currencyCarret{
-    margin-top: 4.5%;
-    margin-left: -8%;
-  }
-
-  .priceBreakdownHeading {
-    padding-top:2%;
   }
   
 }
@@ -377,69 +183,6 @@ p {
   .toolTipBox.body {
     transform: rotate(180deg);
   }
-  .festivalNameLabel {
-    font-size: 38px;
-  }
-  .totalPriceLabel {
-    font-size: 38px;
-  }
-  .resultText{
-    font-size: 28px;
-  }
-
-  .priceBreakdownContainer.selected {
-    display: block;
-    animation: fadeInDown 2500ms linear both;
-  }
-
-  .priceBreakdownContainer.unselected {
-    display: block;
-    animation: fadeOutUp 2000ms linear both;
-  }
-
-  .chatBubble.visible {
-    display: block;
-    position: absolute;
-    width: 200px;
-    margin-right: 5%;
-    height: 90px;
-    background-color: rgba(0, 0, 0, 0.7);
-    animation:bounceUp 1s linear both;
-    color:white;
-    font-size: 1.1em;
-    padding-top: 1.5%;
-    top: 0;
-    right: 95%;
-  }
-
-  .chatBubble.right:after{
-    content: ' ';
-    position: absolute;
-    width: 0;
-    height: 0;
-    left: auto;
-    right: -24px;
-    top: 45px;
-    bottom: auto;
-    border: 12px solid black;
-    border-color: transparent transparent transparent rgba(0, 0, 0, 0.75);
-  }
-
-  .currencyDropdownWrap{
-    margin-top: -58px;
-    width: 200px;
-    margin-left: -200px;
-  }
-
-  .currencyCarret{
-    margin-top: 4.5%;
-    margin-left: -8%;
-  }
-
-  .priceBreakdownHeading {
-    padding-top:2%;
-  }
-
 }
 
 .searchWrap {
@@ -447,7 +190,6 @@ p {
   text-align: center;
   display: flex;
   flex-wrap: wrap;
-  /* background-color: red; */
 }
 
 .searchContainer {
@@ -473,34 +215,6 @@ p {
   color:white;
 }
 
-.determinateCircle {
-  z-index: 2;
-}
-
-.indeterminateCircle {
-  position: absolute;
-  margin-left: -100px;
-  z-index: 1;
-}
-
-.successCircle {
-  width: 100px;
-  height: 100px;
-  margin-top: 6%;
-}
-
-
-
-priceBreakdownContainer
-#searchReadyText {
-  margin-top: 1%;
-}
-
-#resultsLabel {
-  color:#984b43;
-  /* margin-top: 2%; */
-}
-
 .locationIcon {
   position: absolute;
   right:0;
@@ -522,64 +236,61 @@ priceBreakdownContainer
   z-index: 2;
 }
 
-.priceBreakdown {
-  color:white;
+.inputError {
+  color:red !important;
 }
 
-.accommodationTypeWrap{
-  width:100%;
-  display: flex;
-  margin-bottom: 3%;
-}
-
-#priceBreakdownLabel {
-  margin-bottom: -0.3%;
-  color: #dfdfdf;
-  font-size: 16px;
-  font-family: 'Rajdhani', sans-serif !important;
-}
-
-.smiley {
-  font-size: 70px;
-  color:#373535;
-  margin-top:-100px;
-}
-
-#sad {
-  transform: rotate(85deg);
-}
-
-#happy {
-  transform: rotate(95deg);
-}
-
-.loaderSmileyWrap {
-  width: 100px;
-  height: 100px;
-  margin: auto;
-  animation: bounceUp 1000ms linear both;
+.flightDetailsError {
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 5%;
+  font-size: 20px;
+  font-family: 'Yanone Kaffeesatz', sans-serif !important;
+  color: #893333;
 }
 
 
-.soldOutWrap {
-  width: 100%;
-  text-align: center;
+.tip {
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  background: transparent;
+  border: 10px solid #ccc;
 }
 
-#soldOutLabel {
-  padding-top: 2%;
+.tip-down {
+  bottom: -18px;
+  border: 8px solid #413435;
+  border-right-color: transparent;
+  border-left-color: transparent;
+  border-bottom-color: transparent;
 }
 
-.finishedResultsWrap {
-  width:100%;
-  text-align:center;
+.toolTipBox {
+  position: absolute;
 }
 
-.chatBubble {
-  display:none;
+.toolTipBox .body {
+  position: relative;
+  width: 200px;
+  background-color: #66494b;
+  border-radius: 4px;
+  border: 2px solid #5a4546;
+  white-space: normal;
+  max-height: 31px;
 }
 
+.toolTipBox .toolTipMessage {
+  border-radius: 3px;
+  font-family: 'Yantramanav', sans-serif !important;
+  font-size: 15px;
+  color: whitesmoke;
+}
 
+.locationTextField {
+  font-family: 'Roboto', sans-serif !important;
+}
 
 @keyframes bounceUp {
   0% { opacity: 0;-webkit-transform: matrix3d(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
@@ -609,237 +320,3 @@ priceBreakdownContainer
   90.69% { -webkit-transform: matrix3d(0.999, 0, 0, 0, 0, 0.999, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(0.999, 0, 0, 0, 0, 0.999, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
   100% { opacity: 1;-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
 }
-
-
-.currencyLabel {
-  display: inline-block;
-  margin-right: 10px;
-}
-
-.currencyFlagIconMenu {
-  height: 35px;
-  width: 35px;
-}
-
-.currencyFlagIconSelected {
-  height: 45px;
-  width: 100%;
-  margin-top:-33px;
-}
-
-
-.currencyCarret {
-  color:white;
-  position: absolute;
-  font-size: 18px;
-}
-
-.loaderWrap {
-  margin-top: 5%;
-  width: 100%;
-  text-align: center;
-}
-
-.inputError {
-  color:red !important;
-}
-
-.priceBreakdownContainer {
-  width: 350px;
-  margin: auto;
-  text-align: center;
-}
-
-.festivalNameLabel {
-  font-family: 'Yanone Kaffeesatz', sans-serif;
-}
-
-.totalPriceLabel {
-  font-family: 'Yanone Kaffeesatz', sans-serif;
-  color: #105755;
-}
-
-.priceBreakdownContainer {
-  display:none;
-}
-
-.priceBreakdownHeading {
-  width:100%;
-  font-family: 'Quicksand', sans-serif;
-  font-size: 30px;
-  margin-bottom: 5%;
-}
-
-#ticketIcon {
-  height: 130px;
-  width: 100%;
-}
-
-.resultText {
-  font-family: 'Saira Extra Condensed', sans-serif;
-  color: #18121E;
-}
-
-.priceLabel {
-  color:#3d6a6f;
-  font-size: 42px;
-  width: 100%;
-}
-
-.routeWrap {
-  width: 100%;
-  height: 130px;
-  padding-top:10%;
-  position: relative;
-}
-
-.iataCodes {
-  font-family: 'BenchNine', sans-serif;
-  font-size: 32px;
-  width: 25%;
-}
-
-@keyframes fly {
-  0% {transform: translate(2px,5px) rotate(92deg);}
-  100% {transform: translate(-2px,-5px) rotate(88deg);}
-}
-
-.planeIcon {
-  width: 50px;
-  height: 50px;
-  width: 50%;
-  position: relative;
-  animation: fly 800ms ease-in-out 0s infinite alternate;
-}
-
-.errorIcon {
-  width: 30%;
-}
-
-.flightDetailsError {
-  width: 75%;
-  margin-left: auto;
-  margin-right: auto;
-  padding-top: 5%;
-  font-size: 20px;
-  font-family: 'Yanone Kaffeesatz', sans-serif !important;
-  color: #893333;
-}
-
-.accomodationWrap {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.homeTypeIcon {
-  height: 60px;
-  width: 35%;
-  margin-left: 8%;
-}
-
-
-.typeAndPriceWrap {
-  margin-top: 5%;
-  width: 40%;
-}
-
-#noInfoLabel {
-  color: darkred;
-  font-size: 12px;
-  margin-top: 2%;
-}
-
-.tip {
-  width: 0px;
-  height: 0px;
-  position: absolute;
-  background: transparent;
-  border: 10px solid #ccc;
-}
-
-.tip-down {
-  bottom: -18px;
-  border: 8px solid #413435;
-  border-right-color: transparent;
-  border-left-color: transparent;
-  border-bottom-color: transparent;
-}
-
-.toolTipBox {
-  position: absolute;
-}
-
-@keyframes showUp {
-  0% {  opacity: 0;transform: translate3d(0,7px,0);}
-  100% { opacity: 1;transform: translate3d(0,0,0);}
-}
-
-.toolTipBox .body {
-  position: relative;
-  width: 200px;
-  background-color: #66494b;
-  border-radius: 4px;
-  border: 2px solid #5a4546;
-  white-space: normal;
-  max-height: 31px;
-}
-
-.toolTipBox .toolTipMessage {
-  border-radius: 3px;
-  font-family: 'Yantramanav', sans-serif !important;
-  font-size: 15px;
-  color: whitesmoke;
-}
-
-.locationTextField {
-  font-family: 'Roboto', sans-serif !important;
-}
-
-
-@keyframes fadeInUp {
-  0% { opacity:0;-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 200, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 200, 0, 1); }
-  4.2% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 90.145, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 90.145, 0, 1); }
-  8.31% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 23.179, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 23.179, 0, 1); }
-  12.51% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -6.431, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -6.431, 0, 1); }
-  16.62% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -12.661, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -12.661, 0, 1); }
-  27.73% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -2.57, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -2.57, 0, 1); }
-  38.84% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0.507, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0.507, 0, 1); }
-  61.06% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -0.02, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -0.02, 0, 1); }
-  83.28% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0.001, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0.001, 0, 1); }
-  100% { opacity:1;-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }  
-}
-
-@keyframes fadeOutUp  {
-  0% { opacity:1;-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 10, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 10, 0, 1); }
-  4.5% { opacity:0.8;-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -9.411, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -9.411, 0, 1); }
-  9.01% { opacity:0.75;-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -25.199, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -25.199, 0, 1); }
-  13.51% { opacity:0.7;-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -33.497, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -33.497, 0, 1); }
-  17.92% { opacity:0.65;-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -35.569, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -35.569, 0, 1); }
-  29.03% { opacity:0.35;-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -31.291, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -31.291, 0, 1); }
-  34.63% { opacity:0.30;-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -29.763, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -29.763, 0, 1); }
-  40.14% { opacity:0.09;-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -29.383, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -29.383, 0, 1); }
-  62.36% { opacity:0;-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -30.068, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -30.068, 0, 1); }
-  84.68% { opacity:0;-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -29.992, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -29.992, 0, 1); }
-  100% { opacity:0;-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -30, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -30, 0, 1); }
-}
-
-@keyframes fadeInDown {
-  0% { opacity:0;-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -30, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -30, 0, 1); }
-  4.5% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -10.589, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -10.589, 0, 1); }
-  9.01% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 5.199, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 5.199, 0, 1); }
-  13.51% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 13.497, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 13.497, 0, 1); }
-  17.92% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 15.569, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 15.569, 0, 1); }
-  29.03% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 11.291, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 11.291, 0, 1); }
-  34.63% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 9.763, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 9.763, 0, 1); }
-  40.14% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 9.383, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 9.383, 0, 1); }
-  62.36% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 10.068, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 10.068, 0, 1); }
-  84.68% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 9.992, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 9.992, 0, 1); }
-  100% { opacity:1;-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 10, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 10, 0, 1); }
-}
-
-@keyframes fadeOutDown { 
-  0% { opacity:1; }
-  100% { opacity: 0; transform: translateY(500px)}
-}
-
-

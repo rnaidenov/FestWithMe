@@ -2,8 +2,7 @@ import React from 'react';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import Paper from 'material-ui/Paper';
-import TextField from 'material-ui/TextField'
-import injectTapEventPlugin from 'react-tap-event-plugin';
+import TextField from 'material-ui/TextField';
 
 class NightsSelector extends React.Component {
 

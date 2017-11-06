@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { loadFestivals, updateInput, searchFestival, getLocation } from '../actions/searchActions';
+import { loadFestivals, searchFestival, getLocation } from '../actions/searchActions';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import IconButton from 'material-ui/IconButton';
 import PeopleSelector from './peopleSelector';

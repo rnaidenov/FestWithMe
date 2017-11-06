@@ -1,0 +1,206 @@
+/*----------- Small screen size -----------*/
+
+@media screen and (max-width: 499px) {
+
+  
+  .loaderSmileyWrap {
+    width: 90% !important;
+    overflow: hidden;
+  }
+
+  .smileyContentWrapper.right {
+    float:right;
+    animation: moveSide 1.5s linear both;
+  }
+
+  
+  .chatBubble.visible {
+    display: block;
+    position: relative;
+    width: 65%;
+    margin-right: 5%;
+    height: 90px;
+    background-color: rgba(0, 0, 0, 0.7);
+    animation:bounceUp 1s linear both;
+    color:white;
+    font-size: 1.1em;
+    padding-top: 1.5%;
+  }
+
+  .chatBubble.right:after{
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: auto;
+    right: -24px;
+    top: 45px;
+    bottom: auto;
+    border: 12px solid black;
+    border-color: transparent transparent transparent rgba(0, 0, 0, 0.75);
+  }
+
+  .currencyDropdownWrap{
+    margin-top: -32px;
+    width: 65%;
+  }
+  
+  .currencyCarret{
+    margin-top: 1.5%;
+    margin-left: -2%;
+  }
+
+
+  @keyframes moveSide { 
+    0% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -139, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -139, 0, 0, 1); }
+    1.3% { -webkit-transform: matrix3d(3.905, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -109.819, 0, 0, 1); transform: matrix3d(3.905, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -109.819, 0, 0, 1); }
+    2.55% { -webkit-transform: matrix3d(4.554, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -84.696, 0, 0, 1); transform: matrix3d(4.554, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -84.696, 0, 0, 1); }
+    4.1% { -webkit-transform: matrix3d(4.025, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -58.339, 0, 0, 1); transform: matrix3d(4.025, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -58.339, 0, 0, 1); }
+    5.71% { -webkit-transform: matrix3d(3.039, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -36.88, 0, 0, 1); transform: matrix3d(3.039, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -36.88, 0, 0, 1); }
+    8.11% { -webkit-transform: matrix3d(1.82, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -14.663, 0, 0, 1); transform: matrix3d(1.82, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -14.663, 0, 0, 1); }
+    8.81% { -webkit-transform: matrix3d(1.581, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -10.119, 0, 0, 1); transform: matrix3d(1.581, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -10.119, 0, 0, 1); }
+    11.96% { -webkit-transform: matrix3d(1.034, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 2.236, 0, 0, 1); transform: matrix3d(1.034, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 2.236, 0, 0, 1); }
+    12.11% { -webkit-transform: matrix3d(1.023, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 2.562, 0, 0, 1); transform: matrix3d(1.023, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 2.562, 0, 0, 1); }
+    15.07% { -webkit-transform: matrix3d(0.947, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 5.867, 0, 0, 1); transform: matrix3d(0.947, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 5.867, 0, 0, 1); }
+    16.12% { -webkit-transform: matrix3d(0.951, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 6.026, 0, 0, 1); transform: matrix3d(0.951, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 6.026, 0, 0, 1); }
+    27.23% { -webkit-transform: matrix3d(1.001, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1.09, 0, 0, 1); transform: matrix3d(1.001, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1.09, 0, 0, 1); }
+    27.58% { -webkit-transform: matrix3d(1.001, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0.983, 0, 0, 1); transform: matrix3d(1.001, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0.983, 0, 0, 1); }
+    38.34% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -0.144, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -0.144, 0, 0, 1); }
+    40.09% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -0.135, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -0.135, 0, 0, 1); }
+    50% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -0.022, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -0.022, 0, 0, 1); }
+    60.56% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0.003, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0.003, 0, 0, 1); }
+    82.78% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+    100% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); } 
+  }
+
+}
+
+/*----------- Medium screen size -----------*/
+
+
+@media screen and (min-width: 500px) and (max-width:1099px) {
+
+  .chatBubble.visible {
+    display: block;
+    position: absolute;
+    width: 200px;
+    margin-right: 5%;
+    height: 90px;
+    background-color: rgba(0, 0, 0, 0.7);
+    animation:bounceUp 1s linear both;
+    color:white;
+    font-size: 1.1em;
+    padding-top: 1.5%;
+    top: 0;
+    right: 95%;
+  }
+
+  .chatBubble.right:after{
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: auto;
+    right: -24px;
+    top: 45px;
+    bottom: auto;
+    border: 12px solid black;
+    border-color: transparent transparent transparent rgba(0, 0, 0, 0.75);
+  }
+
+  .currencyDropdownWrap{
+    margin-top: -58px;
+    width: 200px;
+    margin-left: -200px;
+  }
+
+  .currencyCarret{
+    margin-top: 4.5%;
+    margin-left: -8%;
+  }
+  
+}
+
+
+/*----------- Big screen size -----------*/
+
+@media screen and (min-width:1100px) {
+
+  .chatBubble.visible {
+    display: block;
+    position: absolute;
+    width: 200px;
+    margin-right: 5%;
+    height: 90px;
+    background-color: rgba(0, 0, 0, 0.7);
+    animation:bounceUp 1s linear both;
+    color:white;
+    font-size: 1.1em;
+    padding-top: 1.5%;
+    top: 0;
+    right: 95%;
+  }
+
+  .chatBubble.right:after{
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: auto;
+    right: -24px;
+    top: 45px;
+    bottom: auto;
+    border: 12px solid black;
+    border-color: transparent transparent transparent rgba(0, 0, 0, 0.75);
+  }
+
+  .currencyDropdownWrap{
+    margin-top: -58px;
+    width: 200px;
+    margin-left: -200px;
+  }
+
+  .currencyCarret{
+    margin-top: 4.5%;
+    margin-left: -8%;
+  }
+}
+
+#happy {
+  transform: rotate(95deg);
+}
+
+.loaderSmileyWrap {
+  width: 100px;
+  height: 100px;
+  margin: auto;
+  animation: bounceUp 1000ms linear both;
+}
+
+.chatBubble {
+  display:none;
+}
+
+
+.currencyLabel {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.currencyFlagIconMenu {
+  height: 35px;
+  width: 35px;
+}
+
+.currencyFlagIconSelected {
+  height: 45px;
+  width: 100%;
+  margin-top:-33px;
+}
+
+
+.currencyCarret {
+  color:white;
+  position: absolute;
+  font-size: 18px;
+}

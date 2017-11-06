@@ -1,15 +1,5 @@
 import { coroutine as co } from 'bluebird';
 
-
-const handleInput = (e) => {
-  return {
-    type: 'FESTIVAL_LOOKUP_INPUT',
-    payload: e.target.value
-  }
-};
-
-
-
 function _getFlightDetails(origin, destination, date) {
   return new Promise((resolve, reject) => {
     fetch(`http://localhost:3000/api/prices/flights?origin=${origin}&destination=${destination}&date=${date}`).then(response => {
@@ -70,17 +60,13 @@ export function searchFestival(origin, festivalName, nights, numPeople) {
         const date = eventDetails.date;
         _increaseLoader(dispatch, 'FLIGHTS_SEARCH_START', eventDetails.city);
         const flightDetails = yield _getFlightDetails(origin, destination, date);
-        if (housingDetails==null) {
-          _increaseLoader(dispatch, 'HOUSING_SEARCH_START');
-        }
+        _increaseLoader(dispatch, 'HOUSING_SEARCH_START');
         const housingDetails = yield _getHousingDetails(destination, date, nights, numPeople);
-        const details = yield _getTotalPrice(eventDetails, flightDetails, housingDetails);
-        const pricingDetails = {
-          details
-        }
+        const details = _getTotalPrice(eventDetails, flightDetails, housingDetails);
+
         dispatch({
           type: 'FESTIVAL_SEARCH_FINISHED',
-          payload: pricingDetails
+          payload: { details }
         });
       } else {
         dispatch({
@@ -95,23 +81,16 @@ export function searchFestival(origin, festivalName, nights, numPeople) {
 function _getTotalPrice(eventDetails, flightDetails, housingDetails) {
   const { flightPriceCurrency, flightPriceAmount } = flightDetails;
   const { average_price: accommodationAvgPrice } = housingDetails;
-
-  return new Promise((resolve, reject) => {
-    const { ticketCurrency, ticketPriceAmount } = eventDetails.price;
-    fetch(`http://localhost:3000/api/currencies?from=${ticketCurrency}&to=$&amount=${ticketPriceAmount}`).then(conversionRes => {
-      conversionRes.json().then(data => {
-        const ticketPriceUSD = data.convertedAmount;
-        const totalPrice = ticketPriceUSD + flightPriceAmount + accommodationAvgPrice;
-        resolve({
-          ticketPrice: `${ticketPriceUSD}`,
-          flightDetails,
-          housingDetails:housingDetails.properties,
-          totalPrice
-        })
-      })
-    })
-  });
+  const eventTicketPrice = eventDetails.price;
+  const totalPrice = eventTicketPrice + flightPriceAmount + accommodationAvgPrice;
+  return {
+    ticketPrice: eventTicketPrice,
+    flightDetails,
+    housingDetails:housingDetails.properties,
+    totalPrice
+  }
 }
+
 
 
 function _increaseLoader(dispatch, type, payload) {
@@ -125,13 +104,6 @@ function _increaseLoader(dispatch, type, payload) {
   setTimeout(() => {
     dispatch({ type: `${type}4`, payload });
   }, 600);
-}
-
-export const updateInput = (festivalName) => {
-  return {
-    type: 'FESTIVAL_INPUT_UPDATE',
-    payload: festivalName
-  }
 }
 
 export function getLocation() {

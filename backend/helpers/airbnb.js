@@ -56,11 +56,6 @@ function getPropertiesDetails(destination, checkInDate, checkOutDate, numPeople)
   });
 }
 
-
-module.exports = {
-  getPrice
-}
-
 function getAveragePrice(destination, checkInDate, checkOutDate, numPeople, roomType) {
   return new Promise((resolve, reject) => {
 
@@ -79,4 +74,8 @@ function getAveragePrice(destination, checkInDate, checkOutDate, numPeople, room
         reject("Failed to fetch AirBnb data. ",err);
       })
   });
+}
+
+module.exports = {
+  getPrice
 }

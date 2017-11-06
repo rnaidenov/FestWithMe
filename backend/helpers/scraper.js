@@ -2,6 +2,8 @@
 
 const request = require('request');
 const cheerio = require('cheerio');
+const CurrencyConverter = require('./currencies');
+const DEFAULT_CURRENCY_SYMBOL='$';
 
 // Get price of the ticket for the event
 function getPrice(body) {
@@ -43,25 +45,26 @@ function _scrapePrice(body) {
 }
 
 function _formatPrice(price) {
-  const priceBreakdown = price.split(/[£*$*€*\+*]/);
-  const currencyBreakdown = price.split(/\d/);
-
-  let ticketPrice = priceBreakdown[1];
-  let bookingFee = priceBreakdown[3];
-  let currency = currencyBreakdown[0];
-
-  // Euro symbol is placed after price in the RA website
-  if (price.includes('€')) {
-    ticketPrice = priceBreakdown[0];
-    bookingFee = priceBreakdown[2];
-    currency = currencyBreakdown[currencyBreakdown.length - 1].trim();
-  }
-  let ticketPrice_total;
-  bookingFee ? ticketPrice_total = parseInt(ticketPrice) + parseInt(bookingFee) : ticketPrice_total = parseInt(ticketPrice)
-  return {
-    ticketCurrency: currency,
-    ticketPriceAmount: ticketPrice_total
-  };
+  return new Promise((resolve, reject) => {
+    const priceBreakdown = price.split(/[£*$*€*\+*]/);
+    const currencyBreakdown = price.split(/\d/);
+  
+    let ticketPrice = priceBreakdown[1];
+    let bookingFee = priceBreakdown[3];
+    let currency = currencyBreakdown[0];
+  
+    // Euro symbol is placed after price in the RA website
+    if (price.includes('€')) {
+      ticketPrice = priceBreakdown[0];
+      bookingFee = priceBreakdown[2];
+      currency = currencyBreakdown[currencyBreakdown.length - 1].trim();
+    }
+    let ticketPrice_total;
+    bookingFee ? ticketPrice_total = parseInt(ticketPrice) + parseInt(bookingFee) : ticketPrice_total = parseInt(ticketPrice)
+    CurrencyConverter.convert(currency,DEFAULT_CURRENCY_SYMBOL,ticketPrice_total).then(price => {
+      resolve(price.convertedAmount);
+    })
+  });
 }
 
 // Get the name of the city, where the event will be held
