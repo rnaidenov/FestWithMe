@@ -18,7 +18,7 @@ class CurrencyConverter extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { smileyClass: 'smileyContentWrapper', chatBubbleClass: 'chatBubble right', currency: this.props.defaultCurrency };
+        this.state = { smileyClass: 'smileyContentWrapper', chatBubbleClass: 'chatBubble right', currency: this.props.currency };
     }
 
 
@@ -33,16 +33,12 @@ class CurrencyConverter extends React.Component {
     }
 
 
-    componentWillUpdate(newProps) {
-        const { convertedPrices: { details: convertedDetails }, priceDetails: newPriceDetails} = newProps;
+    componentWillReceiveProps(newProps) {
+        const { priceDetails: newPriceDetails, currency } = newProps;
         const { priceDetails } = this.state;
 
-        if (convertedDetails != null && this.state.currency !== convertedDetails.currencySymbol) {
-            this.setState({ currency: convertedDetails.currencySymbol });
-        }
-
         if (newPriceDetails!==priceDetails) {
-            this.setState({priceDetails:newPriceDetails});
+            this.setState({ priceDetails: newPriceDetails,currency });
         }
     }
 

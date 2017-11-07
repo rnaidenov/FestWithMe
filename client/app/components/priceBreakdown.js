@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Paper from 'material-ui/Paper';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
 import FlightPrice from './flightPrice';
 import CustomCarousel from './customCarousel';
 import { updateTicketPrice } from '../actions/priceUpdateActions';
@@ -19,28 +21,30 @@ class PriceBreakdown extends React.Component {
     this.state = { priceBreakdownClass: 'priceBreakdownContainer' };
   }
 
-  componentWillUpdate(newProps) {
+  componentWillReceiveProps(newProps) {
+    // if (newProps.priceDetails!==this.state.priceDetails) {
+    //   const { priceDetails, currency } = newProps;
+    //   this.setState({priceDetails, currency })
+    // }
+    this.togglePriceBreakdown(newProps.isSelected);
+  }
 
-    if (newProps.priceDetails!==this.state.priceDetails) {
-      const { priceDetails, currency } = newProps;
-      this.setState({priceDetails, currency })
-    }
-
+  togglePriceBreakdown(isSelected){
     const breakdownIsShown = this.state.priceBreakdownClass === 'priceBreakdownContainer selected';
-
-    if (newProps.isSelected) {
-      if (!breakdownIsShown) {
-        this.setState({ priceBreakdownClass: 'priceBreakdownContainer selected' });
+    
+      if (isSelected) {
+        if (!breakdownIsShown) {
+          this.setState({ priceBreakdownClass: 'priceBreakdownContainer selected' });
+        }
+      } else {
+        if (breakdownIsShown) {
+          this.setState({ priceBreakdownClass: 'priceBreakdownContainer unselected' }, () => {
+            setTimeout(() => {
+              this.setState({ priceBreakdownClass: 'priceBreakdownContainer' });
+            }, 1000);
+          })
+        }
       }
-    } else {
-      if (breakdownIsShown) {
-        this.setState({ priceBreakdownClass: 'priceBreakdownContainer unselected' }, () => {
-          setTimeout(() => {
-            this.setState({ priceBreakdownClass: 'priceBreakdownContainer' });
-          }, 1000);
-        })
-      }
-    }
   }
 
   updateTicketPrice() {
@@ -49,68 +53,87 @@ class PriceBreakdown extends React.Component {
 
   render() {
 
-    const { priceDetails, defaultCurrency } = this.props;
-    const { flightDetails, ticketPrice, housingDetails: { properties }, totalPrice } = priceDetails || {};
+    // const { priceDetails, defaultCurrency } = this.props;
+    // const { flightDetails, ticketPrice, housingDetails: { properties }, totalPrice } = priceDetails;
     const { priceBreakdownClass, currency } = this.state;
 
     const noInfo = (
       <span id='noInfoLabel'>No information</span>
     )
 
-    const accommodationTypes = properties.map((propertyType, key) => {
-      return (
-        <div key={key} className='accommodationTypeWrap'>
-          <div className="propertyTypeIconWrap">
-            <img src={require(`../public/${propertyType.icon}`)} className='homeTypeIcon' />
-          </div>
-          <div className='typeAndPriceWrap'><p>{propertyType.type}</p></div>
-          <div className='typeAndPriceWrap'><p>{currency}{propertyType.price}</p></div>
-        </div>
-      )
-    });
+    // const accommodationTypes = properties.map((propertyType, key) => {
+    //   return (
+    //     <div key={key} className='accommodationTypeWrap'>
+    //       <div className="propertyTypeIconWrap">
+    //         <img src={require(`../public/${propertyType.icon}`)} className='homeTypeIcon' />
+    //       </div>
+    //       <div className='typeAndPriceWrap'><p>{propertyType.type}</p></div>
+    //       <div className='typeAndPriceWrap'><p>{currency}{propertyType.price}</p></div>
+    //     </div>
+    //   )
+    // });
 
+
+     const activeFestival = (
+      <div>
+        <h1 className='priceBreakdownHeading'>Festival ticket</h1>
+        <img src={require('../public/ticket.svg')} className='ticketIcon' />
+        <p className='priceLabel'>$32</p>
+      </div>
+    )
 
     const soldOutFestival = (
       <div>
         <h1 className='priceBreakdownHeading'>Festival ticket</h1>
-        <p className='soldOutLabel'>
-          Unfortunately, the event seems to be sold out on Resident Advisor. 
-          If you have purchased a ticket already, you can enter the price amount in the input box below.
+        <img src={require('../public/inactiveTicket.svg')} className='ticketIcon inactive' />
+        <p className='price-update-text'>
+          Unfortunately, the event seems to be sold out on Resident Advisor.
+          <br/>
+          <span className='price-update-text prompt'>If you have purchased a ticket already, you can enter the price amount in the input box below.</span>
         </p>
-        <input/> <button onClick={() => this.updateTicketPrice()}>Okay</button>
+        <div className='inputWrap'>
+          <Paper className='price-update-input'>
+            <TextField 
+              underlineShow={false}
+              value="laina"
+              style={{width:'50px'}}
+            />
+          </Paper>
+          <span className='price-update-btn'><p className='price-update-btn-text'>OK</p></span>
+        </div>
       </div>
     )
 
-    const activeFestival = (
-      <div>
-        <h1 className='priceBreakdownHeading'>Festival ticket</h1>
-        <img src={require('../public/ticket.svg')} id='ticketIcon' />
-        <p className='priceLabel'>{currency}{ticketPrice}</p>
-      </div>
-    )
+    // const activeFestival = (
+    //   <div>
+    //     <h1 className='priceBreakdownHeading'>Festival ticket</h1>
+    //     <img src={require('../public/ticket.svg')} id='ticketIcon' />
+    //     <p className='priceLabel'>{currency}{ticketPrice}</p>
+    //   </div>
+    // )
 
-    const festival = ticketPrice ? activeFestival : soldOutFestival
+    // const festival = ticketPrice ? activeFestival : soldOutFestival
 
-    const travel = (
-      <div>
-        <h1 className='priceBreakdownHeading'>Plane ticket</h1>
-        <FlightPrice details={flightDetails} currency={currency} />
-      </div>
-    )
+    // const travel = (
+    //   <div>
+    //     <h1 className='priceBreakdownHeading'>Plane ticket</h1>
+    //     <FlightPrice details={flightDetails} currency={currency} />
+    //   </div>
+    // )
 
-    const housing = (
-      <div className="accomodationWrap">
-        <h1 className='priceBreakdownHeading'>Accommodation</h1>
-        {accommodationTypes}
-      </div>
-    )
+    // const housing = (
+    //   <div className="accomodationWrap">
+    //     <h1 className='priceBreakdownHeading'>Accommodation</h1>
+    //     {accommodationTypes}
+    //   </div>
+    // )
 
 
     return (
       <Paper zDepth={1} className={priceBreakdownClass}>
         <CustomCarousel
           slideWidth={1}
-          content={[festival, travel, housing]}
+          content={[soldOutFestival,activeFestival]}
         />
       </Paper>
     )

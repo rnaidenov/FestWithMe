@@ -82,12 +82,8 @@ export function searchFestival(origin, festivalName, nights, numPeople) {
 export function getTotalPrice(eventDetails, flightDetails, housingDetails) {
   const { flightPriceCurrency, flightPriceAmount } = flightDetails;
   const { average_price: accommodationAvgPrice } = housingDetails;
-  console.log(eventDetails);
   const eventTicketPrice = eventDetails.price;
   const { soldOut, price: eventPrice } = eventDetails;
-  console.log(flightPriceAmount);
-  console.log(accommodationAvgPrice);
-  console.log(soldOut + " and " + eventPrice);
 
   const totalPrice = !soldOut ?  eventPrice + flightPriceAmount + accommodationAvgPrice : flightPriceAmount + accommodationAvgPrice;
   

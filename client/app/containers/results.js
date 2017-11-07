@@ -24,7 +24,7 @@ class Results extends React.Component {
   constructor(props) {
     super(props);
     this.DEFAULT_CURRENCY = '$';
-    this.state = { carret: 'arrow_drop_up', isPricebreakdownSelected: false, priceDetails: null, currency:this.DEFAULT_CURRENCY };
+    this.state = { carret: 'arrow_drop_up', isPricebreakdownSelected: false, priceDetails: null, currency: this.DEFAULT_CURRENCY };
     this.SMARTPHONE_MAX_WIDTH_PIXELS = 500;
     this.closePriceBreakdownMobile = this.closePriceBreakdownMobile.bind(this);
   }
@@ -59,31 +59,31 @@ class Results extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
-      const { searchResults, festivalName, convertedPrices, priceUpdate } = newProps;
-      const { priceDetails, currency } = this.state;
-      
-      
-      if (priceDetails!=null && priceDetails.ticketPrice==null && priceUpdate){
-          const { details } = priceUpdate;
-          this.setState({ priceDetails: details});
-          this.setState({ totalPrice: details.totalPrice });
-      }
+    const { searchResults, festivalName, convertedPrices, priceUpdate } = newProps;
+    const { priceDetails, currency } = this.state;
 
-      if (!convertedPrices) {
-        const { prices } = searchResults || {};
-        const { details } = prices || {};
-        if (priceDetails!=details && details!=null) {
-          this.setState({ priceDetails:details});
-          this.setState({ totalPrice: details.totalPrice });
-        }
-      } else {
-        const { details } = convertedPrices;
-        const { totalPrice, currencySymbol } = details;
-        if(currency!==currencySymbol) {
-          this.setState({ priceDetails:details, totalPrice, currency: currencySymbol });
-        }
+
+    if (priceDetails != null && priceDetails.ticketPrice == null && priceUpdate) {
+      const { details } = priceUpdate;
+      this.setState({ priceDetails: details });
+      this.setState({ totalPrice: details.totalPrice });
+    }
+
+    if (!convertedPrices) {
+      const { prices } = searchResults || {};
+      const { details } = prices || {};
+      if (priceDetails != details && details != null) {
+        this.setState({ priceDetails: details });
+        this.setState({ totalPrice: details.totalPrice });
       }
-      
+    } else {
+      const { details } = convertedPrices;
+      const { totalPrice, currencySymbol } = details;
+      if (currency !== currencySymbol) {
+        this.setState({ priceDetails: details, totalPrice, currency: currencySymbol });
+      }
+    }
+
   }
 
   render() {
@@ -91,12 +91,7 @@ class Results extends React.Component {
 
     const { searchResults, festivalName, convertedPrices } = this.props;
     const { carret, isPricebreakdownSelected, priceDetails, totalPrice, currency } = this.state;
-    const { text, color, loaderValue, searching, isActive, prices, updatedPrices } = searchResults || {};
-    const { details } = prices || {};
-    // const { totalPrice } = details || {};
-    const { totalPrice: totalPriceUpdated, eventPrice: eventPriceUpdated } = updatedPrices || {};
-    const { isConverted, details: convertedDetails } = convertedPrices || {};
-    const { currencySymbol: convertedCurrency, totalPrice: totalPriceConverted } = convertedDetails || {};
+    const { text, color, loaderValue, searching, isActive } = searchResults || {};
     let results;
 
 
@@ -132,21 +127,21 @@ class Results extends React.Component {
             className='determinateCircle' />
           <p className='smiley' id='sad'>:(</p>
         </div>
-        <p id='soldOutLabel'>{prices || null}</p>
+        <p id='soldOutLabel'>Sorry, but this event has finished.</p>
       </div>
     )
 
     let finishedPhase = (
       <div className='finishedResultsWrap'>
-        <CurrencyConverter 
-          defaultCurrency={this.DEFAULT_CURRENCY} 
-          priceDetails={ priceDetails || {} }
+        <CurrencyConverter
+          priceDetails={priceDetails || {}}
+          currency={currency}
         />
         <p id='resultsLabel'>
           <span className="resultText">Going to </span>
           <span className="festivalNameLabel">{festivalName}</span>
           <span className="resultText"> will cost you </span>
-          <span className="totalPriceLabel">{currency}{ totalPrice || {} }</span>
+          <span className="totalPriceLabel">{currency}{totalPrice}</span>
         </p>
         <div className="priceBreakdownWrap">
           <p className="priceBreakdown" id="priceBreakdownLabel">
@@ -157,9 +152,9 @@ class Results extends React.Component {
             onClick={() => this.togglePriceBreakdown()}>
             {carret}
           </i>
-          <div ref={(wrapper) => { this.wrapperRef = wrapper }}>
+          <div ref={(wrapper) => { this.wrapperRef = wrapper }} className='breakdownContainerWrap'>
             <PriceBreakdown
-              priceDetails={ priceDetails || {} }
+              priceDetails={priceDetails || {}}
               isSelected={isPricebreakdownSelected}
               currency={currency}
             />
@@ -178,7 +173,7 @@ class Results extends React.Component {
 
     return (
       <div>
-        {results}
+        {finishedPhase}
       </div>
     )
   }

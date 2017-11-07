@@ -16,7 +16,7 @@ module.exports = {
                 test: /\.js$/,
                 loader: 'babel-loader',
                 query: {
-                  plugins: ['react-html-attrs', 'transform-class-properties', 'transform-decorators-legacy'],
+                  plugins: ['react-html-attrs', 'transform-class-properties', 'transform-decorators-legacy','transform-async-to-generator'],
                 },
                 exclude: /node_modules/
             },
