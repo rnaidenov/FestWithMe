@@ -35,7 +35,7 @@ function convertAccommodationPrices(from,to,housingDetails) {
     return new Promise ((resolve, reject) => {
         const convertedPricesResponses = [];
         const convertedPricesJSON = [];
-        const housingDetailsConverted = [...housingDetails];
+        const { properties: housingDetailsConverted, average_price } = housingDetails;
         
         housingDetailsConverted.forEach(property => {
             convertedPricesResponses.push(fetch(`http://localhost:3000/api/currencies/?from=${from}&to=${to}&amount=${property.price}`));
@@ -52,7 +52,13 @@ function convertAccommodationPrices(from,to,housingDetails) {
                     propertyCopy.price = newPrice.convertedAmount;
                     housingDetailsConverted[idx] = propertyCopy;
                 });
-                resolve(housingDetailsConverted);
+
+                fetch(`http://localhost:3000/api/currencies/?from=${from}&to=${to}&amount=${average_price}`).then(res =>{
+                    res.json().then(averagePriceConverted => {
+                        const convertedDetails = Object.assign({},{properties: housingDetailsConverted, average_price:averagePriceConverted.convertedAmount});
+                        resolve(convertedDetails);
+                    })
+                })
             })
         })
     });

@@ -8,12 +8,13 @@ const DEFAULT_CURRENCY_SYMBOL='$';
 // Get price of the ticket for the event
 function getPrice(body) {
   return new Promise((resolve, reject) => {
-    _scrapePrice(body).then(price => {
-      if (price) {
+    _scrapePrice(body).then(details => {
+      const { isActive, soldOut, price } = details;
+      if (isActive && !soldOut) {
         const ticketAndBookingFee = price.children[1].children[0].children[0].children[0].data;
         resolve(_formatPrice(ticketAndBookingFee));
       } else {
-        resolve(price);
+        resolve(details);
       }
     })
   })
@@ -22,24 +23,23 @@ function getPrice(body) {
 function _scrapePrice(body) {
   return new Promise((resolve, reject) => {
     const $ = cheerio.load(body);
-    // console.log("Body is : [ " + body + " ]");
     const tickets = $('#tickets');
     try {
       if (tickets.children().attr().id == 'ticket-sales-have-ended') {
-        resolve(false);
+        resolve({isActive:false});
       }
       else {
         // Getting the different types of tickets wrapped within <li/>
         tickets.children().get(1).children.forEach(item => {
           if (item.type == 'tag' && item.name == 'li' && item.attribs.class !== 'closed') {
-            resolve(item);
+            resolve({isActive:true, soldOut: false, price: item});
           }
         })
       }
-      resolve(false);
+      resolve({ soldOut: true });
     }
     catch (err) {
-      resolve(false)
+      resolve({isActive:false})
     }
   })
 }
@@ -133,13 +133,23 @@ function getEventDetails(url) {
     _getEventBody(url).then(body => {
       Promise.all([getPrice(body), getCity(body), getCountry(body), getDate(body)])
         .then(data => {
-          const [price, city, country, date] = data;
-          resolve({
-            price,
+          const [priceDetails, city, country, date] = data;
+          let eventDetails = {
             city,
             country,
-            date
-          })
+            date,
+            isActive:true
+          };  
+
+          const eventDate = new Date(date);
+          const todaysDate = new Date();
+          eventDetails = eventDate < todaysDate ? Object.assign(eventDetails,{isActive:false}) : eventDetails
+
+          const { isActive, soldOut } = priceDetails;
+          !isNaN(priceDetails) 
+            ? eventDetails.price = priceDetails 
+            : eventDetails = Object.assign(eventDetails, priceDetails);
+          resolve(eventDetails)
         })
         .catch(err => {
           reject(err)
@@ -147,6 +157,25 @@ function getEventDetails(url) {
     })
   })
 }
+
+
+// active event
+// getEventDetails("https://www.residentadvisor.net/events/1010741").then(res => {
+//   console.log(res);
+// })
+
+
+// // sold out event, still active
+// getEventDetails("https://www.residentadvisor.net/events/1016589").then(res => {
+//   console.log(res);
+// })
+
+
+// // sold out event, not active
+// getEventDetails("https://www.residentadvisor.net/events/864800").then(res => {
+//   console.log(res);
+// })
+
 
 module.exports = {
   getEventDetails,

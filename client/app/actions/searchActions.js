@@ -1,4 +1,5 @@
 import { coroutine as co } from 'bluebird';
+export let LAST_EVENT_DETAILS;
 
 function _getFlightDetails(origin, destination, date) {
   return new Promise((resolve, reject) => {
@@ -48,21 +49,21 @@ function _getEventDetails(festivalName) {
 }
 
 
-
 export function searchFestival(origin, festivalName, nights, numPeople) {
   return function (dispatch) {
     _increaseLoader(dispatch, 'FESTIVAL_SEARCH_START');
     co(function* () {
 
       const eventDetails = yield _getEventDetails(festivalName);
-      if (eventDetails.price) {
+
+      if (eventDetails.isActive) {
         const destination = `${eventDetails.city},${eventDetails.country}`;
         const date = eventDetails.date;
         _increaseLoader(dispatch, 'FLIGHTS_SEARCH_START', eventDetails.city);
         const flightDetails = yield _getFlightDetails(origin, destination, date);
         _increaseLoader(dispatch, 'HOUSING_SEARCH_START');
         const housingDetails = yield _getHousingDetails(destination, date, nights, numPeople);
-        const details = _getTotalPrice(eventDetails, flightDetails, housingDetails);
+        const details = getTotalPrice(eventDetails, flightDetails, housingDetails);
 
         dispatch({
           type: 'FESTIVAL_SEARCH_FINISHED',
@@ -70,7 +71,7 @@ export function searchFestival(origin, festivalName, nights, numPeople) {
         });
       } else {
         dispatch({
-          type: 'EVENT_SOLD_OUT',
+          type: 'EVENT_NOT_ACTIVE',
           payload: 'Unfortunately, the event has been sold out'
         });
       }
@@ -78,19 +79,38 @@ export function searchFestival(origin, festivalName, nights, numPeople) {
   }
 }
 
-function _getTotalPrice(eventDetails, flightDetails, housingDetails) {
+export function getTotalPrice(eventDetails, flightDetails, housingDetails) {
   const { flightPriceCurrency, flightPriceAmount } = flightDetails;
   const { average_price: accommodationAvgPrice } = housingDetails;
+  console.log(eventDetails);
   const eventTicketPrice = eventDetails.price;
-  const totalPrice = eventTicketPrice + flightPriceAmount + accommodationAvgPrice;
+  const { soldOut, price: eventPrice } = eventDetails;
+  console.log(flightPriceAmount);
+  console.log(accommodationAvgPrice);
+  console.log(soldOut + " and " + eventPrice);
+
+  const totalPrice = !soldOut ?  eventPrice + flightPriceAmount + accommodationAvgPrice : flightPriceAmount + accommodationAvgPrice;
+  
   return {
-    ticketPrice: eventTicketPrice,
-    flightDetails,
-    housingDetails:housingDetails.properties,
-    totalPrice
-  }
+              ticketPrice: eventPrice,
+              flightDetails,
+              housingDetails:housingDetails,
+              totalPrice
+         };
 }
 
+
+export function updateTicketPrice(eventPrice) {
+  return (dispatch => {
+    const { flightDetails, housingDetails } = LAST_EVENT_DETAILS;
+    const totalPrice = _getTotalPrice({ soldOut: false, price: eventPrice}, flightDetails, housingDetails);
+
+    dispatch({
+      type:'EVENT_PRICE_UPDATE',
+      payload:{details: totalPrice}
+    });
+  }); 
+}
 
 
 function _increaseLoader(dispatch, type, payload) {
@@ -117,6 +137,7 @@ export function getLocation() {
       })
   }
 }
+
 
 
 export function loadFestivals() {

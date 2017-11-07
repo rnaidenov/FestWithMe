@@ -9,7 +9,6 @@ import '../styles/currencyConverter.css';
 
 @connect(store => {
     return {
-        searchResults: store.searchResults,
         convertedPrices: store.currencyChanger
     }
 })
@@ -35,22 +34,22 @@ class CurrencyConverter extends React.Component {
 
 
     componentWillUpdate(newProps) {
-        const convertedPrices = newProps.convertedPrices.details;
+        const { convertedPrices: { details: convertedDetails }, priceDetails: newPriceDetails} = newProps;
+        const { priceDetails } = this.state;
 
-        if (convertedPrices != null && this.state.currency !== convertedPrices.currencySymbol) {
-            this.setState({ currency: convertedPrices.currencySymbol });
+        if (convertedDetails != null && this.state.currency !== convertedDetails.currencySymbol) {
+            this.setState({ currency: convertedDetails.currencySymbol });
+        }
+
+        if (newPriceDetails!==priceDetails) {
+            this.setState({priceDetails:newPriceDetails});
         }
     }
 
-
     changeCurrency(toCurrency) {
-        const { searchResults, convertedPrices } = this.props;
+        const { convertedPrices } = this.props;
         const { currency: fromCurrency } = this.state;
-        if (convertedPrices.details != null) {
-            this.props.dispatch(changeCurrency(fromCurrency, toCurrency, convertedPrices.details));
-        } else {
-            this.props.dispatch(changeCurrency(fromCurrency, toCurrency, searchResults.prices.details));
-        }
+        this.props.dispatch(changeCurrency(fromCurrency, toCurrency, this.props.priceDetails)); 
     }
 
 

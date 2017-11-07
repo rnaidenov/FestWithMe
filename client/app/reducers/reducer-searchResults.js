@@ -42,6 +42,9 @@ export default (state = null, action) => {
     case 'EVENT_SOLD_OUT':
       return {prices: action.payload, searching: false,loaderValue:100,isActive: false};
       break;
+    case 'EVENT_PRICE_UPDATE':
+      return {updatedPrices: action.payload, searching: false,loaderValue:100,isActive:true};
+      break;
   }
   return state;
 }

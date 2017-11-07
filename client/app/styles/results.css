@@ -217,6 +217,9 @@ priceBreakdownContainer
   transform: rotate(85deg);
 }
 
+.soldOutLabel {
+  
+}
 
 #soldOutLabel {
     padding-top: 2%;
