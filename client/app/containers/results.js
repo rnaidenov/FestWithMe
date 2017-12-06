@@ -157,6 +157,7 @@ class Results extends React.Component {
               priceDetails={priceDetails || {}}
               isSelected={isPricebreakdownSelected}
               currency={currency}
+              updateTicketPrice={updateTicketPrice}
             />
           </div>
         </div>
@@ -173,7 +174,7 @@ class Results extends React.Component {
 
     return (
       <div>
-        {finishedPhase}
+        {results}
       </div>
     )
   }

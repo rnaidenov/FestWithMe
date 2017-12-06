@@ -15,14 +15,14 @@ function FlightPrice ({details,currency}) {
   // </div>
 
 
-  // <div>
-  //   <div className="routeWrap">
-  //     <span className='iataCodes'>{origin}</span>
-  //     <img src={require('../public/airplane.svg')} className='planeIcon'/>
-  //     <span className='iataCodes'>{destination}</span>
-  //   </div>
-  //   <p className='priceLabel'>{currency} {amount}</p>
-  // </div>
+  <div>
+    <div className="routeWrap">
+      <span className='iataCodes'>{origin}</span>
+      <img src={require('../public/airplane.svg')} className='planeIcon'/>
+      <span className='iataCodes'>{destination}</span>
+    </div>
+    <p className='priceLabel'>{currency} {amount}</p>
+  </div>
   
   // add amount
   if (amount) {

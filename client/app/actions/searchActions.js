@@ -55,12 +55,13 @@ export function searchFestival(origin, festivalName, nights, numPeople) {
     co(function* () {
 
       const eventDetails = yield _getEventDetails(festivalName);
-
+      console.log(eventDetails);
       if (eventDetails.isActive) {
         const destination = `${eventDetails.city},${eventDetails.country}`;
         const date = eventDetails.date;
         _increaseLoader(dispatch, 'FLIGHTS_SEARCH_START', eventDetails.city);
         const flightDetails = yield _getFlightDetails(origin, destination, date);
+        console.log(flightDetails)
         _increaseLoader(dispatch, 'HOUSING_SEARCH_START');
         const housingDetails = yield _getHousingDetails(destination, date, nights, numPeople);
         const details = getTotalPrice(eventDetails, flightDetails, housingDetails);
@@ -79,12 +80,13 @@ export function searchFestival(origin, festivalName, nights, numPeople) {
   }
 }
 
+
 export function getTotalPrice(eventDetails, flightDetails, housingDetails) {
   const { flightPriceCurrency, flightPriceAmount } = flightDetails;
   const { average_price: accommodationAvgPrice } = housingDetails;
   const eventTicketPrice = eventDetails.price;
   const { soldOut, price: eventPrice } = eventDetails;
-
+  
   const totalPrice = !soldOut ?  eventPrice + flightPriceAmount + accommodationAvgPrice : flightPriceAmount + accommodationAvgPrice;
   
   return {
@@ -96,19 +98,6 @@ export function getTotalPrice(eventDetails, flightDetails, housingDetails) {
 }
 
 
-export function updateTicketPrice(eventPrice) {
-  return (dispatch => {
-    const { flightDetails, housingDetails } = LAST_EVENT_DETAILS;
-    const totalPrice = _getTotalPrice({ soldOut: false, price: eventPrice}, flightDetails, housingDetails);
-
-    dispatch({
-      type:'EVENT_PRICE_UPDATE',
-      payload:{details: totalPrice}
-    });
-  }); 
-}
-
-
 function _increaseLoader(dispatch, type, payload) {
   dispatch({ type: `${type}1`, payload });
   setTimeout(() => {
@@ -116,10 +105,10 @@ function _increaseLoader(dispatch, type, payload) {
   }, 200);
   setTimeout(() => {
     dispatch({ type: `${type}3`, payload });
-  }, 400);
+  }, 300);
   setTimeout(() => {
     dispatch({ type: `${type}4`, payload });
-  }, 600);
+  }, 500);
 }
 
 export function getLocation() {

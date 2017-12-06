@@ -9,8 +9,8 @@ const DEFAULT_CURRENCY_SYMBOL='$';
 function getPrice(body) {
   return new Promise((resolve, reject) => {
     _scrapePrice(body).then(details => {
-      const { isActive, soldOut, price } = details;
-      if (isActive && !soldOut) {
+      const { soldOut, price } = details;
+      if (!soldOut) {
         const ticketAndBookingFee = price.children[1].children[0].children[0].children[0].data;
         resolve(_formatPrice(ticketAndBookingFee));
       } else {
@@ -30,16 +30,16 @@ function _scrapePrice(body) {
       }
       else {
         // Getting the different types of tickets wrapped within <li/>
-        tickets.children().get(1).children.forEach(item => {
+        tickets.children().get(2).children.forEach(item => {
           if (item.type == 'tag' && item.name == 'li' && item.attribs.class !== 'closed') {
-            resolve({isActive:true, soldOut: false, price: item});
+            resolve({soldOut: false, price: item});
           }
         })
       }
       resolve({ soldOut: true });
     }
     catch (err) {
-      resolve({isActive:false})
+      resolve({ soldOut:true })
     }
   })
 }
@@ -140,15 +140,15 @@ function getEventDetails(url) {
             date,
             isActive:true
           };  
-
           const eventDate = new Date(date);
           const todaysDate = new Date();
+          console.log(eventDate, todaysDate, eventDate < todaysDate)
           eventDetails = eventDate < todaysDate ? Object.assign(eventDetails,{isActive:false}) : eventDetails
-
-          const { isActive, soldOut } = priceDetails;
           !isNaN(priceDetails) 
-            ? eventDetails.price = priceDetails 
-            : eventDetails = Object.assign(eventDetails, priceDetails);
+          ? eventDetails.price = priceDetails 
+          : eventDetails = Object.assign(eventDetails, priceDetails);
+          console.log(priceDetails);
+          console.log(eventDetails)
           resolve(eventDetails)
         })
         .catch(err => {

@@ -12,8 +12,9 @@ app.use(cors());
 
 var port = process.env.PORT || 3000;
 
-mongoose.connect("mongodb://festwithmeadmin:XSza3Ytpp420pP@ds161001.mlab.com:61001/fest-with-me");
-setupController(app);
+
+// mongoose.connect("mongodb://localhost:27017/mydb");
+// setupController(app);
 apiController(app);
 
 app.use(express.static(path.join(__dirname + '/', '..', '/client/dist/')));
