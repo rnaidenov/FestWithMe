@@ -18,7 +18,7 @@ class PriceBreakdown extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { priceBreakdownClass: 'priceBreakdownContainer' };
+    this.state = { newPriceMissing: true,priceBreakdownClass: 'priceBreakdownContainer' };
   }
 
   componentWillReceiveProps(newProps) {
@@ -48,7 +48,7 @@ class PriceBreakdown extends React.Component {
   }
 
   updatePriceAmt = (e, newPriceAmount) => {
-    this.setState({ newPriceAmount });
+      this.setState({ newPriceAmount, newPriceMissing: false });
   }
 
   updateTicketPrice = () => {
@@ -62,7 +62,7 @@ class PriceBreakdown extends React.Component {
 
     const { priceDetails, currency } = this.props;
     const { flightDetails, ticketPrice, housingDetails: { properties }, totalPrice } = priceDetails;
-    const { priceBreakdownClass, newPriceAmount } = this.state;
+    const { priceBreakdownClass, newPriceAmount, newPriceMissing } = this.state;
 
     const noInfo = (
       <span id='noInfoLabel'>No information</span>
@@ -107,7 +107,10 @@ class PriceBreakdown extends React.Component {
               onChange={this.updatePriceAmt}
             />
           </Paper>
-          <span className='price-update-btn' onClick={this.updateTicketPrice}><p className='price-update-btn-text'>OK</p></span>
+          <RaisedButton 
+            className='price-update-btn' 
+            disabled={newPriceMissing}
+            onClick={this.updateTicketPrice}><p className='price-update-btn-text'>OK</p></RaisedButton>
         </div>
       </div>
     )
