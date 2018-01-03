@@ -97,25 +97,27 @@ class Results extends React.Component {
 
     const loadingPhase = (
       <div className="loaderWrap">
-        <CircularProgress
-          size={100}
-          mode="determinate"
-          thickness={3}
-          value={loaderValue}
-          color={color}
-          className='determinateCircle' />
-        <CircularProgress
-          size={100}
-          thickness={3}
-          color="#7c5652"
-          className='indeterminateCircle' />
-        <p>
+        <div className='smileyWrap'>
+          <CircularProgress
+            size={100}
+            mode="determinate"
+            thickness={3}
+            value={loaderValue}
+            color={color}
+            className='determinateCircle' />
+          <CircularProgress
+            size={100}
+            thickness={3}
+            color="#7c5652"
+            className='indeterminateCircle' />
+        </div>
+        <p className='waitingMsg'>
           {text || ''}
         </p>
       </div>
     )
 
-    const soldOutEvent = (
+    const pastEvent = (
       <div className='soldOutWrap'>
         <div className='loaderSmileyWrap'>
           <CircularProgress
@@ -127,7 +129,7 @@ class Results extends React.Component {
             className='determinateCircle' />
           <p className='smiley' id='sad'>:(</p>
         </div>
-        <p id='soldOutLabel'>Sorry, but this event has finished.</p>
+        <p className='waitingMsg' id='soldOutLabel'>It seems that this event has finished.</p>
       </div>
     )
 
@@ -169,7 +171,7 @@ class Results extends React.Component {
     } else if (searching) {
       results = loadingPhase;
     } else {
-      results = isActive ? finishedPhase : soldOutEvent
+      results = isActive ? finishedPhase : pastEvent
     }
 
     return (
