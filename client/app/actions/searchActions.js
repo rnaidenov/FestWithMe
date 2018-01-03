@@ -64,8 +64,9 @@ export function searchFestival(origin, festivalName, nights, numPeople) {
         console.log(flightDetails)
         _increaseLoader(dispatch, 'HOUSING_SEARCH_START');
         const housingDetails = yield _getHousingDetails(destination, date, nights, numPeople);
+        console.log(housingDetails);
         const details = getTotalPrice(eventDetails, flightDetails, housingDetails);
-
+        console.log(details);
         dispatch({
           type: 'FESTIVAL_SEARCH_FINISHED',
           payload: { details }
@@ -88,7 +89,7 @@ export function getTotalPrice(eventDetails, flightDetails, housingDetails) {
   const { soldOut, price: eventPrice } = eventDetails;
   
   const totalPrice = !soldOut ?  eventPrice + flightPriceAmount + accommodationAvgPrice : flightPriceAmount + accommodationAvgPrice;
-  
+  console.log("total price is ",totalPrice);
   return {
               ticketPrice: eventPrice,
               flightDetails,

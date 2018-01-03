@@ -63,15 +63,15 @@ function getAveragePrice(destination, checkInDate, checkOutDate, numPeople, room
     if (!roomType) {
       airbnbAPIUrl = `https://www.airbnb.co.uk/api/v2/explore_tabs?version=1.3.1&_format=for_explore_search_web&items_per_grid=18&experiences_per_grid=20&guidebooks_per_grid=20&fetch_filters=true&is_guided_search=true&is_new_cards_experiment=true&supports_for_you_v3=true&screen_size=large&timezone_offset=60&auto_ib=true&luxury_pre_launch=false&metadata_only=true&is_standard_search=false&tab_id=home_tab&location=${destination}&checkin=${checkInDate}&checkout=${checkOutDate}&guests=${numPeople}&adults=${numPeople}&infants=0&children=0&allow_override%5B%5D=&ib=false&s_tag=djaZS3SU&federated_search_session_id=1a547173-59ba-4856-a472-29245673ba62&_intents=p1&key=d306zoyjsyarp7ifhu67rjxn52tv0t20&currency=USD&locale=en-GB`;
     }
-    fetch(airbnbAPIUrl)
-      .then(response => {
-        response.json().then(json_results => {
-          const avgPrice = json_results.explore_tabs[0].home_tab_metadata.price_histogram.average_price;
-          resolve(avgPrice)
-        })
-      })
-      .catch(err => {
-        reject("Failed to fetch AirBnb data. ",err);
+    fetch(airbnbAPIUrl).then(response => {
+        response.json()
+          .then(json_results => {
+            const avgPrice = json_results.explore_tabs[0].home_tab_metadata.price_histogram.average_price;
+            resolve(avgPrice)
+          })
+          .catch(err => {
+            reject("Failed to fetch AirBnb data. ",err);
+          })
       })
   });
 }

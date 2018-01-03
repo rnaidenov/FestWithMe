@@ -20,10 +20,9 @@ import Results from './results';
 })
 
 class Search extends React.Component {
-
   constructor(props) {
     super(props);
-    this.state = { nightsOfStay: '1', numPeople: 1, missingFestival:'', missingLocation:'', locationOrigin:'Sofia', festivalName:'Awakenings Early New Years Special - BY DAY'}
+    this.state = { nightsOfStay: '1', numPeople: 1, missingFestival:'', missingLocation:'', locationOrigin:'Sofia', festivalName:'Music On London - Marco Carola The Birthday'}
   }
 
   updateWindowWidth() {

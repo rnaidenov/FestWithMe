@@ -47,15 +47,22 @@ class PriceBreakdown extends React.Component {
       }
   }
 
+  updatePriceAmt = (e, newPriceAmount) => {
+    this.setState({ newPriceAmount });
+  }
+
   updateTicketPrice = () => {
-    this.props.dispatch(updateTicketPrice(this.props.priceDetails,20));
+    const { dispatch, priceDetails } = this.props;
+    const { newPriceAmount } = this.state;
+
+    dispatch(updateTicketPrice(priceDetails,newPriceAmount));
   }
 
   render() {
 
     const { priceDetails, currency } = this.props;
     const { flightDetails, ticketPrice, housingDetails: { properties }, totalPrice } = priceDetails;
-    const { priceBreakdownClass } = this.state;
+    const { priceBreakdownClass, newPriceAmount } = this.state;
 
     const noInfo = (
       <span id='noInfoLabel'>No information</span>
@@ -96,6 +103,8 @@ class PriceBreakdown extends React.Component {
             <TextField 
               underlineShow={false}
               style={{width:'50px'}}
+              value={newPriceAmount}
+              onChange={this.updatePriceAmt}
             />
           </Paper>
           <span className='price-update-btn' onClick={this.updateTicketPrice}><p className='price-update-btn-text'>OK</p></span>
