@@ -18,51 +18,57 @@ class PriceBreakdown extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { newPriceMissing: true,priceBreakdownClass: 'priceBreakdownContainer' };
+    this.state = { showContent: false, newPriceMissing: true, priceBreakdownClass: 'priceBreakdownContainer' };
   }
 
-  componentWillReceiveProps(newProps) {
-    // if (newProps.priceDetails!==this.state.priceDetails) {
-    //   const { priceDetails, currency } = newProps;
-    //   this.setState({priceDetails, currency })
-    // }
-    this.togglePriceBreakdown(newProps.isSelected);
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({ showContent: true });
+    }, 1000);
   }
 
-  togglePriceBreakdown(isSelected){
-    const breakdownIsShown = this.state.priceBreakdownClass === 'priceBreakdownContainer selected';
-    
-      if (isSelected) {
-        if (!breakdownIsShown) {
-          this.setState({ priceBreakdownClass: 'priceBreakdownContainer selected' });
-        }
-      } else {
-        if (breakdownIsShown) {
-          this.setState({ priceBreakdownClass: 'priceBreakdownContainer unselected' }, () => {
-            setTimeout(() => {
-              this.setState({ priceBreakdownClass: 'priceBreakdownContainer' });
-            }, 1000);
-          })
-        }
-      }
-  }
+  // componentWillReceiveProps(newProps) {
+  //   // if (newProps.priceDetails!==this.state.priceDetails) {
+  //   //   const { priceDetails, currency } = newProps;
+  //   //   this.setState({priceDetails, currency })
+  //   // }
+  //   this.togglePriceBreakdown(newProps.isSelected);
+  // }
 
-  updatePriceAmt = (e, newPriceAmount) => {
-      this.setState({ newPriceAmount, newPriceMissing: false });
-  }
+  // togglePriceBreakdown(isSelected){
+  //   const breakdownIsShown = this.state.priceBreakdownClass === 'priceBreakdownContainer selected';
 
-  updateTicketPrice = () => {
-    const { dispatch, priceDetails } = this.props;
-    const { newPriceAmount } = this.state;
+  //     if (isSelected) {
+  //       if (!breakdownIsShown) {
+  //         this.setState({ priceBreakdownClass: 'priceBreakdownContainer selected' });
+  //       }
+  //     } else {
+  //       if (breakdownIsShown) {
+  //         this.setState({ priceBreakdownClass: 'priceBreakdownContainer unselected' }, () => {
+  //           setTimeout(() => {
+  //             this.setState({ priceBreakdownClass: 'priceBreakdownContainer' });
+  //           }, 1000);
+  //         })
+  //       }
+  //     }
+  // }
 
-    dispatch(updateTicketPrice(priceDetails,newPriceAmount));
-  }
+  // updatePriceAmt = (e, newPriceAmount) => {
+  //     this.setState({ newPriceAmount, newPriceMissing: false });
+  // }
+
+  // updateTicketPrice = () => {
+  //   const { dispatch, priceDetails } = this.props;
+  //   const { newPriceAmount } = this.state;
+
+  //   dispatch(updateTicketPrice(priceDetails,newPriceAmount));
+  // }
 
   render() {
 
-    const { priceDetails, currency } = this.props;
+    const { priceDetails, currency, screenSize } = this.props;
     const { flightDetails, ticketPrice, housingDetails: { properties }, totalPrice } = priceDetails;
-    const { priceBreakdownClass, newPriceAmount, newPriceMissing } = this.state;
+    const { priceBreakdownClass, newPriceAmount, newPriceMissing, showContent } = this.state;
 
     const noInfo = (
       <span id='noInfoLabel'>No information</span>
@@ -81,7 +87,7 @@ class PriceBreakdown extends React.Component {
     });
 
 
-    //  const activeFestival = (
+    // const activeFestival = (
     //   <div>
     //     <h1 className='priceBreakdownHeading'>Festival ticket</h1>
     //     <img src={require('../public/ticket.svg')} className='ticketIcon' />
@@ -139,14 +145,32 @@ class PriceBreakdown extends React.Component {
       </div>
     )
 
+    const content = [activeFestival, activeFestival, activeFestival].map((content, idx) => {
+      return (
+        <Paper className='contentType' id={`content${idx}`}>
+          {content}
+        </Paper>
+      )
+    });
 
-    return (
+    const priceBreakdownBigScreen = (
+      <div className="contentWrap">
+        {content}
+      </div>
+    )
+
+    const priceBreakdownMobileScreen = (
       <Paper zDepth={1} className={priceBreakdownClass}>
         <CustomCarousel
           slideWidth={1}
-          content={[festival, travel, housing]}
+          content={[activeFestival, activeFestival, activeFestival]}
         />
       </Paper>
+    )
+
+
+    return (
+        screenSize==='mobile' ? priceBreakdownMobileScreen : priceBreakdownBigScreen
     )
 
 

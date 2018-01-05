@@ -172,6 +172,7 @@
 
 .loaderSmileyWrap {
   width: 100px;
+  height:100px;
   margin: auto;
   animation: bounceUp 1000ms linear both;
 }

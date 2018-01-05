@@ -26,16 +26,31 @@ class Results extends React.Component {
     this.DEFAULT_CURRENCY = '$';
     this.state = { carret: 'arrow_drop_up', isPricebreakdownSelected: false, priceDetails: null, currency: this.DEFAULT_CURRENCY };
     this.SMARTPHONE_MAX_WIDTH_PIXELS = 500;
+    this.MOBILE_MAX_WIDTH_PIXELS = 1100;    
     this.closePriceBreakdownMobile = this.closePriceBreakdownMobile.bind(this);
+    this.updateWindowWidth = this.updateWindowWidth.bind(this);
+    this.updateWindowWidth = this.updateWindowWidth.bind(this);
   }
 
   componentDidMount() {
     window.changeCurrency = this.changeCurrency;
     document.addEventListener('mousedown', this.closePriceBreakdownMobile);
+    this.updateWindowWidth();
+    window.addEventListener('resize', this.updateWindowWidth);
   }
 
   componentWillUnmount() {
     document.removeEventListener('mousedown', this.closePriceBreakdownMobile);
+    window.removeEventListener('resize', this.updateWindowWidth);
+  }
+
+  updateWindowWidth() {
+    this.setState({ windowWidth: window.innerWidth });
+    if (window.innerWidth < this.MOBILE_MAX_WIDTH_PIXELS) {
+      this.setState({ screenSize: 'mobile' });
+    } else {
+      this.setState({ screenSize: 'desktop' });
+    }
   }
 
   closePriceBreakdown() {
@@ -51,7 +66,7 @@ class Results extends React.Component {
   }
 
   closePriceBreakdownMobile(e) {
-    if (this.wrapperRef && !this.wrapperRef.contains(e.target) && window.innerWidth < this.SMARTPHONE_MAX_WIDTH_PIXELS) {
+    if (this.wrapperRef && !this.wrapperRef.contains(e.target) && windowWidth < this.SMARTPHONE_MAX_WIDTH_PIXELS) {
       if (this.state.isPricebreakdownSelected) {
         this.closePriceBreakdown();
       }
@@ -90,10 +105,11 @@ class Results extends React.Component {
 
 
     const { searchResults, festivalName, convertedPrices } = this.props;
-    const { carret, isPricebreakdownSelected, priceDetails, totalPrice, currency } = this.state;
+    const { screenSize, carret, isPricebreakdownSelected, priceDetails, totalPrice, currency } = this.state;
     const { text, color, loaderValue, searching, isActive } = searchResults || {};
     let results;
 
+    console.log(this.state);
 
     const loadingPhase = (
       <div className="loaderWrap">
@@ -133,6 +149,21 @@ class Results extends React.Component {
       </div>
     )
 
+    const priceBreakdownCarret = (
+      <div>
+        <p className="priceBreakdown" id="priceBreakdownLabel">
+          Price breakdown
+        </p>
+        <i class="material-icons priceBreakdown"
+          id='carretDropdown'
+          onClick={() => this.togglePriceBreakdown()}>
+          {carret}
+        </i>
+      </div>
+    )
+
+    console.log(this.state);
+
     let finishedPhase = (
       <div className='finishedResultsWrap'>
         <CurrencyConverter
@@ -146,20 +177,14 @@ class Results extends React.Component {
           <span className="totalPriceLabel">{currency}{totalPrice}</span>
         </p>
         <div className="priceBreakdownWrap">
-          <p className="priceBreakdown" id="priceBreakdownLabel">
-            Price breakdown
-           </p>
-          <i class="material-icons priceBreakdown"
-            id='carretDropdown'
-            onClick={() => this.togglePriceBreakdown()}>
-            {carret}
-          </i>
+          {screenSize === 'mobile' ? priceBreakdownCarret : null}
           <div ref={(wrapper) => { this.wrapperRef = wrapper }} className='breakdownContainerWrap'>
             <PriceBreakdown
               priceDetails={priceDetails || {}}
               isSelected={isPricebreakdownSelected}
               currency={currency}
               updateTicketPrice={updateTicketPrice}
+              screenSize={screenSize}
             />
           </div>
         </div>
@@ -176,7 +201,7 @@ class Results extends React.Component {
 
     return (
       <div>
-        {results}
+        {finishedPhase}
       </div>
     )
   }
