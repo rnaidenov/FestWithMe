@@ -17,6 +17,9 @@ function getCityCode(location) {
             const { city: cityCode } = data[0];
             resolve(cityCode);
           })
+          .catch(err => {
+            reject(`Unable to fetch IATA code for ${location}`);
+          })
       });
     });
   });

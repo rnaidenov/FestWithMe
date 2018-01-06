@@ -27,42 +27,42 @@ class PriceBreakdown extends React.Component {
     }, 1000);
   }
 
-  // componentWillReceiveProps(newProps) {
-  //   // if (newProps.priceDetails!==this.state.priceDetails) {
-  //   //   const { priceDetails, currency } = newProps;
-  //   //   this.setState({priceDetails, currency })
-  //   // }
-  //   this.togglePriceBreakdown(newProps.isSelected);
-  // }
+  componentWillReceiveProps(newProps) {
+    // if (newProps.priceDetails!==this.state.priceDetails) {
+    //   const { priceDetails, currency } = newProps;
+    //   this.setState({priceDetails, currency })
+    // }
+    this.togglePriceBreakdown(newProps.isSelected);
+  }
 
-  // togglePriceBreakdown(isSelected){
-  //   const breakdownIsShown = this.state.priceBreakdownClass === 'priceBreakdownContainer selected';
+  togglePriceBreakdown(isSelected){
+    const breakdownIsShown = this.state.priceBreakdownClass === 'priceBreakdownContainer selected';
 
-  //     if (isSelected) {
-  //       if (!breakdownIsShown) {
-  //         this.setState({ priceBreakdownClass: 'priceBreakdownContainer selected' });
-  //       }
-  //     } else {
-  //       if (breakdownIsShown) {
-  //         this.setState({ priceBreakdownClass: 'priceBreakdownContainer unselected' }, () => {
-  //           setTimeout(() => {
-  //             this.setState({ priceBreakdownClass: 'priceBreakdownContainer' });
-  //           }, 1000);
-  //         })
-  //       }
-  //     }
-  // }
+      if (isSelected) {
+        if (!breakdownIsShown) {
+          this.setState({ priceBreakdownClass: 'priceBreakdownContainer selected' });
+        }
+      } else {
+        if (breakdownIsShown) {
+          this.setState({ priceBreakdownClass: 'priceBreakdownContainer unselected' }, () => {
+            setTimeout(() => {
+              this.setState({ priceBreakdownClass: 'priceBreakdownContainer' });
+            }, 1000);
+          })
+        }
+      }
+  }
 
-  // updatePriceAmt = (e, newPriceAmount) => {
-  //     this.setState({ newPriceAmount, newPriceMissing: false });
-  // }
+  updatePriceAmt = (e, newPriceAmount) => {
+      this.setState({ newPriceAmount, newPriceMissing: false });
+  }
 
-  // updateTicketPrice = () => {
-  //   const { dispatch, priceDetails } = this.props;
-  //   const { newPriceAmount } = this.state;
+  updateTicketPrice = () => {
+    const { dispatch, priceDetails } = this.props;
+    const { newPriceAmount } = this.state;
 
-  //   dispatch(updateTicketPrice(priceDetails,newPriceAmount));
-  // }
+    dispatch(updateTicketPrice(priceDetails,newPriceAmount));
+  }
 
   render() {
 
@@ -145,7 +145,9 @@ class PriceBreakdown extends React.Component {
       </div>
     )
 
-    const content = [activeFestival, activeFestival, activeFestival].map((content, idx) => {
+    const priceBreakdownContent = [festival, travel, housing];
+
+    const content = priceBreakdownContent.map((content, idx) => {
       return (
         <Paper className='contentType' id={`content${idx}`}>
           {content}
@@ -163,7 +165,7 @@ class PriceBreakdown extends React.Component {
       <Paper zDepth={1} className={priceBreakdownClass}>
         <CustomCarousel
           slideWidth={1}
-          content={[activeFestival, activeFestival, activeFestival]}
+          content={priceBreakdownContent}
         />
       </Paper>
     )

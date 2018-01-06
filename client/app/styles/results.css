@@ -291,7 +291,8 @@ priceBreakdownContainer
 }
 
 .contentType{
-  display: inline-block;
+  display: inline-grid;
+  height:310px;
   margin-right: 4%;
   margin-left: 4%;
   width: 23%;

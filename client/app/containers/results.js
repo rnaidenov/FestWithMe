@@ -201,7 +201,7 @@ class Results extends React.Component {
 
     return (
       <div>
-        {finishedPhase}
+        {results}
       </div>
     )
   }
