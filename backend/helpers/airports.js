@@ -7,21 +7,16 @@ const googleMaps = require('@google/maps').createClient({
 });
 
 // Returns a 3-letter code of city, where nearest airport is located
-function getCityCode(location) {
-  return new Promise((resolve, reject) => {
-    getCoordinates(location).then(geocode => {
-      const { lat, lng } = geocode;
-      fetch(`${amadeusAPI}&latitude=${lat}&longitude=${lng}`).then(response => {
-        response.json()
-          .then(data => {
-            const { city: cityCode } = data[0];
-            resolve(cityCode);
-          })
-          .catch(err => {
-            reject(`Unable to fetch IATA code for ${location}`);
-          })
-      });
-    });
+const getCityCode = location => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const  { lat, lng } = await getCoordinates(location);
+      const data = await fetch(`${amadeusAPI}&latitude=${lat}&longitude=${lng}`).then(res => res.json());
+      const { city } = data[0];
+      resolve(city);
+    } catch(err) {
+      reject(`Unable to fetch IATA code for ${location}`);
+    }
   });
 }
 

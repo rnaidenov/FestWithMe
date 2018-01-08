@@ -66,8 +66,10 @@ class Results extends React.Component {
   }
 
   closePriceBreakdownMobile(e) {
+    const { windowWidth, isPricebreakdownSelected } = this.state;
+
     if (this.wrapperRef && !this.wrapperRef.contains(e.target) && windowWidth < this.SMARTPHONE_MAX_WIDTH_PIXELS) {
-      if (this.state.isPricebreakdownSelected) {
+      if (isPricebreakdownSelected) {
         this.closePriceBreakdown();
       }
     }

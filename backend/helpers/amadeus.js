@@ -7,44 +7,41 @@ const amadeusAPI = `https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search
 
 // Generates the body for the amadeus search query
 function generateSearchQuery (origin,destination,date) {
-  return new Promise((resolve, reject) => {
-    const originIataPromise = airports.getCityCode(origin);
-    const destinationIataPromise = airports.getCityCode(destination);
-    const flightDate = formatter.formatDate(date,{more:false,days:1});
-
-    originIataPromise.then(originIata => {
-      destinationIataPromise.then(destinationIata => {
-        resolve({
-          link: `${amadeusAPI}&origin=${originIata}&destination=${destinationIata}&departure_date=${flightDate}`,
-          origin: originIata,
-          destination: destinationIata
-        });
-      })
-    })
+  return new Promise(async (resolve, reject) => {
+    try {
+      const originIata = await airports.getCityCode(origin).then(res => res.json());
+      const destinationIata = await airports.getCityCode(destination).then(res => res.json());
+      const flightDate = formatter.formatDate(date,{more:false,days:1});
+      resolve({
+        link: `${amadeusAPI}&origin=${originIata}&destination=${destinationIata}&departure_date=${flightDate}`,
+        origin: originIata,
+        destination: destinationIata
+      });
+    } catch(err) {
+      reject(`Unable to generate search query for Amadeus. Error: ${err}`);
+    }
   })
 }
 
 // Looks up low-fare flights tickets and returns cheapest option
 function getFlightPrices (origin,destination,date) {
-  return new Promise ((resolve, reject) => {
-    generateSearchQuery(origin,destination,date).then(searchQuery => {
-      fetch(searchQuery.link).then(response => {
-        response.json().then(data => {
-          const {results} = data;
-          const {fare : {total_price : ticketPrice}} = results[0];
-          resolve({
-            flightPriceAmount : parseInt(ticketPrice),
-            origin : searchQuery.origin,
-            destination : searchQuery.destination
-          });
-        }).catch(err => {
-          reject({
-            flightPriceAmount:0,
-            error:'Unable to fetch price details for flight ticket.'
-          })
-        })
+  return new Promise(async (resolve, reject) => {
+    try {
+      const searchQuery = await generateSearchQuery(origin,destination,date);
+      const { results } = await fetch(searchQuery.link).then(res => res.json());
+      const {fare : {total_price : ticketPrice}} = results[0];
+
+      resolve({
+        flightPriceAmount : parseInt(ticketPrice),
+        origin : searchQuery.origin,
+        destination : searchQuery.destination
+      });
+    } catch(err) {
+      reject({
+        flightPriceAmount:0,
+        error:`Unable to fetch price details for flight ticket. Error: ${err}`
       })
-    })
+    }   
   });
 }
 
