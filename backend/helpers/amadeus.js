@@ -9,8 +9,8 @@ const amadeusAPI = `https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search
 function generateSearchQuery (origin,destination,date) {
   return new Promise(async (resolve, reject) => {
     try {
-      const originIata = await airports.getCityCode(origin).then(res => res.json());
-      const destinationIata = await airports.getCityCode(destination).then(res => res.json());
+      const originIata = await airports.getCityCode(origin);
+      const destinationIata = await airports.getCityCode(destination);
       const flightDate = formatter.formatDate(date,{more:false,days:1});
       resolve({
         link: `${amadeusAPI}&origin=${originIata}&destination=${destinationIata}&departure_date=${flightDate}`,
@@ -45,6 +45,9 @@ function getFlightPrices (origin,destination,date) {
   });
 }
 
+getFlightPrices('Sofia','London','10 Feb 2018').then(res => {
+  console.log(res);
+})
 
 module.exports = {
   getFlightPrices
