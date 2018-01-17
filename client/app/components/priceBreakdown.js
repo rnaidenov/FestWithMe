@@ -10,6 +10,7 @@ import { updateTicketPrice } from '../actions/priceUpdateActions';
 
 @connect(store => {
   return {
+    searchResults: store.searchResults,
     updatedPrices: store.priceUpdater
   }
 })
@@ -28,10 +29,10 @@ class PriceBreakdown extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
-    // if (newProps.priceDetails!==this.state.priceDetails) {
-    //   const { priceDetails, currency } = newProps;
-    //   this.setState({priceDetails, currency })
-    // }
+    if (newProps.priceDetails!==this.state.priceDetails) {
+      const { priceDetails, currency } = newProps;
+      this.setState({priceDetails, currency })
+    }
     this.togglePriceBreakdown(newProps.isSelected);
   }
 
@@ -58,10 +59,9 @@ class PriceBreakdown extends React.Component {
   }
 
   updateTicketPrice = () => {
-    const { dispatch, priceDetails } = this.props;
+    const { dispatch, priceDetails, searchResults: { searchDetails } } = this.props;
     const { newPriceAmount } = this.state;
-
-    dispatch(updateTicketPrice(priceDetails,newPriceAmount));
+    dispatch(updateTicketPrice(priceDetails,newPriceAmount, searchDetails));
   }
 
   render() {
@@ -85,15 +85,6 @@ class PriceBreakdown extends React.Component {
         </div>
       )
     });
-
-
-    // const activeFestival = (
-    //   <div>
-    //     <h1 className='priceBreakdownHeading'>Festival ticket</h1>
-    //     <img src={require('../public/ticket.svg')} className='ticketIcon' />
-    //     <p className='priceLabel'>$32</p>
-    //   </div>
-    // )
 
     const soldOutFestival = (
       <div>

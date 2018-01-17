@@ -22,7 +22,8 @@ import Results from './results';
 class Search extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { nightsOfStay: '1', numPeople: 1, missingFestival:'', missingLocation:'', locationOrigin:'Sofia', festivalName:'Music On London - Marco Carola The Birthday'}
+    // change missingFestival and location
+    this.state = { nightsOfStay: '1', numPeople: 1, missingFestival:false, missingLocation:false, festivalName:'Marco Carola The Birthday', locationOrigin:'Sofia'}
   }
 
   updateWindowWidth() {
@@ -46,22 +47,21 @@ class Search extends React.Component {
   }
 
   lookUpFestival() {
-    const { numPeople, festivalName, nightsOfStay, locationOrigin } = this.state;
+    const { numPeople, festivalName, nightsOfStay, locationOrigin, missingLocation, missingFestival } = this.state;
     
-    if (locationOrigin == null || locationOrigin.trim() === '') {
-      this.setState({ missingLocation: true });
-    } else {
-      this.setState({ missingLocation: false });
-    }
-    if (festivalName == null || festivalName.trim() === '') {
-      this.setState({ missingFestival: true });
-    } else {
-      this.setState({ missingFestival: false });
-    }
+    // if (locationOrigin == null || locationOrigin.trim() === '') {
+    //   this.setState({ missingLocation: true });
+    // } else {
+    //   this.setState({ missingLocation: false });
+    // }
+    // if (festivalName == null || festivalName.trim() === '') {
+    //   this.setState({ missingFestival: true });
+    // } else {
+    //   this.setState({ missingFestival: false });
+    // }
     
     setTimeout(() => {
-      
-      if (this.state.missingLocation===false && this.state.missingFestival===false) {
+      if (!missingLocation && !missingFestival) {
         this.setState({ festivalToSearch: festivalName });
         this.props.dispatch(searchFestival(locationOrigin, festivalName, nightsOfStay, numPeople));
       }
@@ -79,7 +79,7 @@ class Search extends React.Component {
       zIndex:'2'
     };
     const errorStyle = { fontSize: '14px', color: '#841f26',marginTop:'-7%',zIndex:'1'}
-
+    
     return (
         <MuiThemeProvider>
           <div>

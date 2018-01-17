@@ -8,6 +8,8 @@ import { changeCurrency } from '../actions/priceBreakdownActions';
 import { updateTicketPrice } from '../actions/priceUpdateActions';
 import CurrencyConverter from './currencyConverter';
 import CurrencyDropdown from '../components/currencyDropdown';
+import { Loader } from '../components/loader';
+
 import '../styles/results.css';
 
 
@@ -108,31 +110,11 @@ class Results extends React.Component {
 
     const { searchResults, festivalName, convertedPrices } = this.props;
     const { screenSize, carret, isPricebreakdownSelected, priceDetails, totalPrice, currency } = this.state;
-    const { text, color, loaderValue, searching, isActive } = searchResults || {};
+    const { loadedValue, maxLoadValue, text, color, loaderValue, searching, isActive } = searchResults || {};
     let results;
 
-    console.log(this.state);
-
     const loadingPhase = (
-      <div className="loaderWrap">
-        <div className='smileyWrap'>
-          <CircularProgress
-            size={100}
-            mode="determinate"
-            thickness={3}
-            value={loaderValue}
-            color={color}
-            className='determinateCircle' />
-          <CircularProgress
-            size={100}
-            thickness={3}
-            color="#7c5652"
-            className='indeterminateCircle' />
-        </div>
-        <p className='waitingMsg'>
-          {text || ''}
-        </p>
-      </div>
+      <Loader loadedValue={loadedValue} maxLoadValue={maxLoadValue} text={text || ''}  color={color}/>
     )
 
     const pastEvent = (
@@ -164,7 +146,6 @@ class Results extends React.Component {
       </div>
     )
 
-    console.log(this.state);
 
     let finishedPhase = (
       <div className='finishedResultsWrap'>

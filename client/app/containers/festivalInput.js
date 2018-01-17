@@ -18,7 +18,7 @@ class FestivalInput extends React.Component {
 
     constructor(props){
         super(props);
-        this.state = { festivalName : 'pastEvent' };
+        this.state = { festivalName : '' };
         this.errorMessage = 'Please enter the name of the festival you\'re going to';
     }
 
