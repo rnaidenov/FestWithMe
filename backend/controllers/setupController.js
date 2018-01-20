@@ -24,7 +24,7 @@ module.exports = (app) => {
       },
       {
         name: "25 Years of RAM Records"
-      },
+      }
     ]
 
 

@@ -5,7 +5,7 @@ const config = require ('./config');
 const setupController = require('./controllers/setupController');
 const apiController = require('./controllers/apiController');
 const path = require('path');
-
+const MONGO_DB_URL= config.getDBConnectionString();
 
 const app = express ();
 app.use(cors());
@@ -13,8 +13,8 @@ app.use(cors());
 var port = process.env.PORT || 3000;
 
 
-// mongoose.connect("mongodb://localhost:27017/mydb");
-// setupController(app);
+mongoose.connect(MONGO_DB_URL);
+setupController(app);
 apiController(app);
 
 app.use(express.static(path.join(__dirname + '/', '..', '/client/dist/')));

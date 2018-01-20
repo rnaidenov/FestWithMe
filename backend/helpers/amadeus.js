@@ -45,10 +45,6 @@ function getFlightPrices (origin,destination,date) {
   });
 }
 
-getFlightPrices('Sofia','London','10 Feb 2018').then(res => {
-  console.log(res);
-})
-
 module.exports = {
   getFlightPrices
 }

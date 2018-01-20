@@ -3,7 +3,8 @@
 const request = require('request');
 const cheerio = require('cheerio');
 const CurrencyConverter = require('./currencies');
-const DEFAULT_CURRENCY_SYMBOL='$';
+const DEFAULT_CURRENCY_SYMBOL = '$';
+const MongoClient = require('./mongoClient');
 
 // Get price of the ticket for the event
 function getPrice(body) {
@@ -26,33 +27,47 @@ function _scrapePrice(body) {
     const tickets = $('#tickets');
     try {
       if (tickets.children().attr().id == 'ticket-sales-have-ended') {
-        resolve({isActive:false});
+        resolve({ isActive: false });
       }
       else {
         // Getting the different types of tickets wrapped within <li/>
         tickets.children().get(2).children.forEach(item => {
           if (item.type == 'tag' && item.name == 'li' && item.attribs.class !== 'closed') {
-            resolve({soldOut: false, price: item});
+            resolve({ soldOut: false, price: item });
           }
         })
       }
       resolve({ soldOut: true });
     }
     catch (err) {
-      resolve({ soldOut:true })
+      resolve({ soldOut: true })
     }
   })
 }
 
-function _formatPrice(price) {
+
+const _scrapeEventName = (body) => {
+  return new Promise((resolve, reject) => {
+    try {
+      const $ = cheerio.load(body);
+      const eventDetails = $('#sectionHead');
+      const eventName = eventDetails[0].children[3].children[0].data;
+      resolve(eventName);
+    } catch (err) {
+      reject('Unable to scrape event name. ', err);
+    }
+  });
+}
+
+const _formatPrice = (price) => {
   return new Promise((resolve, reject) => {
     const priceBreakdown = price.split(/[£*$*€*\+*]/);
     const currencyBreakdown = price.split(/\d/);
-  
+
     let ticketPrice = priceBreakdown[1];
     let bookingFee = priceBreakdown[3];
     let currency = currencyBreakdown[0];
-  
+
     // Euro symbol is placed after price in the RA website
     if (price.includes('€')) {
       ticketPrice = priceBreakdown[0];
@@ -61,14 +76,14 @@ function _formatPrice(price) {
     }
     let ticketPrice_total;
     bookingFee ? ticketPrice_total = parseInt(ticketPrice) + parseInt(bookingFee) : ticketPrice_total = parseInt(ticketPrice)
-    CurrencyConverter.convert(currency,DEFAULT_CURRENCY_SYMBOL,ticketPrice_total).then(price => {
+    CurrencyConverter.convert(currency, DEFAULT_CURRENCY_SYMBOL, ticketPrice_total).then(price => {
       resolve(price.convertedAmount);
     })
   });
 }
 
 // Get the name of the city, where the event will be held
-function getCity(body) { 
+const getCity = (body) => {
   return new Promise((resolve, reject) => {
     try {
       const $ = cheerio.load(body);
@@ -81,7 +96,7 @@ function getCity(body) {
 }
 
 // Get the name of the country, where the event will be held
-function getCountry(body) {
+const getCountry = (body) => {
   return new Promise((resolve, reject) => {
     try {
       const $ = cheerio.load(body);
@@ -95,7 +110,7 @@ function getCountry(body) {
 }
 
 // Get the date of the event
-function getDate(body) {
+const getDate = (body) => {
   return new Promise((resolve, reject) => {
     try {
       const $ = cheerio.load(body);
@@ -115,7 +130,10 @@ function getDate(body) {
   })
 }
 
-function _getEventBody(url) {
+
+
+
+const _getEventBody = (url) => {
   return new Promise((resolve, reject) => {
     request(url, (err, resp, body) => {
       if (!err) {
@@ -128,33 +146,27 @@ function _getEventBody(url) {
 }
 
 // Get the event details
-function getEventDetails(url) {
-  return new Promise((resolve, reject) => {
-    _getEventBody(url).then(body => {
-      Promise.all([getPrice(body), getCity(body), getCountry(body), getDate(body)])
-        .then(data => {
-          const [priceDetails, city, country, date] = data;
-          let eventDetails = {
-            city,
-            country,
-            date,
-            isActive:true
-          };  
-          const eventDate = new Date(date);
-          const todaysDate = new Date();
-          console.log(eventDate, todaysDate, eventDate < todaysDate)
-          eventDetails = eventDate < todaysDate ? Object.assign(eventDetails,{isActive:false}) : eventDetails
-          !isNaN(priceDetails) 
-          ? eventDetails.price = priceDetails 
-          : eventDetails = Object.assign(eventDetails, priceDetails);
-          console.log(priceDetails);
-          console.log(eventDetails)
-          resolve(eventDetails)
-        })
-        .catch(err => {
-          reject(err)
-        })
-    })
+const getEventDetails = (url) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const eventInfo = await _getEventBody(url).then(body => Promise.all([_scrapeEventName(body), getPrice(body), getCity(body), getCountry(body), getDate(body)]));
+      const [name, priceDetails, city, country, date] = eventInfo;
+      MongoClient.saveIfNotExist(name);
+      let eventDetails = {
+        name,
+        city,
+        country,
+        date,
+        isActive: true
+      };
+      const eventDate = new Date(date);
+      const todaysDate = new Date();
+      eventDetails = eventDate < todaysDate ? Object.assign(eventDetails, { isActive: false }) : eventDetails
+      !isNaN(priceDetails) ? eventDetails.price = priceDetails : eventDetails = Object.assign(eventDetails, priceDetails);
+      resolve(eventDetails)
+    } catch (err){
+      reject(err);
+    }
   })
 }
 
