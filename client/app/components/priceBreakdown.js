@@ -89,25 +89,27 @@ class PriceBreakdown extends React.Component {
     const soldOutFestival = (
       <div>
         <h1 className='priceBreakdownHeading'>Festival ticket</h1>
-        <img src={require('../public/inactiveTicket.svg')} className='ticketIcon inactive' />
-        <p className='price-update-text'>
-          Unfortunately, the event seems to be sold out on Resident Advisor.
-          <br/>
-          <span className='price-update-text prompt'>If you have purchased a ticket already, you can enter the price amount in the input box below.</span>
-        </p>
-        <div className='inputWrap'>
-          <Paper className='price-update-input'>
-            <TextField 
-              underlineShow={false}
-              style={{width:'50px'}}
-              value={newPriceAmount}
-              onChange={this.updatePriceAmt}
-            />
-          </Paper>
-          <RaisedButton 
-            className='price-update-btn' 
-            disabled={newPriceMissing}
-            onClick={this.updateTicketPrice}><p className='price-update-btn-text'>OK</p></RaisedButton>
+        <div className="contentWrap">
+          <img src={require('../public/inactiveTicket.svg')} className='ticketIcon inactive' />
+          <p className='price-update-text'>
+            Unfortunately, the event seems to be sold out on Resident Advisor.
+            <br/>
+            <span className='price-update-text prompt'>If you have purchased a ticket already, you can enter the price amount in the input box below.</span>
+          </p>
+          <div className='inputWrap'>
+            <Paper className='price-update-input'>
+              <TextField 
+                underlineShow={false}
+                style={{width:'50px'}}
+                value={newPriceAmount}
+                onChange={this.updatePriceAmt}
+              />
+            </Paper>
+            <RaisedButton 
+              className='price-update-btn' 
+              disabled={newPriceMissing}
+              onClick={this.updateTicketPrice}><p className='price-update-btn-text'>OK</p></RaisedButton>
+          </div>
         </div>
       </div>
     )
@@ -115,8 +117,10 @@ class PriceBreakdown extends React.Component {
     const activeFestival = (
       <div>
         <h1 className='priceBreakdownHeading'>Festival ticket</h1>
-        <img src={require('../public/ticket.svg')} className='ticketIcon' />
-        <p className='priceLabel'>{currency}{ticketPrice}</p>
+        <div className='contentWrap'>
+          <img src={require('../public/ticket.svg')} className='ticketIcon' />
+          <p className='priceLabel'>{currency}{ticketPrice}</p>
+        </div>
       </div>
     )
 
@@ -132,7 +136,9 @@ class PriceBreakdown extends React.Component {
     const housing = (
       <div className="accomodationWrap">
         <h1 className='priceBreakdownHeading'>Accommodation</h1>
-        {accommodationTypes}
+        <div className="contentWrap">
+          {accommodationTypes}
+        </div>
       </div>
     )
 
@@ -147,9 +153,7 @@ class PriceBreakdown extends React.Component {
     });
 
     const priceBreakdownBigScreen = (
-      <div className="contentWrap">
-        {content}
-      </div>
+      <div>{content}</div>    
     )
 
     const priceBreakdownMobileScreen = (

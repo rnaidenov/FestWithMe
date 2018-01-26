@@ -152,6 +152,13 @@ body{
     margin-right: 35%;
   }
 
+  .breakdownContainerWrap{
+    padding-top: 2%;
+    padding-left: 3.5%;
+    padding-right: 3.5%;
+    overflow:hidden;
+  }
+
 }
 
 
@@ -196,17 +203,21 @@ body{
     margin-left: 42.5%;
     margin-right: 42.5%;
   }
-}
 
+  .breakdownContainerWrap{
+    padding-top: 2%;
+    padding-left: 5%;
+    padding-right: 5%;
+    overflow:hidden;
+  }
+
+}
 
 .loaderWrap {
     margin-top: 5%;
     width: 100%;
     text-align: center;
   }
-  
-
-
   
 .determinateCircle {
     z-index: 2;
@@ -248,7 +259,8 @@ priceBreakdownContainer
 .accommodationTypeWrap{
   width:100%;
   display: flex;
-  margin-bottom: 3%;
+  margin-bottom: 1%;
+  height: 30%;
 }
 
 #priceBreakdownLabel {
@@ -285,10 +297,8 @@ priceBreakdownContainer
 }
 
 .contentWrap{
-  padding-top: 2%;
-  padding-left: 3.5%;
-  padding-right: 3.5%;
-  overflow:hidden;
+  width: 100%;
+  height: 80%;
 }
 
 .contentType{
@@ -344,7 +354,7 @@ priceBreakdownContainer
   width:100%;
   font-family: 'Quicksand', sans-serif;
   font-size: 30px;
-  margin-bottom: 5%;
+  height:20%;
 }
 
 .ticketIcon {
@@ -370,6 +380,7 @@ priceBreakdownContainer
   width:85%;
   margin:auto;
   padding-top:2%;
+  height: 55%;
 }
 
 .price-update-input{
@@ -405,8 +416,8 @@ priceBreakdownContainer
 
 .routeWrap {
   width: 100%;
-  height: 130px;
   padding-top:10%;
+  height: 60%;
   position: relative;
 }
 
