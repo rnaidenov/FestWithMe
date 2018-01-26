@@ -22,7 +22,7 @@ class FestivalInput extends React.Component {
         this.errorMessage = 'Please enter the name of the festival you\'re going to';
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.props.dispatch(loadFestivals());
     }
 

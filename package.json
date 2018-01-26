@@ -12,7 +12,7 @@
     "start": "cd client && webpack-dev-server",
     "postinstall": "cd client && webpack --config webpack.prod.config.js -p --progress --colors",
     "backend": "cd backend && nodemon app.js",
-    "what": "cd backend && nodemon helpers/scraper.js",
+    "what": "cd backend && nodemon helpers/mongoClient.js",
     "test": "mocha backend/test/flightDetails.test.js"
   },
   "license": "ISC",

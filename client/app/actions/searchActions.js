@@ -35,6 +35,7 @@ const _getEventDetails = (festivalName, dispatch) => {
   return new Promise(async (resolve, reject) => {
     try {
       const eventDetails = await fetch(`http://localhost:3000/api/prices/events?eventName=${festivalName}`).then(res => res.json())
+      console.log(eventDetails);
       resolve(eventDetails);
     } catch (err) {
       reject("Fetching event details failed.", err);
@@ -67,6 +68,7 @@ export const getTotalPrice = (eventDetails, flightDetails, housingDetails, night
   const eventTicketPrice = eventDetails.price;
   const { soldOut, price: eventPrice } = eventDetails;
 
+  console.log(eventPrice , " + ", flightPriceAmount, " + ", accommodationAvgPrice ," * ", nights , " = ", eventPrice + flightPriceAmount + accommodationAvgPrice * nights);
   const totalPrice = !soldOut 
                                 ? eventPrice + flightPriceAmount + accommodationAvgPrice * nights
                                 : flightPriceAmount + accommodationAvgPrice * nights;
