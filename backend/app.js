@@ -13,7 +13,7 @@ app.use(cors());
 var port = process.env.PORT || 3000;
 
 
-mongoose.connect(MONGO_DB_URL);
+// mongoose.connect(MONGO_DB_URL);
 setupController(app);
 apiController(app);
 

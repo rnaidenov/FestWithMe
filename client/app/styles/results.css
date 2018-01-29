@@ -298,12 +298,12 @@ priceBreakdownContainer
 
 .contentWrap{
   width: 100%;
-  height: 80%;
+  height: 85%;
 }
 
 .contentType{
   display: inline-grid;
-  height:310px;
+  height:350px;
   margin-right: 4%;
   margin-left: 4%;
   width: 23%;
@@ -354,19 +354,24 @@ priceBreakdownContainer
   width:100%;
   font-family: 'Quicksand', sans-serif;
   font-size: 30px;
-  height:20%;
+  height:15%;
 }
 
 .ticketIcon {
   height: 130px;
-  width: 100%;
+  height: 130px;
+  display: block;
+  margin: auto;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -65px;
+  margin-top: -65px;
 }
 
 
 .ticketIcon.inactive {
-  position: absolute;
   filter: grayscale(100%);
-  left: 0;
   z-index: -1;
 }
 
@@ -379,8 +384,6 @@ priceBreakdownContainer
   font-family: 'Oswald', sans-serif !important;
   width:85%;
   margin:auto;
-  padding-top:2%;
-  height: 55%;
 }
 
 .price-update-input{
@@ -405,7 +408,7 @@ priceBreakdownContainer
 
 .inputWrap{
   display: flex;
-  padding-top: 5%;
+  padding-top:2%;
 }
 
 .priceLabel {
@@ -414,11 +417,19 @@ priceBreakdownContainer
   width: 100%;
 }
 
+.mainContent{
+  position: relative;
+  height: 66%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .routeWrap {
-  width: 100%;
+  /* width: 100%;
   padding-top:10%;
   height: 60%;
-  position: relative;
+  position: relative; */
 }
 
 .iataCodes {

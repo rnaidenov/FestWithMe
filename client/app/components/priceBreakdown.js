@@ -90,12 +90,14 @@ class PriceBreakdown extends React.Component {
       <div>
         <h1 className='priceBreakdownHeading'>Festival ticket</h1>
         <div className="contentWrap">
-          <img src={require('../public/inactiveTicket.svg')} className='ticketIcon inactive' />
-          <p className='price-update-text'>
-            Unfortunately, the event seems to be sold out on Resident Advisor.
-            <br/>
-            <span className='price-update-text prompt'>If you have purchased a ticket already, you can enter the price amount in the input box below.</span>
-          </p>
+          <div className="mainContent">
+            <img src={require('../public/inactiveTicket.svg')} className='ticketIcon inactive' />
+            <p className='price-update-text'>
+              Unfortunately, the event seems to be sold out on Resident Advisor.
+              <br/>
+              <span className='price-update-text prompt'>If you have purchased a ticket already, you can enter the price amount in the input box below.</span>
+            </p>
+          </div>
           <div className='inputWrap'>
             <Paper className='price-update-input'>
               <TextField 
@@ -118,7 +120,9 @@ class PriceBreakdown extends React.Component {
       <div>
         <h1 className='priceBreakdownHeading'>Festival ticket</h1>
         <div className='contentWrap'>
-          <img src={require('../public/ticket.svg')} className='ticketIcon' />
+          <div className="mainContent">
+            <img src={require('../public/ticket.svg')} className='ticketIcon' />
+          </div>
           <p className='priceLabel'>{currency}{ticketPrice}</p>
         </div>
       </div>
@@ -127,7 +131,7 @@ class PriceBreakdown extends React.Component {
     const festival = ticketPrice!=null ? activeFestival : soldOutFestival
 
     const travel = (
-      <div>
+      <div className='accomodationWrap'>
         <h1 className='priceBreakdownHeading'>Plane ticket</h1>
         <FlightPrice details={flightDetails} currency={currency} />
       </div>
