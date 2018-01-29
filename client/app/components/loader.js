@@ -67,9 +67,11 @@ class Loader extends React.Component {
                         color="#7c5652"
                         className='indeterminateCircle' />
                 </div>
-                <p className='waitingMsg'>
-                    {text || ''}
-                </p>
+                <div className="waitingMsgWrap">
+                    <p>
+                        {text || ''}
+                    </p>
+                </div>
             </div>
 
         )
