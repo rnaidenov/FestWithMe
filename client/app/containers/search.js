@@ -23,7 +23,11 @@ class Search extends React.Component {
   constructor(props) {
     super(props);
     // change missingFestival and location
-    this.state = { nightsOfStay: '1', numPeople: 1, missingFestival:false, missingLocation:false, festivalName:'Marco Carola The Birthday', locationOrigin:'Sofia'}
+    this.SMARTPHONE_MAX_WIDTH_PIXELS = 500;
+    this.MOBILE_MAX_WIDTH_PIXELS = 1100;   
+    this.updateWindowWidth = this.updateWindowWidth.bind(this);
+    this.updateWindowWidth = this.updateWindowWidth.bind(this);
+    this.state = { doneSearch:false,nightsOfStay: '1', numPeople: 1, missingFestival:false, missingLocation:false, festivalName:'Marco Carola The Birthday', locationOrigin:'Sofia'}
   }
 
   updateWindowWidth() {
@@ -62,16 +66,46 @@ class Search extends React.Component {
     
     setTimeout(() => {
       if (!missingLocation && !missingFestival) {
-        this.setState({ festivalToSearch: festivalName });
+        this.setState({ festivalToSearch: festivalName, doneSearch:true });
         this.props.dispatch(searchFestival(locationOrigin, festivalName, nightsOfStay, numPeople));
       }
     },500);
   }
 
+
+  componentDidMount() {
+    this.updateWindowWidth();
+    window.addEventListener('resize', this.updateWindowWidth);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateWindowWidth);
+  }
+
+  updateWindowWidth() {
+    this.setState({ windowWidth: window.innerWidth });
+    if(window.innerWidth < this.SMARTPHONE_MAX_WIDTH_PIXELS) {
+      this.setState({ screenSize: 'phone' });
+    } else if (window.innerWidth > this.SMARTPHONE_MAX_WIDTH_PIXELS && window.innerWidth < this.MOBILE_MAX_WIDTH_PIXELS) {
+      this.setState({ screenSize: 'tablet' });
+    } else {
+      this.setState({ screenSize: 'desktop' });
+    }
+  }
+
   render() {
     const { locationInput, location, festivalHint,
-            locationHint, hintStyle, missingFestival, missingLocation } = this.state;
+            locationHint, hintStyle, missingFestival, missingLocation, festivalToSearch, doneSearch, screenSize } = this.state;
     const { festivalInput } = this.props;
+
+    const isPhone = screenSize==='phone';
+
+    console.log(screenSize);
+
+    const appTitle = (
+      <div className={ !isPhone && doneSearch ? "appTitle noSearch" : "appTitle"}>FestWithMe</div>
+    )
+
     const inputStyle = {
       paddingLeft: '12px',
       fontFamily: "'Abel', sans-serif",
@@ -79,11 +113,13 @@ class Search extends React.Component {
       zIndex:'2'
     };
     const errorStyle = { fontSize: '14px', color: '#841f26',marginTop:'-7%',zIndex:'1'}
+  
     
     return (
         <MuiThemeProvider>
           <div>
-            <div className="searchWrap">
+            { !isPhone ? appTitle : null }
+            <div className={!isPhone && doneSearch ? "searchWrap noSearch" : "searchWrap"}>
               <PeopleSelector
                 updateNumPeople={(numPeople) => this.updateNumPeople(numPeople)}
                 inputStyle={inputStyle}
@@ -114,7 +150,7 @@ class Search extends React.Component {
               </div>
             </div>
 
-            <Results festivalName={this.state.festivalToSearch} />
+            <Results festivalName={festivalToSearch} screenSize={screenSize}/>
           </div>
         </MuiThemeProvider>
     )

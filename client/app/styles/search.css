@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Lato:300|family=Roboto:300|Yantramanav:100|Oswald:300,400|BenchNine|Hammersmith+One|Rajdhani|Saira+Extra+Condensed|Quicksand|Abel|Yanone+Kaffeesatz');
+@import url('https://fonts.googleapis.com/css?family=Caveat+Brush|Lato:300|family=Roboto:300|Yantramanav:100|Oswald:300,400|BenchNine|Hammersmith+One|Rajdhani|Saira+Extra+Condensed|Quicksand|Abel|Yanone+Kaffeesatz');
 
 * {
   -webkit-box-sizing: border-box;
@@ -135,7 +135,7 @@ p {
     background-image: url('../public/party_background.jpg');
   }
   .searchWrap {
-    padding-top: 12%;
+    padding-top: 5%;
     width:75% !important;
   }
   .inlineLabel{
@@ -185,12 +185,27 @@ p {
   }
 }
 
+.appTitle{
+  font-size: 110px;
+  font-family: 'Caveat Brush', cursive;
+  text-align: center;
+  padding-top: 5%;
+  color: #000000a3;
+}
+
+
 .searchWrap {
   margin: auto;
   text-align: center;
   display: flex;
   flex-wrap: wrap;
-  margin-bottom:5%;
+  margin-bottom:4%;
+}
+
+.noSearch{
+  transition-delay: 2s;
+  transition: padding-top 0.5s ease-in-out;
+  padding-top: 2%;
 }
 
 .searchContainer {
@@ -235,20 +250,6 @@ p {
 #location_off:hover {
   color:rgba(128, 80, 80, 0.8);
   z-index: 2;
-}
-
-.inputError {
-  color:red !important;
-}
-
-.flightDetailsError {
-  width: 75%;
-  margin-left: auto;
-  margin-right: auto;
-  padding-top: 5%;
-  font-size: 20px;
-  font-family: 'Yanone Kaffeesatz', sans-serif !important;
-  color: #893333;
 }
 
 

@@ -91,7 +91,7 @@ class PriceBreakdown extends React.Component {
         <h1 className='priceBreakdownHeading'>Festival ticket</h1>
         <div className="contentWrap">
           <div className="mainContent">
-            <img src={require('../public/inactiveTicket.svg')} className='ticketIcon inactive' />
+            <img src={require('../public/inactiveTicket.svg')} className='contentIcon inactive' />
             <p className='price-update-text'>
               Unfortunately, the event seems to be sold out on Resident Advisor.
               <br/>
@@ -105,6 +105,7 @@ class PriceBreakdown extends React.Component {
                 style={{width:'50px'}}
                 value={newPriceAmount}
                 onChange={this.updatePriceAmt}
+                id='priceInputField'
               />
             </Paper>
             <RaisedButton 
@@ -121,7 +122,7 @@ class PriceBreakdown extends React.Component {
         <h1 className='priceBreakdownHeading'>Festival ticket</h1>
         <div className='contentWrap'>
           <div className="mainContent">
-            <img src={require('../public/ticket.svg')} className='ticketIcon' />
+            <img src={require('../public/ticket.svg')} className='contentIcon' />
           </div>
           <p className='priceLabel'>{currency}{ticketPrice}</p>
         </div>
@@ -150,7 +151,7 @@ class PriceBreakdown extends React.Component {
 
     const content = priceBreakdownContent.map((content, idx) => {
       return (
-        <Paper className='contentType' id={`content${idx}`}>
+        <Paper className='contentType' id={`content${idx}`} key={idx}>
           {content}
         </Paper>
       )
@@ -171,7 +172,7 @@ class PriceBreakdown extends React.Component {
 
 
     return (
-        screenSize==='mobile' ? priceBreakdownMobileScreen : priceBreakdownBigScreen
+        screenSize!=='desktop' ? priceBreakdownMobileScreen : priceBreakdownBigScreen
     )
 
 

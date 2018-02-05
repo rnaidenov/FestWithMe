@@ -26,33 +26,17 @@ class Results extends React.Component {
   constructor(props) {
     super(props);
     this.DEFAULT_CURRENCY = '$';
-    this.state = { carret: 'arrow_drop_up', isPricebreakdownSelected: false, priceDetails: null, currency: this.DEFAULT_CURRENCY };
-    this.SMARTPHONE_MAX_WIDTH_PIXELS = 500;
-    this.MOBILE_MAX_WIDTH_PIXELS = 1100;    
+    this.state = { carret: 'arrow_drop_up', isPricebreakdownSelected: false, priceDetails: null, currency: this.DEFAULT_CURRENCY }; 
     this.closePriceBreakdownMobile = this.closePriceBreakdownMobile.bind(this);
-    this.updateWindowWidth = this.updateWindowWidth.bind(this);
-    this.updateWindowWidth = this.updateWindowWidth.bind(this);
   }
 
   componentDidMount() {
     window.changeCurrency = this.changeCurrency;
     document.addEventListener('mousedown', this.closePriceBreakdownMobile);
-    this.updateWindowWidth();
-    window.addEventListener('resize', this.updateWindowWidth);
   }
 
   componentWillUnmount() {
     document.removeEventListener('mousedown', this.closePriceBreakdownMobile);
-    window.removeEventListener('resize', this.updateWindowWidth);
-  }
-
-  updateWindowWidth() {
-    this.setState({ windowWidth: window.innerWidth });
-    if (window.innerWidth < this.MOBILE_MAX_WIDTH_PIXELS) {
-      this.setState({ screenSize: 'mobile' });
-    } else {
-      this.setState({ screenSize: 'desktop' });
-    }
   }
 
   closePriceBreakdown() {
@@ -68,9 +52,8 @@ class Results extends React.Component {
   }
 
   closePriceBreakdownMobile(e) {
-    const { windowWidth, isPricebreakdownSelected } = this.state;
-
-    if (this.wrapperRef && !this.wrapperRef.contains(e.target) && windowWidth < this.SMARTPHONE_MAX_WIDTH_PIXELS) {
+    const { isPricebreakdownSelected, screenSize } = this.state;
+    if (this.wrapperRef && !this.wrapperRef.contains(e.target) && screenSize==='phone') {
       if (isPricebreakdownSelected) {
         this.closePriceBreakdown();
       }
@@ -78,9 +61,12 @@ class Results extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
-    const { searchResults, festivalName, convertedPrices, priceUpdate } = newProps;
-    const { priceDetails, currency } = this.state;
+    const { searchResults, festivalName, convertedPrices, priceUpdate, screenSize:newScreenSize } = newProps;
+    const { priceDetails, currency, screenSize } = this.state;
 
+    if(screenSize!==newScreenSize){
+      this.setState({ screenSize: newScreenSize });
+    }
 
     if (priceDetails != null && priceDetails.ticketPrice == null && priceUpdate) {
       const { details } = priceUpdate;
@@ -108,8 +94,8 @@ class Results extends React.Component {
   render() {
 
 
-    const { searchResults, festivalName, convertedPrices } = this.props;
-    const { screenSize, carret, isPricebreakdownSelected, priceDetails, totalPrice, currency } = this.state;
+    const { searchResults, festivalName, convertedPrices, screenSize } = this.props;
+    const { carret, isPricebreakdownSelected, priceDetails, totalPrice, currency } = this.state;
     const { loadedValue, maxLoadValue, text, color, loaderValue, searching, isActive } = searchResults || {};
     let results;
 
@@ -160,7 +146,7 @@ class Results extends React.Component {
           <span className="totalPriceLabel">{currency}{totalPrice}</span>
         </p>
         <div className="priceBreakdownWrap">
-          {screenSize === 'mobile' ? priceBreakdownCarret : null}
+          {screenSize !== 'desktop' ? priceBreakdownCarret : null}
           <div ref={(wrapper) => { this.wrapperRef = wrapper }} className='breakdownContainerWrap'>
             <PriceBreakdown
               priceDetails={priceDetails || {}}

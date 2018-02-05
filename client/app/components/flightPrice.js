@@ -30,8 +30,10 @@ function FlightPrice ({details,currency}) {
     )
   }
   return (
-    <div>
-      <img src={require('../public/cross.svg')} className='errorIcon'/>
+    <div className='contentWrap'>
+      <div className="mainContent">
+        <img src={require('../public/cross.svg')} className='contentIcon'/>
+      </div>
       <p className='flightDetailsError'>Unfortunately something went wrong when trying to get the flight details</p>
     </div>
   )
