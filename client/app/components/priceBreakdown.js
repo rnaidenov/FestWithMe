@@ -7,11 +7,9 @@ import FlightPrice from './flightPrice';
 import CustomCarousel from './customCarousel';
 import { updateTicketPrice } from '../actions/priceUpdateActions';
 
-
 @connect(store => {
   return {
-    searchResults: store.searchResults,
-    updatedPrices: store.priceUpdater
+    searchResults: store.searchResults
   }
 })
 
@@ -59,15 +57,15 @@ class PriceBreakdown extends React.Component {
   }
 
   updateTicketPrice = () => {
-    const { dispatch, priceDetails, searchResults: { searchDetails } } = this.props;
+    const { dispatch, prices, searchDetails } = this.props;
     const { newPriceAmount } = this.state;
-    dispatch(updateTicketPrice(priceDetails,newPriceAmount, searchDetails));
+    dispatch(updateTicketPrice(prices, newPriceAmount, searchDetails));
   }
 
   render() {
 
-    const { priceDetails, currency, screenSize } = this.props;
-    const { flightDetails, ticketPrice, housingDetails: { properties }, totalPrice } = priceDetails;
+    const { prices, currency, screenSize } = this.props;
+    const { flightDetails, ticketPrice, housingDetails: { properties }, totalPrice } = prices;
     const { priceBreakdownClass, newPriceAmount, newPriceMissing, showContent } = this.state;
 
     const noInfo = (

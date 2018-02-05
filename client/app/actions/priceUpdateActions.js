@@ -8,10 +8,10 @@ export const updateTicketPrice = (priceDetails, eventPrice, searchDetails) => {
     console.log(priceDetails);
     console.log("Event price is: ", eventPrice);
     const eventPriceAmount = parseInt(eventPrice);
-    const totalPrice = getTotalPrice({ soldOut: false, price: eventPriceAmount }, flightDetails, housingDetails, nights, numPeople);
+    const details = getTotalPrice({ soldOut: false, price: eventPriceAmount }, flightDetails, housingDetails, nights, numPeople);
     dispatch({
       type:'EVENT_PRICE_UPDATE',
-      payload:{details: totalPrice}
+      priceUpdateDetails:details
     });
   }); 
 }

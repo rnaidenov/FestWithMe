@@ -54,7 +54,7 @@ export const searchFestival = (origin, festivalName, nights, numPeople) => {
       const flightDetails = await _getFlightDetails(origin, eventDetails.city, destination, date, dispatch);
       const housingDetails = await _getHousingDetails(destination, date, nights, numPeople, dispatch);
       const details = getTotalPrice(eventDetails, flightDetails, housingDetails, nights, numPeople);
-      dispatch({ type: 'FESTIVAL_SEARCH_FINISHED', payload: { details } });
+      dispatch({ type: 'FESTIVAL_SEARCH_FINISHED', priceDetails: details});
     } else {
       dispatch({ type: 'EVENT_NOT_ACTIVE', payload: 'Unfortunately, the event has been sold out' });
     }

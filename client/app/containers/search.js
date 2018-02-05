@@ -99,9 +99,6 @@ class Search extends React.Component {
     const { festivalInput } = this.props;
 
     const isPhone = screenSize==='phone';
-
-    console.log(screenSize);
-
     const appTitle = (
       <div className={ !isPhone && doneSearch ? "appTitle noSearch" : "appTitle"}>FestWithMe</div>
     )

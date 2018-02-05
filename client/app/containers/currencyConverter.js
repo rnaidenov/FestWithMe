@@ -34,7 +34,7 @@ class CurrencyConverter extends React.Component {
 
 
     componentWillReceiveProps(newProps) {
-        const { priceDetails: newPriceDetails, currency } = newProps;
+        const { prices: newPriceDetails, currency } = newProps;
         const { priceDetails } = this.state;
 
         if (newPriceDetails!==priceDetails) {
@@ -43,9 +43,9 @@ class CurrencyConverter extends React.Component {
     }
 
     changeCurrency(toCurrency) {
-        const { convertedPrices } = this.props;
+        const { convertedPrices, prices } = this.props;
         const { currency: fromCurrency } = this.state;
-        this.props.dispatch(changeCurrency(fromCurrency, toCurrency, this.props.priceDetails)); 
+        this.props.dispatch(changeCurrency(fromCurrency, toCurrency, prices)); 
     }
 
 

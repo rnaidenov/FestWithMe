@@ -1,7 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Paper from 'material-ui/Paper';
-import IconButton from 'material-ui/IconButton';
 import CircularProgress from 'material-ui/CircularProgress';
 import PriceBreakdown from '../components/priceBreakdown';
 import { changeCurrency } from '../actions/priceBreakdownActions';
@@ -15,9 +13,7 @@ import '../styles/results.css';
 
 @connect(store => {
   return {
-    searchResults: store.searchResults,
-    convertedPrices: store.currencyChanger,
-    priceUpdate: store.priceUpdater,
+    searchResults: store.searchResults
   }
 })
 
@@ -26,7 +22,7 @@ class Results extends React.Component {
   constructor(props) {
     super(props);
     this.DEFAULT_CURRENCY = '$';
-    this.state = { carret: 'arrow_drop_up', isPricebreakdownSelected: false, priceDetails: null, currency: this.DEFAULT_CURRENCY }; 
+    this.state = { carret: 'arrow_drop_up', isPricebreakdownSelected: false }; 
     this.closePriceBreakdownMobile = this.closePriceBreakdownMobile.bind(this);
   }
 
@@ -61,42 +57,20 @@ class Results extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
-    const { searchResults, festivalName, convertedPrices, priceUpdate, screenSize:newScreenSize } = newProps;
-    const { priceDetails, currency, screenSize } = this.state;
+    const { screenSize:newScreenSize } = newProps;
+    const { screenSize } = this.state;
 
     if(screenSize!==newScreenSize){
       this.setState({ screenSize: newScreenSize });
     }
-
-    if (priceDetails != null && priceDetails.ticketPrice == null && priceUpdate) {
-      const { details } = priceUpdate;
-      this.setState({ priceDetails: details });
-      this.setState({ totalPrice: details.totalPrice });
-    }
-
-    if (!convertedPrices) {
-      const { prices } = searchResults || {};
-      const { details } = prices || {};
-      if (priceDetails != details && details != null) {
-        this.setState({ priceDetails: details });
-        this.setState({ totalPrice: details.totalPrice });
-      }
-    } else {
-      const { details } = convertedPrices;
-      const { totalPrice, currencySymbol } = details;
-      if (currency !== currencySymbol) {
-        this.setState({ priceDetails: details, totalPrice, currency: currencySymbol });
-      }
-    }
-
   }
 
   render() {
 
-
-    const { searchResults, festivalName, convertedPrices, screenSize } = this.props;
-    const { carret, isPricebreakdownSelected, priceDetails, totalPrice, currency } = this.state;
-    const { loadedValue, maxLoadValue, text, color, loaderValue, searching, isActive } = searchResults || {};
+    const { searchResults, festivalName,  screenSize } = this.props;
+    const { carret, isPricebreakdownSelected, priceDetails } = this.state;
+    const { loadedValue, maxLoadValue, text, color, loaderValue, searching, isActive, prices, currency, searchDetails } = searchResults || {};
+    const { totalPrice } = prices || {};
     let results;
 
     const loadingPhase = (
@@ -131,29 +105,31 @@ class Results extends React.Component {
         </i>
       </div>
     )
+    
 
 
-    let finishedPhase = (
+    const finishedPhase = (
       <div className='finishedResultsWrap'>
         <CurrencyConverter
-          priceDetails={priceDetails || {}}
-          currency={currency}
+          prices={prices || {}}
+          currency={currency || this.DEFAULT_CURRENCY}
         />
         <p id='resultsLabel'>
           <span className="resultText">Going to </span>
           <span className="festivalNameLabel">{festivalName}</span>
           <span className="resultText"> will cost you </span>
-          <span className="totalPriceLabel">{currency}{totalPrice}</span>
+          <span className="totalPriceLabel">{currency || this.DEFAULT_CURRENCY}{totalPrice}</span>
         </p>
         <div className="priceBreakdownWrap">
           {screenSize !== 'desktop' ? priceBreakdownCarret : null}
           <div ref={(wrapper) => { this.wrapperRef = wrapper }} className='breakdownContainerWrap'>
             <PriceBreakdown
-              priceDetails={priceDetails || {}}
+              prices={prices || {}}
               isSelected={isPricebreakdownSelected}
-              currency={currency}
+              currency={currency || this.DEFAULT_CURRENCY}
               updateTicketPrice={updateTicketPrice}
               screenSize={screenSize}
+              searchDetails={searchDetails}
             />
           </div>
         </div>

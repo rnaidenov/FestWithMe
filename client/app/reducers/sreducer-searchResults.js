@@ -42,8 +42,11 @@ export default (state = null, action) => {
     case 'EVENT_NOT_ACTIVE':
       return Object.assign({}, state, {prices: action.payload, searching: false,loaderValue:100,isActive: false});
       break;
+    case 'CURRENCY_CHANGED':
+      return Object.assign({}, state, {prices: action.details });
+      break;
     case 'EVENT_PRICE_UPDATE':
-      return Object.assign({}, state, {updatedPrices: action.payload, searching: false,loaderValue:100,isActive:true});
+      return Object.assign({}, state, {updatedPrices: action.payload});
       break;
   }
   return state;
