@@ -34,14 +34,6 @@ body{
     display: block;
   }
 
-  
-.waitingMsg{
-  width: 60%;
-  margin-left: 20%;
-  margin-right: 20%;
-}
-
-
   .homeTypeIcon {
     height: 45px;
   }
@@ -218,12 +210,6 @@ body{
     font-size: 22px;
   }
 
-  .waitingMsg{
-    width: 15%;
-    margin-left: 42.5%;
-    margin-right: 42.5%;
-  }
-
   .breakdownContainerWrap{
     padding-top: 2%;
     padding-left: 5%;
@@ -291,7 +277,6 @@ priceBreakdownContainer
 }
 
 #resultsLabel {
-  color:#984b43;
   padding-top:1%;
 }
 
@@ -327,7 +312,7 @@ priceBreakdownContainer
   background-color: #f5f5f5a8;
   margin-top: 1%;
   font-size: 15px;
-  padding: 5px 5px 0px 5px;
+  padding: 10px 10px 0px 10px;
   font-weight: bold;
   display: inline-block;
 }
@@ -385,6 +370,7 @@ priceBreakdownContainer
 
 .festivalNameLabel {
   font-family: 'Yanone Kaffeesatz', sans-serif;
+  color:#633935;
 }
 
 .totalPriceLabel {
@@ -479,14 +465,6 @@ priceBreakdownContainer
 }
 
 
-
-.routeWrap {
-  /* width: 100%;
-  padding-top:10%;
-  height: 60%;
-  position: relative; */
-}
-
 .iataCodes {
   font-family: 'BenchNine', sans-serif;
   font-size: 32px;
@@ -516,11 +494,9 @@ priceBreakdownContainer
 }
 
 .waitingMsg {
-  background-color: #f5f5f5a8; 
-  padding-top: 5px;
-  margin-top: 1%;
-  font-size: 15px;
-  font-weight: bold;
+  font-family: 'Yanone Kaffeesatz', sans-serif !important;
+  font-size: 24px;
+  font-weight: 200;
 }
 
 .accomodationWrap {

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Caveat+Brush|Lato:300|family=Roboto:300|Yantramanav:100|Oswald:300,400|BenchNine|Hammersmith+One|Rajdhani|Saira+Extra+Condensed|Quicksand|Abel|Yanone+Kaffeesatz');
+@import url('https://fonts.googleapis.com/css?family=family=Yanone+Kaffeesatz:300|Caveat+Brush|Lato:300|family=Roboto:300|Yantramanav:100|Oswald:300,400|BenchNine|Hammersmith+One|Rajdhani|Saira+Extra+Condensed|Quicksand|Abel|Yanone+Kaffeesatz');
 
 * {
   -webkit-box-sizing: border-box;
@@ -39,13 +39,14 @@ p {
 
   .inlineLabel {
     width: 100%;
-    font-size: larger;
+    margin: 0;
+    margin-bottom: 1%;
+    margin-top: 1%;
   }
   .searchContainer {
     width: 90%;
     margin:auto;
     position: absolute;
-    margin-bottom: 2%;
   } 
   .nightsLabel{
     padding-left: 45%;
@@ -140,7 +141,9 @@ p {
   }
   .inlineLabel{
     width: 5%;
-    padding-top: 1%;
+    padding-top: 0.5%;
+    margin-left: 1%;
+    margin-right: 1%;
   }
   .searchContainer {
     width: 30%;
@@ -150,7 +153,7 @@ p {
   }
   #peopleField{
     order:1;
-    width:10%;
+    width:8%;
   }
   #goingToLabel {
     order:2;
@@ -159,12 +162,14 @@ p {
     order: 3;
   }
   #fromLabel {
+    width: 3%;
     order:4;
   }
   #cityField {
     order: 5;
   }
   #forLabel {
+    width: 3%;
     order: 6
   }
   #nightsField {
@@ -202,6 +207,11 @@ p {
   margin-bottom:4%;
 }
 
+.inlineLabel{
+  font-family: 'Yanone Kaffeesatz', sans-serif !important;
+  font-size: 24px;
+}
+
 .noSearch{
   transition-delay: 2s;
   transition: padding-top 0.5s ease-in-out;
@@ -216,6 +226,8 @@ p {
 .nightsLabel{
   width:60%;
   display: inline-block;
+  font-family: 'Yanone Kaffeesatz', sans-serif !important;
+  font-size: 20px;
 }
 
 .searchBtn {

@@ -68,7 +68,7 @@ class Loader extends React.Component {
                         className='indeterminateCircle' />
                 </div>
                 <div className="waitingMsgWrap">
-                    <p>
+                    <p className='waitingMsg'>
                         {text || ''}
                     </p>
                 </div>
