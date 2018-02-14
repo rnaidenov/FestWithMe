@@ -8,7 +8,7 @@ function FlightPrice ({details,currency}) {
   // <div>
   //   <div className="routeWrap">
   //     <span className='iataCodes'>SOF</span>
-  //     <img src={require('../public/airplane.svg')} className='planeIcon'/>
+  //     <img src={require('../../dist/public/airplane.svg')} className='planeIcon'/>
   //     <span className='iataCodes'>LON</span>
   //   </div>
   //   <p className='priceLabel'>$25</p>
@@ -21,7 +21,7 @@ function FlightPrice ({details,currency}) {
         <div className="mainContent">
           <div className="routeWrap">
             <span className='iataCodes'>{origin}</span>
-            <img src={require('../public/airplane.svg')} className='planeIcon'/>
+            <img src={require('../../dist/public/airplane.svg')} className='planeIcon'/>
             <span className='iataCodes'>{destination}</span>
           </div>
         </div>
@@ -32,7 +32,7 @@ function FlightPrice ({details,currency}) {
   return (
     <div className='contentWrap'>
       <div className="mainContent">
-        <img src={require('../public/cross.svg')} className='contentIcon'/>
+        <img src={require('../../dist/public/cross.svg')} className='contentIcon'/>
       </div>
       <p className='flightDetailsError'>Unfortunately something went wrong when trying to get the flight details</p>
     </div>

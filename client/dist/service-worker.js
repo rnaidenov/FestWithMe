@@ -4,7 +4,7 @@ if('serviceWorker' in navigator){
     });
 }
 
-var CACHE_NAME = 'fest-with-initial-load-cache';
+var CACHE_NAME = 'fest-with-initial-load-cache-v1';
 
 const toCache = [
     '/',
@@ -12,10 +12,11 @@ const toCache = [
 ]
 
 const _addToCatche = (newCaches) => {
-    const toCache = Array.isArray(newCaches) ? newCaches : Array(newCaches);
-    caches.open(CACHE_NAME).then(cache => {
-        return cache.addAll(toCache);
-    })
+    if(newCaches.includes('fonts') || newCaches.includes('.jpg') || newCaches.includes('/api/festivals')) {
+        caches.open(CACHE_NAME).then(cache => {
+            return cache.addAll(Array(newCaches));
+        })
+    }
 }
 
 self.addEventListener('install', (event) => {
