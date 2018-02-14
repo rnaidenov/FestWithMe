@@ -26,7 +26,7 @@ class Search extends React.Component {
     this.MOBILE_MAX_WIDTH_PIXELS = 1100;   
     this.updateWindowWidth = this.updateWindowWidth.bind(this);
     this.updateWindowWidth = this.updateWindowWidth.bind(this);
-    this.state = { doneSearch:false,nightsOfStay: '1', numPeople: 1, missingFestival:false, missingLocation:false, festivalName:'Marco Carola The Birthday', locationOrigin:'Sofia'}
+    this.state = { doneSearch:false,nightsOfStay: '1', numPeople: 1, missingFestival:false, missingLocation:false, festivalName:'Junction 2', locationOrigin:'Sofia'}
   }
 
   updateWindowWidth() {

@@ -109,9 +109,9 @@
   }
 
   .currencyDropdownWrap{
-    margin-top: -58px;
-    width: 200px;
-    margin-left: -200px;
+    position: absolute;
+    top:50%;
+    left:0%;
   }
 
   .currencyCarret{
