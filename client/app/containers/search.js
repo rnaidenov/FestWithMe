@@ -8,7 +8,6 @@ import PeopleSelector from './peopleSelector';
 import NightsSelector from './nightsSelector';
 import FestivalInput from './festivalInput';
 import LocationInput from './locationInput';
-import '../styles/search.css';
 
 
 import Results from './results';

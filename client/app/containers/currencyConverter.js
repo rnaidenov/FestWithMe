@@ -4,8 +4,7 @@ import IconButton from 'material-ui/IconButton';
 import CircularProgress from 'material-ui/CircularProgress';
 import { changeCurrency } from '../actions/priceBreakdownActions';
 import CurrencyDropdown from '../components/currencyDropdown';
-import '../styles/currencyConverter.css';
-
+import '../../dist/styles/currencyConverter.css';
 
 @connect(store => {
     return {

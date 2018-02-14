@@ -76,7 +76,7 @@ class PriceBreakdown extends React.Component {
       return (
         <div key={key} className='accommodationTypeWrap'>
           <div className="accomodationInfo">
-            <img src={require(`../public/${propertyType.icon}`)} className='homeTypeIcon' />
+            <img src={require(`../../dist/public/${propertyType.icon}`)} className='homeTypeIcon' />
           </div>
           <div className='accomodationInfo' id='typeAndPrice'><p>{propertyType.type}</p></div>
           <div className='accomodationInfo' id='typeAndPrice'><p>{currency}{propertyType.price}</p></div>
@@ -89,7 +89,7 @@ class PriceBreakdown extends React.Component {
         <h1 className='priceBreakdownHeading'>Festival ticket</h1>
         <div className="contentWrap">
           <div className="mainContent">
-            <img src={require('../public/inactiveTicket.svg')} className='contentIcon inactive' />
+            <img src={require('../../dist/public/inactiveTicket.svg')} className='contentIcon inactive' />
             <p className='price-update-text'>
               Unfortunately, the event seems to be sold out on Resident Advisor.
               <br/>
@@ -120,7 +120,7 @@ class PriceBreakdown extends React.Component {
         <h1 className='priceBreakdownHeading'>Festival ticket</h1>
         <div className='contentWrap'>
           <div className="mainContent">
-            <img src={require('../public/ticket.svg')} className='contentIcon' />
+            <img src={require('../../dist/public/ticket.svg')} className='contentIcon' />
           </div>
           <p className='priceLabel'>{currency}{ticketPrice}</p>
         </div>

@@ -7,8 +7,7 @@ import { updateTicketPrice } from '../actions/priceUpdateActions';
 import CurrencyConverter from './currencyConverter';
 import CurrencyDropdown from '../components/currencyDropdown';
 import { Loader } from '../components/loader';
-
-import '../styles/results.css';
+import '../../dist/styles/results.css';
 
 
 @connect(store => {
