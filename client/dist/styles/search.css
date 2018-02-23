@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=family=Yanone+Kaffeesatz:300|Caveat+Brush|Lato:300|family=Roboto:300|Yantramanav:100|Oswald:300,400|BenchNine|Hammersmith+One|Rajdhani|Saira+Extra+Condensed|Quicksand|Abel|Yanone+Kaffeesatz');
+@import url('https://fonts.googleapis.com/css?family=family=Yanone+Kaffeesatz:300|Oregano|Lato:300|family=Roboto:300|Yantramanav:100|Oswald:300,400|BenchNine|Hammersmith+One|Rajdhani|Saira+Extra+Condensed|Quicksand|Abel|Yanone+Kaffeesatz');
 
 * {
   -webkit-box-sizing: border-box;
@@ -192,7 +192,7 @@ p {
 
 .appTitle{
   font-size: 110px;
-  font-family: 'Caveat Brush', cursive;
+  font-family: 'Oregano', cursive;
   text-align: center;
   padding-top: 5%;
   color: #000000a3;
@@ -231,12 +231,12 @@ p {
 }
 
 .searchBtn {
-  background-color: #414141 !important;
+  background-color: #462828 !important;
   border-radius: 50%;
 }
 
 .searchBtn:hover{
-  background-color: #6d6d6d !important;
+  background-color: #723939d2 !important;
 }
 
 .searchBtnIcon{

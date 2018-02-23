@@ -139,7 +139,7 @@ class Results extends React.Component {
 
 
 
-    if (!searchResults || !screenSize) {
+    if (!searchResults) {
       results = null;
     } else if (searching) {
       results = loadingPhase;

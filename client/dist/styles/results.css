@@ -149,7 +149,6 @@ body{
   }
 
   .breakdownContainerWrap{
-    padding-top: 2%;
     padding-left: 3.5%;
     padding-right: 3.5%;
     overflow:hidden;
@@ -211,7 +210,6 @@ body{
   }
 
   .breakdownContainerWrap{
-    padding-top: 2%;
     padding-left: 5%;
     padding-right: 5%;
     overflow:hidden;
@@ -343,6 +341,7 @@ priceBreakdownContainer
   margin-left: 4%;
   width: 23%;
   animation: comeUp 1s linear both;
+  padding-top:1%;
 }
 
 .hidden{
@@ -391,6 +390,7 @@ priceBreakdownContainer
   font-family: 'Quicksand', sans-serif;
   font-size: 30px;
   height:15%;
+  margin-bottom: 5%;
 }
 
 .contentIcon {

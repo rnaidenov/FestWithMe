@@ -110,6 +110,7 @@ class Search extends React.Component {
     };
     const errorStyle = { fontSize: '14px', color: '#841f26',marginTop:'-7%',zIndex:'1'}
   
+    if(!screenSize) return null;
     
     return (
         <MuiThemeProvider>
