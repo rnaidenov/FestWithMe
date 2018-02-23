@@ -67,11 +67,7 @@ class CurrencyConverter extends React.Component {
                     </div>
                 </div>
                 <div class={chatBubbleClass}>
-                    <div class="talktext">
-                        <p>Would you like to change the currency?</p>
-                    </div>
-                </div>
-                <div className='currencyDropdownWrap'>
+                    <p className='currencyDialogueText'>Would you like to change the currency?</p>
                     {chatBubbleClass === 'chatBubble right visible'
                         ? <CurrencyDropdown changeCurrency={(symbol) => this.changeCurrency(symbol)} />
                         : null}

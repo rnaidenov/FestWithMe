@@ -38,7 +38,7 @@ class CurrencyDropdown extends React.Component {
 
 
         return(
-            <div>
+            <div className='currencyDropdownWrap'>
                 <IconMenu
                     iconButtonElement={<IconButton style={{marginTop:'-15px',width:'65px'}}>
                                                     <FlagIcon 
@@ -50,12 +50,15 @@ class CurrencyDropdown extends React.Component {
                     onChange={(event, currencyValue) => this.changeCurrency(event, currencyValue)}
                     value={this.state.currencyValue}
                     menuStyle={{width:'100px',overflow:'hidden'}}
+                    className="currencyMenu"
                 >
                 {currencyChoices}
                 </IconMenu> 
-                <i class="material-icons currencyCarret">
-                    arrow_drop_down
-                </i>
+                <span className="carretWrap">
+                    <i class="material-icons currencyCarret">
+                        arrow_drop_down
+                    </i>
+                </span>
             </div>
         )
     }

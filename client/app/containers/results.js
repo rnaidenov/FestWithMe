@@ -106,6 +106,8 @@ class Results extends React.Component {
     )
     
 
+    console.log(screenSize);
+
 
     const finishedPhase = (
       <div className='finishedResultsWrap'>
@@ -123,19 +125,21 @@ class Results extends React.Component {
           {screenSize !== 'desktop' ? priceBreakdownCarret : null}
           <div ref={(wrapper) => { this.wrapperRef = wrapper }} className='breakdownContainerWrap'>
             <PriceBreakdown
-              prices={prices || {}}
-              isSelected={isPricebreakdownSelected}
-              currency={currency || this.DEFAULT_CURRENCY}
-              updateTicketPrice={updateTicketPrice}
-              screenSize={screenSize}
-              searchDetails={searchDetails}
-            />
+                prices={prices || {}}
+                isSelected={isPricebreakdownSelected}
+                currency={currency || this.DEFAULT_CURRENCY}
+                updateTicketPrice={updateTicketPrice}
+                screenSize={screenSize}
+                searchDetails={searchDetails}
+              />
           </div>
         </div>
       </div>
     )
 
-    if (!searchResults) {
+
+
+    if (!searchResults || !screenSize) {
       results = null;
     } else if (searching) {
       results = loadingPhase;

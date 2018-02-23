@@ -15,39 +15,15 @@
 
   
   .chatBubble.visible {
-    display: block;
     position: relative;
     width: 65%;
-    margin-right: 5%;
-    height: 90px;
-    background-color: rgba(0, 0, 0, 0.7);
-    animation:bounceUp 1s linear both;
-    color:white;
-    font-size: 1.1em;
     padding-top: 1.5%;
   }
 
-  .chatBubble.right:after{
-    content: ' ';
-    position: absolute;
-    width: 0;
-    height: 0;
-    left: auto;
-    right: -24px;
-    top: 45px;
-    bottom: auto;
-    border: 12px solid black;
-    border-color: transparent transparent transparent rgba(0, 0, 0, 0.75);
-  }
 
   .currencyDropdownWrap{
-    margin-top: -32px;
-    width: 65%;
-  }
-  
-  .currencyCarret{
-    margin-top: 1.5%;
-    margin-left: -2%;
+    position: absolute;
+    top: 55%;
   }
 
 
@@ -75,96 +51,21 @@
 
 }
 
-/*----------- Medium screen size -----------*/
+/*----------- Medium & Big screen sizes -----------*/
 
 
-@media screen and (min-width: 500px) and (max-width:1099px) {
-
+@media screen and (min-width: 500px) {
   .chatBubble.visible {
     display: block;
     position: absolute;
     width: 200px;
-    margin-right: 5%;
-    height: 90px;
-    background-color: rgba(0, 0, 0, 0.7);
-    animation:bounceUp 1s linear both;
-    color:white;
-    font-size: 1.1em;
-    padding-top: 1.5%;
+    padding-top: 3.5%;
     top: 0;
-    right: 95%;
+    right: 100%;
   }
-
-  .chatBubble.right:after{
-    content: ' ';
-    position: absolute;
-    width: 0;
-    height: 0;
-    left: auto;
-    right: -24px;
-    top: 45px;
-    bottom: auto;
-    border: 12px solid black;
-    border-color: transparent transparent transparent rgba(0, 0, 0, 0.75);
-  }
-
-  .currencyDropdownWrap{
-    position: absolute;
-    top:50%;
-    left:git 0%;
-  }
-
-  .currencyCarret{
-    margin-top: 4.5%;
-    margin-left: -8%;
-  }
-  
 }
 
 
-/*----------- Big screen size -----------*/
-
-@media screen and (min-width:1100px) {
-
-  .chatBubble.visible {
-    display: block;
-    position: absolute;
-    width: 200px;
-    margin-right: 5%;
-    height: 90px;
-    background-color: rgba(0, 0, 0, 0.7);
-    animation:bounceUp 1s linear both;
-    color:white;
-    font-size: 1.1em;
-    padding-top: 1.5%;
-    top: 0;
-    right: 95%;
-  }
-
-  .chatBubble.right:after{
-    content: ' ';
-    position: absolute;
-    width: 0;
-    height: 0;
-    left: auto;
-    right: -24px;
-    top: 45px;
-    bottom: auto;
-    border: 12px solid black;
-    border-color: transparent transparent transparent rgba(0, 0, 0, 0.75);
-  }
-
-  .currencyDropdownWrap{
-    margin-top: -58px;
-    width: 200px;
-    margin-left: -200px;
-  }
-
-  .currencyCarret{
-    margin-top: 4.5%;
-    margin-left: -8%;
-  }
-}
 
 #happy {
   transform: rotate(95deg);
@@ -181,6 +82,29 @@
   display:none;
 }
 
+.chatBubble.visible{
+  display: block;
+  margin-right: 5%;
+  height: 100px;
+  background-color: rgba(0, 0, 0, 0.7);
+  animation:bounceUp 1s linear both;
+  color:white;
+  font-size: 1.1em;
+}
+
+
+.chatBubble.right:after{
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: auto;
+  right: -24px;
+  top: 45px;
+  bottom: auto;
+  border: 12px solid black;
+  border-color: transparent transparent transparent rgba(0, 0, 0, 0.75);
+}
 
 .currencyLabel {
   display: inline-block;
@@ -198,9 +122,30 @@
   margin-top:-33px;
 }
 
+.currencyDialogueText{
+  margin-bottom:0;
+}
+
+.currencyDropdownWrap{
+  width:35%;
+  margin-left: 32.5%;
+  margin-right: 32.5%;
+  display: flex;
+}
+
+.currencyMenu{
+  width:80%;
+  margin-left: -4%;
+}
+
+.carretWrap{
+  display: block;
+  width:20%;
+  padding-top: 15%;
+}
 
 .currencyCarret {
   color:white;
-  position: absolute;
   font-size: 18px;
+  line-height: 0;
 }
