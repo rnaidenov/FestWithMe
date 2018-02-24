@@ -375,7 +375,7 @@ priceBreakdownContainer
 }
 
 .festivalNameLabel {
-  font-weight: 500;
+  font-weight: 400;
   color:#633935;
 }
 
@@ -394,7 +394,7 @@ priceBreakdownContainer
 
 .priceBreakdownHeading {
   width:100%;
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Assistant', sans-serif;
   font-size: 30px;
   height:15%;
   margin-bottom: 5%;
@@ -454,6 +454,8 @@ priceBreakdownContainer
 }
 
 .priceLabel {
+  font-family: 'Oswald', sans-serif !important;
+  font-weight: 300;
   color:#3d6a6f;
   font-size: 42px;
   width: 100%;
@@ -473,7 +475,8 @@ priceBreakdownContainer
 
 
 .iataCodes {
-  font-family: 'BenchNine', sans-serif;
+  font-family: 'Teko', sans-serif;
+  font-weight: 700;
   font-size: 32px;
   width: 25%;
 }
@@ -513,6 +516,8 @@ priceBreakdownContainer
 
 
 #typeAndPrice {
+  font-family: 'Assistant', sans-serif !important;
+  font-weight: 300;
   padding-top: 5%;
 }
 
