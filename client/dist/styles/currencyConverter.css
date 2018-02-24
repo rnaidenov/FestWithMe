@@ -123,6 +123,8 @@
 }
 
 .currencyDialogueText{
+  font-family: 'Oswald', sans-serif !important;
+  font-weight:300;
   margin-bottom:0;
 }
 

@@ -31,11 +31,14 @@ class PeopleSelector extends React.Component {
 
         const { numPeople } = this.state;
         const { inputStyle } = this.props;
+        const menuOptionStyle = { ...inputStyle, fontSize:'20px', paddingLeft:'0px' };
+        const labelStyle =  {...inputStyle, float:'left' };
         
         const selectOptions = this.getOptions().map((option, idx) => {
             return (<MenuItem
                 key={idx}
                 value={idx}
+                style={menuOptionStyle}
                 primaryText={option}
             />);
         });
@@ -46,7 +49,7 @@ class PeopleSelector extends React.Component {
                     value={numPeople}
                     onChange={(event, idx, value) => this.selectNumPeople(event, idx, value)}
                     style={{ width: '100%' }}
-                    labelStyle={{ float:'left', paddingLeft: '12px' }}
+                    labelStyle={labelStyle}
                 >
                     {selectOptions}
                 </SelectField>

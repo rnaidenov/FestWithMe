@@ -104,9 +104,10 @@ class Search extends React.Component {
 
     const inputStyle = {
       paddingLeft: '12px',
-      fontFamily: "'Abel', sans-serif",
-      fontSize: '18px',
-      zIndex:'2'
+      fontFamily: "'Teko', sans-serif",
+      fontWeight:300,
+      fontSize: '26px',
+      zIndex:2
     };
     const errorStyle = { fontSize: '14px', color: '#841f26',marginTop:'-7%',zIndex:'1'}
   
@@ -116,26 +117,26 @@ class Search extends React.Component {
         <MuiThemeProvider>
           <div>
             { !isPhone ? appTitle : null }
-            <div className={!isPhone && doneSearch ? "searchWrap noSearch" : "searchWrap"}>
+            <div className='searchWrap'>
               <PeopleSelector
                 updateNumPeople={(numPeople) => this.updateNumPeople(numPeople)}
                 inputStyle={inputStyle}
               />
-              <p className="inlineLabel" id="goingToLabel">going to</p>
+              <p className="searchText" id="goingToLabel">going to</p>
               <FestivalInput
                 updateFestivalInput={(festivalName) => this.updateFestivalInput(festivalName)}
                 inputStyle={inputStyle}
                 errorStyle={errorStyle}
                 missingFestival={missingFestival}
               />
-              <p className="inlineLabel" id="fromLabel">from</p>
+              <p className="searchText" id="fromLabel">from</p>
               <LocationInput
                 updateLocationInput={(location) => this.updateLocationInput(location)}
                 inputStyle={inputStyle}
                 errorStyle={errorStyle}
                 missingLocation={missingLocation}
               />
-              <p className="inlineLabel" id="forLabel">for</p>
+              <p className="searchText" id="forLabel">for</p>
               <NightsSelector
                 updateNightsField={(numOfNights) => { this.updateNightsField(numOfNights) }}
                 inputStyle={inputStyle}

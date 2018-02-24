@@ -6,6 +6,12 @@ body{
 
 @media screen and (max-width: 499px) {
 
+  .resultWrap{
+    position: absolute;
+    width:100%;
+    bottom: 0;
+  }
+
   .priceBreakdownWrap{
     width:100%;
     display: relative;
@@ -275,7 +281,7 @@ priceBreakdownContainer
 }
 
 #resultsLabel {
-  padding-top:1%;
+  font-family: 'Oswald', sans-serif !important;
 }
 
 .priceBreakdown {
@@ -290,9 +296,9 @@ priceBreakdownContainer
 
 #priceBreakdownLabel {
   margin-bottom: -0.3%;
-  color: #dfdfdf;
-  font-size: 16px;
-  font-family: 'Rajdhani', sans-serif !important;
+  color: #f5f5f5;
+  font-size: 22px;
+  font-family: 'Oswald', sans-serif !important;
 }
 
 .smiley {
@@ -365,15 +371,16 @@ priceBreakdownContainer
   width: 350px;
   margin: auto;
   text-align: center;
+  padding-top: 4%;
 }
 
 .festivalNameLabel {
-  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-weight: 500;
   color:#633935;
 }
 
 .totalPriceLabel {
-  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-weight: 500;
   color: #105755;
 }
 
@@ -411,7 +418,7 @@ priceBreakdownContainer
 }
 
 .resultText {
-  font-family: 'Saira Extra Condensed', sans-serif;
+  font-weight: 300;
   color: #18121E;
 }
 

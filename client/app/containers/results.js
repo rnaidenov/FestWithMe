@@ -104,9 +104,6 @@ class Results extends React.Component {
         </i>
       </div>
     )
-    
-
-    console.log(screenSize);
 
 
     const finishedPhase = (
@@ -115,23 +112,25 @@ class Results extends React.Component {
           prices={prices || {}}
           currency={currency || this.DEFAULT_CURRENCY}
         />
-        <p id='resultsLabel'>
-          <span className="resultText">Going to </span>
-          <span className="festivalNameLabel">{festivalName}</span>
-          <span className="resultText"> will cost you </span>
-          <span className="totalPriceLabel">{currency || this.DEFAULT_CURRENCY}{totalPrice}</span>
-        </p>
-        <div className="priceBreakdownWrap">
-          {screenSize !== 'desktop' ? priceBreakdownCarret : null}
-          <div ref={(wrapper) => { this.wrapperRef = wrapper }} className='breakdownContainerWrap'>
-            <PriceBreakdown
-                prices={prices || {}}
-                isSelected={isPricebreakdownSelected}
-                currency={currency || this.DEFAULT_CURRENCY}
-                updateTicketPrice={updateTicketPrice}
-                screenSize={screenSize}
-                searchDetails={searchDetails}
-              />
+      <div className='resultWrap'>
+          <p id='resultsLabel'>
+            <span className="resultText">Going to </span>
+            <span className="festivalNameLabel">{festivalName}</span>
+            <span className="resultText"> will cost you </span>
+            <span className="totalPriceLabel">{currency || this.DEFAULT_CURRENCY}{totalPrice}</span>
+          </p>
+          <div className="priceBreakdownWrap">
+            {screenSize !== 'desktop' ? priceBreakdownCarret : null}
+              <div ref={(wrapper) => { this.wrapperRef = wrapper }} className='breakdownContainerWrap'>
+                <PriceBreakdown
+                    prices={prices || {}}
+                    isSelected={isPricebreakdownSelected}
+                    currency={currency || this.DEFAULT_CURRENCY}
+                    updateTicketPrice={updateTicketPrice}
+                    screenSize={screenSize}
+                    searchDetails={searchDetails}
+                  />
+              </div>
           </div>
         </div>
       </div>
