@@ -21,6 +21,7 @@ import Results from './results';
 class Search extends React.Component {
   constructor(props) {
     super(props);
+    console.log(navigator.offline);
     // change missingFestival and location
     this.SMARTPHONE_MAX_WIDTH_PIXELS = 500;
     this.MOBILE_MAX_WIDTH_PIXELS = 1100;   
