@@ -76,6 +76,7 @@
   height:100px;
   margin: auto;
   animation: bounceUp 1000ms linear both;
+  margin-bottom: 1%;
 }
 
 .chatBubble {
