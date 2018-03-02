@@ -10,7 +10,6 @@ export function changeCurrency(from, to, prices) {
         const housingDetailsConverted = await convertAccommodationPrices(from,to,housingDetails);
         const totalPriceRes = await fetch(`http://localhost:3000/api/currencies/?from=${from}&to=${to}&amount=${totalPrice}`);
         const { convertedAmount: totalPriceConverted } = await totalPriceRes.json();
-        console.log("NEW CURRENCY SYMBOL SHOULD BE ", to);
             dispatch({
                 type: 'CURRENCY_CHANGED',
                 details: {

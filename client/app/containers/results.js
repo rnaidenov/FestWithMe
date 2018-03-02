@@ -68,13 +68,11 @@ class Results extends React.Component {
 
     const { searchResults, festivalName,  screenSize } = this.props;
     const { carret, isPricebreakdownSelected, priceDetails } = this.state;
-    const { loadedValue, maxLoadValue, text, color, loaderValue, searching, isActive, prices, currency, searchDetails } = searchResults || {};
+    const { searching, prices, currency, searchDetails, isActive } = searchResults || {};
     const { totalPrice } = prices || {};
     let results;
 
-    const loadingPhase = (
-      <Loader loadedValue={loadedValue} maxLoadValue={maxLoadValue} text={text || ''}  color={color}/>
-    )
+  
 
     const pastEvent = (
       <div className='soldOutWrap'>
@@ -141,7 +139,7 @@ class Results extends React.Component {
     if (!searchResults) {
       results = null;
     } else if (searching) {
-      results = loadingPhase;
+      results = <Loader/>;
     } else {
       results = isActive ? finishedPhase : pastEvent
     }
