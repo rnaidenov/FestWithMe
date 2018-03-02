@@ -65,55 +65,67 @@ class PriceBreakdown extends React.Component {
   render() {
 
     const { prices, currency, screenSize } = this.props;
-    const { flightDetails, ticketPrice, housingDetails: { properties }, totalPrice } = prices;
+    // const { flightDetails, ticketPrice, housingDetails: { properties }, totalPrice } = prices;
     const { priceBreakdownClass, newPriceAmount, newPriceMissing, showContent } = this.state;
 
     const noInfo = (
       <span id='noInfoLabel'>No information</span>
     )
 
-    const accommodationTypes = properties.map((propertyType, key) => {
-      return (
-        <div key={key} className='accommodationTypeWrap'>
-          <div className="accomodationInfo">
-            <img src={require(`../../dist/public/${propertyType.icon}`)} className='homeTypeIcon' />
-          </div>
-          <div className='accomodationInfo' id='typeAndPrice'><p>{propertyType.type}</p></div>
-          <div className='accomodationInfo' id='typeAndPrice'><p>{currency}{propertyType.price}</p></div>
-        </div>
-      )
-    });
+    // const accommodationTypes = properties.map((propertyType, key) => {
+    //   return (
+    //     <div key={key} className='accommodationTypeWrap'>
+    //       <div className="accomodationInfo">
+    //         <img src={require(`../../dist/public/${propertyType.icon}`)} className='homeTypeIcon' />
+    //       </div>
+    //       <div className='accomodationInfo' id='typeAndPrice'><p>{propertyType.type}</p></div>
+    //       <div className='accomodationInfo' id='typeAndPrice'><p>{currency}{propertyType.price}</p></div>
+    //     </div>
+    //   )
+    // });
 
-    const soldOutFestival = (
-      <div>
-        <h1 className='priceBreakdownHeading'>Festival ticket</h1>
-        <div className="contentWrap">
-          <div className="mainContent">
-            <img src={require('../../dist/public/inactiveTicket.svg')} className='contentIcon inactive' />
-            <p className='price-update-text'>
-              Unfortunately, the event seems to be sold out on Resident Advisor.
-              <br/>
-              <span className='price-update-text prompt'>If you have purchased a ticket already, you can enter the price amount in the input box below.</span>
-            </p>
-          </div>
-          <div className='inputWrap'>
-            <Paper className='price-update-input'>
-              <TextField 
-                underlineShow={false}
-                style={{width:'50px'}}
-                value={newPriceAmount}
-                onChange={this.updatePriceAmt}
-                id='priceInputField'
-              />
-            </Paper>
-            <RaisedButton 
-              className='price-update-btn' 
-              disabled={newPriceMissing}
-              onClick={this.updateTicketPrice}><p className='price-update-btn-text'>OK</p></RaisedButton>
-          </div>
-        </div>
-      </div>
-    )
+    // const soldOutFestival = (
+    //   <div>
+    //     <h1 className='priceBreakdownHeading'>Festival ticket</h1>
+    //     <div className="contentWrap">
+    //       <div className="mainContent">
+    //         <img src={require('../../dist/public/inactiveTicket.svg')} className='contentIcon inactive' />
+    //         <p className='price-update-text'>
+    //           Unfortunately, the event seems to be sold out on Resident Advisor.
+    //           <br/>
+    //           <span className='price-update-text prompt'>If you have purchased a ticket already, you can enter the price amount in the input box below.</span>
+    //         </p>
+    //       </div>
+    //       <div className='inputWrap'>
+    //         <Paper className='price-update-input'>
+    //           <TextField 
+    //             underlineShow={false}
+    //             style={{width:'50px'}}
+    //             value={newPriceAmount}
+    //             onChange={this.updatePriceAmt}
+    //             id='priceInputField'
+    //           />
+    //         </Paper>
+    //         <RaisedButton 
+    //           className='price-update-btn' 
+    //           disabled={newPriceMissing}
+    //           onClick={this.updateTicketPrice}><p className='price-update-btn-text'>OK</p></RaisedButton>
+    //       </div>
+    //     </div>
+    //   </div>
+    // )
+
+    // const activeFestival = (
+    //   <div>
+    //     <h1 className='priceBreakdownHeading'>Festival ticket</h1>
+    //     <div className='contentWrap'>
+    //       <div className="mainContent">
+    //         <img src={require('../../dist/public/ticket.svg')} className='contentIcon' />
+    //       </div>
+    //       <p className='priceLabel'>{currency}{ticketPrice}</p>
+    //     </div>
+    //   </div>
+    // )
 
     const activeFestival = (
       <div>
@@ -122,34 +134,35 @@ class PriceBreakdown extends React.Component {
           <div className="mainContent">
             <img src={require('../../dist/public/ticket.svg')} className='contentIcon' />
           </div>
-          <p className='priceLabel'>{currency}{ticketPrice}</p>
+          <p className='priceLabel'>£420</p>
         </div>
       </div>
     )
 
-    const festival = ticketPrice!=null ? activeFestival : soldOutFestival
 
-    const travel = (
-      <div className='accomodationWrap'>
-        <h1 className='priceBreakdownHeading'>Plane ticket</h1>
-        <FlightPrice details={flightDetails} currency={currency} />
-      </div>
-    )
+    // const festival = ticketPrice!=null ? activeFestival : soldOutFestival
 
-    const housing = (
-      <div className="accomodationWrap">
-        <h1 className='priceBreakdownHeading'>Accommodation</h1>
-        <div className="contentWrap">
-          {accommodationTypes}
-        </div>
-      </div>
-    )
+    // const travel = (
+    //   <div className='accomodationWrap'>
+    //     <h1 className='priceBreakdownHeading'>Plane ticket</h1>
+    //     <FlightPrice details={flightDetails} currency={currency} />
+    //   </div>
+    // )
 
-    const priceBreakdownContent = [festival, travel, housing];
+    // const housing = (
+    //   <div className="accomodationWrap">
+    //     <h1 className='priceBreakdownHeading'>Accommodation</h1>
+    //     <div className="contentWrap">
+    //       {accommodationTypes}
+    //     </div>
+    //   </div>
+    // )
+
+    const priceBreakdownContent = [activeFestival, activeFestival, activeFestival];
 
     const content = priceBreakdownContent.map((content, idx) => {
       return (
-        <Paper className='contentType' id={`content${idx}`} key={idx}>
+        <Paper className='contentType' id={`content${idx}`} zDepth={5} key={idx}>
           {content}
         </Paper>
       )

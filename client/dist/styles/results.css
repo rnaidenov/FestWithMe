@@ -339,7 +339,6 @@ priceBreakdownContainer
   width: 100%;
 }
 
-
 .contentType{
   display: inline-grid;
   height:350px;
@@ -347,6 +346,7 @@ priceBreakdownContainer
   margin-left: 4%;
   width: 23%;
   animation: comeUp 1s linear both;
+  box-shadow: inset 0 0 0 3000px rgba(255,255,255,0.3);
   padding-top:1%;
 }
 
@@ -459,6 +459,7 @@ priceBreakdownContainer
   color:#3d6a6f;
   font-size: 42px;
   width: 100%;
+  z-index: 3;
 }
 
 .mainContent{
