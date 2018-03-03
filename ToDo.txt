@@ -1,3 +1,0 @@
-TODO:
-
-- Fix waiting message container to match text width 
