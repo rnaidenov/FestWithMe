@@ -8,14 +8,19 @@ var CACHE_NAME = 'fest-with-initial-load-cache-v1';
 
 const toCache = [
     '/',
-    'service-worker.js',
-    '/bundle.js'
+    '/service-worker.js',
+    '/bundle.js',
+    '/styles/search.css',
+    '/styles/results.css',
+    '/styles/currencyConverter.css'
 ]
 
 
 self.addEventListener('install', (event) => {
     event.waitUntil(
-        _addToCatche(toCache)
+        caches.open(CACHE_NAME).then(cache => {
+            cache.addAll(toCache);
+        })
     );
 });
 
@@ -23,12 +28,14 @@ self.addEventListener('install', (event) => {
 self.addEventListener('fetch', event => {
     event.respondWith(
         caches.match(event.request).then(response => {
-            console.log("TRYING TO GET " + event.request.url);
+
+            // return response || fetch(event.request);
+
+            // console.log("TRYING TO GET " + event.request.url);
             if (response) {
                 console.log("Getting " + response.url + " from cache");
                 return response;
             } else {
-                _addNewCaches(event.request.url);
                 return fetch(event.request);
             }
         })
