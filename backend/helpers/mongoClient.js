@@ -11,7 +11,7 @@ const saveIfNotExist = (eventName) => {
 const getSavedEvents = () => {
     return new Promise((resolve, reject) => {
         Festivals.find({}, (err, festivals) => {
-            err ? resolve([]) : resolve(festivals)
+            err ? reject(err) : resolve(festivals)
         });
     });
 }

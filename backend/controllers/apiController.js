@@ -19,8 +19,12 @@ module.exports = (app) => {
   app.use(bodyParser.urlencoded({ extended: true }));
 
   app.get("/api/festivals/", async (req, res) => {
-    const events = await MongoClient.getSavedEvents();
-    res.send(events);
+    try{
+      const events = await MongoClient.getSavedEvents();
+      res.status(200).send(events);
+    } catch(err){
+      res.status(500).send(err)
+    }
   });
 
   app.get("/api/prices/housing", (req, res) => {

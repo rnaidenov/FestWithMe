@@ -97,9 +97,10 @@ class Search extends React.Component {
             locationHint, hintStyle, missingFestival, missingLocation, festivalToSearch, doneSearch, screenSize } = this.state;
     const { festivalInput } = this.props;
 
+    const isOnline = navigator.onLine;
     const isPhone = screenSize==='phone';
     const appTitle = (
-      <div className={ !isPhone && doneSearch ? "appTitle noSearch" : "appTitle"}>FestWithMe</div>
+      <div className={ isOnline && !isPhone && doneSearch ? "appTitle noSearch" : "appTitle"}>FestWithMe</div>
     )
 
     const inputStyle = {
