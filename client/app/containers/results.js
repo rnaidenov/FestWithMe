@@ -21,7 +21,7 @@ class Results extends React.Component {
   constructor(props) {
     super(props);
     this.DEFAULT_CURRENCY = '$';
-    this.state = { carret: 'arrow_drop_up', isPricebreakdownSelected: false }; 
+    this.state = { carret: 'arrow_drop_up', isPricebreakdownSelected: false };
     this.closePriceBreakdownMobile = this.closePriceBreakdownMobile.bind(this);
   }
 
@@ -48,7 +48,7 @@ class Results extends React.Component {
 
   closePriceBreakdownMobile(e) {
     const { isPricebreakdownSelected, screenSize } = this.state;
-    if (this.wrapperRef && !this.wrapperRef.contains(e.target) && screenSize==='phone') {
+    if (this.wrapperRef && !this.wrapperRef.contains(e.target) && screenSize === 'phone') {
       if (isPricebreakdownSelected) {
         this.closePriceBreakdown();
       }
@@ -56,23 +56,23 @@ class Results extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
-    const { screenSize:newScreenSize } = newProps;
+    const { screenSize: newScreenSize } = newProps;
     const { screenSize } = this.state;
 
-    if(screenSize!==newScreenSize){
+    if (screenSize !== newScreenSize) {
       this.setState({ screenSize: newScreenSize });
     }
   }
 
   render() {
 
-    const { searchResults, festivalName,  screenSize } = this.props;
+    const { searchResults, festivalName, screenSize } = this.props;
     const { carret, isPricebreakdownSelected, priceDetails } = this.state;
     const { searching, prices, currency, searchDetails, isActive } = searchResults || {};
     const { totalPrice } = prices || {};
     let results;
 
-  
+
 
     const pastEvent = (
       <div className='soldOutWrap'>
@@ -110,7 +110,7 @@ class Results extends React.Component {
           prices={prices || {}}
           currency={currency || this.DEFAULT_CURRENCY}
         />
-      <div className='resultWrap'>
+        <div className='resultWrap'>
           <p id='resultsLabel'>
             <span className="resultText">Going to </span>
             <span className="festivalNameLabel">{festivalName}</span>
@@ -119,17 +119,17 @@ class Results extends React.Component {
           </p>
           <div className="priceBreakdownWrap">
             {screenSize !== 'desktop' ? priceBreakdownCarret : null}
-              <div ref={(wrapper) => { this.wrapperRef = wrapper }} className='breakdownContainerWrap'>
-                <PriceBreakdown
-                    prices={prices || {}}
-                    isSelected={isPricebreakdownSelected}
-                    currency={currency || this.DEFAULT_CURRENCY}
-                    updateTicketPrice={updateTicketPrice}
-                    screenSize={screenSize}
-                    searchDetails={searchDetails}
-                  />
-              </div>
           </div>
+        </div>
+        <div ref={(wrapper) => { this.wrapperRef = wrapper }} className='breakdownContainerWrap'>
+          <PriceBreakdown
+            prices={prices || {}}
+            isSelected={isPricebreakdownSelected}
+            currency={currency || this.DEFAULT_CURRENCY}
+            updateTicketPrice={updateTicketPrice}
+            screenSize={screenSize}
+            searchDetails={searchDetails}
+          />
         </div>
       </div>
     )
@@ -139,7 +139,7 @@ class Results extends React.Component {
     if (!searchResults) {
       results = null;
     } else if (searching) {
-      results = <Loader/>;
+      results = <Loader />;
     } else {
       results = isActive ? finishedPhase : pastEvent
     }

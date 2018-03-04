@@ -1,6 +1,3 @@
-import { coroutine as co } from 'bluebird';
-export let LAST_EVENT_DETAILS;
-
 const _getFlightDetails = (origin, cityDestination, fullDestination, date, dispatch) => {
   dispatch({ type: 'FLIGHTS_SEARCH_START', destination: cityDestination });
   _increaseLoader(dispatch, 60);

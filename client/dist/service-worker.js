@@ -92,7 +92,7 @@ const fileManifest = [
   },
   {
     "url": "styles/currencyConverter.css",
-    "revision": "cbe34b5f6677befe056fe818d6e353fc"
+    "revision": "9c9f4dc312f6073a462f7771c762d9bc"
   },
   {
     "url": "styles/results.css",

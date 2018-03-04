@@ -15,11 +15,12 @@
 
   
   .chatBubble.visible {
-    position: relative;
-    width: 65%;
-    padding-top: 1.5%;
+    width: 70%;
   }
 
+  .currencyDialogueText{
+    font-size: 20px;
+  }
 
   .currencyDropdownWrap{
     position: absolute;
@@ -56,16 +57,12 @@
 
 @media screen and (min-width: 500px) {
   .chatBubble.visible {
-    display: block;
-    position: absolute;
     width: 200px;
     padding-top: 3.5%;
     top: 0;
     right: 100%;
   }
 }
-
-
 
 #happy {
   transform: rotate(95deg);
@@ -85,8 +82,8 @@
 
 .chatBubble.visible{
   display: block;
-  margin-right: 5%;
-  height: 100px;
+  position: absolute;
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
   animation:bounceUp 1s linear both;
   color:white;
