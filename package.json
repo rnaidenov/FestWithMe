@@ -18,7 +18,6 @@
   "license": "ISC",
   "dependencies": {
     "@google/maps": "^0.4.3",
-    "airapi": "^0.1.0",
     "body-parser": "^1.17.2",
     "cheerio": "^1.0.0-rc.1",
     "cors": "^2.8.1",

@@ -1,4 +1,3 @@
-const airbnb = require('airapi');
 const formatter = require('./formatter');
 const fetch = require('node-fetch');
 
