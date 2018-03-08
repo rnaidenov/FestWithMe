@@ -115,7 +115,6 @@ export const loadFestivals = () => {
   return async dispatch => {
     try {
       const festivals = await fetch("http://localhost:3000/api/festivals").then(data => data.json());
-      console.log(festivals);
       dispatch({ type: 'LOAD_FESTIVALS_FINISH', festivals });
     } catch(err) {
       dispatch({ type: 'LOAD_FESTIVALS_ERROR' });

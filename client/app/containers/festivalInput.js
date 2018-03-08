@@ -35,6 +35,7 @@ class FestivalInput extends React.Component {
 
         const { festivalName } = this.state;
         const { inputStyle, errorStyle, festivals, missingFestival } = this.props;
+        console.log(this.props);
 
         return (
             <Paper zDepth={1} className='searchContainer' id="festivalField">
