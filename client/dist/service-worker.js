@@ -24,7 +24,11 @@ const fileManifest = [
   },
   {
     "url": "index.html",
-    "revision": "7893397a494d44f8c559547b4ebaf77b"
+    "revision": "10753adb18308c0e6f7d71c8dfe823f6"
+  },
+  {
+    "url": "manifest.json",
+    "revision": "d4b8b4208853a1cda654c39ea0021ac3"
   },
   {
     "url": "public/airplane.svg",
@@ -45,6 +49,42 @@ const fileManifest = [
   {
     "url": "public/inactiveTicket.svg",
     "revision": "f091ad4383fb6f516fef2e0c8071e1e2"
+  },
+  {
+    "url": "public/manifest/android-chrome-192x192.png",
+    "revision": "38fb72de7d5177bd89aa73b9bf0dae80"
+  },
+  {
+    "url": "public/manifest/apple-touch-icon.png",
+    "revision": "2dd6133809cefc8c33a43572527eb371"
+  },
+  {
+    "url": "public/manifest/browserconfig.xml",
+    "revision": "389eabe3c9a90736f426109c84458455"
+  },
+  {
+    "url": "public/manifest/favicon-16x16.png",
+    "revision": "ae8564a0fc709d02ce4d9391866a5f70"
+  },
+  {
+    "url": "public/manifest/favicon-32x32.png",
+    "revision": "6509488c2491fe19fcdf3e7e10f8f3a4"
+  },
+  {
+    "url": "public/manifest/favicon.ico",
+    "revision": "5c4326bfdca3834cc82376cc8e93cf1f"
+  },
+  {
+    "url": "public/manifest/mstile-150x150.png",
+    "revision": "8fdb445f5d6ec4a57c6b0d813f7f887f"
+  },
+  {
+    "url": "public/manifest/safari-pinned-tab.svg",
+    "revision": "3df5bab3a38c28178673a96eb504819c"
+  },
+  {
+    "url": "public/manifest/splashscreen-512x512.png",
+    "revision": "2e730ae8d2296de2e15337974a236adc"
   },
   {
     "url": "public/party_background_mobile.jpg",

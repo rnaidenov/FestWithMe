@@ -1,0 +1,41 @@
+{
+    "short_name": "FestWithMe",
+    "name": "FestWithMe",
+    "icons": [
+        {
+            "src": "public/manifest/favicon-16x16.png",
+            "type": "image/png",
+            "sizes": "16x16"
+        },
+        {
+            "src": "public/manifest/favicon-32x32.png",
+            "type": "image/png",
+            "sizes": "32x32"
+        },
+        {
+            "src": "public/manifest/apple-touch-icon.png",
+            "type": "image/png",
+            "sizes": "180x180"
+        },
+        {
+            "src": "public/manifest/mstile-150x150.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "public/manifest/android-chrome-192x192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "public/manifest/splashscreen-512x512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ],
+    "display":"standalone",
+    "orientation":"portrait",
+    "background_color": "#b7334d",
+    "theme_color":"#aab3bb",
+    "start_url": "/"
+}
