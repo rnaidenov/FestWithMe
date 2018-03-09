@@ -20,6 +20,7 @@ module.exports = (app) => {
 
   app.get("/api/festivals/", async (req, res) => {
     try{
+      await MongoClient.removePastEvents();
       const events = await MongoClient.getSavedEvents();
       res.status(200).send(events);
     } catch(err){

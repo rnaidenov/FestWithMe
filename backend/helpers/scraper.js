@@ -10,8 +10,8 @@ const MongoClient = require('./mongoClient');
 function getPrice(body) {
   return new Promise((resolve, reject) => {
     _scrapePrice(body).then(details => {
-      const { soldOut, price } = details;
-      if (!soldOut) {
+      const { soldOut, price, isActive } = details;
+      if (!soldOut && isActive) {
         const ticketAndBookingFee = price.children[1].children[0].children[0].children[0].data;
         resolve(_formatPrice(ticketAndBookingFee));
       } else {
@@ -33,7 +33,7 @@ function _scrapePrice(body) {
         // Getting the different types of tickets wrapped within <li/>
         tickets.children().get(2).children.forEach(item => {
           if (item.type == 'tag' && item.name == 'li' && item.attribs.class !== 'closed') {
-            resolve({ soldOut: false, price: item });
+            resolve({ soldOut: false, price: item, isActive:true });
           }
         })
       }
@@ -151,7 +151,7 @@ const getEventDetails = (url) => {
     try {
       const eventInfo = await _getEventBody(url).then(body => Promise.all([_scrapeEventName(body), getPrice(body), getCity(body), getCountry(body), getDate(body)]));
       const [name, priceDetails, city, country, date] = eventInfo;
-      MongoClient.saveIfNotExist(name);
+      MongoClient.saveIfNotExist({name, date});
       let eventDetails = {
         name,
         city,
