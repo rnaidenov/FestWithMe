@@ -19,8 +19,8 @@ importScripts('workbox-sw.prod.v2.1.3.js');
  */
 const fileManifest = [
   {
-    "url": "/bundle.js",
-    "revision": "5ab4e5d24597a3c9b4e91388f58176e3"
+    "url": "/bundle.js.gz",
+    "revision": "f4934a034c3accc124b6f41576fafab7"
   },
   {
     "url": "index.html",
@@ -125,10 +125,6 @@ const fileManifest = [
   {
     "url": "public/united-states.svg",
     "revision": "4a90ee18671e922d4eb77cd821ed821b"
-  },
-  {
-    "url": "service-worker-registration.js",
-    "revision": "9675e9faefdbd4a62c9c2fad6c0e242f"
   },
   {
     "url": "styles/currencyConverter.css",

@@ -17,6 +17,14 @@ mongoose.connect(MONGO_DB_URL);
 setupController(app);
 apiController(app);
 
+
+app.get('/bundle.js',(req,res, next) => {
+    req.url = req.url + '.gz',
+    console.log(" I GOT THE BUNDLE");
+    res.set('Content-Encoding', 'gzip');
+    next();
+});
+
 app.use(express.static(path.join(__dirname + '/', '..', '/client/dist/')));
 
 app.get('/',(req,res) => {

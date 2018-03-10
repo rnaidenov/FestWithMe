@@ -1,13 +1,16 @@
+const { APPLICATION_API_BASE_URL }  = process.env;
+
+
 const _getFlightDetails = (origin, cityDestination, fullDestination, date, dispatch) => {
   dispatch({ type: 'FLIGHTS_SEARCH_START', destination: cityDestination });
   _increaseLoader(dispatch, 60);
   return new Promise(async (resolve, reject) => {
     try {
-      const flightDetails = await fetch(`http://localhost:3000/api/prices/flights?origin=${origin}&destination=${fullDestination}&date=${date}`)
+      const flightDetails = await fetch(`${APPLICATION_API_BASE_URL}api/prices/flights?origin=${origin}&destination=${fullDestination}&date=${date}`)
         .then(res => res.json());
       resolve(flightDetails);
     } catch (err) {
-      reject("Fetching flight details failed.", err);
+      reject(`Fetching flight details failed.`, err);
     }
   })
 }
@@ -17,11 +20,11 @@ const _getHousingDetails = (destination, date, nights, numPeople, dispatch) => {
   _increaseLoader(dispatch, 80);
   return new Promise(async (resolve, reject) => {
     try {
-      const housingDetails = await fetch(`http://localhost:3000/api/prices/housing?location=${destination}&date=${date}&nights=${nights}&numPeople=${numPeople}`)
+      const housingDetails = await fetch(`${APPLICATION_API_BASE_URL}api/prices/housing?location=${destination}&date=${date}&nights=${nights}&numPeople=${numPeople}`)
         .then(res => res.json());
       resolve(housingDetails);
     } catch (err) {
-      reject("Fetching accommodation details failed.", err);
+      reject(`Fetching accommodation details failed.`, err);
     }
   });
 }
@@ -31,11 +34,11 @@ const _getEventDetails = (festivalName, dispatch) => {
   _increaseLoader(dispatch, 0);
   return new Promise(async (resolve, reject) => {
     try {
-      const eventDetails = await fetch(`http://localhost:3000/api/prices/events?eventName=${festivalName}`).then(res => res.json())
+      const eventDetails = await fetch(`${APPLICATION_API_BASE_URL}api/prices/events?eventName=${festivalName}`).then(res => res.json())
       console.log(eventDetails);
       resolve(eventDetails);
     } catch (err) {
-      reject("Fetching event details failed.", err);
+      reject(`Fetching event details failed.`, err);
     }
   });
 }
@@ -65,7 +68,6 @@ export const getTotalPrice = (eventDetails, flightDetails, housingDetails, night
   const eventTicketPrice = eventDetails.price;
   const { soldOut, price: eventPrice } = eventDetails;
 
-  console.log(eventPrice , " + ", flightPriceAmount, " + ", accommodationAvgPrice ," * ", nights , " = ", eventPrice + flightPriceAmount + accommodationAvgPrice * nights);
   const totalPrice = !soldOut 
                                 ? eventPrice + flightPriceAmount + accommodationAvgPrice * nights
                                 : flightPriceAmount + accommodationAvgPrice * nights;
@@ -102,19 +104,19 @@ const _increaseLoader = (dispatch, loadedValue) => {
 export const getLocation = () => {
   return async dispatch => {
     try {
-      const location = await fetch("http://localhost:3000/api/location").then(data => data.json());
+      const location = await fetch(`${APPLICATION_API_BASE_URL}api/location`).then(data => data.json());
       const { city, country } = location;
       dispatch({ type: 'SEARCHING_LOCATION_FINISH', payload: `${city},${country}` });
     } catch(err) { console.log(err) }
   }
 }
 
-
-
 export const loadFestivals = () => {
+  
+
   return async dispatch => {
     try {
-      const festivals = await fetch("http://localhost:3000/api/festivals").then(data => data.json());
+      const festivals = await fetch(`${APPLICATION_API_BASE_URL}api/festivals`).then(data => data.json());
       dispatch({ type: 'LOAD_FESTIVALS_FINISH', festivals });
     } catch(err) {
       dispatch({ type: 'LOAD_FESTIVALS_ERROR' });

@@ -2,7 +2,6 @@ const path = require('path'),
       webpack = require('webpack'),
       workboxPlugin = require('workbox-webpack-plugin'),
       outputDir = path.resolve(__dirname,'dist');
-
 module.exports = {
     devServer: {
       inline: true,
@@ -51,18 +50,11 @@ module.exports = {
         filename: 'bundle.js'
     },
     plugins: [
-        new webpack.optimize.OccurrenceOrderPlugin(),
-        new workboxPlugin({
-            globDirectory: outputDir,
-            globPatterns: ['**/!(*map*)'],
-            swDest:path.join(outputDir, 'service-worker.js'),
-            clientsClaim:true,
-            skipWaiting:true,
-            runtimeCaching:[{
-                urlPattern: new RegExp('/.*\/(bundle.js)/'),
-                handler:'networkFirst'
-            }],
-            maximumFileSizeToCacheInBytes: 15000000
+        new webpack.DefinePlugin({
+            "process.env": {
+              NODE_ENV: JSON.stringify(process.env.NODE_ENV || "develop"),
+              APPLICATION_API_BASE_URL: JSON.stringify("http://localhost:3000/")
+            }
         })
     ]
 };
