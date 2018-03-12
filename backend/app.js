@@ -20,7 +20,6 @@ apiController(app);
 
 app.get('/bundle.js',(req,res, next) => {
     req.url = req.url + '.gz',
-    console.log(" I GOT THE BUNDLE");
     res.set('Content-Encoding', 'gzip');
     next();
 });
