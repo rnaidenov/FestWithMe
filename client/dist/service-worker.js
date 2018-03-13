@@ -20,7 +20,11 @@ importScripts('workbox-sw.prod.v2.1.3.js');
 const fileManifest = [
   {
     "url": "/bundle.js.gz",
-    "revision": "f4934a034c3accc124b6f41576fafab7"
+    "revision": "d0c53e62938cb5d11f2e8bb23f0119f4"
+  },
+  {
+    "url": "bundle.min.js.gz",
+    "revision": "ffecf3e6517eca11c08ee99c5c40808b"
   },
   {
     "url": "index.html",
@@ -88,15 +92,15 @@ const fileManifest = [
   },
   {
     "url": "public/party_background_mobile.jpg",
-    "revision": "d6e8ed3d6aaab93b6e45dee942544ada"
+    "revision": "5deffefc722c962512b62710e217d450"
   },
   {
     "url": "public/party_background_tablet.jpg",
-    "revision": "d5194ca08091c3d01aadc8cef2b8aad8"
+    "revision": "23f73faf515c215bc350d058918f6661"
   },
   {
     "url": "public/party_background.jpg",
-    "revision": "c762917fac4c8b22298ea1c373aa97c4"
+    "revision": "ca8013627c16963c4429b25fce3118c0"
   },
   {
     "url": "public/privateRoom.svg",
@@ -125,6 +129,10 @@ const fileManifest = [
   {
     "url": "public/united-states.svg",
     "revision": "4a90ee18671e922d4eb77cd821ed821b"
+  },
+  {
+    "url": "service-worker-registration.js",
+    "revision": "9675e9faefdbd4a62c9c2fad6c0e242f"
   },
   {
     "url": "styles/currencyConverter.css",

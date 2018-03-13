@@ -2,7 +2,9 @@ const path = require('path'),
       webpack = require('webpack'),
       workboxPlugin = require('workbox-webpack-plugin'),
       CompressionPlugin = require('compression-webpack-plugin'),
-      outputDir = path.resolve(__dirname, 'dist');
+      outputDir = path.resolve(__dirname, 'dist'),
+      BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 
 
 module.exports = {
@@ -51,7 +53,20 @@ module.exports = {
         }
     }),
     new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      mangle: true,
+      compress: {
+        warnings: false, 
+        pure_getters: true,
+        unsafe: true,
+        unsafe_comps: true,
+        screw_ie8: true
+      },
+      output: {
+        comments: false,
+      },
+      exclude: [/\.min\.js$/gi] 
+    }),
     new webpack.optimize.AggressiveMergingPlugin(),
     new webpack.NoErrorsPlugin(),
     new workboxPlugin({
@@ -65,6 +80,7 @@ module.exports = {
         handler: 'networkFirst'
       }]
     }),
+    new BundleAnalyzerPlugin(),
     new CompressionPlugin({
       asset: "[path].gz[query]",
       algorithm: "gzip",
