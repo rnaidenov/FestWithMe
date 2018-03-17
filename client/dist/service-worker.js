@@ -28,7 +28,7 @@ const fileManifest = [
   },
   {
     "url": "index.html",
-    "revision": "31748c827a1bf03ec981c9aa2ff91ad0"
+    "revision": "4e56588f3567198025c22a5c8b7c6037"
   },
   {
     "url": "manifest.json",
@@ -119,10 +119,6 @@ const fileManifest = [
     "revision": "4a90ee18671e922d4eb77cd821ed821b"
   },
   {
-    "url": "service-worker-registration.js",
-    "revision": "9675e9faefdbd4a62c9c2fad6c0e242f"
-  },
-  {
     "url": "styles/currencyConverter.css",
     "revision": "9c9f4dc312f6073a462f7771c762d9bc"
   },
@@ -133,10 +129,6 @@ const fileManifest = [
   {
     "url": "styles/search.css",
     "revision": "78248ca3a1f8f8f1a6b6312f3d8e81e8"
-  },
-  {
-    "url": "styles/style.css",
-    "revision": "3c1c1a8144d133173f6516f528b3fbee"
   }
 ];
 
