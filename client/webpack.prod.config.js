@@ -6,7 +6,7 @@ const path = require('path'),
 
 
 module.exports = {
-  devtool: 'cheap-module-eval-source-map',
+  devtool: false,
   entry: path.resolve(__dirname, 'app/index.js'),
 
   output: {
@@ -40,13 +40,24 @@ module.exports = {
           limit: 8192
         }
       }
+    ],
+    rules: [
+      {
+          test: /\.css$/,
+          use: ExtractTextPlugin.extract({
+              fallback: 'style-loader',
+              use: [
+                  { loader: 'css-loader', options: { minimize: true } }
+              ]
+          })
+      }
     ]
   },
 
   plugins: [
     new webpack.DefinePlugin({
         "process.env": {
-          NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+          NODE_ENV: JSON.stringify("production"),
           APPLICATION_API_BASE_URL: JSON.stringify("/")
         }
     }),
