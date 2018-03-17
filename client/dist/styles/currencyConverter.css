@@ -1,6 +1,6 @@
 /*----------- Small screen size -----------*/
 
-@media screen and (max-width: 499px) {
+@media screen and (max-width: 480px) {
 
   
   .loaderSmileyWrap {
@@ -55,7 +55,7 @@
 /*----------- Medium & Big screen sizes -----------*/
 
 
-@media screen and (min-width: 500px) {
+@media screen and (min-width: 481px) {
   .chatBubble.visible {
     width: 200px;
     padding-top: 3.5%;

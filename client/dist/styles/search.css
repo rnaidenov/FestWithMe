@@ -35,7 +35,7 @@ p {
   }
 
   .background {
-    background-image: url('../public/party_background_mobile.jpg');
+    background-image: url("http://res.cloudinary.com/rado-content-cloud/image/upload/c_scale,w_480/v1521193705/marvin-meyer-190672-unsplash.jpg");
   }
 
   .searchText {
@@ -72,7 +72,7 @@ p {
 @media screen and (min-width: 500px) and (max-width:1099px) {
 
   .background {
-    background-image: url('../public/party_background_tablet.jpg');
+    background-image: url('http://res.cloudinary.com/rado-content-cloud/image/upload/c_scale,w_800/v1521193705/marvin-meyer-190672-unsplash.jpg');
   }
 
   .searchWrap{
@@ -133,7 +133,7 @@ p {
 @media screen and (min-width:1100px) {
 
   .background {
-    background-image: url('../public/party_background.jpg');
+    background-image: url("http://res.cloudinary.com/rado-content-cloud/image/upload/v1521193705/marvin-meyer-190672-unsplash.jpg");
   }
   .searchWrap {
     width:75%;

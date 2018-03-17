@@ -6,7 +6,7 @@ const path = require('path'),
 
 
 module.exports = {
-  devtool: 'cheap-module-eval-source-map',
+  devtool: false,
   entry: path.resolve(__dirname, 'app/index.js'),
 
   output: {
