@@ -10,6 +10,7 @@ import FestivalInput from './festivalInput';
 import LocationInput from './locationInput';
 import Results from './results';
 import '../../dist/styles/search.css';
+import { isDate } from 'util';
 
 @connect(store => {
   return {
@@ -20,6 +21,7 @@ import '../../dist/styles/search.css';
 class Search extends React.Component {
   constructor(props) {
     super(props);
+    console.log(props);
     // change missingFestival and location
     this.SMARTPHONE_MAX_WIDTH_PIXELS = 500;
     this.MOBILE_MAX_WIDTH_PIXELS = 1100;   
@@ -48,6 +50,17 @@ class Search extends React.Component {
     this.setState({ locationOrigin });
   }
 
+
+  isDemo(){
+    const { location : { search } } = this.props;
+      if(search.length) {
+        const [paramType, paramValue] = search.split('?')[1].split('=');
+        if(paramType==='demo' && paramValue) return true;
+      } 
+      return false;
+  }
+
+
   lookUpFestival() {
     const { numPeople, festivalName, nightsOfStay, locationOrigin, missingLocation, missingFestival } = this.state;
     
@@ -65,11 +78,11 @@ class Search extends React.Component {
     setTimeout(() => {
       if (!missingLocation && !missingFestival) {
         this.setState({ festivalToSearch: festivalName, doneSearch:true });
-        this.props.dispatch(searchFestival(locationOrigin, festivalName, nightsOfStay, numPeople));
+        const isDemo = this.isDemo();
+        this.props.dispatch(searchFestival(locationOrigin, festivalName, nightsOfStay, numPeople, isDemo));
       }
     },500);
   }
-
 
   componentDidMount() {
     this.updateWindowWidth();
@@ -156,4 +169,4 @@ class Search extends React.Component {
 
 }
 
-export default Search;
+export { Search };

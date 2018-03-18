@@ -44,7 +44,19 @@ const _getEventDetails = (festivalName, dispatch) => {
 }
 
 
-export const searchFestival = (origin, festivalName, nights, numPeople) => {
+const _saveSearchResult = async ({eventName,priceDetails}) => {
+  const isAdded = await fetch(`${APPLICATION_API_BASE_URL}api/cachedResults`, {
+    method: 'PUT',
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({eventName,priceDetails})
+  }).then(response => response.json());
+};
+
+
+export const searchFestival = (origin, festivalName, nights, numPeople, isDemo) => {
   return async dispatch => {
     dispatch({ type: 'FESTIVAL_SEARCH_START', search: { origin, festivalName, nights, numPeople } });
     const eventDetails = await _getEventDetails(festivalName, dispatch);
@@ -54,6 +66,7 @@ export const searchFestival = (origin, festivalName, nights, numPeople) => {
       const flightDetails = await _getFlightDetails(origin, eventDetails.city, destination, date, dispatch);
       const housingDetails = await _getHousingDetails(destination, date, nights, numPeople, dispatch);
       const details = getTotalPrice(eventDetails, flightDetails, housingDetails, nights, numPeople);
+      _saveSearchResult({ eventName: festivalName, priceDetails: details });
       dispatch({ type: 'FESTIVAL_SEARCH_FINISHED', priceDetails: details});
     } else {
       dispatch({ type: 'EVENT_NOT_ACTIVE', payload: 'Unfortunately, the event has been sold out' });

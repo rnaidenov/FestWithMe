@@ -1,7 +1,8 @@
 import 'babel-polyfill';
 import React from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { render } from 'react-dom';
-import App from './components/app';
+import { Search } from './containers/search';
 import { Provider } from 'react-redux';
 import store from './store';
 
@@ -9,6 +10,8 @@ import store from './store';
 
 render(
   <Provider store = {store}>
-     <App/>
+    <Router>
+      <Route path="/" component={Search}/>
+    </Router>
   </Provider>,document.getElementById('root')
 )

@@ -1,3 +1,4 @@
+
 (() => {
     if('serviceWorker' in navigator){
         window.addEventListener('load', () => {
@@ -6,4 +7,6 @@
                                         .catch(err => console.log("Something went wrong with the SW registration. Error: ", err));
         }
     )}
-})();  
+})();
+
+

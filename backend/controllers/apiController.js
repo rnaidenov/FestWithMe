@@ -7,7 +7,7 @@ const amadeus = require('../helpers/amadeus');
 const airbnb = require('../helpers/airbnb');
 const currencies = require('../helpers/currencies');
 const location = require('../helpers/iplocation');
-const Festivals = require('../models/festivalModel');
+const SearchResults = require('../models/searchResultsModel');
 const MongoClient = require('../helpers/mongoClient');
 
 
@@ -26,6 +26,13 @@ module.exports = (app) => {
     } catch(err){
       res.status(500).send(err)
     }
+  });
+
+  app.put('/api/cachedResults', (req,res) => {
+      const { eventName, priceDetails } = req.body;
+      SearchResults.create({ eventName, priceDetails }, (err, data) => {
+         !err ? res.status(200).send(data) : res.status(500).send(err);
+      });
   });
 
   app.get("/api/prices/housing", (req, res) => {
