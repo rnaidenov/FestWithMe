@@ -1,7 +1,6 @@
 const path = require('path'),
       webpack = require('webpack'),
       workboxPlugin = require('workbox-webpack-plugin'),
-      CompressionPlugin = require('compression-webpack-plugin'),
       outputDir = path.resolve(__dirname, 'dist');
 
 
@@ -64,13 +63,6 @@ module.exports = {
         urlPattern: new RegExp('/.*\/(bundle.js)/'),
         handler: 'networkFirst'
       }]
-    }),
-    new CompressionPlugin({
-      asset: "[path].gz[query]",
-      algorithm: "gzip",
-      test: /\.js$|\.css$|\.html$/,
-      threshold: 10240,
-      minRatio: 0.8
     })
   ]
 };
