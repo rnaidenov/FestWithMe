@@ -2,13 +2,13 @@
 
 const bodyParser = require('body-parser');
 const scraper = require('../helpers/scraper');
-const google = require('../helpers/google');
 const amadeus = require('../helpers/amadeus');
 const airbnb = require('../helpers/airbnb');
 const currencies = require('../helpers/currencies');
 const location = require('../helpers/iplocation');
 const SearchResults = require('../models/searchResultsModel');
 const MongoClient = require('../helpers/mongoClient');
+const CachedDataLoader = require('../helpers/cachedDataLoader');
 
 
 module.exports = (app) => {
@@ -19,20 +19,31 @@ module.exports = (app) => {
   app.use(bodyParser.urlencoded({ extended: true }));
 
   app.get("/api/festivals/", async (req, res) => {
-    try{
+    try {
       await MongoClient.removePastEvents();
       const events = await MongoClient.getSavedEvents();
       res.status(200).send(events);
-    } catch(err){
+    } catch (err) {
       res.status(500).send(err)
     }
   });
 
-  app.put('/api/cachedResults', (req,res) => {
-      const { eventName, priceDetails } = req.body;
-      SearchResults.create({ eventName, priceDetails }, (err, data) => {
-         !err ? res.status(200).send(data) : res.status(500).send(err);
-      });
+  app.put('/api/cachedResults', async (req, res) => {
+    const { eventName, eventDetails, flightDetails, housingDetails } = req.body;
+    try {
+      const cachedData = await CachedDataLoader.saveEventData({ eventName, eventDetails, flightDetails, housingDetails });
+      res.status(200).send(cachedData);
+    } catch (err) {
+      res.status(500).send(err)
+    }
+  });
+
+
+  app.get('/api/cachedResults', (req, res) => {
+    const { festivalName } = req.query;
+    SearchResults.find({ eventName: festivalName }, (err, data) => {
+      !err ? res.status(200).send(data) : res.status(500).send(err);
+    });
   });
 
   app.get("/api/prices/housing", (req, res) => {
@@ -45,27 +56,38 @@ module.exports = (app) => {
       })
   })
 
-  app.get("/api/prices/flights", (req, res) => {
-    amadeus.getFlightPrices(req.query.origin, req.query.destination, req.query.date)
-      .then(flightDetails => {
-        res.send(flightDetails)
-      })
-      .catch(error => {
-        res.status(500).send(error);
-      })
+  app.get("/api/prices/flights", async (req, res) => {
+    const { origin, destination, date, isDemo, eventName } = req.query;
+    try {
+      const flightDetails = Boolean(isDemo) 
+                              ?  await CachedDataLoader.loadEventData({ eventName, dataType: CachedDataLoader.DataType.FLIGHT_DETAILS })
+                              :  await amadeus.getFlightPrices(origin, destination, date);
+      res.status(200).send(flightDetails);
+    } catch(err){
+      res.status(500).send(error);
+    }
+   
+
+    // amadeus.getFlightPrices(req.query.origin, req.query.destination, req.query.date)
+    //   .then(flightDetails => {
+    //     res.send(flightDetails)
+    //   })
+    //   .catch(error => {
+        
+    //   })
   });
 
 
-  app.get("/api/prices/events", (req, res) => {
-    google.getEventLink(req.query.eventName)
-      .then(url => {
-        scraper.getEventDetails(url).then(eventDetails => {
-          res.send(eventDetails);
-        })
-      })
-      .catch(error => {
-        res.status(400).send(error);
-      })
+  app.get("/api/prices/events", async (req, res) => {
+    const { eventName, isDemo } = req.query;
+    try {
+      const eventDetails = Boolean(isDemo)
+                              ? await CachedDataLoader.loadEventData({ eventName, dataType: CachedDataLoader.DataType.EVENT_DETAILS })
+                              : await scraper.lookUpEvent({ eventName });
+      res.status(200).send(eventDetails);
+    } catch (err) {
+      res.status(500).send(err);
+    }
   });
 
   app.get("/api/currencies", (req, res) => {

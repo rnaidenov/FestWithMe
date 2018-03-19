@@ -1,12 +1,14 @@
-const { APPLICATION_API_BASE_URL }  = process.env;
+import { isDate } from "util";
+
+const { APPLICATION_API_BASE_URL } = process.env;
 
 
-const _getFlightDetails = (origin, cityDestination, fullDestination, date, dispatch) => {
+const _getFlightDetails = (origin, cityDestination, fullDestination, date, {isDemo = false, eventName}, dispatch) => {
   dispatch({ type: 'FLIGHTS_SEARCH_START', destination: cityDestination });
   _increaseLoader(dispatch, 60);
   return new Promise(async (resolve, reject) => {
     try {
-      const flightDetails = await fetch(`${APPLICATION_API_BASE_URL}api/prices/flights?origin=${origin}&destination=${fullDestination}&date=${date}`)
+      const flightDetails = await fetch(`${APPLICATION_API_BASE_URL}api/prices/flights?origin=${origin}&destination=${fullDestination}&date=${date}&isDemo=${isDemo}&eventName=${eventName}`)
         .then(res => res.json());
       resolve(flightDetails);
     } catch (err) {
@@ -30,11 +32,11 @@ const _getHousingDetails = (destination, date, nights, numPeople, dispatch) => {
 }
 
 
-const _getEventDetails = (festivalName, dispatch) => {
+const _getEventDetails = (festivalName, isDemo = false, dispatch) => {
   _increaseLoader(dispatch, 0);
   return new Promise(async (resolve, reject) => {
     try {
-      const eventDetails = await fetch(`${APPLICATION_API_BASE_URL}api/prices/events?eventName=${festivalName}`).then(res => res.json())
+      const eventDetails = await fetch(`${APPLICATION_API_BASE_URL}api/prices/events?eventName=${festivalName}&isDemo=${isDemo}`).then(res => res.json())
       console.log(eventDetails);
       resolve(eventDetails);
     } catch (err) {
@@ -44,34 +46,39 @@ const _getEventDetails = (festivalName, dispatch) => {
 }
 
 
-const _saveSearchResult = async ({eventName,priceDetails}) => {
+const _saveSearchResult = async ({ festivalName, eventDetails, flightDetails, housingDetails }) => {
   const isAdded = await fetch(`${APPLICATION_API_BASE_URL}api/cachedResults`, {
     method: 'PUT',
     headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
     },
-    body: JSON.stringify({eventName,priceDetails})
+    body: JSON.stringify({ eventName: festivalName, eventDetails, flightDetails, housingDetails })
   }).then(response => response.json());
 };
 
 
 export const searchFestival = (origin, festivalName, nights, numPeople, isDemo) => {
+  console.log("is it a demo : ", isDemo);
   return async dispatch => {
     dispatch({ type: 'FESTIVAL_SEARCH_START', search: { origin, festivalName, nights, numPeople } });
-    const eventDetails = await _getEventDetails(festivalName, dispatch);
+    const eventDetails = await _getEventDetails(festivalName, isDemo, dispatch);
     if (eventDetails.isActive) {
       const destination = `${eventDetails.city},${eventDetails.country}`;
       const date = eventDetails.date;
-      const flightDetails = await _getFlightDetails(origin, eventDetails.city, destination, date, dispatch);
+      const flightDetails = await _getFlightDetails(origin, eventDetails.city, destination, date, {isDemo, eventName:festivalName}, dispatch);
       const housingDetails = await _getHousingDetails(destination, date, nights, numPeople, dispatch);
       const details = getTotalPrice(eventDetails, flightDetails, housingDetails, nights, numPeople);
-      _saveSearchResult({ eventName: festivalName, priceDetails: details });
-      dispatch({ type: 'FESTIVAL_SEARCH_FINISHED', priceDetails: details});
+      _saveSearchResult({ festivalName, eventDetails, flightDetails, housingDetails });
+      dispatch({ type: 'FESTIVAL_SEARCH_FINISHED', priceDetails: details });
     } else {
       dispatch({ type: 'EVENT_NOT_ACTIVE', payload: 'Unfortunately, the event has been sold out' });
     }
   }
+}
+
+const doDemoSearch = ({ festivalName }) => {
+
 }
 
 
@@ -81,9 +88,9 @@ export const getTotalPrice = (eventDetails, flightDetails, housingDetails, night
   const eventTicketPrice = eventDetails.price;
   const { soldOut, price: eventPrice } = eventDetails;
 
-  const totalPrice = !soldOut 
-                                ? eventPrice + flightPriceAmount + accommodationAvgPrice * nights
-                                : flightPriceAmount + accommodationAvgPrice * nights;
+  const totalPrice = !soldOut
+    ? eventPrice + flightPriceAmount + accommodationAvgPrice * nights
+    : flightPriceAmount + accommodationAvgPrice * nights;
   return {
     ticketPrice: eventPrice,
     flightDetails,
@@ -120,18 +127,18 @@ export const getLocation = () => {
       const location = await fetch(`${APPLICATION_API_BASE_URL}api/location`).then(data => data.json());
       const { city, country } = location;
       dispatch({ type: 'SEARCHING_LOCATION_FINISH', payload: `${city},${country}` });
-    } catch(err) { console.log(err) }
+    } catch (err) { console.log(err) }
   }
 }
 
 export const loadFestivals = () => {
-  
+
 
   return async dispatch => {
     try {
       const festivals = await fetch(`${APPLICATION_API_BASE_URL}api/festivals`).then(data => data.json());
       dispatch({ type: 'LOAD_FESTIVALS_FINISH', festivals });
-    } catch(err) {
+    } catch (err) {
       dispatch({ type: 'LOAD_FESTIVALS_ERROR' });
     }
   }

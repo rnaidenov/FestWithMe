@@ -2,6 +2,7 @@
 
 const request = require('request');
 const cheerio = require('cheerio');
+const google = require('../helpers/google');
 const CurrencyConverter = require('./currencies');
 const DEFAULT_CURRENCY_SYMBOL = '$';
 const MongoClient = require('./mongoClient');
@@ -33,7 +34,7 @@ function _scrapePrice(body) {
         // Getting the different types of tickets wrapped within <li/>
         tickets.children().get(2).children.forEach(item => {
           if (item.type == 'tag' && item.name == 'li' && item.attribs.class !== 'closed') {
-            resolve({ soldOut: false, price: item, isActive:true });
+            resolve({ soldOut: false, price: item, isActive: true });
           }
         })
       }
@@ -52,6 +53,7 @@ const _scrapeEventName = (body) => {
       const $ = cheerio.load(body);
       const eventDetails = $('#sectionHead');
       const eventName = eventDetails[0].children[3].children[0].data;
+      console.log("event name is : ", eventName);
       resolve(eventName);
     } catch (err) {
       reject('Unable to scrape event name. ', err);
@@ -77,6 +79,7 @@ const _formatPrice = (price) => {
     let ticketPrice_total;
     bookingFee ? ticketPrice_total = parseInt(ticketPrice) + parseInt(bookingFee) : ticketPrice_total = parseInt(ticketPrice)
     CurrencyConverter.convert(currency, DEFAULT_CURRENCY_SYMBOL, ticketPrice_total).then(price => {
+      console.log("price is : ", price.convertedAmount);
       resolve(price.convertedAmount);
     })
   });
@@ -88,6 +91,7 @@ const getCity = (body) => {
     try {
       const $ = cheerio.load(body);
       const city = $('.circle-left')[0].children[0].children[0].data;
+      console.log("city is : ", city);
       resolve(city);
     } catch (err) {
       reject('Unable to get the city name for the event. ', err);
@@ -147,11 +151,12 @@ const _getEventBody = (url) => {
 
 // Get the event details
 const getEventDetails = (url) => {
+  console.log("url is ", url);
   return new Promise(async (resolve, reject) => {
     try {
       const eventInfo = await _getEventBody(url).then(body => Promise.all([_scrapeEventName(body), getPrice(body), getCity(body), getCountry(body), getDate(body)]));
       const [name, priceDetails, city, country, date] = eventInfo;
-      MongoClient.saveIfNotExist({name, date});
+      MongoClient.saveIfNotExist({ name, date });
       let eventDetails = {
         name,
         city,
@@ -164,10 +169,22 @@ const getEventDetails = (url) => {
       eventDetails = eventDate < todaysDate ? Object.assign(eventDetails, { isActive: false }) : eventDetails
       !isNaN(priceDetails) ? eventDetails.price = priceDetails : eventDetails = Object.assign(eventDetails, priceDetails);
       resolve(eventDetails)
-    } catch (err){
+    } catch (err) {
       reject(err);
     }
   })
+}
+
+
+const lookUpEvent = ({ eventName }) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const eventDetails = await google.getEventLink(eventName).then(url => getEventDetails(url)).then(eventDetails => eventDetails);
+      resolve(eventDetails);
+    } catch (err) {
+      reject(err);
+    }
+  });
 }
 
 
@@ -190,7 +207,7 @@ const getEventDetails = (url) => {
 
 
 module.exports = {
-  getEventDetails,
+  lookUpEvent,
   getPrice,
   getCity,
   getCountry,

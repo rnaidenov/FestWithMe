@@ -25,6 +25,7 @@ class Search extends React.Component {
     // change missingFestival and location
     this.SMARTPHONE_MAX_WIDTH_PIXELS = 500;
     this.MOBILE_MAX_WIDTH_PIXELS = 1100;   
+    this.demoParam = 'demo';
     this.updateWindowWidth = this.updateWindowWidth.bind(this);
     this.updateWindowWidth = this.updateWindowWidth.bind(this);
     this.state = { doneSearch:false,nightsOfStay: '1', numPeople: 1, missingFestival:false, missingLocation:false, festivalName:'Junction 2', locationOrigin:'Sofia'}
@@ -55,7 +56,7 @@ class Search extends React.Component {
     const { location : { search } } = this.props;
       if(search.length) {
         const [paramType, paramValue] = search.split('?')[1].split('=');
-        if(paramType==='demo' && paramValue) return true;
+        if(paramType===this.demoParam && Boolean(paramValue)) return true;
       } 
       return false;
   }
