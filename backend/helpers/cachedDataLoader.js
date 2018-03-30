@@ -7,32 +7,45 @@ const DataType = {
     HOUSING_DETAILS: "housing details"
 }
 
+// const what = () => {
+//     [DataType.FLIGHT_DETAILS, DataType.HOUSING_DETAILS, DataType.EVENT_DETAILS].map(type => SearchResults.create({ type, data: []}));
+// }
 
-const saveEventData = ({ eventName, eventDetails, flightDetails, housingDetails }) => {
+// what();
+
+
+const cacheResults = ({ type, data }) => {
     return new Promise((resolve, reject) => {
-        SearchResults.create({ eventName, eventDetails, flightDetails, housingDetails }, (err, data) => {
-            !err ? resolve(data) : reject(err);
-        });
+        SearchResults.findOneAndUpdate({ type }, { $push: { data } }, (err, data) => { !err ? resolve() : reject(err) })
     });
 }
 
-const loadEventData = ({ eventName, dataType }) => {
+const loadCachedHousingResult = (destination, date, numPeople) => {
     return new Promise((resolve, reject) => {
-        console.log("LOOKING FOR ", dataType, " for ", eventName);
-        SearchResults.findOne({ eventName }, (err, data) => {
-            if (err) reject(err);
-            console.log(data);
-            switch (dataType) {
-                case DataType.EVENT_DETAILS:
-                    setTimeout(() => resolve(data.eventDetails), 1500);
-                    break;
-                case DataType.FLIGHT_DETAILS:
-                    setTimeout(() => resolve(data.flightDetails), 4200);
-                    break;
-                case DataType.HOUSING_DETAILS:
-                    setTimeout(() => resolve(data.housingDetails), 1200);
-                    break;    
-            }
+        SearchResults.findOne({ type: DataType.HOUSING_DETAILS }, (err, cachedDetails) => {
+            const cachedHousingResult = cachedDetails.data.find(data => data.destination == destination && data.numPeople == numPeople && data.date == date);  
+            setTimeout(() => resolve(cachedHousingResult.housingDetails), 400);
+        })
+    });
+}
+
+const loadCachedEventResult = (eventName) => {
+    console.log("LOOKING FOR ", eventName);
+    return new Promise((resolve, reject) => {
+        SearchResults.findOne({ type: DataType.EVENT_DETAILS }, (err, cachedDetails) => {
+            const cachedEventResult = cachedDetails.data.find(data => data.eventDetails.name.includes(eventName));
+            console.log("GIVING BACK CACHED EVENT RESULT");
+            setTimeout(() => resolve(cachedEventResult.eventDetails), 1500);
+        })
+    });
+}
+
+const loadCachedFlightResult = (origin, destination) => {
+    return new Promise((resolve, reject) => {
+        SearchResults.findOne({ type: DataType.FLIGHT_DETAILS }, (err, cachedDetails) => {
+            const cachedFlightResult = cachedDetails.data.find(data => data.origin == origin && data.destination == destination);
+            console.log("GIVING BACK CACHED FLIGHT RESULT");
+            setTimeout(() => resolve(cachedFlightResult.flightDetails), 4200);
         })
     });
 }
@@ -41,6 +54,8 @@ const loadEventData = ({ eventName, dataType }) => {
 
 module.exports = {
     DataType,
-    saveEventData,
-    loadEventData
+    cacheResults,
+    loadCachedEventResult,
+    loadCachedFlightResult,
+    loadCachedHousingResult
 }

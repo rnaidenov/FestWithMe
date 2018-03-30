@@ -1,5 +1,7 @@
 const formatter = require('./formatter');
 const fetch = require('node-fetch');
+const DataCacheUtil = require('./cachedDataLoader');
+
 
 // Fix getPrice method
 function getPrice(destination, checkInDate, numNights, numPeople) {
@@ -15,9 +17,11 @@ function getPrice(destination, eventDate, nights, numPeople) {
     const checkOutDate = formatter.formatDate(eventDate, { more: true, days: parseInt(nights) });
     Promise.all([getPropertiesDetails(destination, checkInDate, checkOutDate, numPeople),
     getAveragePrice(destination, checkInDate, checkOutDate, numPeople)])
-      .then(housingDetails => {
-        const [properties, average_price] = housingDetails;
-        resolve({ properties, average_price });
+      .then(details => {
+        const [properties, average_price] = details;
+        const housingDetails = { properties, average_price };
+        DataCacheUtil.cacheResults({ type: DataCacheUtil.DataType.HOUSING_DETAILS, data: { housingDetails, destination, numPeople, date: eventDate }});
+        resolve(housingDetails);
       })
       .catch(err => {
         reject("Unable to get accommodation prices from AirBnb. ",err);

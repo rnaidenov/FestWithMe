@@ -6,6 +6,7 @@ const google = require('../helpers/google');
 const CurrencyConverter = require('./currencies');
 const DEFAULT_CURRENCY_SYMBOL = '$';
 const MongoClient = require('./mongoClient');
+const DataCacheUtil = require('./cachedDataLoader');
 
 // Get price of the ticket for the event
 function getPrice(body) {
@@ -53,7 +54,7 @@ const _scrapeEventName = (body) => {
       const $ = cheerio.load(body);
       const eventDetails = $('#sectionHead');
       const eventName = eventDetails[0].children[3].children[0].data;
-      console.log("event name is : ", eventName);
+      // console.log("event name is : ", eventName);
       resolve(eventName);
     } catch (err) {
       reject('Unable to scrape event name. ', err);
@@ -79,7 +80,7 @@ const _formatPrice = (price) => {
     let ticketPrice_total;
     bookingFee ? ticketPrice_total = parseInt(ticketPrice) + parseInt(bookingFee) : ticketPrice_total = parseInt(ticketPrice)
     CurrencyConverter.convert(currency, DEFAULT_CURRENCY_SYMBOL, ticketPrice_total).then(price => {
-      console.log("price is : ", price.convertedAmount);
+      // console.log("price is : ", price.convertedAmount);
       resolve(price.convertedAmount);
     })
   });
@@ -91,7 +92,7 @@ const getCity = (body) => {
     try {
       const $ = cheerio.load(body);
       const city = $('.circle-left')[0].children[0].children[0].data;
-      console.log("city is : ", city);
+      // console.log("city is : ", city);
       resolve(city);
     } catch (err) {
       reject('Unable to get the city name for the event. ', err);
@@ -151,7 +152,7 @@ const _getEventBody = (url) => {
 
 // Get the event details
 const getEventDetails = (url) => {
-  console.log("url is ", url);
+  // console.log("url is ", url);
   return new Promise(async (resolve, reject) => {
     try {
       const eventInfo = await _getEventBody(url).then(body => Promise.all([_scrapeEventName(body), getPrice(body), getCity(body), getCountry(body), getDate(body)]));
@@ -176,10 +177,11 @@ const getEventDetails = (url) => {
 }
 
 
-const lookUpEvent = ({ eventName }) => {
+const lookUpEvent = (eventName) => {
   return new Promise(async (resolve, reject) => {
     try {
       const eventDetails = await google.getEventLink(eventName).then(url => getEventDetails(url)).then(eventDetails => eventDetails);
+      DataCacheUtil.cacheResults({ type: DataCacheUtil.DataType.EVENT_DETAILS, data: {eventDetails}});
       resolve(eventDetails);
     } catch (err) {
       reject(err);

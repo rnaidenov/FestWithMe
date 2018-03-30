@@ -3,12 +3,12 @@ import { isDate } from "util";
 const { APPLICATION_API_BASE_URL } = process.env;
 
 
-const _getFlightDetails = (origin, cityDestination, fullDestination, date, {isDemo = false, eventName}, dispatch) => {
+const _getFlightDetails = (origin, cityDestination, fullDestination, date, isDemo = false, dispatch) => {
   dispatch({ type: 'FLIGHTS_SEARCH_START', destination: cityDestination });
   _increaseLoader(dispatch, 60);
   return new Promise(async (resolve, reject) => {
     try {
-      const flightDetails = await fetch(`${APPLICATION_API_BASE_URL}api/prices/flights?origin=${origin}&destination=${fullDestination}&date=${date}&isDemo=${isDemo}&eventName=${eventName}`)
+      const flightDetails = await fetch(`${APPLICATION_API_BASE_URL}api/prices/flights?origin=${origin}&destination=${fullDestination}&date=${date}&isDemo=${isDemo}`)
         .then(res => res.json());
       resolve(flightDetails);
     } catch (err) {
@@ -17,12 +17,12 @@ const _getFlightDetails = (origin, cityDestination, fullDestination, date, {isDe
   })
 }
 
-const _getHousingDetails = (destination, date, nights, numPeople, dispatch) => {
+const _getHousingDetails = (destination, date, nights, numPeople, isDemo, dispatch) => {
   dispatch({ type: 'HOUSING_SEARCH_START' });
   _increaseLoader(dispatch, 80);
   return new Promise(async (resolve, reject) => {
     try {
-      const housingDetails = await fetch(`${APPLICATION_API_BASE_URL}api/prices/housing?location=${destination}&date=${date}&nights=${nights}&numPeople=${numPeople}`)
+      const housingDetails = await fetch(`${APPLICATION_API_BASE_URL}api/prices/housing?location=${destination}&date=${date}&nights=${nights}&numPeople=${numPeople}&isDemo=${isDemo}`)
         .then(res => res.json());
       resolve(housingDetails);
     } catch (err) {
@@ -37,7 +37,6 @@ const _getEventDetails = (festivalName, isDemo = false, dispatch) => {
   return new Promise(async (resolve, reject) => {
     try {
       const eventDetails = await fetch(`${APPLICATION_API_BASE_URL}api/prices/events?eventName=${festivalName}&isDemo=${isDemo}`).then(res => res.json())
-      console.log(eventDetails);
       resolve(eventDetails);
     } catch (err) {
       reject(`Fetching event details failed.`, err);
@@ -46,30 +45,16 @@ const _getEventDetails = (festivalName, isDemo = false, dispatch) => {
 }
 
 
-const _saveSearchResult = async ({ festivalName, eventDetails, flightDetails, housingDetails }) => {
-  const isAdded = await fetch(`${APPLICATION_API_BASE_URL}api/cachedResults`, {
-    method: 'PUT',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ eventName: festivalName, eventDetails, flightDetails, housingDetails })
-  }).then(response => response.json());
-};
-
-
 export const searchFestival = (origin, festivalName, nights, numPeople, isDemo) => {
-  console.log("is it a demo : ", isDemo);
   return async dispatch => {
     dispatch({ type: 'FESTIVAL_SEARCH_START', search: { origin, festivalName, nights, numPeople } });
     const eventDetails = await _getEventDetails(festivalName, isDemo, dispatch);
     if (eventDetails.isActive) {
       const destination = `${eventDetails.city},${eventDetails.country}`;
       const date = eventDetails.date;
-      const flightDetails = await _getFlightDetails(origin, eventDetails.city, destination, date, {isDemo, eventName:festivalName}, dispatch);
-      const housingDetails = await _getHousingDetails(destination, date, nights, numPeople, dispatch);
+      const flightDetails = await _getFlightDetails(origin, eventDetails.city, destination, date, isDemo, dispatch);
+      const housingDetails = await _getHousingDetails(destination, date, nights, numPeople, isDemo, dispatch);
       const details = getTotalPrice(eventDetails, flightDetails, housingDetails, nights, numPeople);
-      _saveSearchResult({ festivalName, eventDetails, flightDetails, housingDetails });
       dispatch({ type: 'FESTIVAL_SEARCH_FINISHED', priceDetails: details });
     } else {
       dispatch({ type: 'EVENT_NOT_ACTIVE', payload: 'Unfortunately, the event has been sold out' });

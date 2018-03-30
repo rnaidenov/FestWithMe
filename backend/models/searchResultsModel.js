@@ -1,12 +1,10 @@
-const mongoose = require ('mongoose');
+const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const SearchResults = new Schema ({
-  eventName: String,
-  eventDetails : Object,  
-  flightDetails: Object,
-  housingDetails: Object
+const SearchResults = new Schema({
+  type: String,
+  data: Array
 })
 
 module.exports = mongoose.model('SearchResults', SearchResults);
