@@ -243,6 +243,14 @@ body{
     font-size: 24px;
   }
 
+  .resultWrap{
+    margin-bottom:2%;
+  }
+
+  .finishedResultsWrap{
+    margin-bottom: 5%;
+  }
+
 }
 
 .loaderWrap {
@@ -327,8 +335,9 @@ priceBreakdownContainer
 }
 
 .finishedResultsWrap {
-  width:100%;
-  text-align:center;
+  text-align: center;
+  position: absolute;
+  width: 100%;
 }
 
 .inputError {
@@ -398,6 +407,7 @@ priceBreakdownContainer
   font-size: 30px;
   height:15%;
   margin-bottom: 5%;
+  font-weight: 400;
 }
 
 .contentIcon {
