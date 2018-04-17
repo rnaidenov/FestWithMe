@@ -16,6 +16,7 @@ const DataType = {
 
 // createResultTypesInDB();
 
+// Check if data is already in the database before caching it 
 const _isDataCached = ({ type, data }) => {
     return new Promise((resolve, reject) => {
         SearchResults.findOne({ type }, (err, caches) => {
@@ -71,7 +72,6 @@ const loadCachedHousingResult = (destination, date, numPeople) => {
 }
 
 const loadCachedEventResult = (eventName) => {
-    console.log("LOOKING FOR ", eventName);
     return new Promise((resolve, reject) => {
         SearchResults.findOne({ type: DataType.EVENT_DETAILS }, (err, cachedDetails) => {
             const cachedEventResult = cachedDetails.data.find(data => data.name.includes(eventName));
@@ -81,15 +81,9 @@ const loadCachedEventResult = (eventName) => {
 }
 
 const loadCachedFlightResult = (origin, destination) => {
-    console.log("LOADING FLIGHT CACHED RESULTS.");
-
-    console.log(`Looking for origin "${origin} and destination "${destination}" ...`);
-
     return new Promise((resolve, reject) => {
         SearchResults.findOne({ type: DataType.FLIGHT_DETAILS }, (err, cachedDetails) => {
             const cachedFlightResult = cachedDetails.data.find(data => data.origin.includes(origin) && data.destination.includes(destination));
-            console.log("GIVING BACK CACHED FLIGHT RESULT");
-            console.log(cachedFlightResult)
             setTimeout(() => resolve(cachedFlightResult.flightPriceDetails), 4200);
         })
     });
