@@ -42,7 +42,8 @@ function getFlightPrices (origin,destination,date) {
       const searchQuery = await generateSearchQuery(origin,destination,date);
       const { results } = await fetch(searchQuery.link).then(res => res.json());
       const flightPriceDetails = _getFlightPriceDetails(searchQuery, results);
-      DataCacheUtil.cacheResults({ type: DataCacheUtil.DataType.FLIGHT_DETAILS, data: {origin, destination, ...flightPriceDetails} });
+      console.log("About to cache results for origin " + origin + " and destination " + destination);
+      DataCacheUtil.cacheResults({ type: DataCacheUtil.DataType.FLIGHT_DETAILS, data: {origin, destination, flightPriceDetails} });
       resolve(flightPriceDetails);
     } catch(err) {
       resolve({

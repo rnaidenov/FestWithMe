@@ -181,7 +181,8 @@ const lookUpEvent = (eventName) => {
   return new Promise(async (resolve, reject) => {
     try {
       const eventDetails = await google.getEventLink(eventName).then(url => getEventDetails(url)).then(eventDetails => eventDetails);
-      DataCacheUtil.cacheResults({ type: DataCacheUtil.DataType.EVENT_DETAILS, data: {eventDetails}});
+      console.log(eventDetails);
+      DataCacheUtil.cacheResults({ type: DataCacheUtil.DataType.EVENT_DETAILS, data: eventDetails});
       resolve(eventDetails);
     } catch (err) {
       reject(err);

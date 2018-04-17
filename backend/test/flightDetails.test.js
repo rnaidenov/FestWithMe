@@ -8,13 +8,13 @@ const config = require('../config');
 
 describe('Flight details', () => {
 
-    // describe('Check for correct IATA codes', () => {
-    //     checkCityIata('Sofia', 'SOF');
-    //     checkCityIata('Reading, United Kingdom', 'LON');
-    //     checkCityIata('Amsterdam', 'AMS');
-    //     checkCityIata('Parco Dora, Turin', 'TRN');
-    //     checkCityIata('Lausanne', 'GVA');
-    // });
+    describe('Check for correct IATA codes', () => {
+        checkCityIata('Sofia', 'SOF');
+        checkCityIata('Reading, United Kingdom', 'LON');
+        checkCityIata('Amsterdam', 'AMS');
+        checkCityIata('Parco Dora, Turin', 'TRN');
+        checkCityIata('Lausanne', 'GVA');
+    });
 
 
     describe('Ensure Amadeus is giving back flight data.', () => {

@@ -7,16 +7,57 @@ const DataType = {
     HOUSING_DETAILS: "housing details"
 }
 
-// const what = () => {
+
+// Creates documents correspnding to each result type 
+
+// const createResultTypesInDB = () => {
 //     [DataType.FLIGHT_DETAILS, DataType.HOUSING_DETAILS, DataType.EVENT_DETAILS].map(type => SearchResults.create({ type, data: []}));
 // }
 
-// what();
+// createResultTypesInDB();
 
+const _isDataCached = ({ type, data }) => {
+    return new Promise((resolve, reject) => {
+        SearchResults.findOne({ type }, (err, caches) => {
+            switch (type) {
+                case DataType.EVENT_DETAILS:
+                    resolve(_isFestivalCached(caches.data,data));
+                case DataType.FLIGHT_DETAILS:
+                    resolve(_areFlightDetailsCached(caches.data,data));
+                case DataType.HOUSING_DETAILS:
+                    resolve(_areHousingDetailsCached(caches.data,data));
+            }
+        });
+    });
+}
+
+const _isFestivalCached = (cachedData, newFestivalData) => {
+    for(data of cachedData){
+        if (data.name === newFestivalData.name) return true;
+    }
+    return false;
+}
+
+
+const _areFlightDetailsCached = (cachedData, newFlightDetails) => {
+    for(data of cachedData){
+        if (data.origin === newFlightDetails.origin && data.destination === newFlightDetails.destination) return true;
+    }
+    return false;
+}
+
+
+const _areHousingDetailsCached = (cachedData, newHousingDetails) => {
+    for(data of cachedData){
+        if (data.date === newHousingDetails.date && data.numPeople === newHousingDetails.numPeople && data.destination === newHousingDetails.destination) return true;
+    }
+    return false;
+}
 
 const cacheResults = ({ type, data }) => {
-    return new Promise((resolve, reject) => {
-        SearchResults.findOneAndUpdate({ type }, { $push: { data } }, (err, data) => { !err ? resolve() : reject(err) })
+    return new Promise(async (resolve, reject) => {
+        const isCached = await _isDataCached({ type, data });
+        if (!isCached) SearchResults.findOneAndUpdate({ type }, { $push: { data } }, (err, data) => { !err ? resolve() : reject(err) });
     });
 }
 
@@ -33,19 +74,23 @@ const loadCachedEventResult = (eventName) => {
     console.log("LOOKING FOR ", eventName);
     return new Promise((resolve, reject) => {
         SearchResults.findOne({ type: DataType.EVENT_DETAILS }, (err, cachedDetails) => {
-            const cachedEventResult = cachedDetails.data.find(data => data.eventDetails.name.includes(eventName));
-            console.log("GIVING BACK CACHED EVENT RESULT");
-            setTimeout(() => resolve(cachedEventResult.eventDetails), 1500);
+            const cachedEventResult = cachedDetails.data.find(data => data.name.includes(eventName));
+            setTimeout(() => resolve(cachedEventResult), 1500);
         })
     });
 }
 
 const loadCachedFlightResult = (origin, destination) => {
+    console.log("LOADING FLIGHT CACHED RESULTS.");
+
+    console.log(`Looking for origin "${origin} and destination "${destination}" ...`);
+
     return new Promise((resolve, reject) => {
         SearchResults.findOne({ type: DataType.FLIGHT_DETAILS }, (err, cachedDetails) => {
-            const cachedFlightResult = cachedDetails.data.find(data => data.origin == origin && data.destination == destination);
+            const cachedFlightResult = cachedDetails.data.find(data => data.origin.includes(origin) && data.destination.includes(destination));
             console.log("GIVING BACK CACHED FLIGHT RESULT");
-            setTimeout(() => resolve(cachedFlightResult.flightDetails), 4200);
+            console.log(cachedFlightResult)
+            setTimeout(() => resolve(cachedFlightResult.flightPriceDetails), 4200);
         })
     });
 }

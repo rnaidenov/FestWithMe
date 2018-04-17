@@ -46,8 +46,10 @@ module.exports = (app) => {
       const flightDetails = isDemo == 'true'
                               ?  await DataCacheUtil.loadCachedFlightResult(origin,destination)
                               :  await amadeus.getFlightPrices(origin, destination, date);
+      console.log(flightDetails);
       res.status(200).send(flightDetails);
     } catch(err){
+      console.log("error is : " + err)
       res.status(500).send(error);
     }
   });
