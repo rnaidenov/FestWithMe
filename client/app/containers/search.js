@@ -80,7 +80,8 @@ class Search extends React.Component {
       if (!missingLocation && !missingFestival) {
         this.setState({ festivalToSearch: festivalName, doneSearch:true });
         const isDemo = this.isDemo();
-        this.props.dispatch(searchFestival(locationOrigin, festivalName, nightsOfStay, numPeople, isDemo));
+        const { searchResults : { currency }, dispatch } = this.props;
+        dispatch(searchFestival(locationOrigin, festivalName, nightsOfStay, numPeople, currency, isDemo));
       }
     },500);
   }

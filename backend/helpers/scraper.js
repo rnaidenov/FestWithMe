@@ -4,18 +4,17 @@ const request = require('request');
 const cheerio = require('cheerio');
 const google = require('../helpers/google');
 const CurrencyConverter = require('./currencies');
-const DEFAULT_CURRENCY_SYMBOL = '$';
 const MongoClient = require('./mongoClient');
 const DataCacheUtil = require('./cachedDataLoader');
 
 // Get price of the ticket for the event
-function getPrice(body) {
+function getPrice(body, currency) {
   return new Promise((resolve, reject) => {
     _scrapePrice(body).then(details => {
       const { soldOut, price, isActive } = details;
       if (!soldOut && isActive) {
         const ticketAndBookingFee = price.children[1].children[0].children[0].children[0].data;
-        resolve(_formatPrice(ticketAndBookingFee));
+        resolve(_formatPrice(ticketAndBookingFee, currency));
       } else {
         resolve(details);
       }
@@ -62,24 +61,24 @@ const _scrapeEventName = (body) => {
   });
 }
 
-const _formatPrice = (price) => {
+const _formatPrice = (price, currency) => {
   return new Promise((resolve, reject) => {
     const priceBreakdown = price.split(/[£*$*€*\+*]/);
     const currencyBreakdown = price.split(/\d/);
 
     let ticketPrice = priceBreakdown[1];
     let bookingFee = priceBreakdown[3];
-    let currency = currencyBreakdown[0];
+    let ticketCurrency = currencyBreakdown[0];
 
     // Euro symbol is placed after price in the RA website
     if (price.includes('€')) {
       ticketPrice = priceBreakdown[0];
       bookingFee = priceBreakdown[2];
-      currency = currencyBreakdown[currencyBreakdown.length - 1].trim();
+      ticketCurrency = currencyBreakdown[currencyBreakdown.length - 1].trim();
     }
     let ticketPrice_total;
     bookingFee ? ticketPrice_total = parseInt(ticketPrice) + parseInt(bookingFee) : ticketPrice_total = parseInt(ticketPrice)
-    CurrencyConverter.convert(currency, DEFAULT_CURRENCY_SYMBOL, ticketPrice_total).then(price => {
+    CurrencyConverter.convert(ticketCurrency, currency, ticketPrice_total).then(price => {
       // console.log("price is : ", price.convertedAmount);
       resolve(price.convertedAmount);
     })
@@ -151,11 +150,10 @@ const _getEventBody = (url) => {
 }
 
 // Get the event details
-const getEventDetails = (url) => {
-  // console.log("url is ", url);
+const getEventDetails = (url, currency) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const eventInfo = await _getEventBody(url).then(body => Promise.all([_scrapeEventName(body), getPrice(body), getCity(body), getCountry(body), getDate(body)]));
+      const eventInfo = await _getEventBody(url).then(body => Promise.all([_scrapeEventName(body), getPrice(body, currency), getCity(body), getCountry(body), getDate(body)]));
       const [name, priceDetails, city, country, date] = eventInfo;
       MongoClient.saveIfNotExist({ name, date });
       let eventDetails = {
@@ -177,12 +175,12 @@ const getEventDetails = (url) => {
 }
 
 
-const lookUpEvent = (eventName) => {
+const lookUpEvent = (eventName, currency) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const eventDetails = await google.getEventLink(eventName).then(url => getEventDetails(url)).then(eventDetails => eventDetails);
+      const eventDetails = await google.getEventLink(eventName).then(url => getEventDetails(url, currency)).then(eventDetails => eventDetails);
       console.log(eventDetails);
-      DataCacheUtil.cacheResults({ type: DataCacheUtil.DataType.EVENT_DETAILS, data: eventDetails});
+      DataCacheUtil.cacheResults({ type: DataCacheUtil.DataType.EVENT_DETAILS, data: eventDetails });
       resolve(eventDetails);
     } catch (err) {
       reject(err);

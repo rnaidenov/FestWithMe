@@ -1,7 +1,8 @@
-export default (state = null, action) => {
+const DEFAULT_CURRENCY_SYMBOL = '$';
+
+export default (state = { currency: DEFAULT_CURRENCY_SYMBOL, searching: false }, action) => {
   switch (action.type) {
     case 'FESTIVAL_SEARCH_START':
-      console.log("FESTIVAL_SEARCH_START");
       return Object.assign({}, state, { text: 'Getting event details ...', color: '#b7665d', searching: true, searchDetails: action.search });
     case 'FLIGHTS_SEARCH_START':
       return Object.assign({}, state, { text: `Looking for a ticket to ${action.destination} ...`, color: '#914037' });

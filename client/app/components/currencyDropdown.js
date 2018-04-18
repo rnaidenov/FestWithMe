@@ -7,53 +7,59 @@ import FlagIcon from './flagIcon';
 class CurrencyDropdown extends React.Component {
 
 
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.currencies = [{name:'USD',icon:'united-states',symbol:'$'},
-                           {name:'EUR',icon:'european-union',symbol:'€'},
-                           {name:'GBP',icon:'united-kingdom',symbol:'£'}];
-        this.state={currencyValue:this.currencies[0]};
+        this.currencies = [{ name: 'USD', icon: 'united-states', symbol: '$' },
+        { name: 'EUR', icon: 'european-union', symbol: '€' },
+        { name: 'GBP', icon: 'united-kingdom', symbol: '£' }];
+        this.state = { currencyValue: this.currencies[0] };
     }
 
     changeCurrency(event, currencyValue) {
-        this.setState({currencyValue});
+        this.setState({ currencyValue });
         this.props.changeCurrency(currencyValue.symbol)
     }
 
+    componentDidMount(){
+        const { onReloadCurrency } = this.props;
+        const onReloadCurrencyValue = this.currencies.filter(currencyOption => currencyOption.symbol === onReloadCurrency)[0];
+        if (this.state.currencyValue.symbol !== onReloadCurrency) this.setState({ currencyValue: onReloadCurrencyValue });
+    }
 
     render() {
-        
-        const { currencyValue } = this.state;
-        
 
-        const currencyChoices = this.currencies.map((currency,idx) => {
+        const { onReloadCurrency } = this.props;
+        const { currencyValue } = this.state;
+
+
+        const currencyChoices = this.currencies.map((currency, idx) => {
             return (
-                <MenuItem 
+                <MenuItem
                     key={idx}
-                    value={currency}  
-                    rightIcon={<FlagIcon currencyName={currency.name} countryName={currency.icon}/>} 
+                    value={currency}
+                    rightIcon={<FlagIcon currencyName={currency.name} countryName={currency.icon} />}
                 />
             )
         });
 
 
-        return(
+        return (
             <div className='currencyDropdownWrap'>
                 <IconMenu
-                    iconButtonElement={<IconButton style={{marginTop:'-15px',width:'65px'}}>
-                                                    <FlagIcon 
-                                                        currencyName={currencyValue.name} 
-                                                        countryName={currencyValue.icon} 
-                                                        isSelectedIcon={true}
-                                                    />
-                                        </IconButton>}
+                    iconButtonElement={<IconButton style={{ marginTop: '-15px', width: '65px' }}>
+                        <FlagIcon
+                            currencyName={currencyValue.name}
+                            countryName={currencyValue.icon}
+                            isSelectedIcon={true}
+                        />
+                    </IconButton>}
                     onChange={(event, currencyValue) => this.changeCurrency(event, currencyValue)}
                     value={this.state.currencyValue}
-                    menuStyle={{width:'100px',overflow:'hidden'}}
+                    menuStyle={{ width: '100px', overflow: 'hidden' }}
                     className="currencyMenu"
                 >
-                {currencyChoices}
-                </IconMenu> 
+                    {currencyChoices}
+                </IconMenu>
                 <span className="carretWrap">
                     <i class="material-icons currencyCarret">
                         arrow_drop_down

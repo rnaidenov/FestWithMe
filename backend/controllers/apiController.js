@@ -29,11 +29,11 @@ module.exports = (app) => {
   });
 
   app.get("/api/prices/housing", async (req, res) => {
-    const { location, date, nights, numPeople, isDemo } = req.query;
+    const { location, date, nights, numPeople, currency, isDemo } = req.query;
     try {
       const housingDetails = isDemo == 'true'
                             ? await DataCacheUtil.loadCachedHousingResult(location, date, numPeople)
-                            : await airbnb.getPrice(location, date, nights, numPeople);
+                            : await airbnb.getPrice(location, date, nights, numPeople, currency);
       res.status(200).send(housingDetails);                 
     } catch(error) {
       res.status(500).send(error);
@@ -41,27 +41,23 @@ module.exports = (app) => {
   })
 
   app.get("/api/prices/flights", async (req, res) => {
-    const { origin, destination, date, isDemo } = req.query;
+    const { origin, destination, date, currency, isDemo } = req.query;
     try {
       const flightDetails = isDemo == 'true'
                               ?  await DataCacheUtil.loadCachedFlightResult(origin,destination)
-                              :  await amadeus.getFlightPrices(origin, destination, date);
-      console.log(flightDetails);
+                              :  await amadeus.getFlightPrices(origin, destination, date, currency);
       res.status(200).send(flightDetails);
     } catch(err){
-      console.log("error is : " + err)
       res.status(500).send(error);
     }
   });
 
-
   app.get("/api/prices/events", async (req, res) => {
-    const { eventName, isDemo } = req.query;
-    console.log(isDemo == 'true')
+    const { eventName, currency, isDemo } = req.query;
     try {
       const eventDetails = isDemo == 'true'
                               ? await DataCacheUtil.loadCachedEventResult(eventName)
-                              : await scraper.lookUpEvent(eventName);
+                              : await scraper.lookUpEvent(eventName,currency);
       res.status(200).send(eventDetails);
     } catch (err) {
       res.status(500).send(err);

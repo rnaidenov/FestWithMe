@@ -8,6 +8,7 @@ import '../../dist/styles/currencyConverter.css';
 
 @connect(store => {
     return {
+        searchResults: store.searchResults,
         convertedPrices: store.currencyChanger
     }
 })
@@ -49,6 +50,10 @@ class CurrencyConverter extends React.Component {
 
 
     render() {
+
+        const { searchResults: { currency } } = this.props;
+        console.log(this.props);
+        console.log(`On reload currency should be ${currency}`);
         const { carret, priceBreakdownClass, smileyClass, chatBubbleClass } = this.state;
 
         return (
@@ -69,7 +74,7 @@ class CurrencyConverter extends React.Component {
                 <div class={chatBubbleClass}>
                     <p className='currencyDialogueText'>Would you like to change the currency?</p>
                     {chatBubbleClass === 'chatBubble right visible'
-                        ? <CurrencyDropdown changeCurrency={(symbol) => this.changeCurrency(symbol)} />
+                        ? <CurrencyDropdown changeCurrency={(symbol) => this.changeCurrency(symbol)} onReloadCurrency={currency} />
                         : null}
                 </div>
             </div>

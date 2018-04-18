@@ -20,7 +20,6 @@ class Results extends React.Component {
 
   constructor(props) {
     super(props);
-    this.DEFAULT_CURRENCY = '$';
     this.state = { carret: 'arrow_drop_up', isPricebreakdownSelected: false };
     this.closePriceBreakdownMobile = this.closePriceBreakdownMobile.bind(this);
   }
@@ -108,14 +107,14 @@ class Results extends React.Component {
       <div className='finishedResultsWrap'>
         <CurrencyConverter
           prices={prices || {}}
-          currency={currency || this.DEFAULT_CURRENCY}
+          currency={currency}
         />
         <div className='resultWrap'>
           <p id='resultsLabel'>
             <span className="resultText">Going to </span>
             <span className="festivalNameLabel">{festivalName}</span>
             <span className="resultText"> will cost you </span>
-            <span className="totalPriceLabel">{currency || this.DEFAULT_CURRENCY}{totalPrice}</span>
+            <span className="totalPriceLabel">{currency}{totalPrice}</span>
           </p>
           <div className="priceBreakdownWrap">
             {screenSize !== 'desktop' ? priceBreakdownCarret : null}
@@ -125,7 +124,7 @@ class Results extends React.Component {
           <PriceBreakdown
             prices={prices || {}}
             isSelected={isPricebreakdownSelected}
-            currency={currency || this.DEFAULT_CURRENCY}
+            currency={currency}
             updateTicketPrice={updateTicketPrice}
             screenSize={screenSize}
             searchDetails={searchDetails}
@@ -136,7 +135,7 @@ class Results extends React.Component {
 
 
 
-    if (!searchResults) {
+    if (!searching && !prices) {
       results = null;
     } else if (searching) {
       results = <Loader />;

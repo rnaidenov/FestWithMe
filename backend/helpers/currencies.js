@@ -5,6 +5,7 @@ const fetch = require('node-fetch');
 function convert(from, to, amount) {
   const fromCurrency = getCurrencyCode(from);
   const toCurrency = getCurrencyCode(to);
+  console.log(`Converting ${from}${amount} to ${getCurrencyCode(to)}`)
 
   return new Promise((resolve, reject) => {
     let isLatestRates = Object.keys(fx.rates).length!==0;
@@ -54,5 +55,6 @@ function getCurrencyCode(symbol) {
 }
 
 module.exports = {
-  convert
+  convert,
+  getCurrencyCode
 }
