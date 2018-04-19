@@ -59,10 +59,20 @@ module.exports = {
       swDest: path.join(outputDir, 'service-worker.js'),
       clientsClaim: true,
       skipWaiting: true,
-      runtimeCaching: [{
-        urlPattern: new RegExp('/.*\/(bundle.js)/'),
-        handler: 'networkFirst'
-      }]
+      runtimeCaching: [
+        {
+          urlPattern: new RegExp('.*.js.*'),
+          handler: 'networkFirst'
+        },
+        {
+          urlPattern: new RegExp('.*fonts.*'),
+          handler: 'networkFirst'
+        },
+        {
+          urlPattern: new RegExp('.*cloudinary.*'),
+          handler: 'networkFirst'
+        }
+      ]
     })
   ]
 };
