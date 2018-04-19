@@ -61,7 +61,7 @@ module.exports = {
       skipWaiting: true,
       runtimeCaching: [
         {
-          urlPattern: new RegExp('.*.js.*'),
+          urlPattern: new RegExp('.*.(webp|js|woff2).*'),
           handler: 'networkFirst'
         },
         {

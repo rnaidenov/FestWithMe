@@ -13,7 +13,7 @@
     "start": "cd client && webpack-dev-server",
     "postinstall": "cd client && webpack --config webpack.prod.config.js -p --progress --colors",
     "backend": "cd backend && nodemon app.js",
-    "minify": "html-minifier -o ./client/dist/index.min.html ./client/dist/index.dev.html --minify-css true --minify-js true  --remove-comments --collapse-whitespace --collapse-inline-tag-whitespace",
+    "minify": "html-minifier -o ./client/dist/index.html ./client/dist/index.dev.html --minify-css true --minify-js true  --remove-comments --collapse-whitespace --collapse-inline-tag-whitespace",
     "what": "cd backend && nodemon helpers/mongoClient.js",
     "test": "mocha backend/test/flightDetails.test.js"
   },
