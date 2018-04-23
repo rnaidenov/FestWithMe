@@ -7,7 +7,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack",
-    "prod": "npm run build && npm run minify && node backend/app.js",
+    "prod": "npm run build && npm run minify && cd backend && node app.js",
     "build": "cd client && webpack --config webpack.prod.config.js -p --progress --colors",
     "build:dev": "cd client && webpack --config webpack.config.js -p --progress --colors",
     "start": "cd client && webpack-dev-server",
