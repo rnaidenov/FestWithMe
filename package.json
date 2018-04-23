@@ -2,7 +2,7 @@
   "name": "fest-with-me",
   "version": "1.0.0",
   "engines": {
-    "node": "6.10.0"
+    "node": ">= 7.6.0"
   },
   "main": "index.js",
   "scripts": {
