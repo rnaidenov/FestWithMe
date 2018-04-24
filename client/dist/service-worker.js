@@ -28,15 +28,11 @@ const fileManifest = [
   },
   {
     "url": "index.dev.html",
-    "revision": "1fcc06704d46d312dcf16abff2287c18"
+    "revision": "5e70c684aed744ec17dcc20ee0b2f151"
   },
   {
     "url": "index.html",
-    "revision": "cf05ebff9e85eb0f557cd35d6e6b0c4a"
-  },
-  {
-    "url": "index.min.html",
-    "revision": "cf05ebff9e85eb0f557cd35d6e6b0c4a"
+    "revision": "5b87d38abde338123bf6e6e5d6358eb2"
   },
   {
     "url": "manifest.json",
