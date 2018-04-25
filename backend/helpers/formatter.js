@@ -1,6 +1,6 @@
 'use strict';
 
-function formatDate(eventDate, change) {
+const formatDate = (eventDate, change, flightsFormat) => {
   const date = new Date(eventDate);
   if (change) {
     const { more, days } = change;
@@ -15,8 +15,16 @@ function formatDate(eventDate, change) {
 
   const day = date.getDate();
   const dayFormat = day < 10 ? `0${day}` : day
+  const year = date.getFullYear();
 
-  return `${date.getFullYear()}-${monthFormat}-${dayFormat}`;
+  return flightsFormat ? `${_getStrippedYear(year)}${monthFormat}${dayFormat}` : `${year}-${monthFormat}-${dayFormat}`;
+}
+
+
+const _getStrippedYear = (year) => {
+  const yearSplit = String(year).split("");
+  const yearDigitsNum = yearSplit.length;
+  return `${yearSplit[yearDigitsNum-2]}${yearSplit[yearDigitsNum-1]}`
 }
 
 module.exports = {
