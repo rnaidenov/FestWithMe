@@ -1,6 +1,6 @@
 'use strict';
 
-const request = require('request');
+const HtmlParser = require('./htmlParser');
 const cheerio = require('cheerio');
 const google = require('../helpers/google');
 const CurrencyConverter = require('./currencies');
@@ -136,24 +136,11 @@ const getDate = (body) => {
 
 
 
-
-const _getEventBody = (url) => {
-  return new Promise((resolve, reject) => {
-    request(url, (err, resp, body) => {
-      if (!err) {
-        resolve(body)
-      } else {
-        reject(`Unable to get html body for "${url}". ${err}`);
-      }
-    });
-  });
-}
-
 // Get the event details
 const getEventDetails = (url, currency) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const eventInfo = await _getEventBody(url).then(body => Promise.all([_scrapeEventName(body), getPrice(body, currency), getCity(body), getCountry(body), getDate(body)]));
+      const eventInfo = await HtmlParser.getEventBody(url).then(body => Promise.all([_scrapeEventName(body), getPrice(body, currency), getCity(body), getCountry(body), getDate(body)]));
       const [name, priceDetails, city, country, date] = eventInfo;
       MongoClient.saveIfNotExist({ name, date });
       let eventDetails = {
