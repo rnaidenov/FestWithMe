@@ -1,29 +1,12 @@
 const fetch = require('node-fetch');
 const config = require('../config');
 const Formatter = require('./formatter');
+const CurrencyConverter = require('./currencies');
 const amadeusAPI = `https://api.sandbox.amadeus.com/v1.2//airports/nearest-relevant?apikey=${config.amadeusAPIKey}`;
 const googleMaps = require('@google/maps').createClient({
   key: config.googleMapsKey
 });
-const SKYSCANNER_BASE_URL =  `https://www.skyscanner.net/transport/flights`
-
-
-
-
-// Returns a 3-letter code of city, where nearest airport is located
-// const getCityCode = location => {
-  //   return new Promise(async (resolve, reject) => {
-    //     try {
-      //       const  { lat, lng } = await getCoordinates(location);
-      //       const data = await fetch(`${amadeusAPI}&latitude=${lat}&longitude=${lng}`).then(res => res.json());
-      //       const { city } = data[0];
-      //       resolve(city);
-      //     } catch(err) {
-        //       reject(`Unable to fetch IATA code for ${location}`);
-        //     }
-//   });
-// }
-
+const SKYSCANNER_BASE_URL = `https://www.skyscanner.net/transport/flights`
 
 
 // Gets latitude and longitude of location
@@ -40,11 +23,11 @@ const _getCoordinates = location => {
 const _getCityIATACode = location => {
   return new Promise(async (resolve, reject) => {
     try {
-      const  { lat, lng } = await _getCoordinates(location);
+      const { lat, lng } = await _getCoordinates(location);
       const data = await fetch(`${amadeusAPI}&latitude=${lat}&longitude=${lng}`).then(res => res.json());
       const { city } = data[0];
       resolve(city);
-    } catch(err) {
+    } catch (err) {
       reject(`Unable to fetch IATA code for ${location}`);
     }
   });
@@ -55,71 +38,73 @@ const _getCityIATACode = location => {
 
 // https://www.skyscanner.net/transport/flights/lon/sof/180430?adults=1&currency=EUR
 
-// Generates the body for the amadeus search query
-// function generateSearchQuery (origin,destination,date) {
-//   return new Promise(async (resolve, reject) => {
-//     try {
-//       const originIata = await airports.getCityCode(origin);
-//       const destinationIata = await airports.getCityCode(destination);
-//       const flightDate = formatter.formatDate(date,{more:false,days:1});
-//       resolve({
-//         link: `${SKYSCANNER_BASE_URL}/${originIata}/${destinationIata}/${flightDate}/`,
-//         origin: originIata,
-//         destination: destinationIata
-//       });
-//     } catch(err) {
-//       reject(`Unable to generate search query for Amadeus. Error: ${err}`);
-//     }
-//   })
-// }
 
-
-const generateSearchQuery = (origin, destination, date) => {
+const _generateSearchQuery = (origin, destination, date, numPeople, nightsOfStay, currencySymbol) => {
   return new Promise(async (resolve, reject) => {
     try {
       const originIata = await _getCityIATACode(origin);
       const destinationIata = await _getCityIATACode(destination);
-      const flightDate = Formatter.formatDate(date,false,true);
+      const outboundDate = Formatter.formatDate(date, false, true);
+      const inboundDate = Formatter.formatDate(date, { more: true, days: Number(nightsOfStay) }, true);
+      const currencyCode = CurrencyConverter.getCurrencyCode(currencySymbol);
       resolve({
-        link: `${SKYSCANNER_BASE_URL}/${originIata}/${destinationIata}/${flightDate}/`,
+        link: `${SKYSCANNER_BASE_URL}/${originIata}/${destinationIata}/${outboundDate}/${inboundDate}?adultsv2=${numPeople}&currency=${currencyCode}`,
         origin: originIata,
         destination: destinationIata
       });
-    } catch(err) {
-      reject(`Unable to generate search query for Amadeus. Error: ${err}`);
+    } catch (err) {
+      reject(`Unable to generate search query for Skyscanner. Error: ${err}`);
     }
   })
 }
 
-generateSearchQuery('London, United Kingdom','Mannheim','28 June 2018').then(res => console.log(res));
+_generateSearchQuery('Sofia', 'Moscow', '5 August 2018','8','3','£').then(res => console.log(res));
 
+// https://www.skyscanner.net/transport/flights/lond/fra/180628/180703?adults=3
+// https://www.skyscanner.net/transport/flights/LON/FRA/180628/180703?adults=3&currency=GBP
 
 const _getFlightPriceDetails = async (searchQuery, results, currency) => {
 
-  const {fare : {total_price : ticketPrice}} = results[0]; 
-  const flightPrice = await CurrencyConverter.convert(AMADEUS_DEFAULT_CURRENCY_SYMBOL,currency,parseInt(ticketPrice))
+  const { fare: { total_price: ticketPrice } } = results[0];
+  const flightPrice = await CurrencyConverter.convert(AMADEUS_DEFAULT_CURRENCY_SYMBOL, currency, parseInt(ticketPrice))
   return {
-      flightPriceAmount : flightPrice.convertedAmount,
-      origin : searchQuery.origin,
-      destination : searchQuery.destination
+    flightPriceAmount: flightPrice.convertedAmount,
+    origin: searchQuery.origin,
+    destination: searchQuery.destination
   }
 }
 
+
+
+// const getFlightPrices = ( origin, destination, date, numPeople, nights, currency ) => {
+//   return new Promise(async (resolve, reject) => {
+//     try {
+//       const searchQuery = await _generateSearchQuery(origin, destination, date, numPeople, nights, currency);
+//       DataCacheUtil.cacheResults({ type: DataCacheUtil.DataType.FLIGHT_DETAILS, data: { origin, destination, flightPriceDetails } });
+//     } catch (err) {
+//       resolve({
+//         flightPriceAmount: 0,
+//         error: `Unable to fetch price details for flight ticket. Error: ${err}`
+//       })
+//     }
+//   });
+// }
+
 // Looks up low-fare flights tickets and returns cheapest option
-function getFlightPrices (origin,destination,date,currency) {
+function getFlightPrices(origin, destination, date, currency) {
   return new Promise(async (resolve, reject) => {
     try {
-      const searchQuery = await generateSearchQuery(origin,destination,date);
+      const searchQuery = await _generateSearchQuery(origin, destination, date);
       const { results } = await fetch(searchQuery.link).then(res => res.json());
       const flightPriceDetails = _getFlightPriceDetails(searchQuery, results, currency);
-      DataCacheUtil.cacheResults({ type: DataCacheUtil.DataType.FLIGHT_DETAILS, data: {origin, destination, flightPriceDetails} });
+      DataCacheUtil.cacheResults({ type: DataCacheUtil.DataType.FLIGHT_DETAILS, data: { origin, destination, flightPriceDetails } });
       resolve(flightPriceDetails);
-    } catch(err) {
+    } catch (err) {
       resolve({
-        flightPriceAmount:0,
-        error:`Unable to fetch price details for flight ticket. Error: ${err}`
+        flightPriceAmount: 0,
+        error: `Unable to fetch price details for flight ticket. Error: ${err}`
       })
-    }   
+    }
   });
 }
 
