@@ -1,10 +1,13 @@
 const fetch = require('node-fetch');
 // const geocoder = require('geocoder');
 const config = require('../config');
-const amadeusAPI = `https://api.sandbox.amadeus.com/v1.2//airports/nearest-relevant?apikey=${config.amadeusAPIKey}`;
+const amadeusAPI = `https://api.sandbox.amadeus.com/v1.2/airports/nearest-relevant?apikey=${config.amadeusAPIKey}`;
 const FlightScanner = require('skiplagged-node-api');
+const CurrencyConverter = require('./currencies');
 const Formatter = require('./formatter');
-
+const DataCacheUtil = require('./cachedDataLoader');
+const SKIPLAGGED_DEFAULT_CURRENCY_SYMBOL = '$';
+const SKIPLAGGED_BASE_URL = 'https://skiplagged.com/flights';
 const googleMaps = require('@google/maps').createClient({
   key: config.googleMapsKey
 });
@@ -37,55 +40,36 @@ const _getCityIATACode = location => {
 
 
 
-// Generates the body for the amadeus search query
-function generateSearchQuery(origin, destination, date) {
-  return new Promise(async (resolve, reject) => {
-    try {
-      const originIata = await airports.getCityCode(origin);
-      const destinationIata = await airports.getCityCode(destination);
-      const flightDate = Formatter.formatDate(date, { more: false, days: 1 });
-      resolve({
-        link: `${amadeusAPI}&origin=${originIata}&destination=${destinationIata}&departure_date=${flightDate}`,
-        origin: originIata,
-        destination: destinationIata
-      });
-    } catch (err) {
-      reject(`Unable to generate search query for Amadeus. Error: ${err}`);
-    }
-  })
+const _formatResponse = async ({ inboundFlightDetails, outboundFlightDetails, originIata, destinationIata, inboundDate, outboundDate, currency }) => {
+  const { price: inboundFlightPrice, flightCode: inboundFlightCode } = inboundFlightDetails;
+  const { price: outboundFlightPrice, flightCode: outboundFlightCode } = outboundFlightDetails;
+  const inboundPriceDetails = await CurrencyConverter.convert(SKIPLAGGED_DEFAULT_CURRENCY_SYMBOL, currency, inboundFlightPrice);
+  const outboundPriceDetails = await CurrencyConverter.convert(SKIPLAGGED_DEFAULT_CURRENCY_SYMBOL, currency, outboundFlightPrice);
+  return {
+    flightPriceAmount: inboundPriceDetails.convertedAmount + outboundPriceDetails.convertedAmount,
+    origin: originIata,
+    destination: destinationIata,
+    url: `${SKIPLAGGED_BASE_URL}/${originIata}/${destinationIata}/${inboundDate}/${outboundDate}#trip=${inboundFlightCode},${outboundFlightCode}`
+  }
 }
 
 
-const getFlightPrices = (origin, destination, date, daysOfStay) => {
+const _getCheapestFlightDetails = ({ from, to, departureDate }) => {
   return new Promise(async (resolve, reject) => {
-    const originIata = await _getCityIATACode(origin);
-    const destinationIata = await _getCityIATACode(destination);
-    const inboundDate = Formatter.formatDate(date);;
-    const inboundFlight = await _getCheapestFlight({ from: originIata, to: destinationIata, departureDate:inboundDate });
-    const outboundDate = Formatter.formatDate(date,{ more:true, days: Number(daysOfStay) });
-    const outboundFlight = await _getCheapestFlight({ from: destinationIata, to: originIata, departureDate:outboundDate });
-    console.log(inboundFlight);
-    console.log(outboundFlight);
+    const searchOptions = { from, to, departureDate };
+    console.log(searchOptions);
+    const flightsResults = await FlightScanner(searchOptions);
+    console.log(flightsResults);
+    const { price: priceWithCurrency, legs: flightDetails } = flightsResults[0];
+    const { flightCode } = flightDetails[0];
+    const price = Number(priceWithCurrency.split(SKIPLAGGED_DEFAULT_CURRENCY_SYMBOL)[1]);
+    resolve({ price, flightCode });
   });
 }
 
 
-const _getCheapestFlight = async ({ from, to, departureDate }) => {
-  const searchOptions = { from, to, departureDate };
-  console.log(searchOptions);
-  const flightsResults = await FlightScanner(searchOptions);
-  console.log(flightsResults)
-  const { price, legs: flightDetails } = flightsResults[0];
-  const { flightCode } = flightDetails[0];
-  return { price, flightCode };
-}
-
-
-getFlightPrices('London','Sofia','10 June 2018', 7);
-
 
 const _getFlightPriceDetails = async (searchQuery, results, currency) => {
-
   const { fare: { total_price: ticketPrice } } = results[0];
   const flightPrice = await CurrencyConverter.convert(AMADEUS_DEFAULT_CURRENCY_SYMBOL, currency, parseInt(ticketPrice))
   return {
@@ -95,7 +79,31 @@ const _getFlightPriceDetails = async (searchQuery, results, currency) => {
   }
 }
 
-// Looks up low-fare flights tickets and returns cheapest option
+
+const getFlightPrices = (origin, destination, date, daysOfStay, currency) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const originIata = await _getCityIATACode(origin);
+      const destinationIata = await _getCityIATACode(destination);
+      const formattedInboundDate = Formatter.formatDate(date);
+      const inboundFlightDetails = await _getCheapestFlightDetails({ from: originIata, to: destinationIata, departureDate: formattedInboundDate });
+      const formattedOutboundDate = Formatter.formatDate(date, { more: true, days: Number(daysOfStay) });
+      const outboundFlightDetails = await _getCheapestFlightDetails({ from: destinationIata, to: originIata, departureDate: formattedOutboundDate });
+      const flightPriceDetails = await _formatResponse({ inboundFlightDetails, outboundFlightDetails, originIata, destinationIata, formattedInboundDate, formattedOutboundDate, currency });
+      DataCacheUtil.cacheResults({ type: DataCacheUtil.DataType.FLIGHT_DETAILS, data: { origin, destination, flightPriceDetails } });
+      resolve(flightPriceDetails);
+
+    } catch (err) {
+      resolve({
+        flightPriceAmount: 0,
+        error: `Unable to fetch price details for flight ticket. Error: ${err}`
+      })
+    }
+  });
+}
+
+
+
 // function getFlightPrices(origin, destination, date, currency) {
 //   return new Promise(async (resolve, reject) => {
 //     try {
@@ -116,5 +124,5 @@ const _getFlightPriceDetails = async (searchQuery, results, currency) => {
 
 
 module.exports = {
-  _getCityIATACode
+  getFlightPrices
 }
