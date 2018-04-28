@@ -70,7 +70,7 @@ export const getTotalPrice = (eventDetails, flightDetails, housingDetails, night
     ? eventPrice + flightPriceAmount + accommodationAvgPrice * nights
     : flightPriceAmount + accommodationAvgPrice * nights;
   return {
-    ticketPrice: eventPrice,
+    eventDetails,
     flightDetails,
     housingDetails: housingDetails,
     totalPrice: totalPrice * numPeople

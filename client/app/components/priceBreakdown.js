@@ -67,11 +67,11 @@ class PriceBreakdown extends React.Component {
   render() {
 
     const { prices, currency, screenSize } = this.props;
-    const { flightDetails, ticketPrice, housingDetails: { properties }, totalPrice } = prices;
+    const { flightDetails, eventDetails, housingDetails, totalPrice } = prices;
     const { priceBreakdownClass, newPriceAmount, newPriceMissing, showContent } = this.state;
 
 
-    const accommodationTypes = properties.map((propertyType, key) => {
+    const accommodationTypes = housingDetails.properties.map((propertyType, key) => {
       return (
         <div key={key} className='accommodationTypeWrap'>
           <div className="accomodationInfo">
@@ -121,12 +121,12 @@ class PriceBreakdown extends React.Component {
           <div className="mainContent">
             <img src={require('../../dist/public/ticket.svg')} className='contentIcon' />
           </div>
-          <p className='priceLabel'>{currency}{ticketPrice}</p>
+          <p className='priceLabel'>{currency}{eventDetails.price}</p>
         </div>
       </div>
     )
 
-    const festival = ticketPrice != null ? activeFestival : soldOutFestival
+    const festival = eventDetails.price != null ? activeFestival : soldOutFestival
 
     const travel = (
       <div className='flexWrap'>
@@ -144,12 +144,12 @@ class PriceBreakdown extends React.Component {
       </div>
     )
 
-    const priceBreakdownContent = [{ element: festival, ref: null }, { element: travel, ref: flightDetails.url }, { element: housing, ref: null }];
+    const priceBreakdownContent = [{ element: festival, ref: eventDetails.url }, { element: travel, ref: flightDetails.url }, { element: housing, ref: housingDetails.url }];
 
     const content = priceBreakdownContent.map((content, idx) => (
-        <Paper className='contentType' id={`content${idx}`} key={idx} onClick={() => window.open(content.ref, "__blank")}>
-          {content.element}
-        </Paper>
+      <Paper className='contentType' id={`content${idx}`} key={idx} onClick={() => window.open(content.ref, "_blank")}>
+        {content.element}
+      </Paper>
     ));
 
     const priceBreakdownBigScreen = (

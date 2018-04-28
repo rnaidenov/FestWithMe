@@ -167,7 +167,7 @@ const getEventDetails = (url, currency) => {
       const todaysDate = new Date();
       eventDetails = eventDate < todaysDate ? Object.assign(eventDetails, { isActive: false }) : eventDetails
       !isNaN(priceDetails) ? eventDetails.price = priceDetails : eventDetails = Object.assign(eventDetails, priceDetails);
-      resolve(eventDetails)
+      resolve(Object.assign(eventDetails, {url}))
     } catch (err) {
       reject(err);
     }

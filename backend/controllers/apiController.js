@@ -1,7 +1,7 @@
 'use strict';
 
 const bodyParser = require('body-parser');
-const scraper = require('../helpers/scraper');
+const events = require('../helpers/events');
 const flights = require('../helpers/flights');
 const airbnb = require('../helpers/airbnb');
 const currencies = require('../helpers/currencies');
@@ -57,7 +57,7 @@ module.exports = (app) => {
     try {
       const eventDetails = isDemo == 'true'
                               ? await DataCacheUtil.loadCachedEventResult(eventName)
-                              : await scraper.lookUpEvent(eventName,currency);
+                              : await events.lookUpEvent(eventName,currency);
       res.status(200).send(eventDetails);
     } catch (err) {
       res.status(500).send(err);
