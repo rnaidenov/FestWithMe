@@ -10,7 +10,6 @@ import FestivalInput from './festivalInput';
 import LocationInput from './locationInput';
 import Results from './results';
 import '../../dist/styles/search.css';
-import { isDate } from 'util';
 
 @connect(store => {
   return {

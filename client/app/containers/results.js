@@ -5,7 +5,6 @@ import PriceBreakdown from '../components/priceBreakdown';
 import { changeCurrency } from '../actions/priceBreakdownActions';
 import { updateTicketPrice } from '../actions/priceUpdateActions';
 import CurrencyConverter from './currencyConverter';
-import CurrencyDropdown from '../components/currencyDropdown';
 import { Loader } from '../components/loader';
 import '../../dist/styles/results.css';
 

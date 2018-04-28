@@ -1,8 +1,5 @@
 import React from 'react';
-import SelectField from 'material-ui/SelectField';
-import MenuItem from 'material-ui/MenuItem';
 import Paper from 'material-ui/Paper';
-import AutoComplete from 'material-ui/AutoComplete';
 import TextField from 'material-ui/TextField';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';

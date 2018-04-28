@@ -520,7 +520,7 @@ priceBreakdownContainer
   margin:0;
 }
 
-.accomodationWrap {
+.flexWrap {
   display: flex;
   flex-wrap: wrap;
 }
@@ -530,13 +530,6 @@ priceBreakdownContainer
   font-weight: 300;
   padding-top: 5%;
 }
-
-#noInfoLabel {
-  color: darkred;
-  font-size: 12px;
-  margin-top: 2%;
-}
-
 
 @keyframes fadeOutUp  {
   0% { opacity:1;-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 10, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 10, 0, 1); }

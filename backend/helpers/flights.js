@@ -89,7 +89,7 @@ const getFlightPrices = (origin, destination, date, daysOfStay, currency) => {
       const inboundFlightDetails = await _getCheapestFlightDetails({ from: originIata, to: destinationIata, departureDate: formattedInboundDate });
       const formattedOutboundDate = Formatter.formatDate(date, { more: true, days: Number(daysOfStay) });
       const outboundFlightDetails = await _getCheapestFlightDetails({ from: destinationIata, to: originIata, departureDate: formattedOutboundDate });
-      const flightPriceDetails = await _formatResponse({ inboundFlightDetails, outboundFlightDetails, originIata, destinationIata, formattedInboundDate, formattedOutboundDate, currency });
+      const flightPriceDetails = await _formatResponse({ inboundFlightDetails, outboundFlightDetails, originIata, destinationIata, inboundDate: formattedInboundDate,  outboundDate: formattedOutboundDate, currency });
       DataCacheUtil.cacheResults({ type: DataCacheUtil.DataType.FLIGHT_DETAILS, data: { origin, destination, flightPriceDetails } });
       resolve(flightPriceDetails);
 
