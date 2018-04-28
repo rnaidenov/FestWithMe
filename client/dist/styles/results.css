@@ -359,6 +359,10 @@ priceBreakdownContainer
   padding-top:1%;
 }
 
+.contentType:hover{
+  cursor: pointer;
+}
+
 .hidden{
  display: none;
 }

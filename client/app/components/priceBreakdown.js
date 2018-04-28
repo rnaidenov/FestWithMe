@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
@@ -17,8 +18,7 @@ class PriceBreakdown extends React.Component {
 
   constructor(props) {
     super(props);
-    this.desktopTooltipMessage = "Click me for more info.";
-    this.mobileTooltipMessage = "Double tap for more info.";
+    this.openResultLink = this.openResultLink.bind(this);
     this.state = { showContent: false, newPriceMissing: true, priceBreakdownClass: 'priceBreakdownContainer' };
   }
 
@@ -64,6 +64,11 @@ class PriceBreakdown extends React.Component {
     dispatch(updateTicketPrice(prices, newPriceAmount, searchDetails));
   }
 
+  openResultLink = (e,url) => {
+    const inactiveTicketInput = ReactDOM.findDOMNode(this.refs['InactiveTicketInput']);
+    if(inactiveTicketInput===null || !inactiveTicketInput.contains(e.target)) window.open(url, "_blank");
+  }
+
   render() {
 
     const { prices, currency, screenSize } = this.props;
@@ -95,7 +100,7 @@ class PriceBreakdown extends React.Component {
               <span className='price-update-text prompt'>If you have purchased a ticket already, you can enter the price amount in the input box below.</span>
             </p>
           </div>
-          <div className='inputWrap'>
+          <div className='inputWrap' ref='InactiveTicketInput'>
             <Paper className='price-update-input'>
               <TextField
                 underlineShow={false}
@@ -147,7 +152,7 @@ class PriceBreakdown extends React.Component {
     const priceBreakdownContent = [{ element: festival, ref: eventDetails.url }, { element: travel, ref: flightDetails.url }, { element: housing, ref: housingDetails.url }];
 
     const content = priceBreakdownContent.map((content, idx) => (
-      <Paper className='contentType' id={`content${idx}`} key={idx} onClick={() => window.open(content.ref, "_blank")}>
+      <Paper className='contentType' id={`content${idx}`} key={idx} onClick={(e) => this.openResultLink(e, content.ref)}>
         {content.element}
       </Paper>
     ));
@@ -159,6 +164,7 @@ class PriceBreakdown extends React.Component {
     const priceBreakdownMobileScreen = (
       <Paper zDepth={1} className={priceBreakdownClass}>
         <CustomCarousel
+          onClick={this.openResultLink}
           slideWidth={1}
           content={priceBreakdownContent}
         />

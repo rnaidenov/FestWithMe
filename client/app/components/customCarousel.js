@@ -1,10 +1,10 @@
 import React from 'react';
 import Carousel from 'nuka-carousel';
 
-function CustomCarousel({ content, decorators, slidesToShow, slideWidth, className }) {
-  const carouselContent = content.map(c => (
-    <div key={'carousel'}>
-      {c}
+function CustomCarousel({ content, onClick, decorators, slidesToShow, slideWidth, className }) {
+  const carouselContent = content.map((c,idx) => (
+    <div key={idx} onClick={(e) => onClick(e, c.ref)}>
+      {c.element}
     </div>
     ));
 
