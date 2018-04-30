@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
@@ -17,6 +18,7 @@ class PriceBreakdown extends React.Component {
 
   constructor(props) {
     super(props);
+    this.openResultLink = this.openResultLink.bind(this);
     this.state = { showContent: false, newPriceMissing: true, priceBreakdownClass: 'priceBreakdownContainer' };
   }
 
@@ -27,33 +29,33 @@ class PriceBreakdown extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
-    if (newProps.priceDetails!==this.state.priceDetails) {
+    if (newProps.priceDetails !== this.state.priceDetails) {
       const { priceDetails, currency } = newProps;
-      this.setState({priceDetails, currency })
+      this.setState({ priceDetails, currency })
     }
     this.togglePriceBreakdown(newProps.isSelected);
   }
 
-  togglePriceBreakdown(isSelected){
+  togglePriceBreakdown(isSelected) {
     const breakdownIsShown = this.state.priceBreakdownClass === 'priceBreakdownContainer selected';
 
-      if (isSelected) {
-        if (!breakdownIsShown) {
-          this.setState({ priceBreakdownClass: 'priceBreakdownContainer selected' });
-        }
-      } else {
-        if (breakdownIsShown) {
-          this.setState({ priceBreakdownClass: 'priceBreakdownContainer unselected' }, () => {
-            setTimeout(() => {
-              this.setState({ priceBreakdownClass: 'priceBreakdownContainer' });
-            }, 1000);
-          })
-        }
+    if (isSelected) {
+      if (!breakdownIsShown) {
+        this.setState({ priceBreakdownClass: 'priceBreakdownContainer selected' });
       }
+    } else {
+      if (breakdownIsShown) {
+        this.setState({ priceBreakdownClass: 'priceBreakdownContainer unselected' }, () => {
+          setTimeout(() => {
+            this.setState({ priceBreakdownClass: 'priceBreakdownContainer' });
+          }, 1000);
+        })
+      }
+    }
   }
 
   updatePriceAmt = (e, newPriceAmount) => {
-      this.setState({ newPriceAmount, newPriceMissing: false });
+    this.setState({ newPriceAmount, newPriceMissing: false });
   }
 
   updateTicketPrice = () => {
@@ -62,17 +64,19 @@ class PriceBreakdown extends React.Component {
     dispatch(updateTicketPrice(prices, newPriceAmount, searchDetails));
   }
 
+  openResultLink = (e,url) => {
+    const inactiveTicketInput = ReactDOM.findDOMNode(this.refs['InactiveTicketInput']);
+    if(inactiveTicketInput===null || !inactiveTicketInput.contains(e.target)) window.open(url, "_blank");
+  }
+
   render() {
 
     const { prices, currency, screenSize } = this.props;
-    const { flightDetails, ticketPrice, housingDetails: { properties }, totalPrice } = prices;
+    const { flightDetails, eventDetails, housingDetails, totalPrice } = prices;
     const { priceBreakdownClass, newPriceAmount, newPriceMissing, showContent } = this.state;
 
-    const noInfo = (
-      <span id='noInfoLabel'>No information</span>
-    )
 
-    const accommodationTypes = properties.map((propertyType, key) => {
+    const accommodationTypes = housingDetails.properties.map((propertyType, key) => {
       return (
         <div key={key} className='accommodationTypeWrap'>
           <div className="accomodationInfo">
@@ -92,22 +96,22 @@ class PriceBreakdown extends React.Component {
             <img src={require('../../dist/public/inactiveTicket.svg')} className='contentIcon inactive' />
             <p className='price-update-text'>
               Unfortunately, the event seems to be sold out on Resident Advisor.
-              <br/>
+              <br />
               <span className='price-update-text prompt'>If you have purchased a ticket already, you can enter the price amount in the input box below.</span>
             </p>
           </div>
-          <div className='inputWrap'>
+          <div className='inputWrap' ref='InactiveTicketInput'>
             <Paper className='price-update-input'>
-              <TextField 
+              <TextField
                 underlineShow={false}
-                style={{width:'50px'}}
+                style={{ width: '50px' }}
                 value={newPriceAmount}
                 onChange={this.updatePriceAmt}
                 id='priceInputField'
               />
             </Paper>
-            <RaisedButton 
-              className='price-update-btn' 
+            <RaisedButton
+              className='price-update-btn'
               disabled={newPriceMissing}
               onClick={this.updateTicketPrice}><p className='price-update-btn-text'>OK</p></RaisedButton>
           </div>
@@ -122,22 +126,22 @@ class PriceBreakdown extends React.Component {
           <div className="mainContent">
             <img src={require('../../dist/public/ticket.svg')} className='contentIcon' />
           </div>
-          <p className='priceLabel'>{currency}{ticketPrice}</p>
+          <p className='priceLabel'>{currency}{eventDetails.price}</p>
         </div>
       </div>
     )
 
-    const festival = ticketPrice!=null ? activeFestival : soldOutFestival
+    const festival = eventDetails.price != null ? activeFestival : soldOutFestival
 
     const travel = (
-      <div className='accomodationWrap'>
+      <div className='flexWrap'>
         <h1 className='priceBreakdownHeading'>Plane ticket</h1>
         <FlightPrice details={flightDetails} currency={currency} />
       </div>
     )
 
     const housing = (
-      <div className="accomodationWrap">
+      <div className="flexWrap">
         <h1 className='priceBreakdownHeading'>Accommodation</h1>
         <div className="contentWrap">
           {accommodationTypes}
@@ -145,23 +149,22 @@ class PriceBreakdown extends React.Component {
       </div>
     )
 
-    const priceBreakdownContent = [festival, travel, housing];
+    const priceBreakdownContent = [{ element: festival, ref: eventDetails.url }, { element: travel, ref: flightDetails.url }, { element: housing, ref: housingDetails.url }];
 
-    const content = priceBreakdownContent.map((content, idx) => {
-      return (
-        <Paper className='contentType' id={`content${idx}`} key={idx}>
-          {content}
-        </Paper>
-      )
-    });
+    const content = priceBreakdownContent.map((content, idx) => (
+      <Paper className='contentType' id={`content${idx}`} key={idx} onClick={(e) => this.openResultLink(e, content.ref)}>
+        {content.element}
+      </Paper>
+    ));
 
     const priceBreakdownBigScreen = (
-      <div>{content}</div>    
+      <div>{content}</div>
     )
 
     const priceBreakdownMobileScreen = (
       <Paper zDepth={1} className={priceBreakdownClass}>
         <CustomCarousel
+          onClick={this.openResultLink}
           slideWidth={1}
           content={priceBreakdownContent}
         />
@@ -170,7 +173,7 @@ class PriceBreakdown extends React.Component {
 
 
     return (
-        screenSize!=='desktop' ? priceBreakdownMobileScreen : priceBreakdownBigScreen
+      screenSize !== 'desktop' ? priceBreakdownMobileScreen : priceBreakdownBigScreen
     )
 
 

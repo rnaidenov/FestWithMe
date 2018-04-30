@@ -1,8 +1,8 @@
 'use strict';
 
 const bodyParser = require('body-parser');
-const scraper = require('../helpers/scraper');
-const amadeus = require('../helpers/amadeus');
+const events = require('../helpers/events');
+const flights = require('../helpers/flights');
 const airbnb = require('../helpers/airbnb');
 const currencies = require('../helpers/currencies');
 const location = require('../helpers/iplocation');
@@ -41,13 +41,13 @@ module.exports = (app) => {
   })
 
   app.get("/api/prices/flights", async (req, res) => {
-    const { origin, destination, date, currency, isDemo } = req.query;
+    const { origin, destination, date, nights, currency, isDemo } = req.query;
     try {
       const flightDetails = isDemo == 'true'
                               ?  await DataCacheUtil.loadCachedFlightResult(origin,destination)
-                              :  await amadeus.getFlightPrices(origin, destination, date, currency);
+                              :  await flights.getFlightPrices(origin, destination, date, nights, currency);
       res.status(200).send(flightDetails);
-    } catch(err){
+    } catch(error){
       res.status(500).send(error);
     }
   });
@@ -57,7 +57,7 @@ module.exports = (app) => {
     try {
       const eventDetails = isDemo == 'true'
                               ? await DataCacheUtil.loadCachedEventResult(eventName)
-                              : await scraper.lookUpEvent(eventName,currency);
+                              : await events.lookUpEvent(eventName,currency);
       res.status(200).send(eventDetails);
     } catch (err) {
       res.status(500).send(err);

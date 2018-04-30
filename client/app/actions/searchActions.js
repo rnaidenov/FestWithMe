@@ -1,12 +1,12 @@
 const { APPLICATION_API_BASE_URL } = process.env;
 
 
-const _getFlightDetails = (origin, cityDestination, fullDestination, date, currency, isDemo = false, dispatch) => {
+const _getFlightDetails = (origin, cityDestination, fullDestination, date, nights, currency, isDemo = false, dispatch) => {
   dispatch({ type: 'FLIGHTS_SEARCH_START', destination: cityDestination });
   _increaseLoader(dispatch, 60);
   return new Promise(async (resolve, reject) => {
     try {
-      const flightDetails = await fetch(`${APPLICATION_API_BASE_URL}api/prices/flights?origin=${origin}&destination=${fullDestination}&date=${date}&currency=${currency}&isDemo=${isDemo}`)
+      const flightDetails = await fetch(`${APPLICATION_API_BASE_URL}api/prices/flights?origin=${origin}&destination=${fullDestination}&date=${date}&nights=${nights}&currency=${currency}&isDemo=${isDemo}`)
         .then(res => res.json());
       resolve(flightDetails);
     } catch (err) {
@@ -50,7 +50,7 @@ export const searchFestival = (origin, festivalName, nights, numPeople, currency
     if (eventDetails.isActive) {
       const destination = `${eventDetails.city},${eventDetails.country}`;
       const date = eventDetails.date;
-      const flightDetails = await _getFlightDetails(origin, eventDetails.city, destination, date, currency, isDemo, dispatch);
+      const flightDetails = await _getFlightDetails(origin, eventDetails.city, destination, date, nights, currency, isDemo, dispatch);
       const housingDetails = await _getHousingDetails(destination, date, nights, numPeople, currency, isDemo, dispatch);
       const details = getTotalPrice(eventDetails, flightDetails, housingDetails, nights, numPeople);
       dispatch({ type: 'FESTIVAL_SEARCH_FINISHED', priceDetails: details });
@@ -70,7 +70,7 @@ export const getTotalPrice = (eventDetails, flightDetails, housingDetails, night
     ? eventPrice + flightPriceAmount + accommodationAvgPrice * nights
     : flightPriceAmount + accommodationAvgPrice * nights;
   return {
-    ticketPrice: eventPrice,
+    eventDetails,
     flightDetails,
     housingDetails: housingDetails,
     totalPrice: totalPrice * numPeople
