@@ -683,12 +683,18 @@
     </style>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="#aab3bb">
+    <script>
+        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+        ga('create', 'UA-118371442-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <script src="./service-worker-registration.js"></script>
+    <script async src="./bundle.js"></script>
 </head>
 
 <body class="background">
     <div class="overlay" id="root"></div>
-    <script src="./service-worker-registration.js" defer="defer"></script>
-    <script src="./bundle.js"></script>
 </body>
 
 </html>
