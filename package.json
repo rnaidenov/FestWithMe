@@ -57,15 +57,12 @@
     "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.5.2",
     "redux-thunk": "^2.1.0",
-<<<<<<< HEAD
     "sass-loader": "^4.1.1",
     "style-loader": "^0.13.2",
     "url-loader": "^0.5.9",
     "webpack": "^1.13.1",
-    "workbox-webpack-plugin": "^2.1.3"
-=======
+    "workbox-webpack-plugin": "^2.1.3",
     "skiplagged-node-api": "^0.1.0"
->>>>>>> feature/skiplagged-integration
   },
   "devDependencies": {
     "chai": "^4.1.2",
