@@ -1,8 +1,6 @@
 const fetch = require('node-fetch');
-// const geocoder = require('geocoder');
 const config = require('../config');
 const amadeusAPI = `https://api.sandbox.amadeus.com/v1.2/airports/nearest-relevant?apikey=${config.amadeusAPIKey}`;
-const FlightScanner = require('skiplagged-node-api');
 const CurrencyConverter = require('./currencies');
 const Formatter = require('./formatter');
 const DataCacheUtil = require('./cachedDataLoader');
