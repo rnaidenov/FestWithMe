@@ -8,5 +8,6 @@ module.exports = {
   googleAPIKey : configValues.googleAPIKey,
   googleCSE : configValues.googleCSE,
   googleMapsKey : configValues.googleMapsKey,
-  testsMaxTimeout: configValues.testsMaxTimeout
+  testsMaxTimeout: configValues.testsMaxTimeout,
+  fixerAPIKey: configValues.fixerAPIKey
 }

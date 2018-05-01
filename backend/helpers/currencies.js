@@ -1,58 +1,58 @@
 const fx = require('money');
 const fetch = require('node-fetch');
+const config = require('../config');
+const LATEST_CURRENCY_RATES_URL = `http://data.fixer.io/api/latest?access_key=${config.fixerAPIKey}`;
 
 
-function convert(from, to, amount) {
-  const fromCurrency = getCurrencyCode(from);
-  const toCurrency = getCurrencyCode(to);
-  console.log(`Converting ${from}${amount} to ${getCurrencyCode(to)}`)
 
-  return new Promise((resolve, reject) => {
-    let isLatestRates = Object.keys(fx.rates).length!==0;
-    if (!isLatestRates) {
-      getLatestRates().then(() => {
-        resolve(getConversionData(fromCurrency, toCurrency, amount));
-      });
-    } else {
-        resolve(getConversionData(fromCurrency, toCurrency, amount));
-    }
-  })
-}
-
-
-function getConversionData(from, to, amount) { 
-    return new Promise((resolve,reject) => {
-      const convertedAmount = Math.round(fx.convert(amount, { from, to }));     
-      resolve({
-        convertedAmount,
-        currency: to
-      });
-    });
-}
-
-function getLatestRates() {
-  return new Promise((resolve, reject) => {
-    fetch('http://api.fixer.io/latest').then(latestRes => {
-      latestRes.json().then(latestData => {
-        const { base, rates } = latestData;
-        fx.base = base;
-        fx.rates = rates;
-        resolve(true);
-      })
-    })
-  })
-}
-
-
-function getCurrencyCode(symbol) {
+const getCurrencyCode = (symbol) => {
   const currencies = new Map([
     ['£', 'GBP'],
     ['$', 'USD'],
     ['€', 'EUR']
   ]);
-
   return currencies.get(symbol);
 }
+
+const _getConversionData = (from, to, amount) => {
+  return new Promise((resolve, reject) => {
+    try {
+      const fromCurrency = getCurrencyCode(from);
+      const toCurrency = getCurrencyCode(to);
+      const convertedAmount = Math.round(fx.convert(amount, { from: fromCurrency, to: toCurrency }));
+      resolve({ convertedAmount, currency: to });
+    } catch(err){
+      reject(`Unable to convert ${from}${amount} to ${to}. Error: ${err}`);
+    }
+  });
+}
+
+
+const _getLatestRates = () => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const data = await fetch(LATEST_CURRENCY_RATES_URL).then(res => res.json());
+      const { base, rates } = data;
+      Object.assign(fx, { base, rates });
+      resolve();
+    } catch (err) {
+      reject(`Unable to get data for latest currency rates. Error: ${err}`);
+    }
+  })
+}
+
+
+const convert = (from, to, amount) => {
+  return new Promise((resolve, reject) => {
+    try {
+      const isLatestRates = Object.keys(fx.rates).length !== 0;
+      !isLatestRates ? _getLatestRates().then(() => resolve(_getConversionData(from, to, amount))) : resolve(_getConversionData(from, to, amount));
+    } catch(err){
+      reject(err);
+    }
+  })
+}
+
 
 module.exports = {
   convert,
