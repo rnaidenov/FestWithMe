@@ -6,7 +6,7 @@ const _getFlightDetails = (origin, cityDestination, fullDestination, date, night
   _increaseLoader(dispatch, 60);
   return new Promise(async (resolve, reject) => {
     try {
-      const flightDetails = await fetch(`${APPLICATION_API_BASE_URL}api/prices/flights?origin=${origin}&destination=${fullDestination}&date=${date}&nights=${nights}&currency=${currency}&isDemo=${isDemo}`)
+      const flightDetails = await fetch(`${APPLICATION_API_BASE_URL}api/prices/flights?origin=${encodeURIComponent(origin)}&destination=${encodeURIComponent(fullDestination)}&date=${date}&nights=${nights}&currency=${encodeURIComponent(currency)}&isDemo=${isDemo}`)
         .then(res => res.json());
       resolve(flightDetails);
     } catch (err) {
@@ -20,7 +20,7 @@ const _getHousingDetails = (destination, date, nights, numPeople, currency, isDe
   _increaseLoader(dispatch, 80);
   return new Promise(async (resolve, reject) => {
     try {
-      const housingDetails = await fetch(`${APPLICATION_API_BASE_URL}api/prices/housing?location=${destination}&date=${date}&nights=${nights}&numPeople=${numPeople}&currency=${currency}&isDemo=${isDemo}`)
+      const housingDetails = await fetch(`${APPLICATION_API_BASE_URL}api/prices/housing?location=${encodeURIComponent(destination)}&date=${date}&nights=${nights}&numPeople=${numPeople}&currency=${encodeURIComponent(currency)}&isDemo=${isDemo}`)
         .then(res => res.json());
       resolve(housingDetails);
     } catch (err) {
@@ -34,7 +34,7 @@ const _getEventDetails = (festivalName, currency, isDemo = false, dispatch) => {
   _increaseLoader(dispatch, 0);
   return new Promise(async (resolve, reject) => {
     try {
-      const eventDetails = await fetch(`${APPLICATION_API_BASE_URL}api/prices/events?eventName=${festivalName}&currency=${currency}&isDemo=${isDemo}`).then(res => res.json())
+      const eventDetails = await fetch(`${APPLICATION_API_BASE_URL}api/prices/events?eventName=${encodeURIComponent(festivalName)}&currency=${encodeURIComponent(currency)}&isDemo=${isDemo}`).then(res => res.json())
       resolve(eventDetails);
     } catch (err) {
       reject(`Fetching event details failed.`, err);

@@ -8,7 +8,7 @@ const MongoClient = require('./mongoClient');
 const DataCacheUtil = require('./cachedDataLoader');
 
 // Get price of the ticket for the event
-function getPrice(body, currency) {
+const getPrice = (body, currency) => {
   return new Promise((resolve, reject) => {
     _scrapePrice(body).then(details => {
       const { soldOut, price, isActive } = details;
@@ -22,7 +22,7 @@ function getPrice(body, currency) {
   })
 }
 
-function _scrapePrice(body) {
+const _scrapePrice = (body) => {
   return new Promise((resolve, reject) => {
     const $ = cheerio.load(body);
     const tickets = $('#tickets');
@@ -47,13 +47,12 @@ function _scrapePrice(body) {
 }
 
 
-const _scrapeEventName = (body) => {
+const getEventName = (body) => {
   return new Promise((resolve, reject) => {
     try {
       const $ = cheerio.load(body);
       const eventDetails = $('#sectionHead');
       const eventName = eventDetails[0].children[3].children[0].data;
-      // console.log("event name is : ", eventName);
       resolve(eventName);
     } catch (err) {
       reject('Unable to scrape event name. ', err);
@@ -79,7 +78,6 @@ const _formatPrice = (price, currency) => {
     let ticketPrice_total;
     bookingFee ? ticketPrice_total = parseInt(ticketPrice) + parseInt(bookingFee) : ticketPrice_total = parseInt(ticketPrice)
     CurrencyConverter.convert(ticketCurrency, currency, ticketPrice_total).then(price => {
-      // console.log("price is : ", price.convertedAmount);
       resolve(price.convertedAmount);
     })
   });
@@ -91,7 +89,6 @@ const getCity = (body) => {
     try {
       const $ = cheerio.load(body);
       const city = $('.circle-left')[0].children[0].children[0].data;
-      // console.log("city is : ", city);
       resolve(city);
     } catch (err) {
       reject('Unable to get the city name for the event. ', err);
@@ -124,7 +121,7 @@ const getDate = (body) => {
       for (const tag of parentTag) {
         if (tag.name == 'a') {
           const eventDate = tag.children[0].data;
-          resolve(eventDate);
+          resolve(eventDate.trim());
           break;
         }
       }
@@ -149,25 +146,24 @@ const _getEventBody = (url) => {
   });
 }
 
+// Determine whether the event is still active or is already finished
+const determineIsActive = ({name, city, country, date, priceDetails}) => {
+  const eventDetails = Object.assign({}, { name, city, country });
+  const eventDate = new Date(date);
+  const todaysDate = new Date();
+  eventDate < todaysDate ? Object.assign(eventDetails, { isActive: false }) : Object.assign(eventDetails, { isActive: true }) 
+  return !isNaN(priceDetails) ? Object.assign(eventDetails, { price: priceDetails }) : Object.assign(eventDetails, priceDetails);
+}
+
 // Get the event details
 const getEventDetails = (url, currency) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const eventInfo = await _getEventBody(url).then(body => Promise.all([_scrapeEventName(body), getPrice(body, currency), getCity(body), getCountry(body), getDate(body)]));
+      const eventInfo = await _getEventBody(url).then(body => Promise.all([getEventName(body), getPrice(body, currency), getCity(body), getCountry(body), getDate(body)]));
       const [name, priceDetails, city, country, date] = eventInfo;
       MongoClient.saveIfNotExist({ name, date });
-      let eventDetails = {
-        name,
-        city,
-        country,
-        date,
-        isActive: true
-      };
-      const eventDate = new Date(date);
-      const todaysDate = new Date();
-      eventDetails = eventDate < todaysDate ? Object.assign(eventDetails, { isActive: false }) : eventDetails
-      !isNaN(priceDetails) ? eventDetails.price = priceDetails : eventDetails = Object.assign(eventDetails, priceDetails);
-      resolve(Object.assign(eventDetails, {url}))
+      const eventDetails = determineIsActive({name, city, country, date, priceDetails});
+      resolve(Object.assign(eventDetails, { url }))
     } catch (err) {
       reject(err);
     }
@@ -179,7 +175,6 @@ const lookUpEvent = (eventName, currency) => {
   return new Promise(async (resolve, reject) => {
     try {
       const eventDetails = await google.getEventLink(eventName).then(url => getEventDetails(url, currency)).then(eventDetails => eventDetails);
-      console.log(eventDetails);
       DataCacheUtil.cacheResults({ type: DataCacheUtil.DataType.EVENT_DETAILS, data: eventDetails });
       resolve(eventDetails);
     } catch (err) {
@@ -189,27 +184,11 @@ const lookUpEvent = (eventName, currency) => {
 }
 
 
-// active event
-// getEventDetails("https://www.residentadvisor.net/events/1010741").then(res => {
-//   console.log(res);
-// })
-
-
-// // sold out event, still active
-// getEventDetails("https://www.residentadvisor.net/events/1016589").then(res => {
-//   console.log(res);
-// })
-
-
-// // sold out event, not active
-// getEventDetails("https://www.residentadvisor.net/events/864800").then(res => {
-//   console.log(res);
-// })
-
-
 module.exports = {
   lookUpEvent,
+  getEventName,
   getPrice,
+  determineIsActive,
   getCity,
   getCountry,
   getDate

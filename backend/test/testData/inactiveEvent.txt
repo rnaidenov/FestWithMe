@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en,ja,es">
+<head id="_x1"><title>
+	RA: Time Warp 2018 at Maimarkthalle, Mannheim
+</title><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><meta http-equiv="content-language" content="en,ja,es" /><meta name="Description" content="RA: Resident Advisor" /><meta name="Keywords" content="RA, residentadvisor, resident, advisor, music, time, warp, 2018, at, maimarkthalle, mannheim" /><meta name="Author" content="Resident Advisor" /><meta property="og:site_name" content="Resident Advisor" /><meta property="fb:app_id" content="712773712080127" /><link href="/bundles/default-css?v=u__oqMV9PT8tLznefCb_HqzvcVx83jlSz4SazqwVx9o1" rel="stylesheet" />
+<meta name='apple-itunes-app' content='app-id=981952703, app-argument=ra-guide://search'><link href="/bundles/cat-listings-css?v=QU9yHl8B4x3LGMuiq0qWOFti9ETtOXDrSIL9WdkBvWc1" rel="stylesheet" />
+<link rel="icon" href="/favicon.ico" type="image/vnd.microsoft.icon" /><link rel="mask-icon" href="/images/ra_icon.svg" color="#000000" /><script src="/bundles/default-js?v=AlpsDPsovcHFef_tglVlMtq-BVtVE8BBZpVICol07YE1"></script>
+<script>
+	googletag.cmd.push(function () { googletag.pubads().setTargeting("Page", "/events/992335").setTargeting("Category", "Listings").setTargeting("Section", "Events").setTargeting("Country", "DE").setTargeting("Area", "Mannheim"); });
+    if (window.screen.availWidth < 663 && window.screen.width < window.screen.height) {
+        document.write('<meta name="viewport" content="width=328" />');
+    } else {
+        document.write('<meta name="viewport" content="width=device-width, initial-scale=1" />');
+    }
+    console.info('Interested in our code? Join us and help write it - https://www.residentadvisor.net/about/jobs');
+</script>
+<meta Property="og:url" Content="https://www.residentadvisor.net/events/992335" /><meta Property="og:title" Content="Time Warp 2018" /><meta Property="og:type" Content="article" /><meta Property="og:description" Content="Saturday, 07 April 2018 - Mannheim" /><meta Property="og:image" Content="https://www.residentadvisor.net/images/events/flyer/2018/4/de-0407-992335-1098226-front.jpg" /><meta name="twitter:card" content="summary" /><meta name="twitter:site" content="@residentadvisor" /><meta name="twitter:title" content="Time Warp 2018" /><meta name="twitter:description" content="Saturday, 07 April 2018 - Mannheim" /><meta name="twitter:image" Content="https://www.residentadvisor.net/images/events/flyer/2018/4/de-0407-992335-1098226-front.jpg" /><meta name="twitter:image:alt" content="Time Warp 2018" /></head>
+<body id="body">
+<input type='hidden' name='user-id' id='user-id' value='0' />
+<input type="hidden" name='see-ngc' id='see-ngc' value='false' />
+<a name="top"></a>
+<header id="header" role="header"><div class="pnlLeaderWrapper"><div id="pnlLeader">
+<aside class="div-gpt-ad-1452773484957-6 leader"><div id='div-gpt-ad-1452773484957-6' class="ad"></div></aside>
+</div>
+</div>
+<nav id="user" class="clearfix">
+<ul style="-moz-user-select: -moz-none; -khtml-user-select: none; -webkit-user-select: none;">
+<li id="basket" class="but dark arrow-down">
+Basket
+<div class="count basket" style="display:none;"><span></span></div>
+</li>
+<li id="ra-store" class="but dark desktop-only desktop-wide-only"><a ga-on="click" ga-event-category="header" ga-event-action="ra-store" href="https://store.ra.co/" target="_blank"><span>RA Store</span></a></li>
+<li id="profile" class="but arrow-down temp login">Login / Register</li>
+</ul>
+</nav>
+<ul id="profile-panel" class="bbox panel">
+<li><a href="https://www.residentadvisor.net/login">Login</a></li>
+<li><a href="https://www.residentadvisor.net/register">Register</a></li>
+</ul>
+<div id="basket-panel" class="bbox panel bbox generic clearfix">
+<div class="items"></div><div class="basket-but but myra"></div>
+</div>
+<div id="notificationPanel" class="notificationPanel bbox clearfix events col3"></div><div id="navContainer" class="null">
+ <div id="navbar">
+<div id="logo"><a href="/" class="icon">Resident Advisor</a></div>
+<div id="search-bar" class="modal-full-screen">
+<span class="modal-close">&times;</span>
+<div id="search-bar-internal" class="modal-body">
+<span class="f24 mobile-only search-header">Search</span>
+<div id="search-box-div">
+<input type="text" id="search-box" placeholder="Artists, Clubs, Promoters, Cities" />
+</div>
+<div id="search-button" class="but large">
+<a id="search" title="Search">Submit</a>
+</div>
+<div class="grey pt16 search-helper" style="display: none;">Did you mean</div>
+</div>
+</div>
+<nav id="nav" role="navigation" class="modal-full-screen">
+<div class="modal-close">&times;</div>
+<ul id="links" data-display="0" class="modal-body">
+<li class="mobile-only tablet-off">
+<div id="logo-modal-nav">
+<a ga-on="click" ga-event-category="nav" ga-event-action="RA-Logo" href="/" class="icon">Resident Advisor</a>
+</div>
+</li>
+<li id="mMagazine">
+<span>
+Magazine</span>
+<ul>
+<li id="mNews"><a ga-on="click" ga-event-category="nav" ga-event-action="News" href="/news.aspx">
+News</a></li>
+<li id="mReviews"><a ga-on="click" ga-event-category="nav" ga-event-action="Reviews" href="/reviews.aspx">
+Reviews</a></li>
+<li id="mFeatures"><a ga-on="click" ga-event-category="nav" ga-event-action="Features" href="/features.aspx">
+Features</a></li>
+<li id="mFilms"><a ga-on="click" ga-event-category="nav" ga-event-action="Videos" href="/videos">
+Videos</a></li>
+</ul>
+</li>
+<li id="mListings" data-selected="1">
+<span>
+Listings</span>
+<ul>
+<li id="mEvents" data-selected="1"><a ga-on="click" ga-event-category="nav" ga-event-action="Events" href="/events">
+Events</a></li>
+<li id="mClubs"><a ga-on="click" ga-event-category="nav" ga-event-action="Clubs" href="/clubs.aspx">
+Clubs</a></li>
+<li id="mFestivals"><a ga-on="click" ga-event-category="nav" ga-event-action="Festivals" href="/festivals.aspx">
+Festivals</a></li>
+<li id="mPhotos"><a ga-on="click" ga-event-category="nav" ga-event-action="Photos" href="/photos.aspx">
+Photos</a></li>
+</ul>
+</li>
+<li id="mMusic">
+<span>
+Music</span>
+<ul>
+<li id="mDjpages"><a ga-on="click" ga-event-category="nav" ga-event-action="Artists" href="/dj.aspx">
+Artists</a></li>
+<li id="mNewTracks"><a ga-on="click" ga-event-category="nav" ga-event-action="New Tracks" href="/tracks">
+New Tracks</a></li>
+<li id="mCharts"><a ga-on="click" ga-event-category="nav" ga-event-action="DJ Charts" href="/dj-charts.aspx">
+DJ Charts</a></li>
+<li id="mPodcast"><a ga-on="click" ga-event-category="nav" ga-event-action="Podcasts" href="/podcast.aspx">
+Podcasts</a></li>
+</ul>
+</li>
+<li id="mSearch">
+<a ga-on="click" ga-event-category="search" ga-event-action="reveal-desktop" href="#">
+Search</a>
+</li>
+</ul>
+</nav>
+<div ga-on="click" ga-event-category="nav" ga-event-action="burger" id="but-links">
+<div class="icon"></div>
+</div>
+<div ga-on="click" ga-event-category="search" ga-event-action="mobile-reveal" id="but-search">
+<div class="icon"></div>
+</div>
+</div>
+<div id="sectionHead" class="add-space">
+<div id="breadcrumb" class="clearfix">
+<ul>
+<li class="but circle-left bbox"><a href="/guide/de/mannheim">Mannheim</a></li><li class="space">/</li><li class="but circle-left bbox"><a href="/events/de/mannheim">Events</a></li>
+</ul>
+</div>
+<h1>Time Warp 2018</h1>
+</div>
+<link href="/bundles/autocomplete-css?v=LgsUcPmpTNV0nNOC1wz8x1BB-Dw1HtLyGXWG1QRD1nI1" rel="stylesheet" />
+<script src="/bundles/autocomplete?v=rORZ81s26jeqpK3jLcOID8ooSpyCIp6ib6nuO3J8VTg1"></script>
+<script src="/bundles/analytics-js?v=Xs59x1FtN8yPMXEKRjXu_d_xOCdL1etMJaLlqHzBArI1"></script>
+</div></header>
+<main id="main">
+<script src="/bundles/comments-plugin-js?v=B5JYz6ix2DLYJXeJtF75LS4tS9SKCpHTl9mH30yVFGM1"></script>
+<script>
+        var flag;
+
+        $(document)
+            .ready(function () {
+                moveShareButtons();
+                $('.slide').scrollSnap({ page: 'event' });
+            });
+        
+        $(window)
+            .resize(moveShareButtons);
+
+        function moveShareButtons() {
+            var windowWidth = $(window).width();
+            if (flag !== false && windowWidth < 980) {
+                $("#share").insertAfter("#detail .clearfix li:first-child");
+                flag = false;
+            }
+            else if (flag !== true && windowWidth >= 980) {
+                $("#share").insertBefore("#event-item .links");
+                flag = true;
+            }
+        }
+    </script>
+<script src="/bundles/analytics-js?v=Xs59x1FtN8yPMXEKRjXu_d_xOCdL1etMJaLlqHzBArI1" async></script>
+<div id="LightBox" class="hidden">
+<div id="darkLightboxBackground"></div>
+<div id="RollcallContent" class="lightbox hidden">
+<header class="lightbox-header">
+<h1>
+Roll call - <span id='MembersAttendingCount'></span> members attending</h1>
+<img src="/images/buts/close.png" class="closeLightBoxButton" alt="Close Rollcall" />
+</header>
+<section id="Rollcall" class="lightbox-content" data-non-friends-displayed-so-far="0">
+<section>
+<h1 id="FriendsAttendingCount" class='heading'>friends</h1>
+<ul id='FriendsAttending'></ul>
+</section>
+<section>
+<h1 id="NonFriendsAttendingCount" class='heading'>members</h1>
+<ul id='NonFriendsAttending'></ul>
+</section>
+</section>
+<footer class="lightbox-footer">
+<div class="but rollcall">
+<a href="" id="LoadMoreButton">
+Load more</a>
+</div>
+</footer>
+</div>
+<div id="InviteFriendsContent" class="lightbox hidden" data-loaded="false">
+<header class="lightbox-header">
+<h1>
+Invite friends</h1>
+<img src="/images/buts/close.png" class="closeLightBoxButton" alt="Close Invite Friends" />
+</header>
+<section class="lightbox-content invite-friends">
+<section id="AlreadyGoing">
+<h1 id="FriendsAlreadyAttendingHeading" class="heading">friends already attending</h1>
+</section>
+<section id="InviteOthers" class="invite-others">
+<h1 id="InviteOtherFriendsHeading" class="heading">Invite other friends</h1>
+<div id="SelectFriendsInEventAreaDiv" class="but invite-friends myra hidden">
+<a href="" id="SelectFriendsInAreaButton">Select friends in ...</a>
+</div>
+<ul id="InviteOthersList"></ul>
+</section>
+</section>
+<footer class="lightbox-footer">
+<div class="but invite-friends">
+<a href="" id="InviteSelectedButton">
+Invite selected</a>
+</div>
+<span id="Information"></span>
+</footer>
+</div>
+</div>
+<ul class="content-list events-border">
+<li class="nobreak">
+<section class="contentDetail clearfix">
+<div class="clearfix">
+<div class="plus8">
+<div class="fl col4-6 small">
+<aside id="detail" class="clearfix">
+<ul class="clearfix">
+<li class="wide"><div>Date /</div>Sat, <a href="/events/de/mannheim/day/2018-04-07">7 Apr 2018 </a> - Sun, <a href="/events/de/mannheim/day/2018-04-08">8 Apr 2018</a><br />19:30 - 14:00</li><li class="wide"><div>Venue /</div><a href="/club.aspx?id=3300" class="cat-rev" title="Club profile of Maimarkthalle">Maimarkthalle</a><br /> Xaver-Fuhr-Strasse 101, 68163, Mannheim<br /><a href=/local.aspx?ai=153><div class=fl><img src="/images/flags/DE.gif" alt="Germany" title="Germany" border=0 width=22 height=15 /></div>&nbsp; Germany</a></li><li><div>Cost /</div>69</li><li><div>Minimum age /</div>18+</li><li class="wide"><div>Promoters /</div><a href=/promoter.aspx?id=3380>Time Warp</a>, <a href=/promoter.aspx?id=17322>cosmopop_Mannheim</a></li>
+</ul>
+</aside>
+</div>
+<div class="fl col2">
+<div class="pr8">
+<div class="pb1">
+<div id="pnlButton" class="dark">
+<div class="fav button clearfix">
+<ul>
+<li id="liFriendFavourites" style="display:none;">
+<div>
+Friends favourite
+/</div>
+<h1 id="FriendsFavouriteCount">
+</h1>
+</li>
+<li id="liMembersFavourites">
+<div>
+Members attending
+/</div>
+<h1 id="MembersFavouriteCount" class="favCount">
+267</h1>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="myra but members" id="ShowRollCallLightbox"><a ga-on="click" ga-event-category="frm-event" ga-event-action="view-attending" href="#">View members attending</a></div>
+</div>
+</div>
+</div>
+</div>
+<div class="grey-bg clearfix pb8 mb8" style="display: none;" id="InviteFriendsPanel">
+<div class="generic myra">
+<h1 class="heading small">Invite friends</h1>
+<div>
+</div>
+</div>
+</div>
+<div id="TicketControl" class="add-empty"></div>
+<input type="hidden" id="resaleMessage" name="promoter-resale-info" value="">
+</section>
+</li>
+<li id="event-detail" class="alt">
+<div class="content clearfix">
+<div id="event-item">
+<div class="clearfix right">
+<div class="links">
+<ul><li class="f12 grey">RA News /</li><li><a href="/news.aspx?id=41113">Time Warp announces 2018 lineup</a></li></ul><ul><li class="f12 grey">Event admin /</li><li><a href="/profile/cosmopop_mannheim">cosmopop_Mannheim</a></li><li><a ga-on="click" ga-event-category="frm-event" ga-event-action="update-event" href=/event-revisions.aspx?id=992335>Update this event</a></li></ul>
+<ul><li class="f12 grey">Promotional links / </li><li><a href="http://www.time-warp.de" target=_blank>Web</a></li><li><a href="http://www.facebook.com/timewarpofficial/" target=_blank>Facebook</a></li></ul>
+</div>
+</div>
+<div class="flyer">
+<a href="/images/events/flyer/2018/4/de-0407-992335-1098226-front.jpg" target=_blank title="View the Time Warp 2018 flyer"><img src="/images/events/flyer/2018/4/de-0407-992335-1098226-front.jpg" border=0 width=464 /></a>
+</div>
+<div class="left">
+<span class="f12 grey">Line-up /</span>
+<p class="lineup small"><a href="/dj/adambeyer">Adam Beyer</a> - <a href="/dj/adriatique">Adriatique</a> - <a href="/dj/amberoom">Amberoom</a> - <a href="/dj/amirjavasoul">Amir Javasoul</a> - <a href="/dj/apollonia">Apollonia</a> - <a href="/dj/benklock">Ben Klock</a> - <a href="/dj/borisbrejcha">Boris Brejcha</a> - <a href="/dj/chrisliebing">Chris Liebing</a> - <a href="/dj/dixon">Dixon</a> - <a href="/dj/dorianpaic">Dorian Paic</a> - <a href="/dj/dubfire">Dubfire</a> - <a href="/dj/jamiejones">Jamie Jones</a> - <a href="/dj/jonrundell">Jon Rundell</a> - <a href="/dj/josephcapriati">Joseph Capriati</a> - <a href="/dj/karotte">Karotte</a> - <a href="/dj/konstantinsibold">Konstantin Sibold</a> - <a href="/dj/laurentgarnier">Laurent Garnier</a> - <a href="/dj/lenfaki">Len Faki</a> - <a href="/dj/locodice">Loco Dice</a> - <a href="/dj/luciano">Luciano</a> - <a href="/dj/maceoplex">Maceo Plex</a> - <a href="/dj/magda">Magda</a> - <a href="/dj/marcocarola">Marco Carola</a> - <a href="/dj/monikakruse">Monika Kruse</a> - <a href="/dj/nastia">Nastia</a> - <a href="/dj/nickcurly">Nick Curly</a> - <a href="/dj/nicolaslutz">Nicolas Lutz</a> - <a href="/dj/ninakraviz">Nina Kraviz</a> - <a href="/dj/pan-pot">Pan-Pot</a> - <a href="/dj/paulatemple">Paula Temple</a> - <a href="/dj/raresh">Raresh</a> - <a href="/dj/ricardovillalobos">Ricardo Villalobos</a> - <a href="/dj/rodhad">Rødhåd</a> - <a href="/dj/saschbbc">Sasch BBC</a> - <a href="/dj/seebase">Seebase</a> - <a href="/dj/sethtroxler">Seth Troxler</a> - <a href="/dj/shdw">SHDW</a> & <a href="/dj/obscureshape">Obscure Shape</a> - <a href="/dj/solomun">Solomun</a> - <a href="/dj/sonjamoonear">Sonja Moonear</a> - <a href="/dj/steffenbaumann">Steffen Baumann</a> - <a href="/dj/svenvath">Sven Väth</a> - <a href="/dj/taleofus">Tale Of Us</a> - <a href="/dj/themartinezbros">The Martinez Brothers</a></p>
+<p>
+Time Warp DE 2018 - Official Event<br />
+<br />
+Subscribe to our newsletter: <br />
+www.time-warp.de/newsletter
+<div class="col2 standard" style="padding: 32px 0;">
+<ul class="list small clearfix"></ul>
+</div>
+<div class="ptb8 clearfix">
+<div class="but myra" style="width: 312px"><a ga-on="click" ga-event-category="frm-event" ga-event-action="submit-gallery" href='/submit-photos.aspx?eventId=992335'>Submit a photo gallery</a></div>
+</div>
+</p>
+</div>
+</div>
+</div>
+<div class="banner">
+<div id="pnlLeaderInpage">
+<aside class="div-gpt-ad-1452773484957-5 leader" style="padding-bottom:16px;"><div id='div-gpt-ad-1452773484957-5' class="ad"></div></aside>
+</div>
+</div>
+<span>0<span data-role="counter"></span>/</span>
+</li>
+<li class="comments ">
+<div id="comment-container" class="comments-loading" data-per-page="20" data-per-first-page="8" data-section="Event" data-topic-id="323503" data-content-id="992335">
+<section id="comments" class="content clearfix">
+<h1>Comments loading</h1>
+</section>
+ </div>
+<span>0<span data-role="counter"></span>/ #323503</span>
+</li>
+<li class="alt">
+<section class="clearfix">
+<style>
+    .border { border-color: #6b96c2; }
+</style>
+<section class="content">
+<div class="mobile-pr24">
+<h1 class="heading">More on Maimarkthalle</h1>
+</div>
+<ul id="related-list" class="list">
+<li class="related mobile-pr24">
+<article id="short-profile" class="clearfix">
+<div id="divExcerpt" class="excerpt">
+<a href="/club.aspx?id=3300"><img src="/images/clubs/de-maimarkt.jpg" alt="Maimarkthalle" /></a>
+<p>Venue for various concerts and events. Time Warp takes place here every year.<br /><a href="/club.aspx?id=3300">View the venue listing</a></p>
+</div>
+</article>
+</li>
+</ul>
+</section>
+</section>
+<span>0<span data-role="counter"></span>/</span>
+</li>
+<li class="alt">
+<section class="content clearfix events">
+<div class="plus8">
+<div class="pr8">
+<h1 class="heading listing-heading">Popular events</h1>
+<div class="but heading-more mobile-off">
+<a href="/events.aspx?ai=153">More events</a>
+</div>
+<div class="strip small slide" id="events-listing" data-type="events">
+<ul class="list small clearfix popular" style="padding: 0;">
+<li class="min-height-small">
+<article class="highlight-top">
+<p>Sat, 12 May 2018</p>
+<a href="/events/1075533"><img src="/images/events/flyer/2018/5/de-0512-1075533-list.jpg" class=nohide></a>
+<p class="counter nohide">
+<span>6</span> attending
+</p>
+<a href="/events/1075533">
+<h1>
+Stereo621
+</h1>
+</a>
+<p class="copy nohide">
+<a href="\club.aspx?id=27073">Disco Zwei</a>
+</p>
+</article>
+</li><li class="min-height-small">
+<article class="highlight-top">
+<p>Fri, 18 May 2018</p>
+<a href="/events/1104332"><img src="/images/events/flyer/2018/5/de-0518-1104332-list.jpg" class=nohide></a>
+<p class="counter nohide">
+<span>3</span> attending
+</p>
+<a href="/events/1104332">
+<h1>
+Distorted Perception with Subjected and Objection
+</h1>
+</a>
+<p class="copy nohide">
+<a href="\club.aspx?id=27073">Disco Zwei</a>
+</p>
+</article>
+</li><li class="min-height-small">
+<article class="highlight-top">
+<p>Sat, 19 May 2018</p>
+<a href="/events/1095542"><img src="/images/events/flyer/2018/5/de-0519-1095542-list.jpg" class=nohide></a>
+<p class="counter nohide">
+<span>1</span> attending
+</p>
+<a href="/events/1095542">
+<h1>
+Tekkerkane B-Day Bash 2018
+</h1>
+</a>
+<p class="copy nohide">
+<a href="\club.aspx?id=9611">MS Connexion</a>
+</p>
+</article>
+</li><li class="min-height-small">
+<article class="highlight-top">
+<p>Sat, 19 May 2018</p>
+<a href="/events/1107288"><img src="/images/events/flyer/2018/5/de-0519-1107288-list.jpg" class=nohide></a>
+<p class="counter nohide">
+<span>1</span> attending
+</p>
+<a href="/events/1107288">
+<h1>
+Das Hafenweekend
+</h1>
+</a>
+<p class="copy nohide">
+<a href="\club.aspx?id=92855">Hafen 49</a>
+</p>
+</article>
+</li><li class="min-height-small">
+<article class="highlight-top">
+<p>Thu, 31 May 2018</p>
+<a href="/events/1103075"><img src="/images/events/flyer/2018/5/de-0531-1103075-list.jpg" class=nohide></a>
+<p class="counter nohide">
+<span>5</span> attending
+</p>
+<a href="/events/1103075">
+<h1>
+Richie Hawtin &amp; Amelie Lens
+</h1>
+</a>
+<p class="copy nohide">
+<a href="\club.aspx?id=92855">Hafen 49</a>
+</p>
+</article>
+</li><li class="min-height-small">
+<article class="highlight-top">
+<p>Sat, 2 Jun 2018</p>
+<a href="/events/1079627"><img src="/images/events/flyer/2018/6/de-0602-1079627-list.jpg" class=nohide></a>
+<p class="counter nohide">
+<span>1</span> attending
+</p>
+<a href="/events/1079627">
+<h1>
+Freigeist - Outdoor &amp; Indoor Festival ☼ ☾ Juni 2018
+</h1>
+</a>
+<p class="copy nohide">
+<a href="\club.aspx?id=19060">7er Club</a>
+</p>
+</article>
+</li> </ul>
+</div>
+<div class="link-more mobile-only tablet-off">
+<a href="/events.aspx?ai=153">More events</a>
+</div>
+</div>
+</div>
+</section>
+<span>0<span data-role="counter"></span>/</span>
+</li>
+</ul>
+<script src="/bundles/lightbox-js?v=nNed9sjHXmAR6Mf65rb_5VdwGiRd83UgdKnn801bXf41"></script>
+<link rel="prefetch" href="/js/dist/ReactLibs.bundle.js?636612068495671096">
+<link rel="prefetch" href="/js/dist/PaymentPage.bundle.js?636612068495671096">
+</main>
+<footer class="clearfix"><ul class="content-list">
+<li>
+<div class="content clearfix">
+<div class="clearfix plus8">
+<div class="fl col2-3">
+<ul class="pb32">
+<li id="logo-footer"><a href="/">RA</a></li>
+<li class="f12 grey pt16">Copyright &copy; 2018 Resident Advisor Ltd.</li>
+<li class="f12 grey">All rights reserved.</li>
+<li class="f12 grey"><a href="/privacy">Privacy</a> & <a href="/terms">Terms</a></li>
+</ul>
+</div>
+<div class="fl col4-5 pt60">
+<div class="fl col1 footer-category">
+<ul>
+<li class="f12 grey">Resident Advisor /</li> <li><a href="/about" ga-on="click" ga-event-category="homefooter" ga-event-action="about">About</a></li>
+<li><a href="/about/advertising" ga-on="click" ga-event-category="homefooter" ga-event-action="advertise">Advertise</a></li>
+<li><a href="/about/jobs" ga-on="click" ga-event-category="homefooter" ga-event-action="jobs">Jobs</a></li>
+<li><a href="https://www.residentadvisor.net/promoter.aspx?id=890" ga-on="click" ga-event-category="homefooter" ga-event-action="raevents">RA Events</a></li>
+<li><br /></li> </ul>
+</div>
+<div class="fl col1 footer-category">
+<ul>
+<li class="f12 grey">RA Tickets /</li>
+<li><a href="/shop/history" ga-on="click" ga-event-category="homefooter" ga-event-action="mytickets">My Tickets</a></li>
+<li><a href="/shop/faq" ga-on="click" ga-event-category="homefooter" ga-event-action="ticketfaq">Ticketing FAQ</a></li>
+<li><a href="/tickets/resale" ga-on="click" ga-event-category="homefooter" ga-event-action="resale">Resale</a></li>
+<li><a href="/tickets" ga-on="click" ga-event-category="homefooter" ga-event-action="selltickets">Sell tickets on RA</a></li>
+<li><div class="myra but" style="width: 152px; margin-top: 50px;"><a class="submit-event" href="/submit-event.aspx" ga-on="click" ga-event-category="homefooter" ga-event-action="submitevent">Submit event</a></div></li>
+<li><br /></li>
+</ul>
+</div>
+<div class="fl col1 footer-category">
+<ul>
+<li class="f12 grey">Apps /</li> <li><a href="/ra-guide" ga-on="click" ga-event-category="homefooter" ga-event-action="raguide">RA Guide</a></li>
+<li><a href="/tickets/scanner" ga-on="click" ga-event-category="homefooter" ga-event-action="ticketscanner">RA Ticket Scanner</a></li> </ul>
+</div>
+<div class="fl col1 footer-category">
+<ul>
+<li class="f12 grey">Elsewhere /</li>
+<li><a href="http://www.youtube.com/user/residentadvisor?sub_confirmation=1" ga-on="click" ga-event-category="homefooter" ga-event-action="rayoutube">Watch on YouTube</a></li>
+<li><a href="http://www.facebook.com/residentadvisor" ga-on="click" ga-event-category="homefooter" ga-event-action="rafacebook">Follow on Facebook</a></li>
+<li><a href="https://itunes.apple.com/gb/curator/resident-advisor/id996091687" ga-on="click" ga-event-category="homefooter" ga-event-action="raapplemusic">Listen on Apple Music</a></li>
+<li><a href="https://open.spotify.com/user/residentadvisor" ga-on="click" ga-event-category="homefooter" ga-event-action="raspotify">Stream on Spotify</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li class="nobreak">
+<div class="content clearfix">
+<div class="clearfix plus8">
+<div class="fl col3">
+<a href="https://jp.residentadvisor.net/"><a href="https://jp.residentadvisor.net/">RA is also available in Japanese. 日本版</a></a>
+</div>
+<ul id="social" class="col1p5">
+<li class="ytb"><a href="http://www.youtube.com/residentadvisor" ga-on="click" ga-event-category="homefooter" ga-event-action="rayoutube">RA on YouTube</a></li>
+<li class="fcb"><a href="http://www.facebook.com/residentadvisor" ga-on="click" ga-event-category="homefooter" ga-event-action="rafacebook">RA on Facebook</a></li>
+<li class="twt"><a href="http://www.twitter.com/residentadvisor" ga-on="click" ga-event-category="homefooter" ga-event-action="ratwitter">RA on Twitter</a></li>
+<li class="ins"><a href="http://instagram.com/resident_advisor" ga-on="click" ga-event-category="homefooter" ga-event-action="rainstagram">RA on Instagram</a></li>
+<li class="snd"><a href="http://www.soundcloud.com/resident-advisor" ga-on="click" ga-event-category="homefooter" ga-event-action="rasoundcloud">RA on Soundcloud</a></li>
+</ul>
+</div>
+</div>
+</li>
+</ul></footer>
+<script type="text/javascript">
+        (function(i, s, o, g, r, a, m) {
+                                        i['GoogleAnalyticsObject'] = r;
+                                        i[r] = i[r] || function() {
+                                            (i[r].q = i[r].q || []).push(arguments)
+                                        }, i[r].l = 1 * new Date();
+                                        a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+                                        a.async = 1;
+                                        a.src = g;
+                                        m.parentNode.insertBefore(a, m)
+                                    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+                                    ga('create', 'UA-313318-1', 'residentadvisor.net'
+                                    );
+                                    ga('require', 'displayfeatures');
+                                    ga('send', 'pageview');
+                                    ga('require', 'eventTracker');
+	    if (window.location.href.indexOf('.residentadvisor.net') >= 0) {
+	        (function(r, a, v, e, l, i, n) {
+	            r[l] = r[l] || function() { (r[l].q = r[l].q || []).push(arguments) };
+	            i = a.createElement(v);
+	            i.async = i.defer = 1;
+	            i.src = e;
+	            a.body.appendChild(i)
+	        })(window, document, 'script', 'https://cdn.ravelin.net/js/rvn-beta.min.js', 'ravelin');
+	        ravelin('setApiKey', 'pk_test_ttCRpUA9H1ZgoTRmb9ixj5zqTdUwU3Tz');
+	        ravelin('setCustomerId', '0');
+	    }
+	</script>
+</body>
+</html>
