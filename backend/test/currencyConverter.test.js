@@ -4,14 +4,7 @@ const config = require('../config');
 const CurrencyConverter = require('../helpers/currencies');
 
 
-describe('Currency converter', () => {
-    _convertPrice('$', '£', 328, '£');
-    _convertPrice('£', '£', 420, '£');
-    _convertPrice('£', '€', 794, '€');
-});
-
-
-function _convertPrice(from, to, amount, expectedCurrencySymbol) {
+const _convertPrice = (from, to, amount, expectedCurrencySymbol) => {
     it(`Convert ${from}${amount} to ${to}`, function () {
         this.timeout(config.testsMaxTimeout);
 
@@ -30,6 +23,15 @@ function _convertPrice(from, to, amount, expectedCurrencySymbol) {
             })
     });
 }
+
+
+describe('Currency converter', () => {
+    _convertPrice('$', '£', 328, '£');
+    _convertPrice('£', '£', 420, '£');
+    _convertPrice('£', '€', 794, '€');
+});
+
+
 
 
 

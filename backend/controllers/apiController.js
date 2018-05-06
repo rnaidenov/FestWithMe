@@ -54,7 +54,6 @@ module.exports = (app) => {
 
   app.get("/api/prices/events", async (req, res) => {
     const { eventName, currency, isDemo } = req.query;
-    console.log(req.query);
     try {
       const eventDetails = isDemo == 'true'
                               ? await DataCacheUtil.loadCachedEventResult(eventName)
