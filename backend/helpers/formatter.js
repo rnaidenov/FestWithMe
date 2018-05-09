@@ -1,6 +1,6 @@
 'use strict';
 
-function formatDate(eventDate, change) {
+function formatDate(eventDate, change, flightFormat) {
   const date = new Date(eventDate);
   if (change) {
     const { more, days } = change;
@@ -16,7 +16,9 @@ function formatDate(eventDate, change) {
   const day = date.getDate();
   const dayFormat = day < 10 ? `0${day}` : day
 
-  return `${date.getFullYear()}-${monthFormat}-${dayFormat}`;
+  const year = date.getFullYear();
+
+  return flightFormat ? `${dayFormat}/${monthFormat}/${year}` : `${year}-${monthFormat}-${dayFormat}`;
 }
 
 module.exports = {
