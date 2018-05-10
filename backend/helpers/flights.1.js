@@ -44,34 +44,32 @@ const _composeSearchLink = (origin, destination, date, daysOfStay, currencySymbo
       const originIata = await _getIATACode(origin);
       const destinationIata = await _getIATACode(destination);
       const inboundDate = Formatter.formatDate(date, { more: false, days: 1 }, true);
-      const outboundDate = Formatter.formatDate(date, { more: true, days: Number(daysOfStay) }, true);
+      const outboundDate = Formatter.formatDate(date, { more: true, days: Number(daysOfStay) - 1 }, true);
       const currencyCode = CurrencyConverter.getCurrencyCode(currencySymbol);
       resolve(`${KIWI_API_BASE_URL}&flyFrom=${originIata}&to=${destinationIata}&dateFrom=${inboundDate}&dateTo=${inboundDate}&returnFrom=${outboundDate}&returnTo=${outboundDate}&curr=${currencyCode}`)
-    } catch(err){
-      reject(err);
+    } catch (err) {
+      reject(`Error when composing flight search url: Reason: ${err}`);
     }
   });
 }
 
 
-_composeSearchLink('London', 'Sofia', '18 July 2018', 7, '£').then(console.log)
+_composeSearchLink('London', 'Sofia', '18 July 2018', 7, '£').then(console.log).catch(console.log)
 
-//https://skiplagged.com/api/search.php?from=SOF&to=LON&depart=2018-06-09&return=2018-06-10&poll=true&format=v2
-const _getCheapestFlightDetails = ({ originIata, destinationIata, departureDate }) => {
+
+const _getCheapestFlightDetails = (origin, destination, date, daysOfStay, currencySymbol) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const apiUrl = _composeSearchLink({ originIata, destinationIata, departureDate });
-      const flightOptions = await fetch(apiUrl).then(res => res.json());
-      const { flights, itineraries: { outbound } } = flightOptions;
-      const { flight: cheapestFlightID, one_way_price: priceInPennies } = outbound[0];
-      const { segments } = flights[cheapestFlightID];
-      const { airline, flight_number } = segments[0];
-      resolve({ price: (priceInPennies / 100).toFixed(1), flightCode: `${airline}${flight_number}` })
-    } catch (err) {
-      reject(`Unable to get details for flight ${originIata}-${destinationIata} on ${departureDate}. Error: ${err}`);
+      const url = await _composeSearchLink(origin, destination, date, daysOfStay, currencySymbol);
+      const flightSearchDetails = await fetch(url).then(res => res.json());
+      resolve(flightSearchDetails);
+    } catch(err){
+      reject(`Unable to get flight details for ${origin} - ${destination} on ${date}. Reason: ${err}`);
     }
   });
 }
+
+_getCheapestFlightDetails('London','Sofia','19 May 2018',5,'£').then(console.log);
 
 
 // _getCheapestFlightDetails({ originIata: 'SOF', destinationIata: 'LON', departureDate: '2018-06-09' }).then(console.log);
@@ -79,7 +77,7 @@ const _getCheapestFlightDetails = ({ originIata, destinationIata, departureDate 
 
 const _formatResponse = ({ inboundFlightDetails, outboundFlightDetails, originIata, destinationIata, inboundDate, outboundDate, currency }) => {
   return new Promise(async (resolve, reject) => {
-    try{
+    try {
       const { price: inboundFlightPrice, flightCode: inboundFlightCode } = inboundFlightDetails;
       const { price: outboundFlightPrice, flightCode: outboundFlightCode } = outboundFlightDetails;
       const totalPriceInDollars = Number(inboundFlightPrice) + Number(outboundFlightPrice);
@@ -90,7 +88,7 @@ const _formatResponse = ({ inboundFlightDetails, outboundFlightDetails, originIa
         destination: destinationIata,
         url: `${SKIPLAGGED_BASE_URL}/${originIata}/${destinationIata}/${inboundDate}/${outboundDate}#trip=${inboundFlightCode},${outboundFlightCode}`
       })
-    } catch(err){
+    } catch (err) {
       reject(`Unable format flight details response. Most probably issue with currency conversion. Error: ${err}`);
     }
   });
