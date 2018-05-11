@@ -1,4 +1,4 @@
-const DEFAULT_CURRENCY_SYMBOL = '$';
+const DEFAULT_CURRENCY_SYMBOL = '€';
 
 export default (state = { currency: DEFAULT_CURRENCY_SYMBOL, searching: false }, action) => {
   switch (action.type) {

@@ -14,7 +14,7 @@
     "postinstall": "cd client && webpack --config webpack.prod.config.js -p --progress --colors",
     "backend": "cd backend && nodemon app.js",
     "minify": "html-minifier -o ./client/dist/index.html ./client/dist/index.dev.html --minify-css true --minify-js true  --remove-comments --collapse-whitespace --collapse-inline-tag-whitespace",
-    "what": "cd backend && nodemon helpers/flights.1.js",
+    "what": "cd backend && nodemon test/utils/utilities.js",
     "test": "mocha backend/test/*.test.js"
   },
   "license": "ISC",

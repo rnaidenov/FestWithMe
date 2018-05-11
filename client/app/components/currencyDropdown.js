@@ -12,7 +12,7 @@ class CurrencyDropdown extends React.Component {
         this.currencies = [{ name: 'USD', icon: 'united-states', symbol: '$' },
         { name: 'EUR', icon: 'european-union', symbol: '€' },
         { name: 'GBP', icon: 'united-kingdom', symbol: '£' }];
-        this.state = { currencyValue: this.currencies[0] };
+        this.state = { currencyValue: this.currencies[1] };
     }
 
     changeCurrency(event, currencyValue) {

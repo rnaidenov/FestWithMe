@@ -50,7 +50,6 @@ export const searchFestival = (origin, festivalName, nights, numPeople, currency
     if (eventDetails.isActive) {
       const destination = `${eventDetails.city},${eventDetails.country}`;
       const date = eventDetails.date;
-      console.log({origin, destination, date, nights, currency, isDemo, dispatch})
       const flightDetails = await _getFlightDetails(origin, eventDetails.city, destination, date, nights, currency, isDemo, dispatch);
       const housingDetails = await _getHousingDetails(destination, date, nights, numPeople, currency, isDemo, dispatch);
       const details = getTotalPrice(eventDetails, flightDetails, housingDetails, nights, numPeople);

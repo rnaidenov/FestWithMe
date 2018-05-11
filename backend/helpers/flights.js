@@ -22,7 +22,7 @@ const _getCoordinates = location => {
 
 
 // Returns a 3-letter code of city, where nearest airport is located
-const _getIATACode = location => {
+const getIATACode = location => {
   return new Promise(async (resolve, reject) => {
     try {
       const { lat, lng } = await _getCoordinates(location);
@@ -37,25 +37,25 @@ const _getIATACode = location => {
 
 
 const _composeSearchLink = (originIata, destinationIata, date, daysOfStay, currencyCode) => {
-    const inboundDate = Formatter.formatDate(date, { more: false, days: 1 }, true);
-    const outboundDate = Formatter.formatDate(date, { more: true, days: Number(daysOfStay) - 1 }, true);
-    return `${KIWI_API_BASE_URL}&flyFrom=${originIata}&to=${destinationIata}&dateFrom=${inboundDate}&dateTo=${inboundDate}&returnFrom=${outboundDate}&returnTo=${outboundDate}&curr=${currencyCode}`;  
+  const inboundDate = Formatter.formatDate(date, { more: false, days: 1 }, true);
+  const outboundDate = Formatter.formatDate(date, { more: true, days: Number(daysOfStay) - 1 }, true);
+  return `${KIWI_API_BASE_URL}&flyFrom=${originIata}&to=${destinationIata}&dateFrom=${inboundDate}&dateTo=${inboundDate}&returnFrom=${outboundDate}&returnTo=${outboundDate}&curr=${currencyCode}`;
 }
 
 
 
 const _formatResponse = ({ originIata, destinationIata, flightSearchDetails, currencyCode }) => {
   return new Promise(async (resolve, reject) => {
-      const { data } = flightSearchDetails;
-      if(data.length){
-        const cheapestFlight = data[0];
-        const { conversion, deep_link: bookingUrl } = cheapestFlight;
-        const flightPriceAmount = conversion[currencyCode];
-        resolve({ flightPriceAmount, origin: originIata, destination: destinationIata, url: bookingUrl })
-      } else{
-        // TODO: Need to update this
-        reject(`There are no direct flights from ${originIata} to ${destinationIata}. Maybe try searching for indirect flight options.`);
-      }
+    const { data } = flightSearchDetails;
+    if (data.length) {
+      const cheapestFlight = data[0];
+      const { conversion, deep_link: bookingUrl } = cheapestFlight;
+      const flightPriceAmount = conversion[currencyCode];
+      resolve({ flightPriceAmount, origin: originIata, destination: destinationIata, url: bookingUrl })
+    } else {
+      // TODO: Need to update this
+      reject(`There are no direct flights from ${originIata} to ${destinationIata}. Maybe try searching for indirect flight options.`);
+    }
   })
 }
 
@@ -63,13 +63,13 @@ const _getCheapestFlightDetails = (origin, destination, date, daysOfStay, curren
   return new Promise(async (resolve, reject) => {
     try {
       const currencyCode = CurrencyConverter.getCurrencyCode(currencySymbol);
-      const originIata = await _getIATACode(origin);
-      const destinationIata = await _getIATACode(destination);
+      const originIata = await getIATACode(origin);
+      const destinationIata = await getIATACode(destination);
       const url = _composeSearchLink(origin, destination, date, daysOfStay, currencyCode);
       const flightSearchDetails = await fetch(url).then(res => res.json());
       const flightPriceDetails = _formatResponse({ originIata, destinationIata, flightSearchDetails, currencyCode });
       resolve(flightPriceDetails);
-    } catch(err){
+    } catch (err) {
       reject(`Unable to get flight details for ${origin} - ${destination} on ${date}. Reason: ${err}`);
     }
   });
@@ -92,5 +92,6 @@ const getFlightPrices = (origin, destination, date, daysOfStay, currency) => {
 }
 
 module.exports = {
-  getFlightPrices
+  getFlightPrices,
+  getIATACode
 }
