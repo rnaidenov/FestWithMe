@@ -4,9 +4,7 @@ const amadeusAPI = `https://api.sandbox.amadeus.com/v1.2/airports/nearest-releva
 const CurrencyConverter = require('./currencies');
 const Formatter = require('./formatter');
 const DataCacheUtil = require('./cachedDataLoader');
-const SKIPLAGGED_DEFAULT_CURRENCY_SYMBOL = '$';
-const SKIPLAGGED_BASE_URL = 'https://skiplagged.com/flights';
-const SKIPLAGGED_API_BASE_URL = 'https://skiplagged.com/api/search.php?format=v2';
+const KIWI_API_BASE_URL = 'https://api.skypicker.com/flights?partner=picky&directFlights=1';
 const googleMaps = require('@google/maps').createClient({
   key: config.googleMapsKey
 });
@@ -38,60 +36,50 @@ const _getIATACode = location => {
 }
 
 
-const _composeSearchLink = ({ originIata, destinationIata, departureDate }) => {
-  return `${SKIPLAGGED_API_BASE_URL}&from=${originIata}&to=${destinationIata}&depart=${departureDate}`;
+const _composeSearchLink = (originIata, destinationIata, date, daysOfStay, currencyCode) => {
+    const inboundDate = Formatter.formatDate(date, { more: false, days: 1 }, true);
+    const outboundDate = Formatter.formatDate(date, { more: true, days: Number(daysOfStay) - 1 }, true);
+    return `${KIWI_API_BASE_URL}&flyFrom=${originIata}&to=${destinationIata}&dateFrom=${inboundDate}&dateTo=${inboundDate}&returnFrom=${outboundDate}&returnTo=${outboundDate}&curr=${currencyCode}`;  
 }
 
-//https://skiplagged.com/api/search.php?from=SOF&to=LON&depart=2018-06-09&return=2018-06-10&poll=true&format=v2
-const _getCheapestFlightDetails = ({ originIata, destinationIata, departureDate }) => {
+
+
+const _formatResponse = ({ originIata, destinationIata, flightSearchDetails, currencyCode }) => {
+  return new Promise(async (resolve, reject) => {
+      const { data } = flightSearchDetails;
+      if(data.length){
+        const cheapestFlight = data[0];
+        const { conversion, deep_link: bookingUrl } = cheapestFlight;
+        const flightPriceAmount = conversion[currencyCode];
+        resolve({ flightPriceAmount, origin: originIata, destination: destinationIata, url: bookingUrl })
+      } else{
+        // TODO: Need to update this
+        reject(`There are no direct flights from ${originIata} to ${destinationIata}. Maybe try searching for indirect flight options.`);
+      }
+  })
+}
+
+const _getCheapestFlightDetails = (origin, destination, date, daysOfStay, currencySymbol) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const apiUrl = _composeSearchLink({ originIata, destinationIata, departureDate });
-      const flightOptions = await fetch(apiUrl).then(res => res.json());
-      const { flights, itineraries: { outbound } } = flightOptions;
-      const { flight: cheapestFlightID, one_way_price: priceInPennies } = outbound[0];
-      const { segments } = flights[cheapestFlightID];
-      const { airline, flight_number } = segments[0];
-      resolve({ price: (priceInPennies / 100).toFixed(1), flightCode: `${airline}${flight_number}` })
-    } catch (err) {
-      reject(`Unable to get details for flight ${originIata}-${destinationIata} on ${departureDate}. Error: ${err}`);
-    }
-  });
-}
-
-
-// _getCheapestFlightDetails({ originIata: 'SOF', destinationIata: 'LON', departureDate: '2018-06-09' }).then(console.log);
-
-
-const _formatResponse = ({ inboundFlightDetails, outboundFlightDetails, originIata, destinationIata, inboundDate, outboundDate, currency }) => {
-  return new Promise(async (resolve, reject) => {
-    try{
-      const { price: inboundFlightPrice, flightCode: inboundFlightCode } = inboundFlightDetails;
-      const { price: outboundFlightPrice, flightCode: outboundFlightCode } = outboundFlightDetails;
-      const totalPriceInDollars = Number(inboundFlightPrice) + Number(outboundFlightPrice);
-      const totalPrice = await CurrencyConverter.convert(SKIPLAGGED_DEFAULT_CURRENCY_SYMBOL, currency, totalPriceInDollars);
-      resolve({
-        flightPriceAmount: totalPrice.convertedAmount,
-        origin: originIata,
-        destination: destinationIata,
-        url: `${SKIPLAGGED_BASE_URL}/${originIata}/${destinationIata}/${inboundDate}/${outboundDate}#trip=${inboundFlightCode},${outboundFlightCode}`
-      })
+      const currencyCode = CurrencyConverter.getCurrencyCode(currencySymbol);
+      const originIata = await _getIATACode(origin);
+      const destinationIata = await _getIATACode(destination);
+      const url = _composeSearchLink(origin, destination, date, daysOfStay, currencyCode);
+      const flightSearchDetails = await fetch(url).then(res => res.json());
+      const flightPriceDetails = _formatResponse({ originIata, destinationIata, flightSearchDetails, currencyCode });
+      resolve(flightPriceDetails);
     } catch(err){
-      reject(`Unable format flight details response. Most probably issue with currency conversion. Error: ${err}`);
+      reject(`Unable to get flight details for ${origin} - ${destination} on ${date}. Reason: ${err}`);
     }
   });
 }
+
 
 const getFlightPrices = (origin, destination, date, daysOfStay, currency) => {
   return new Promise(async resolve => {
     try {
-      const originIata = await _getIATACode(origin);
-      const destinationIata = await _getIATACode(destination);
-      const inboundDate = Formatter.formatDate(date, { more: false, days: 1 });
-      const outboundDate = Formatter.formatDate(date, { more: true, days: Number(daysOfStay) });
-      const inboundFlightDetails = await _getCheapestFlightDetails({ originIata, destinationIata, departureDate: inboundDate });
-      const outboundFlightDetails = await _getCheapestFlightDetails({ originIata: destinationIata, destinationIata: originIata, departureDate: outboundDate });
-      const flightPriceDetails = await _formatResponse({ inboundFlightDetails, outboundFlightDetails, originIata, destinationIata, inboundDate, outboundDate, currency });
+      const flightPriceDetails = await _getCheapestFlightDetails(origin, destination, date, daysOfStay, currency);
       DataCacheUtil.cacheResults({ type: DataCacheUtil.DataType.FLIGHT_DETAILS, data: { origin, destination, flightPriceDetails } });
       resolve(flightPriceDetails);
     } catch (err) {
@@ -102,7 +90,6 @@ const getFlightPrices = (origin, destination, date, daysOfStay, currency) => {
     }
   });
 }
-
 
 module.exports = {
   getFlightPrices
