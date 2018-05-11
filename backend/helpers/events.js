@@ -163,7 +163,7 @@ const getEventDetails = (url, currency) => {
       const [name, priceDetails, city, country, date] = eventInfo;
       MongoClient.saveIfNotExist({ name, date });
       const eventDetails = determineIsActive({name, city, country, date, priceDetails});
-      resolve(Object.assign(eventDetails, { url }))
+      resolve(Object.assign(eventDetails, { url, date } ))
     } catch (err) {
       reject(err);
     }
