@@ -7,6 +7,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import FlightPrice from './flightPrice';
 import CustomCarousel from './customCarousel';
 import { updateTicketPrice } from '../actions/priceUpdateActions';
+import Tooltip from './Tooltip';
+
 
 @connect(store => {
   return {
@@ -64,14 +66,14 @@ class PriceBreakdown extends React.Component {
     dispatch(updateTicketPrice(prices, newPriceAmount, searchDetails));
   }
 
-  openResultLink = (e,url) => {
+  openResultLink = (e, url) => {
     const inactiveTicketInput = ReactDOM.findDOMNode(this.refs['InactiveTicketInput']);
-    if(inactiveTicketInput===null || !inactiveTicketInput.contains(e.target)) window.open(url, "_blank");
+    if (inactiveTicketInput === null || !inactiveTicketInput.contains(e.target)) window.open(url, "_blank");
   }
 
   render() {
 
-    const { prices, currency, screenSize } = this.props;
+    const { prices, currency, destination, screenSize } = this.props;
     const { flightDetails, eventDetails, housingDetails, totalPrice } = prices;
     const { priceBreakdownClass, newPriceAmount, newPriceMissing, showContent } = this.state;
 
@@ -95,7 +97,7 @@ class PriceBreakdown extends React.Component {
           <div className="mainContent">
             <img src={require('../../dist/public/inactiveTicket.svg')} className='contentIcon inactive' />
             <p className='price-update-text'>
-              Unfortunately, the event seems to be sold out on Resident Advisor.
+              Unfortunately, there is no information about the price of the event on Resident Advisor.
               <br />
               <span className='price-update-text prompt'>If you have purchased a ticket already, you can enter the price amount in the input box below.</span>
             </p>
@@ -131,7 +133,7 @@ class PriceBreakdown extends React.Component {
       </div>
     )
 
-    const festival = eventDetails.price != null ? activeFestival : soldOutFestival
+    const festival = eventDetails.price != null ? soldOutFestival : activeFestival
 
     const travel = (
       <div className='flexWrap'>
@@ -143,6 +145,11 @@ class PriceBreakdown extends React.Component {
     const housing = (
       <div className="flexWrap">
         <h1 className='priceBreakdownHeading'>Accommodation</h1>
+        <Tooltip
+          component={<img src={require('../../dist/public/info.svg')} className='infoIcon' />}
+          text={`These are the average prices for the different room types in London ${destination}`}
+          position='center right'
+        />
         <div className="contentWrap">
           {accommodationTypes}
         </div>

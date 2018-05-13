@@ -4,6 +4,7 @@ import TextField from 'material-ui/TextField';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getLocation } from '../actions/searchActions';
+import Tooltip from '../components/Tooltip'
 
 @connect(store => {
     return {
@@ -23,22 +24,14 @@ class LocationInput extends React.Component {
 
     toggleLocation() {
         if (this.state.autoLocate === true) {
-            this.setState({ autoLocate:false, location: this.locationOff });
+            this.setState({ autoLocate: false, location: this.locationOff });
         } else {
             this.props.dispatch(getLocation());
-            this.setState({ autoLocate:true, location: this.locationOn });
+            this.setState({ autoLocate: true, location: this.locationOn });
             setTimeout(() => {
                 this.setState({ locationField: this.props.location });
             }, 400);
         }
-    }
-
-    hoverLocation() {
-        this.state.location == this.locationOff ? this.setState({ hoverLocation: true }) : null;
-    }
-
-    hoverOutLocation() {
-        this.setState({ hoverLocation: false });
     }
 
     updateLocationField(e) {
@@ -57,19 +50,19 @@ class LocationInput extends React.Component {
     render() {
 
 
-        const toolTip = (
-            <div class="toolTipBox">
-                <div class="body">
-                    <span class="tip tip-down"></span>
-                    <p className="toolTipMessage">Click here to automatically detect and add your location</p>
-                </div>
-            </div>
-        )
-
         const { locationField, location, hoverLocation, autoLocate } = this.state;
-        const { inputStyle, errorStyle, inputFieldStyle, search, missingLocation } = this.props;
+        const { inputStyle, errorStyle, inputFieldStyle, search, missingLocation, screenSize } = this.props;
 
+
+        const locationIcon = (
+            <i className="material-icons locationIcon" id={location}
+                onClick={() => this.toggleLocation()}
+            >
+                {location}
+            </i>
+        )
         return (
+
             <Paper zDepth={1} className='searchContainer' id="cityField">
                 <TextField
                     id='LOCATION_INPUT'
@@ -84,15 +77,14 @@ class LocationInput extends React.Component {
                     errorStyle={errorStyle}
                     value={locationField}
                 />
-                <i className="material-icons locationIcon" id={location}
-                    onMouseEnter={() => this.hoverLocation()}
-                    onClick={() => this.toggleLocation()}
-                    onMouseLeave={() => this.hoverOutLocation()}
-                >
-                    {location}
-                    {(hoverLocation && !autoLocate) ? toolTip : null}
-                </i>
+                <Tooltip
+                    component={locationIcon}
+                    text='Click here to automatically detect and add your location'
+                    position = { screenSize === 'desktop' ? 'bottom right' : 'top right' }
+                />
+
             </Paper>
+
         )
     }
 
