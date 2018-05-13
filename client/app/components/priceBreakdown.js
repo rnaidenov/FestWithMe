@@ -133,7 +133,7 @@ class PriceBreakdown extends React.Component {
       </div>
     )
 
-    const festival = eventDetails.price != null ? soldOutFestival : activeFestival
+    const festival = eventDetails.price != null ? activeFestival : soldOutFestival; 
 
     const travel = (
       <div className='flexWrap'>
