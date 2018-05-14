@@ -75,7 +75,7 @@ const loadCachedEventResult = (eventName) => {
     return new Promise((resolve, reject) => {
         SearchResults.findOne({ type: DataType.EVENT_DETAILS }, (err, cachedDetails) => {
             const cachedEventResult = cachedDetails.data.find(data => data.name.includes(eventName));
-            setTimeout(() => resolve(cachedEventResult), 1500);
+            setTimeout(() => resolve(cachedEventResult), 100);
         })
     });
 }
@@ -84,7 +84,7 @@ const loadCachedFlightResult = (origin, destination) => {
     return new Promise((resolve, reject) => {
         SearchResults.findOne({ type: DataType.FLIGHT_DETAILS }, (err, cachedDetails) => {
             const cachedFlightResult = cachedDetails.data.find(data => data.origin.includes(origin) && data.destination.includes(destination));
-            setTimeout(() => resolve(cachedFlightResult.flightPriceDetails), 4200);
+            setTimeout(() => resolve(cachedFlightResult.flightPriceDetails), 100);
         })
     });
 }

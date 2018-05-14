@@ -22,6 +22,8 @@ class PriceBreakdown extends React.Component {
     super(props);
     this.openResultLink = this.openResultLink.bind(this);
     this.state = { showContent: false, newPriceMissing: true, priceBreakdownClass: 'priceBreakdownContainer' };
+    this.inactiveTicketInput = null;
+    this.accommodationInfo = null;
   }
 
   componentDidMount() {
@@ -36,6 +38,14 @@ class PriceBreakdown extends React.Component {
       this.setState({ priceDetails, currency })
     }
     this.togglePriceBreakdown(newProps.isSelected);
+  }
+
+  setInactiveTicketInputRef = element => {
+    this.inactiveTicketInput = element;
+  }
+
+  setAccommodationInfoRef = element => {
+    this.accommodationInfo = element;
   }
 
   togglePriceBreakdown(isSelected) {
@@ -67,13 +77,12 @@ class PriceBreakdown extends React.Component {
   }
 
   openResultLink = (e, url) => {
-    const inactiveTicketInput = ReactDOM.findDOMNode(this.refs['InactiveTicketInput']);
-    if (inactiveTicketInput === null || !inactiveTicketInput.contains(e.target)) window.open(url, "_blank");
+    if (!this.inactiveTicketInput.contains(e.target) && e.target !== this.accommodationInfo) window.open(url, "_blank");
   }
 
   render() {
 
-    const { prices, currency, destination, screenSize } = this.props;
+    const { prices, currency, screenSize, destination } = this.props;
     const { flightDetails, eventDetails, housingDetails, totalPrice } = prices;
     const { priceBreakdownClass, newPriceAmount, newPriceMissing, showContent } = this.state;
 
@@ -102,7 +111,7 @@ class PriceBreakdown extends React.Component {
               <span className='price-update-text prompt'>If you have purchased a ticket already, you can enter the price amount in the input box below.</span>
             </p>
           </div>
-          <div className='inputWrap' ref='InactiveTicketInput'>
+          <div className='inputWrap' ref={this.setInactiveTicketInputRef}>
             <Paper className='price-update-input'>
               <TextField
                 underlineShow={false}
@@ -133,7 +142,7 @@ class PriceBreakdown extends React.Component {
       </div>
     )
 
-    const festival = eventDetails.price != null ? activeFestival : soldOutFestival; 
+    const festival = eventDetails.price != null ? activeFestival : soldOutFestival;
 
     const travel = (
       <div className='flexWrap'>
@@ -146,9 +155,12 @@ class PriceBreakdown extends React.Component {
       <div className="flexWrap">
         <h1 className='priceBreakdownHeading'>Accommodation</h1>
         <Tooltip
-          component={<img src={require('../../dist/public/info.svg')} className='infoIcon' />}
-          text={`These are the average prices for the different room types in London ${destination}`}
-          position='center right'
+          component={<img src={require('../../dist/public/info.svg')} 
+                          className='infoIcon' 
+                          ref={el => this.setAccommodationInfoRef(el)} 
+                    />}
+          text={`These are the average prices for the different room types in ${destination}`}
+          position='right center'
         />
         <div className="contentWrap">
           {accommodationTypes}

@@ -66,7 +66,7 @@ class Results extends React.Component {
 
     const { searchResults, festivalName, screenSize } = this.props;
     const { carret, isPricebreakdownSelected, priceDetails } = this.state;
-    const { searching, prices, currency, searchDetails, isActive } = searchResults || {};
+    const { searching, prices, currency, searchDetails, isActive, destination } = searchResults || {};
     const { totalPrice } = prices || {};
     let results;
 
@@ -122,6 +122,7 @@ class Results extends React.Component {
         <div ref={(wrapper) => { this.wrapperRef = wrapper }} className='breakdownContainerWrap'>
           <PriceBreakdown
             prices={prices || {}}
+            destination={destination}
             isSelected={isPricebreakdownSelected}
             currency={currency}
             updateTicketPrice={updateTicketPrice}
