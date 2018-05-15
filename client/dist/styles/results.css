@@ -93,6 +93,7 @@ body{
 
 .flightDetailsError{
   padding-top:2%;
+  font-size: 20px;
 }
   
 
@@ -145,9 +146,7 @@ body{
     font-size: 30px;
   }
 
-  .priceBreakdownHeading {
-    padding-top:2%;
-  }
+
   .price-update-text{
     font-size: 20px;
   }
@@ -240,6 +239,10 @@ body{
 
   .contentWrap{
     height: 85%;
+  }
+
+  .contentWrap.flightError{
+    height: 80%;
   }
 
   .accommodationTypeWrap{

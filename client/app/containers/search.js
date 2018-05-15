@@ -4,11 +4,11 @@ import { bindActionCreators } from 'redux';
 import { loadFestivals, searchFestival, getLocation } from '../actions/searchActions';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import IconButton from 'material-ui/IconButton';
-import PeopleSelector from './peopleSelector';
-import NightsSelector from './nightsSelector';
-import FestivalInput from './festivalInput';
-import LocationInput from './locationInput';
-import Results from './results';
+import PeopleSelector from './PeopleSelector';
+import NightsSelector from './NightsSelector';
+import FestivalInput from './FestivalInput';
+import LocationInput from './LocationInput';
+import Results from './Results';
 import '../../dist/styles/search.css';
 
 @connect(store => {

@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import CircularProgress from 'material-ui/CircularProgress';
-import PriceBreakdown from '../components/priceBreakdown';
+import PriceBreakdown from '../components/PriceBreakdown';
 import { changeCurrency } from '../actions/priceBreakdownActions';
 import { updateTicketPrice } from '../actions/priceUpdateActions';
-import CurrencyConverter from './currencyConverter';
-import { Loader } from '../components/loader';
+import CurrencyConverter from './CurrencyConverter';
+import { Loader } from '../components/Loader';
 import '../../dist/styles/results.css';
 
 
