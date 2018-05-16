@@ -77,7 +77,7 @@ class PriceBreakdown extends React.Component {
                                       element:  <HousingDetails
                                                   details={housingDetails}
                                                   currency={currency}
-                                                  setInactiveTicketInputRef={el => this.accommodationInfo = el}
+                                                  setAccommodationInfoRef={el => this.accommodationInfo = el}
                                                 />, 
                                       ref: housingDetails.url
                                     }

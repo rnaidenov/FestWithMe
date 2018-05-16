@@ -17,7 +17,7 @@ class HousingDetails extends React.Component {
 
     render() {
         console.log(this.props);
-        const { details, currency, setAccommodationInfoRef, searchResults : { destination } } = this.props;
+        const { details, currency, setAccommodationInfoRef, searchResults: { destination } } = this.props;
 
 
         const accommodationTypes = details.properties.map((propertyType, key) => {
@@ -32,17 +32,22 @@ class HousingDetails extends React.Component {
             )
         });
 
+
+        const accomodationInfo = (
+            <Tooltip
+                component={<img src={require('../../dist/public/info.svg')}
+                    className='infoIcon'
+                    ref={setAccommodationInfoRef}
+                />}
+                text={`These are the average prices for the different room types in ${destination}`}
+                position='right center'
+            />
+        )
+
         return (
             <div className="flexWrap">
-                <h1 className='priceBreakdownHeading'>Accommodation</h1>
-                <Tooltip
-                    component={<img src={require('../../dist/public/info.svg')}
-                        className='infoIcon'
-                        ref={setAccommodationInfoRef}
-                    />}
-                    text={`These are the average prices for the different room types in ${destination}`}
-                    position='right center'
-                />
+                <h1 className='priceBreakdownHeading'>Accommodation {accomodationInfo}</h1>
+
                 <div className="contentWrap">
                     {accommodationTypes}
                 </div>
