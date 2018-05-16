@@ -365,9 +365,10 @@ priceBreakdownContainer
 }
 
 .infoIcon{
-  margin-top: -1%;
-  margin-left: 2%;
+  margin-top: 3%;
+  margin-left: 3%;
   width: 25px;
+  position: absolute;
 }
 
 .contentType:hover{
