@@ -6,8 +6,6 @@ import HousingDetails from '../containers/HousingDetails';
 import CustomCarousel from './CustomCarousel';
 
 
-
-
 class PriceBreakdown extends React.Component {
 
   constructor(props) {
