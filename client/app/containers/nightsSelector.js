@@ -3,6 +3,7 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
+import Tooltip from '../components/Tooltip';
 
 class NightsSelector extends React.Component {
 
@@ -21,12 +22,12 @@ class NightsSelector extends React.Component {
         }
     }
 
-    render () {
+    render() {
 
         const { nightsOfStay } = this.state;
         const { inputStyle } = this.props;
 
-        return (
+        const nightsSelectorField = (
             <Paper zDepth={1} className='searchContainer' id="nightsField">
                 <TextField
                     id='NIGHTS_SELECTOR'
@@ -38,6 +39,14 @@ class NightsSelector extends React.Component {
                 />
                 <p className='nightsLabel'>{nightsOfStay > 1 ? 'nights' : 'night'}</p>
             </Paper>
+        )
+
+        return (
+            <Tooltip
+                component={ nightsSelectorField }
+                text='By default the search engine will look for flights and accommodation one day before the event'
+                position='top center'
+            />
         )
     }
 

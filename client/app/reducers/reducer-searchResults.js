@@ -5,7 +5,7 @@ export default (state = { currency: DEFAULT_CURRENCY_SYMBOL, searching: false },
     case 'FESTIVAL_SEARCH_START':
       return Object.assign({}, state, { text: 'Getting event details ...', color: '#b7665d', searching: true, searchDetails: action.search });
     case 'FLIGHTS_SEARCH_START':
-      return Object.assign({}, state, { text: `Looking for a ticket to ${action.destination} ...`, color: '#914037' });
+      return Object.assign({}, state, { text: `Looking for a ticket to ${action.destination} ...`, color: '#914037', destination: action.destination });
     case 'HOUSING_SEARCH_START':
       return Object.assign({}, state, { text: 'Just need to find you a comfy bed ...', color: '#68221a' });
     case 'FESTIVAL_SEARCH_FINISHED':

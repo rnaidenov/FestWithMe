@@ -30,7 +30,7 @@ module.exports = {
               loader: 'json-loader'
             },
             {
-            test: /\.(png|jpg|gif|svg)$/,
+            test: /\.(png|jpg|gif|svg|ttf|eot|woff|woff2)$/,
             loader: 'url-loader',
               options: {
                 limit: 8192

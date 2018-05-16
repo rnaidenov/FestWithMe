@@ -74,8 +74,9 @@ body{
   }
 
   .contentWrap{
-    height: 30vh;
+    height: 80%;
   }
+
 
 .accommodationTypeWrap{
   margin-bottom: 3%;
@@ -87,6 +88,7 @@ body{
 
 .flightDetailsError{
   padding-top:2%;
+  font-size: 20px;
 }
   
 
@@ -139,9 +141,7 @@ body{
     font-size: 30px;
   }
 
-  .priceBreakdownHeading {
-    padding-top:2%;
-  }
+
   .price-update-text{
     font-size: 20px;
   }
@@ -213,6 +213,7 @@ body{
   
   .price-update-text.prompt{
     font-size: 22px;
+    font-weight: 400;
   }
 
   .breakdownContainerWrap{
@@ -233,6 +234,10 @@ body{
 
   .contentWrap{
     height: 85%;
+  }
+
+  .contentWrap.flightError{
+    height: 80%;
   }
 
   .accommodationTypeWrap{
@@ -359,6 +364,13 @@ priceBreakdownContainer
   padding-top:1%;
 }
 
+.infoIcon{
+  margin-top: 3%;
+  margin-left: 3%;
+  width: 25px;
+  position: absolute;
+}
+
 .contentType:hover{
   cursor: pointer;
 }
@@ -401,9 +413,14 @@ priceBreakdownContainer
   display:none;
 }
 
-.slider-frame{
-  height:300px !important;
+.slider, .slider-frame, .slider-list, .slider-slide, .resultsContainer {
+  height: 100% !important;
 }
+
+
+/* .slider-slide:first-child{
+  height:100%;
+} */
 
 .priceBreakdownHeading {
   width:100%;
@@ -429,6 +446,7 @@ priceBreakdownContainer
 .contentIcon.inactive {
   filter: grayscale(100%);
   z-index: -1;
+  opacity:0.65;
 }
 
 .resultText {
@@ -459,7 +477,7 @@ priceBreakdownContainer
 }
 
 .price-update-text.prompt{
-  font-weight: 300;
+  font-weight: 400;
 }
 
 .inputWrap{
@@ -527,7 +545,10 @@ priceBreakdownContainer
 .flexWrap {
   display: flex;
   flex-wrap: wrap;
+  height: 100%;
 }
+
+
 
 #typeAndPrice {
   font-family: 'Assistant', sans-serif !important;

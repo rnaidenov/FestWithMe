@@ -4,11 +4,11 @@ import { bindActionCreators } from 'redux';
 import { loadFestivals, searchFestival, getLocation } from '../actions/searchActions';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import IconButton from 'material-ui/IconButton';
-import PeopleSelector from './peopleSelector';
-import NightsSelector from './nightsSelector';
-import FestivalInput from './festivalInput';
-import LocationInput from './locationInput';
-import Results from './results';
+import PeopleSelector from './PeopleSelector';
+import NightsSelector from './NightsSelector';
+import FestivalInput from './FestivalInput';
+import LocationInput from './LocationInput';
+import Results from './Results';
 import '../../dist/styles/search.css';
 
 @connect(store => {
@@ -23,11 +23,11 @@ class Search extends React.Component {
     console.log(props);
     // change missingFestival and location
     this.SMARTPHONE_MAX_WIDTH_PIXELS = 500;
-    this.MOBILE_MAX_WIDTH_PIXELS = 1100;   
+    this.MOBILE_MAX_WIDTH_PIXELS = 1100;
     this.demoParam = 'demo';
     this.updateWindowWidth = this.updateWindowWidth.bind(this);
     this.updateWindowWidth = this.updateWindowWidth.bind(this);
-    this.state = { doneSearch:false,nightsOfStay: '1', numPeople: 1, missingFestival:false, missingLocation:false, festivalName:'Junction 2', locationOrigin:'Sofia'}
+    this.state = { doneSearch: false, nightsOfStay: '1', numPeople: 1, missingFestival: false, missingLocation: false, festivalName: 'Junction 2', locationOrigin: 'Sofia' }
   }
 
   updateWindowWidth() {
@@ -51,19 +51,19 @@ class Search extends React.Component {
   }
 
 
-  isDemo(){
-    const { location : { search } } = this.props;
-      if(search.length) {
-        const [paramType, paramValue] = search.split('?')[1].split('=');
-        if(paramType===this.demoParam && Boolean(paramValue)) return true;
-      } 
-      return false;
+  isDemo() {
+    const { location: { search } } = this.props;
+    if (search.length) {
+      const [paramType, paramValue] = search.split('?')[1].split('=');
+      if (paramType === this.demoParam && Boolean(paramValue)) return true;
+    }
+    return false;
   }
 
 
   lookUpFestival() {
     const { numPeople, festivalName, nightsOfStay, locationOrigin, missingLocation, missingFestival } = this.state;
-    
+
     // if (locationOrigin == null || locationOrigin.trim() === '') {
     //   this.setState({ missingLocation: true });
     // } else {
@@ -74,15 +74,15 @@ class Search extends React.Component {
     // } else {
     //   this.setState({ missingFestival: false });
     // }
-    
+
     setTimeout(() => {
       if (!missingLocation && !missingFestival) {
-        this.setState({ festivalToSearch: festivalName, doneSearch:true });
+        this.setState({ festivalToSearch: festivalName, doneSearch: true });
         const isDemo = this.isDemo();
-        const { searchResults : { currency }, dispatch } = this.props;
+        const { searchResults: { currency }, dispatch } = this.props;
         dispatch(searchFestival(locationOrigin, festivalName, nightsOfStay, numPeople, currency, isDemo));
       }
-    },500);
+    }, 500);
   }
 
   componentDidMount() {
@@ -96,7 +96,7 @@ class Search extends React.Component {
 
   updateWindowWidth() {
     this.setState({ windowWidth: window.innerWidth });
-    if(window.innerWidth < this.SMARTPHONE_MAX_WIDTH_PIXELS) {
+    if (window.innerWidth < this.SMARTPHONE_MAX_WIDTH_PIXELS) {
       this.setState({ screenSize: 'phone' });
     } else if (window.innerWidth > this.SMARTPHONE_MAX_WIDTH_PIXELS && window.innerWidth < this.MOBILE_MAX_WIDTH_PIXELS) {
       this.setState({ screenSize: 'tablet' });
@@ -107,64 +107,65 @@ class Search extends React.Component {
 
   render() {
     const { locationInput, location, festivalHint,
-            locationHint, hintStyle, missingFestival, missingLocation, festivalToSearch, doneSearch, screenSize } = this.state;
+      locationHint, hintStyle, missingFestival, missingLocation, festivalToSearch, doneSearch, screenSize } = this.state;
     const { festivalInput } = this.props;
 
     const isOnline = navigator.onLine;
-    const isPhone = screenSize==='phone';
+    const isPhone = screenSize === 'phone';
     const appTitle = (
-      <div className={ isOnline && !isPhone && doneSearch ? "appTitle noSearch" : "appTitle"}>FestWithMe</div>
+      <div className={isOnline && !isPhone && doneSearch ? "appTitle noSearch" : "appTitle"}>FestWithMe</div>
     )
 
     const inputStyle = {
       paddingLeft: '12px',
       fontFamily: "'Teko', sans-serif",
-      fontWeight:300,
+      fontWeight: 300,
       fontSize: '26px',
-      zIndex:2
+      zIndex: 2
     };
-    const errorStyle = { fontSize: '14px', color: '#841f26',marginTop:'-7%',zIndex:'1'}
-  
-    if(!screenSize) return null;
-    
-    return (
-        <MuiThemeProvider>
-          <div>
-            { !isPhone ? appTitle : null }
-            <div className='searchWrap'>
-              <PeopleSelector
-                updateNumPeople={(numPeople) => this.updateNumPeople(numPeople)}
-                inputStyle={inputStyle}
-              />
-              <p className="searchText" id="goingToLabel">going to</p>
-              <FestivalInput
-                updateFestivalInput={(festivalName) => this.updateFestivalInput(festivalName)}
-                inputStyle={inputStyle}
-                errorStyle={errorStyle}
-                missingFestival={missingFestival}
-              />
-              <p className="searchText" id="fromLabel">from</p>
-              <LocationInput
-                updateLocationInput={(location) => this.updateLocationInput(location)}
-                inputStyle={inputStyle}
-                errorStyle={errorStyle}
-                missingLocation={missingLocation}
-              />
-              <p className="searchText" id="forLabel">for</p>
-              <NightsSelector
-                updateNightsField={(numOfNights) => { this.updateNightsField(numOfNights) }}
-                inputStyle={inputStyle}
-              />
-              <div className="btnWrap">
-                <IconButton className='searchBtn' onClick={() => this.lookUpFestival()}>
-                  <i class="material-icons searchBtnIcon">search</i>
-                </IconButton>
-              </div>
-            </div>
+    const errorStyle = { fontSize: '14px', color: '#841f26', marginTop: '-7%', zIndex: '1' }
 
-            <Results festivalName={festivalToSearch} screenSize={screenSize}/>
+    if (!screenSize) return null;
+
+    return (
+      <MuiThemeProvider>
+        <div>
+          {!isPhone ? appTitle : null}
+          <div className='searchWrap'>
+            <PeopleSelector
+              updateNumPeople={(numPeople) => this.updateNumPeople(numPeople)}
+              inputStyle={inputStyle}
+            />
+            <p className="searchText" id="goingToLabel">going to</p>
+            <FestivalInput
+              updateFestivalInput={(festivalName) => this.updateFestivalInput(festivalName)}
+              inputStyle={inputStyle}
+              errorStyle={errorStyle}
+              missingFestival={missingFestival}
+            />
+            <p className="searchText" id="fromLabel">from</p>
+            <LocationInput
+              updateLocationInput={(location) => this.updateLocationInput(location)}
+              inputStyle={inputStyle}
+              errorStyle={errorStyle}
+              missingLocation={missingLocation}
+              screenSize={screenSize}
+            />
+            <p className="searchText" id="forLabel">for</p>
+            <NightsSelector
+              updateNightsField={(numOfNights) => { this.updateNightsField(numOfNights) }}
+              inputStyle={inputStyle}
+            />
+            <div className="btnWrap">
+              <IconButton className='searchBtn' onClick={() => this.lookUpFestival()}>
+                <i class="material-icons searchBtnIcon">search</i>
+              </IconButton>
+            </div>
           </div>
-        </MuiThemeProvider>
+
+          <Results festivalName={festivalToSearch} screenSize={screenSize} />
+        </div>
+      </MuiThemeProvider>
     )
   }
 

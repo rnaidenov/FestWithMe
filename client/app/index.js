@@ -2,7 +2,7 @@ import 'babel-polyfill';
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { render } from 'react-dom';
-import { Search } from './containers/search';
+import { Search } from './containers/Search';
 import { Provider } from 'react-redux';
 import store from './store';
 
