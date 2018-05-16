@@ -16,7 +16,6 @@ class HousingDetails extends React.Component {
     }
 
     render() {
-        console.log(this.props);
         const { details, currency, setAccommodationInfoRef, searchResults: { destination } } = this.props;
 
 

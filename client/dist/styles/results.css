@@ -74,7 +74,7 @@ body{
   }
 
   .contentWrap{
-    height: 30vh;
+    height: 80%;
   }
 
   .infoIcon{
@@ -421,9 +421,14 @@ priceBreakdownContainer
   display:none;
 }
 
-.slider-frame{
-  height:300px !important;
+.slider, .slider-frame, .slider-list, .slider-slide, .resultsContainer {
+  height: 100% !important;
 }
+
+
+/* .slider-slide:first-child{
+  height:100%;
+} */
 
 .priceBreakdownHeading {
   width:100%;
@@ -548,6 +553,7 @@ priceBreakdownContainer
 .flexWrap {
   display: flex;
   flex-wrap: wrap;
+  height: 100%;
 }
 
 

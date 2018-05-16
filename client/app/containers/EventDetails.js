@@ -37,7 +37,7 @@ class EventDetails extends React.Component {
         const { newPriceMissing, newPriceAmount } = this.state;
 
         const soldOutFestival = (
-            <div>
+            <div className='resultsContainer'>
                 <h1 className='priceBreakdownHeading'>Festival ticket</h1>
                 <div className="contentWrap">
                     <div className="mainContent">
@@ -68,7 +68,7 @@ class EventDetails extends React.Component {
         )
 
         const activeFestival = (
-            <div>
+            <div className='resultsContainer'>
                 <h1 className='priceBreakdownHeading'>Festival ticket</h1>
                 <div className='contentWrap'>
                     <div className="mainContent">

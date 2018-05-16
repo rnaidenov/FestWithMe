@@ -3,7 +3,7 @@ import Carousel from 'nuka-carousel';
 
 function CustomCarousel({ content, onClick, decorators, slidesToShow, slideWidth, className }) {
   const carouselContent = content.map((c,idx) => (
-    <div key={idx} onClick={(e) => onClick(e, c.ref)}>
+    <div key={idx} onClick={(e) => onClick(e, c.ref)} className='resultsContainer'>
       {c.element}
     </div>
     ));
