@@ -20,7 +20,7 @@ importScripts('workbox-sw.prod.v2.1.3.js');
 const fileManifest = [
   {
     "url": "/bundle.js",
-    "revision": "b96e3bcbbad45c588c4bd1efc50d1af1"
+    "revision": "a2b14e860425d31d9536fef9abf0615c"
   },
   {
     "url": "bundle.js.gz",
@@ -57,6 +57,10 @@ const fileManifest = [
   {
     "url": "public/inactiveTicket.svg",
     "revision": "91ea97f5e2b6365cfa8c787194051c4e"
+  },
+  {
+    "url": "public/info.svg",
+    "revision": "a0fb31efd4b2c794adc655bcc959b427"
   },
   {
     "url": "public/manifest/android-chrome-192x192.png",
@@ -128,15 +132,15 @@ const fileManifest = [
   },
   {
     "url": "styles/currencyConverter.css",
-    "revision": "6845bac9a695023207d7125046df137f"
+    "revision": "6d92a6d21b555d5454be316b97901ca4"
   },
   {
     "url": "styles/results.css",
-    "revision": "c86c374fdc9f637d3c859f8d3aa4d7ec"
+    "revision": "b156e6686416ca1cabf30c0ffa52cf0f"
   },
   {
     "url": "styles/search.css",
-    "revision": "76ed7e1fe2648230b64aec49b418aff2"
+    "revision": "03c6ff78da95a48b052bc54410bf3cc6"
   }
 ];
 
