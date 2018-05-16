@@ -31,7 +31,7 @@ const FlightPrice = ({ details, currency }) => {
   return (
     <div className='flexWrap'>
       <h1 className='priceBreakdownHeading'>Plane ticket</h1>
-      {amount ? error : flightDetails}
+      {amount ? flightDetails : error}
     </div>
   )
 }

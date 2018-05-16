@@ -77,11 +77,6 @@ body{
     height: 80%;
   }
 
-  .infoIcon{
-    right: 35px;
-    width: 25px;
-    top: 12px;
-  }
 
 .accommodationTypeWrap{
   margin-bottom: 3%;
@@ -261,12 +256,6 @@ body{
     margin-bottom: 5%;
   }
 
-  .infoIcon{
-    right: 55px;
-    width: 25px;
-    top: 37px;
-  }
-
 }
 
 .loaderWrap {
@@ -376,7 +365,9 @@ priceBreakdownContainer
 }
 
 .infoIcon{
-  position: absolute;
+  margin-top: -1%;
+  margin-left: 2%;
+  width: 25px;
 }
 
 .contentType:hover{
