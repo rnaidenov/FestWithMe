@@ -4,7 +4,7 @@ const amadeusAPI = `https://api.sandbox.amadeus.com/v1.2/airports/nearest-releva
 const CurrencyConverter = require('./currencies');
 const Formatter = require('./formatter');
 const DataCacheUtil = require('./cachedDataLoader');
-const KIWI_API_BASE_URL = 'https://api.skypicker.com/flights?partner=picky&directFlights=1';
+const KIWI_API_BASE_URL = 'https://api.skypicker.com/flights?partner=picky';
 const googleMaps = require('@google/maps').createClient({
   key: config.googleMapsKey
 });
@@ -42,22 +42,30 @@ const _composeSearchLink = (originIata, destinationIata, date, daysOfStay, curre
   return `${KIWI_API_BASE_URL}&flyFrom=${originIata}&to=${destinationIata}&dateFrom=${inboundDate}&dateTo=${inboundDate}&returnFrom=${outboundDate}&returnTo=${outboundDate}&curr=${currencyCode}`;
 }
 
-
+const _getDirectFlight = (allFlightOptions) => {
+  for (let flightOption of allFlightOptions) {
+    const { pnr_count: numFlights } = flightOption;
+    if (Number(numFlights) === 2) return flightOption;
+  }
+  return null;
+}
 
 const _formatResponse = ({ originIata, destinationIata, flightSearchDetails, currencyCode }) => {
   return new Promise(async (resolve, reject) => {
     const { data } = flightSearchDetails;
-    if (data.length) {
+    try {
+      const directFlight =  _getDirectFlight(data);
       const cheapestFlight = data[0];
-      const { conversion, deep_link: bookingUrl } = cheapestFlight;
+      const flightDetails = directFlight!==null ? directFlight : cheapestFlight;
+      const { conversion, deep_link: bookingUrl } = flightDetails;
       const flightPriceAmount = conversion[currencyCode];
       resolve({ flightPriceAmount, origin: originIata, destination: destinationIata, url: bookingUrl })
-    } else {
-      // TODO: Need to update this
-      reject(`There are no direct flights from ${originIata} to ${destinationIata}. Maybe try searching for indirect flight options.`);
+    } catch(err){
+      reject(err);
     }
   })
 }
+
 
 const _getCheapestFlightDetails = (origin, destination, date, daysOfStay, currencySymbol) => {
   return new Promise(async (resolve, reject) => {
@@ -65,7 +73,7 @@ const _getCheapestFlightDetails = (origin, destination, date, daysOfStay, curren
       const currencyCode = CurrencyConverter.getCurrencyCode(currencySymbol);
       const originIata = await getIATACode(origin);
       const destinationIata = await getIATACode(destination);
-      const url = _composeSearchLink(origin, destination, date, daysOfStay, currencyCode);
+      const url = _composeSearchLink(originIata, destinationIata, date, daysOfStay, currencyCode);
       const flightSearchDetails = await fetch(url).then(res => res.json());
       const flightPriceDetails = _formatResponse({ originIata, destinationIata, flightSearchDetails, currencyCode });
       resolve(flightPriceDetails);
@@ -74,7 +82,6 @@ const _getCheapestFlightDetails = (origin, destination, date, daysOfStay, curren
     }
   });
 }
-
 
 const getFlightPrices = (origin, destination, date, daysOfStay, currency) => {
   return new Promise(async resolve => {
