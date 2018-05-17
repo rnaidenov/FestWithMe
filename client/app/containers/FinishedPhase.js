@@ -57,6 +57,7 @@ class FinishedPhase extends React.Component {
         const { screenSize } = this.props;
         const { carret, isPricebreakdownSelected } = this.state;
         const { currency, festivalName, priceDetails, searchDetails, destination } = this.props;
+        const moreThanOnePerson = searchDetails.numPeople > 1;
 
         const priceBreakdownCarret = (
             <div>
@@ -82,25 +83,26 @@ class FinishedPhase extends React.Component {
                     <p id='resultsLabel'>
                         <span className="resultText">Going to </span>
                         <span className="festivalNameLabel">{festivalName}</span>
-                        <span className="resultText"> will cost you </span>
+                        <span className="resultText"> will cost {moreThanOnePerson ? null : 'you'} </span>
                         <span className="totalPriceLabel">{currency}{priceDetails.totalPrice}</span>
+                        {moreThanOnePerson ? <span className="resultText"> per person</span> : null}
                     </p>
-                    <div className="priceBreakdownWrap">
-                        {screenSize !== 'desktop' ? priceBreakdownCarret : null}
-                    </div>
-                </div>
-                <div ref={wrapper => this.wrapperRef = wrapper} className='breakdownContainerWrap'>
-                    <PriceBreakdown
-                        prices={priceDetails}
-                        destination={destination}
-                        isSelected={isPricebreakdownSelected}
-                        currency={currency}
-                        updateTicketPrice={updateTicketPrice}
-                        screenSize={screenSize}
-                        searchDetails={searchDetails}
-                    />
+                <div className="priceBreakdownWrap">
+                    {screenSize !== 'desktop' ? priceBreakdownCarret : null}
                 </div>
             </div>
+            <div ref={wrapper => this.wrapperRef = wrapper} className='breakdownContainerWrap'>
+                <PriceBreakdown
+                    prices={priceDetails}
+                    destination={destination}
+                    isSelected={isPricebreakdownSelected}
+                    currency={currency}
+                    updateTicketPrice={updateTicketPrice}
+                    screenSize={screenSize}
+                    searchDetails={searchDetails}
+                />
+            </div>
+            </div >
 
         )
     }
