@@ -362,6 +362,11 @@ priceBreakdownContainer
   width: 23%;
   animation: comeUp 1s linear both;
   padding-top:1%;
+  transition: box-shadow ease-in-out 0.3s;
+}
+
+.contentType:hover{
+  box-shadow: 0px 10px 25px 5px rgba(255, 255, 255, 0.35) !important;
 }
 
 .infoIcon{

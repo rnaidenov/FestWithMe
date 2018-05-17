@@ -73,7 +73,7 @@ export const getTotalPrice = (eventDetails, flightDetails, housingDetails, night
     eventDetails,
     flightDetails,
     housingDetails: housingDetails,
-    totalPrice: totalPrice * numPeople
+    totalPrice: totalPrice
   };
 }
 
