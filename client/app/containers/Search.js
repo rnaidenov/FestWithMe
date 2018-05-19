@@ -162,7 +162,6 @@ class Search extends React.Component {
               </IconButton>
             </div>
           </div>
-
           <Results festivalName={festivalToSearch} screenSize={screenSize} />
         </div>
       </MuiThemeProvider>
