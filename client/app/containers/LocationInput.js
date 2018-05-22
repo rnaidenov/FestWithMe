@@ -67,7 +67,6 @@ class LocationInput extends React.Component {
                 <TextField
                     id='LOCATION_INPUT'
                     hintText={missingLocation ? '' : 'City'}
-                    className='locationTextField'
                     fullWidth={true}
                     inputStyle={inputStyle}
                     hintStyle={inputStyle}

@@ -44,7 +44,7 @@ class NightsSelector extends React.Component {
         return (
             <Tooltip
                 component={ nightsSelectorField }
-                text='By default the search engine will look for flights and accommodation one day before the event'
+                text='By default the number of nights will start one before the event'
                 position='top center'
             />
         )
