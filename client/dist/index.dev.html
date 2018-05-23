@@ -666,6 +666,9 @@
             .background {
                 background-image: url(https://res.cloudinary.com/rado-content-cloud/image/upload/c_scale,w_500/c_crop,h_800,w_500/v1521193705/marvin-meyer-190672-unsplash.webp)
             }
+            .placeholderTitle {
+                display: none;
+            }
             .searchWrap {
                 width: 100%;
                 padding-top: 6%;
@@ -677,9 +680,20 @@
                 position: absolute
             }
             .searchText {
-                width: 100%;
-                margin: 0;
-                margin-top: 2%
+                width: 30%;
+                padding-top: 1.5%;
+                margin: 2% 35% 2% 35%;
+            }
+            .placeholderItem {
+                height: 30px;
+            }
+            .placeholderBtn {
+                width: 15%;
+                margin-left: 42.5%;
+                margin-right: 42.5%;
+                margin-top: 2%;
+                padding-top: 3%;
+                height: 40px;
             }
 
 
@@ -736,6 +750,14 @@
             .background {
                 background-image: url(https://res.cloudinary.com/rado-content-cloud/image/upload/c_scale,w_1200/v1521193705/marvin-meyer-190672-unsplash.webp)
             }
+            .placeholderWrap {
+                padding-top: 15.7%;
+            }
+            .placeholderTitle {
+                width: 35%;
+                margin-left: 32.5%;
+                margin-right: 32.5%;
+            }
             .searchWrap {
                 width: 75%
             }
@@ -782,6 +804,9 @@
                 order: 7;
                 width: 6%
             }
+            .placeholderItem {
+                height: 40px;
+            }
             .placeholderBtn {
                 order: 8;
                 width: 6%;
@@ -803,34 +828,20 @@
             position: relative;
             height: 40px
         }
-
-        .placeholderWrap {
-            padding-top: 15.7%;
-        }
-
-        .placeholdeTitle {
-            width: 35%;
-            margin-left: 32.5%;
-            margin-right: 32.5%;
-        }
-
-        .placeholderItem {
-            height: 40px;
-        }
     </style>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="#aab3bb">
     <script async src='./analytics.js'></script>
     <script async src='https://www.google-analytics.com/analytics.js'></script>
     <script async src="./service-worker-registration.js"></script>
-    <script async src="./bundle.js"></script>
+    <!-- <script async src="./bundle.js"></script> -->
 </head>
 
 <body class="background">
     <div class="overlay" id="root">
 
         <div class='placeholderWrap'>
-            <div class="ph-item placeholdeTitle">
+            <div class="ph-item placeholderTitle">
                 <div class="ph-col-12">
                     <div class="ph-row">
                         <div class="ph-col-12 ph big"></div>
