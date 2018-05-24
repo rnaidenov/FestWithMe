@@ -32,11 +32,11 @@ const fileManifest = [
   },
   {
     "url": "index.dev.html",
-    "revision": "2ad65adf1414b89f1c90caae06c0bc93"
+    "revision": "4259707857c0ec67a1a86a81b736ab51"
   },
   {
     "url": "index.html",
-    "revision": "affd5d7c45dff73f836c693ced5055bf"
+    "revision": "dbd7755c323584c93665aec5c833bdf1"
   },
   {
     "url": "manifest.json",
