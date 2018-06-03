@@ -17,6 +17,11 @@ setupController(app);
 apiController(app);
 
 app.use(compression());
+
+app.use((req, res, next) => {
+    req.secure ? next() : res.redirect(`https://${req.hostname}${req.url}`);
+})
+
 app.use(express.static(path.join(__dirname + '/', '..', '/client/dist/')));
 
 app.get('/', (req, res) => {
