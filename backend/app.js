@@ -19,8 +19,8 @@ apiController(app);
 app.use(compression());
 
 app.use((req, res, next) => {
-    console.log(`${req.url} is secure : ${req.secure}`);
-    if(req.secure) {
+    console.log(`Protocol is ${req.protocol}. Is secure = ${req.secure}`);
+    if (req.secure) {
         console.log(`${req.hostname}${req.url} is secure.`);
         next();
     } else {
