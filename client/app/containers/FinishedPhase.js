@@ -42,11 +42,9 @@ class FinishedPhase extends React.Component {
     }
 
     closePriceBreakdownMobile = e => {
-        const { isPricebreakdownSelected, screenSize } = this.state;
-        if (this.wrapperRef && !this.wrapperRef.contains(e.target) && screenSize === 'phone') {
-            if (isPricebreakdownSelected) {
-                this.closePriceBreakdown();
-            }
+        const { isPricebreakdownSelected } = this.state;
+        if (this.priceBreakdownWrap && !this.priceBreakdownWrap.contains(e.target) && isPricebreakdownSelected) {
+            this.closePriceBreakdown();
         }
     }
 
@@ -60,13 +58,13 @@ class FinishedPhase extends React.Component {
         const moreThanOnePerson = searchDetails.numPeople > 1;
 
         const priceBreakdownCarret = (
-            <div>
+            <div onClick={this.togglePriceBreakdown}>
                 <p className="priceBreakdown" id="priceBreakdownLabel">
                     Price breakdown
               </p>
                 <i class="material-icons priceBreakdown"
                     id='carretDropdown'
-                    onClick={this.togglePriceBreakdown}>
+                >
                     {carret}
                 </i>
             </div>
@@ -91,7 +89,7 @@ class FinishedPhase extends React.Component {
                     {screenSize !== 'desktop' ? priceBreakdownCarret : null}
                 </div>
             </div>
-            <div ref={wrapper => this.wrapperRef = wrapper} className='breakdownContainerWrap'>
+            <div ref={wrapper => this.priceBreakdownWrap = wrapper} className='breakdownContainerWrap'>
                 <PriceBreakdown
                     prices={priceDetails}
                     destination={destination}

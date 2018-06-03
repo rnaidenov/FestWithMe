@@ -27,12 +27,13 @@ body{
     display: none;
     position: absolute !important;
     bottom:0 !important;
+    transition: transform 1s; 
   }
 
   .priceBreakdownContainer.selected {
-    animation: fadeInUp 2000ms linear both;
+    animation: fadeInUp 1500ms linear both;
     display: block;
-    height: 100%;
+    height: 95%;
   }
 
   .priceBreakdownContainer.unselected {
@@ -55,7 +56,7 @@ body{
   }
 
   .finishedResultsWrap{
-    position: absolute;
+    padding-top: 5%;
     bottom: 0;
     overflow:hidden;
     height: 40vh;
@@ -111,7 +112,7 @@ body{
 @keyframes fadeOutDown { 
     0% { opacity:1; }
     100% { opacity: 0; transform: translateY(500px)}
-  }
+}
   
 
 }
