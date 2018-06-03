@@ -18,17 +18,6 @@ apiController(app);
 
 app.use(compression());
 
-app.use((req, res, next) => {
-    console.log(`Protocol is ${req.protocol}. Is secure = ${req.secure}`);
-    if (req.secure) {
-        console.log(`${req.hostname}${req.url} is secure.`);
-        next();
-    } else {
-        console.log(`Should redirect to https://${req.hostname}${req.url}`);
-        res.redirect(`https://${req.hostname}${req.url}`);
-    }
-})
-
 app.use(express.static(path.join(__dirname + '/', '..', '/client/dist/')));
 
 app.get('/', (req, res) => {
