@@ -19,7 +19,12 @@ apiController(app);
 app.use(compression());
 
 app.use((req, res, next) => {
-    req.secure ? next() : res.redirect(`https://${req.hostname}${req.url}`);
+    console.log(`${req.url} is secure : ${req.secure}`);
+    if(req.secure) {
+        console.log(`${req.hostname}${req.url} is secure.`);
+    } else {
+        console.log(`Should redirect to https://${req.hostname}${req.url}`);
+    }
 })
 
 app.use(express.static(path.join(__dirname + '/', '..', '/client/dist/')));
