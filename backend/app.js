@@ -22,8 +22,10 @@ app.use((req, res, next) => {
     console.log(`${req.url} is secure : ${req.secure}`);
     if(req.secure) {
         console.log(`${req.hostname}${req.url} is secure.`);
+        next();
     } else {
         console.log(`Should redirect to https://${req.hostname}${req.url}`);
+        res.redirect(`https://${req.hostname}${req.url}`);
     }
 })
 
