@@ -62,7 +62,7 @@ export const searchFestival = (origin, festivalName, nights, numPeople, currency
 
 export const getTotalPrice = (eventDetails, flightDetails, housingDetails, nights, numPeople) => {
   const { flightPriceCurrency, flightPriceAmount } = flightDetails;
-  const { average_price: accommodationAvgPrice } = housingDetails;
+  const { avgPrice: accommodationAvgPrice } = housingDetails;
   const eventTicketPrice = eventDetails.price;
   const { soldOut, price: eventPrice } = eventDetails;
 

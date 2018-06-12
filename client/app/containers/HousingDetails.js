@@ -20,13 +20,19 @@ class HousingDetails extends React.Component {
 
 
         const accommodationTypes = details.properties.map((propertyType, key) => {
+
+
+            const propertyPrice = propertyType.price
+                                                    ? <div className='accomodationInfo typeAndPrice'><p>{currency}{propertyType.price}</p></div>
+                                                    : <span className='accomodationInfo typeAndPrice' id='noPriceInfoTxt'>No information</span>
+
             return (
                 <div key={key} className='accommodationTypeWrap'>
                     <div className="accomodationInfo">
                         <img src={require(`../../dist/public/${propertyType.icon}`)} className='homeTypeIcon' />
                     </div>
-                    <div className='accomodationInfo' id='typeAndPrice'><p>{propertyType.type}</p></div>
-                    <div className='accomodationInfo' id='typeAndPrice'><p>{currency}{propertyType.price}</p></div>
+                    <div className='accomodationInfo typeAndPrice'><p>{propertyType.type}</p></div>
+                    {propertyPrice}
                 </div>
             )
         });

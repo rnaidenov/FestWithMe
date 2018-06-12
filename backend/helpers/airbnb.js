@@ -2,7 +2,7 @@ const formatter = require('./formatter');
 const fetch = require('node-fetch');
 const DataCacheUtil = require('./cachedDataLoader');
 const CurrencyConverter = require('./currencies');
-const AIRBNB_BASE_URL = 'https://www.airbnb.co.uk/s/all?query';
+const AIRBNB_BASE_URL = 'https://www.airbnb.co.uk/s/homes?query';
 
 
 
@@ -75,7 +75,7 @@ const getPrice = (destination, eventDate, nights, numPeople, currencySymbol) => 
     getAveragePrice(destination, checkInDate, checkOutDate, numPeople, currencyCode)])
       .then(details => {
         const [properties, average_price] = details;
-        const housingDetails = { properties, average_price };
+        const housingDetails = { properties, avgPrice: Math.round(average_price/numPeople) };
         DataCacheUtil.cacheResults({ type: DataCacheUtil.DataType.HOUSING_DETAILS, data: { housingDetails, destination, numPeople, date: eventDate }});
         resolve(Object.assign(housingDetails, { url: _composeUrl({ destination, checkInDate, checkOutDate, numPeople, currencyCode })}));
       })
