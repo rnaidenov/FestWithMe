@@ -18,6 +18,15 @@ class HousingDetails extends React.Component {
     render() {
         const { details, currency, setAccommodationInfoRef, searchResults: { destination } } = this.props;
 
+        if (details.error) return (
+            <div className="flexWrap">
+                <h1 className='priceBreakdownHeading'>Accommodation {accomodationInfo}</h1>
+
+                <div className="contentWrap">
+                    Sorry, but something went wrong behind the scenes :(
+                </div>
+            </div>
+        )
 
         const accommodationTypes = details.properties.map((propertyType, key) => {
 

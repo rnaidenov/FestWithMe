@@ -19,7 +19,7 @@ const getAveragePrice = (destination, checkInDate, checkOutDate, numPeople, curr
             resolve(avgPrice)
           })
           .catch(err => {
-            reject("Failed to fetch AirBnb data. ",err);
+            reject(`Failed to fetch AirBnb data. Reason: \n ${err}`);
           })
       })
   });
@@ -52,7 +52,7 @@ const getPropertiesDetails = (destination, checkInDate, checkOutDate, numPeople,
         resolve(accommodationTypes);
       })
       .catch(err => {
-        reject("Failed to fetch AirBnb data. ",err);
+        reject(err);
       })
   });
 }
@@ -80,7 +80,8 @@ const getPrice = (destination, eventDate, nights, numPeople, currencySymbol) => 
         resolve(Object.assign(housingDetails, { url: _composeUrl({ destination, checkInDate, checkOutDate, numPeople, currencyCode })}));
       })
       .catch(err => {
-        reject("Unable to get accommodation prices from AirBnb. ",err);
+        console.error(err);
+        resolve({ error:true, avgPrice: 0, url: _composeUrl({ destination, checkInDate, checkOutDate, numPeople, currencyCode })});
       })
   });
 }
