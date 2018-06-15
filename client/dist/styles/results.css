@@ -92,6 +92,27 @@ body{
   padding-top:2%;
   font-size: 20px;
 }
+
+
+.festiveSpiritTxt{
+  font-size: 1.1em;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+
+.redirectToAirbnbTxt{
+  font-size:1.35em;
+}
+
+.accommodationError{
+  font-size: 1.15em;
+}
+
+
+.accommodationErrorIcon{
+  width:40px;
+}
   
 
 
@@ -256,6 +277,26 @@ body{
 
   .finishedResultsWrap{
     margin-bottom: 5%;
+  }
+
+
+  .festiveSpiritTxt{
+    margin-top: 20px;
+    margin-bottom: 25px;
+  }
+
+  .redirectToAirbnbTxt{
+    font-size: 1.16em;
+  }
+
+
+  .accommodationError{
+    font-size: 1.4em;
+  }
+
+
+  .accommodationErrorIcon{
+    width:50px;
   }
 
 }
@@ -424,11 +465,6 @@ priceBreakdownContainer
   height: 100% !important;
 }
 
-
-/* .slider-slide:first-child{
-  height:100%;
-} */
-
 .priceBreakdownHeading {
   width:100%;
   font-family: 'Assistant', sans-serif;
@@ -552,6 +588,35 @@ priceBreakdownContainer
   font-size: 24px;
   font-weight: 200;
   margin:0;
+}
+
+.accommodationError{
+  font-family: 'Oswald', sans-serif !important;
+  padding-top: 2%;
+  width:95%;
+  margin-left: 2.5%;
+}
+
+.sadFaceIcon{
+  margin-top: -25px;
+}
+
+.festiveSpiritTxt{
+  display: block;
+}
+
+.airbnbIcon{
+  width:50px;
+}
+
+
+.bold{
+  font-weight: bold;
+}
+
+.wrongTxt{
+  color: #d27171;
+  font-weight: bold;
 }
 
 .flexWrap {

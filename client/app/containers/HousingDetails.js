@@ -23,52 +23,58 @@ class HousingDetails extends React.Component {
                 <h1 className='priceBreakdownHeading'>Accommodation {accomodationInfo}</h1>
 
                 <div className="contentWrap">
-                    Sorry, but something went wrong behind the scenes :(
+                    <p className='accommodationError'>
+                        <span>Aaah <img src={require('../../dist/public/sad.svg')} className='accommodationErrorIcon sadFaceIcon' /> it seems that something went <span className='wrongTxt'>wrong</span> behind the scenes</span>
+                        <span className='festiveSpiritTxt'> Don't let this bring down your festive spirit <span className='bold'>!</span> </span>
+                        <span className='redirectToAirbnbTxt'>
+                            Just click anywhere on the card to be redirected to <img src={require('../../dist/public/airbnb.svg')} className='accommodationErrorIcon' /> to find your holiday home
+                        </span>
+                    </p>
                 </div>
             </div>
         )
-
+            
         const accommodationTypes = details.properties.map((propertyType, key) => {
 
 
             const propertyPrice = propertyType.price
                                                     ? <div className='accomodationInfo typeAndPrice'><p>{currency}{propertyType.price}</p></div>
-                                                    : <span className='accomodationInfo typeAndPrice' id='noPriceInfoTxt'>No information</span>
+                    : <span className='accomodationInfo typeAndPrice' id='noPriceInfoTxt'>No information</span>
 
-            return (
+                    return (
                 <div key={key} className='accommodationTypeWrap'>
-                    <div className="accomodationInfo">
-                        <img src={require(`../../dist/public/${propertyType.icon}`)} className='homeTypeIcon' />
+                        <div className="accomodationInfo">
+                            <img src={require(`../../dist/public/${propertyType.icon}`)} className='homeTypeIcon' />
+                        </div>
+                        <div className='accomodationInfo typeAndPrice'><p>{propertyType.type}</p></div>
+                        {propertyPrice}
                     </div>
-                    <div className='accomodationInfo typeAndPrice'><p>{propertyType.type}</p></div>
-                    {propertyPrice}
-                </div>
-            )
-        });
-
-
-        const accomodationInfo = (
+                    )
+                });
+        
+        
+                const accomodationInfo = (
             <Tooltip
-                component={<img src={require('../../dist/public/info.svg')}
-                    className='infoIcon'
-                    ref={setAccommodationInfoRef}
-                />}
-                text={`These are the average prices for the different room types in ${destination}`}
-                position='right center'
-            />
-        )
-
-        return (
+                        component={<img src={require('../../dist/public/info.svg')}
+                            className='infoIcon'
+                            ref={setAccommodationInfoRef}
+                        />}
+                        text={`These are the average prices for the different room types in ${destination}`}
+                        position='right center'
+                    />
+                    )
+            
+                    return (
             <div className="flexWrap">
-                <h1 className='priceBreakdownHeading'>Accommodation {accomodationInfo}</h1>
+                        <h1 className='priceBreakdownHeading'>Accommodation {accomodationInfo}</h1>
 
-                <div className="contentWrap">
-                    {accommodationTypes}
-                </div>
-            </div>
-        )
-    }
-}
-
-
+                        <div className="contentWrap">
+                            {accommodationTypes}
+                        </div>
+                    </div>
+                    )
+                }
+            }
+            
+            
 export default HousingDetails;

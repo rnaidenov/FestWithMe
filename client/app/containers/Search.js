@@ -27,7 +27,7 @@ class Search extends React.Component {
     this.demoParam = 'demo';
     this.updateWindowWidth = this.updateWindowWidth.bind(this);
     this.updateWindowWidth = this.updateWindowWidth.bind(this);
-    this.state = { doneSearch: false, nightsOfStay: '1', numPeople: 1, missingFestival: false, missingLocation: false, festivalName: 'Junction 2', locationOrigin: 'Sofia' }
+    this.state = { doneSearch: false, nightsOfStay: '3', numPeople: 6, missingFestival: false, missingLocation: false, festivalName: 'Pulsår Festival 2018', locationOrigin: 'Belgrade' }
   }
 
   updateWindowWidth() {
