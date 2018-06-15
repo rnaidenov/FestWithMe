@@ -24,7 +24,7 @@ class HousingDetails extends React.Component {
 
                 <div className="contentWrap">
                     <p className='accommodationError'>
-                        <span>Aaah <img src={require('../../dist/public/sad.svg')} className='accommodationErrorIcon sadFaceIcon' /> it seems that something went <span className='wrongTxt'>wrong</span> behind the scenes</span>
+                        <span>Aaah <img src={require('../../dist/public/sad.svg')} className='accommodationErrorIcon sadFaceIcon' /> it seems that something went <span className='wrongTxt bold'>wrong</span></span>
                         <span className='festiveSpiritTxt'> Don't let this bring down your festive spirit <span className='bold'>!</span> </span>
                         <span className='redirectToAirbnbTxt'>
                             Just click anywhere on the card to be redirected to <img src={require('../../dist/public/airbnb.svg')} className='accommodationErrorIcon' /> to find your holiday home

@@ -85,7 +85,7 @@ body{
 }
 
 .priceBreakdownHeading{
-  margin-bottom: 4%;
+  font-size: 2.35em;
 }
 
 .flightDetailsError{
@@ -95,9 +95,9 @@ body{
 
 
 .festiveSpiritTxt{
-  font-size: 1.1em;
-  margin-top: 10px;
-  margin-bottom: 20px;
+  font-size: 1.05em;
+  margin-top: 6%;
+  margin-bottom: 5%;
 }
 
 
@@ -107,6 +107,7 @@ body{
 
 .accommodationError{
   font-size: 1.15em;
+  padding-top: 4.5%;
 }
 
 
@@ -226,10 +227,6 @@ body{
     animation: fadeOutUp 2000ms linear both;
   }
 
-  .priceBreakdownHeading {
-    padding-top:2%;
-  }
-
   .price-update-text{
     font-size: 20px;
   }
@@ -281,22 +278,28 @@ body{
 
 
   .festiveSpiritTxt{
-    margin-top: 20px;
-    margin-bottom: 25px;
+    margin-top: 8%;
+    margin-bottom: 10%;
   }
 
   .redirectToAirbnbTxt{
-    font-size: 1.16em;
+    font-size: 1.25em;
   }
 
 
   .accommodationError{
     font-size: 1.4em;
+    padding-top: 3%;
   }
 
 
   .accommodationErrorIcon{
-    width:50px;
+    width:45px;
+  }
+
+  
+  .priceBreakdownHeading {
+    font-size: 2.4em;
   }
 
 }
@@ -468,7 +471,6 @@ priceBreakdownContainer
 .priceBreakdownHeading {
   width:100%;
   font-family: 'Assistant', sans-serif;
-  font-size: 30px;
   height:15%;
   margin-bottom: 5%;
   font-weight: 400;
@@ -592,7 +594,6 @@ priceBreakdownContainer
 
 .accommodationError{
   font-family: 'Oswald', sans-serif !important;
-  padding-top: 2%;
   width:95%;
   margin-left: 2.5%;
 }
@@ -616,7 +617,8 @@ priceBreakdownContainer
 
 .wrongTxt{
   color: #d27171;
-  font-weight: bold;
+  display: inline-block;
+  transform: rotate(45deg);
 }
 
 .flexWrap {
