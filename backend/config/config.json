@@ -6,5 +6,7 @@
   "googleCSE" : "001283578301271081774:by8c0ahji_4",
   "googleMapsKey":"AIzaSyDRv4BTAOXhhFvbiOHuQzQW0Ka9zIKLPrw",
   "fixerAPIKey":"cd41e6e5939b350ee87179070f73ae47",
+  "ipStackBaseURL":"http://api.ipstack.com/",
+  "ipStackAccessKey":"6b408a4b0d310ed4cc48fca4135f089b",
   "testsMaxTimeout":"30000"
 }

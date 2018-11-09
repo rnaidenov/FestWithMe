@@ -66,6 +66,7 @@ export const getTotalPrice = (eventDetails, flightDetails, housingDetails, night
   const eventTicketPrice = eventDetails.price;
   const { soldOut, price: eventPrice } = eventDetails;
 
+  debugger;
   const totalPrice = !soldOut
     ? eventPrice + flightPriceAmount + accommodationAvgPrice * nights
     : flightPriceAmount + accommodationAvgPrice * nights;

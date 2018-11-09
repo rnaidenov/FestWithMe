@@ -10,16 +10,16 @@ const _checkAirBnbDetails = (destination, checkInDate, numPeople, numNights, cur
         this.timeout(config.testsMaxTimeout);
         return AirBnb.getPrice(destination, checkInDate, numNights, numPeople, currencySymbol)
             .then(details => {
-                expect(details).to.have.all.keys('properties', 'average_price', 'url');
+                expect(details).to.have.all.keys('properties', 'avgPrice', 'url');
 
-                const { properties, average_price } = details;
+                const { properties, avgPrice } = details;
                 expect(properties).length(3, 'There should have been data for 3 accommodation types in the response returned.');
                 properties.forEach(property => {
                     const propertyPrice = property.price;
                     assert(propertyPrice != null, `${property.type} should have a price, but it is ${propertyPrice}`);
                 });
 
-                assert(average_price != null, `An average price for the stay should have been returned, however average_price=${average_price}`);
+                assert(avgPrice != null, `An average price for the stay should have been returned, however avgPrice=${avgPrice}`);
             })
             .catch(err => {
                 assert(false, err.message);

@@ -1,10 +1,17 @@
-var iplocation = require('iplocation')
+const config = require('../config');
+const fetch = require('node-fetch');
 
 
-function findLocaton () {
+// const findLocaton = () => {
+//   fetch(${con}')
+// }
+
+
+const findLocaton = () => {
   return new Promise ((resolve, reject) => {
     iplocation()
       .then(data => {
+        console.log(data);
         const {city, country_name : country} = data;
         resolve({
           city,
@@ -18,6 +25,4 @@ function findLocaton () {
 }
 
 
-module.exports = {
-  findLocaton
-}
+findLocaton();

@@ -9,5 +9,7 @@ module.exports = {
   googleCSE : configValues.googleCSE,
   googleMapsKey : configValues.googleMapsKey,
   testsMaxTimeout: configValues.testsMaxTimeout,
-  fixerAPIKey: configValues.fixerAPIKey
+  fixerAPIKey: configValues.fixerAPIKey,
+  ipStackBaseURL: configValues.ipStackBaseURL,
+  ipStackAccessKey: configValues.ipStackAccessKey
 }

@@ -23,15 +23,19 @@ class LocationInput extends React.Component {
     }
 
     toggleLocation() {
-        if (this.state.autoLocate === true) {
-            this.setState({ autoLocate: false, location: this.locationOff });
-        } else {
-            this.props.dispatch(getLocation());
-            this.setState({ autoLocate: true, location: this.locationOn });
-            setTimeout(() => {
-                this.setState({ locationField: this.props.location });
-            }, 400);
+        if(!navigator.geolocation) {
+            console.log(navigator.geolocation);
+            navigator.geolocation.getCurrentPosition(showPosition);
         }
+        // if (this.state.autoLocate === true) {
+        //     this.setState({ autoLocate: false, location: this.locationOff });
+        // } else {
+        //     this.props.dispatch(getLocation());
+        //     this.setState({ autoLocate: true, location: this.locationOn });
+        //     setTimeout(() => {
+        //         this.setState({ locationField: this.props.location });
+        //     }, 400);
+        // }
     }
 
     updateLocationField(e) {
@@ -81,7 +85,6 @@ class LocationInput extends React.Component {
                     text='Click here to automatically detect and add your location'
                     position = { screenSize === 'desktop' ? 'bottom right' : 'top right' }
                 />
-
             </Paper>
 
         )

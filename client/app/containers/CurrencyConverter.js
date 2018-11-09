@@ -36,7 +36,7 @@ class CurrencyConverter extends React.Component {
     componentWillReceiveProps(newProps) {
         const { prices: newPriceDetails, currency } = newProps;
         const { priceDetails } = this.state;
-
+        debugger;
         if (newPriceDetails!==priceDetails) {
             this.setState({ priceDetails: newPriceDetails,currency });
         }
@@ -52,8 +52,6 @@ class CurrencyConverter extends React.Component {
     render() {
 
         const { searchResults: { currency } } = this.props;
-        console.log(this.props);
-        console.log(`On reload currency should be ${currency}`);
         const { carret, priceBreakdownClass, smileyClass, chatBubbleClass } = this.state;
 
         return (
