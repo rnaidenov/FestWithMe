@@ -24,12 +24,13 @@ class LocationInput extends React.Component {
 
     toggleLocation() {
         if (this.state.location === this.locationOn) {
-            this.setState({ autoLocate: false, location: this.locationOff });
+            this.setState({ location: this.locationOff });
         } else {
             this.props.dispatch(getLocation());
             this.setState({ location: this.locationOn });
             setTimeout(() => {
                 this.setState({ locationField: this.props.location });
+                this.props.updateLocationInput(this.props.location)
             }, 400);
         }
     }
@@ -50,8 +51,8 @@ class LocationInput extends React.Component {
     render() {
 
 
-        const { locationField, location, hoverLocation, autoLocate } = this.state;
-        const { inputStyle, errorStyle, inputFieldStyle, search, missingLocation, screenSize } = this.props;
+        const { locationField, location } = this.state;
+        const { inputStyle, errorStyle, inputFieldStyle, missingLocation, screenSize } = this.props;
 
 
         const locationIcon = (

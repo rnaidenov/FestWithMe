@@ -27,7 +27,7 @@ class Search extends React.Component {
     this.demoParam = 'demo';
     this.updateWindowWidth = this.updateWindowWidth.bind(this);
     this.updateWindowWidth = this.updateWindowWidth.bind(this);
-    this.state = { doneSearch: false, nightsOfStay: '3', numPeople: 6, missingFestival: false, missingLocation: false, festivalName: 'Pulsår Festival 2018', locationOrigin: 'Belgrade' }
+    this.state = { doneSearch: false, nightsOfStay: '3', numPeople: 6, missingFestival: false, missingLocation: false, festivalName: '', locationOrigin: '' }
   }
 
   updateWindowWidth() {
@@ -47,6 +47,7 @@ class Search extends React.Component {
   }
 
   updateLocationInput(locationOrigin) {
+    debugger;
     this.setState({ locationOrigin });
   }
 
@@ -80,6 +81,7 @@ class Search extends React.Component {
         this.setState({ festivalToSearch: festivalName, doneSearch: true });
         const isDemo = this.isDemo();
         const { searchResults: { currency }, dispatch } = this.props;
+        debugger;
         dispatch(searchFestival(locationOrigin, festivalName, nightsOfStay, numPeople, currency, isDemo));
       }
     }, 500);
