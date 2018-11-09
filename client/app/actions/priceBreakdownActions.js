@@ -9,7 +9,6 @@ export function changeCurrency(from, to, prices) {
         Object.assign(eventDetails, { price: ticketPriceConverted });
         const { convertedAmount: flightPriceConverted } = await fetch(`${APPLICATION_API_BASE_URL}api/currencies/?from=${from}&to=${to}&amount=${flightDetails.flightPriceAmount}`).then(res => res.json());
         Object.assign(flightDetails, { flightPriceAmount: flightPriceConverted });
-        debugger;
         const housingDetailsConverted = await convertAccommodationPrices(from, to, housingDetails);
         const totalPriceRes = await fetch(`${APPLICATION_API_BASE_URL}api/currencies/?from=${from}&to=${to}&amount=${totalPrice}`);
         const { convertedAmount: totalPriceConverted } = await totalPriceRes.json();

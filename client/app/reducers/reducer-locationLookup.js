@@ -5,7 +5,7 @@ export default (state='',action) => {
       return 'Looking for your coordinates...'
       break;
     case 'SEARCHING_LOCATION_FINISH':
-      return action.payload;
+      return action.location;
       break;
   }
   return state;

@@ -5,6 +5,7 @@ const events = require('../helpers/events');
 const flights = require('../helpers/flights');
 const airbnb = require('../helpers/airbnb');
 const currencies = require('../helpers/currencies');
+const googleMaps = require('../helpers/maps');
 const location = require('../helpers/iplocation');
 const SearchResults = require('../models/searchResultsModel');
 const MongoClient = require('../helpers/mongoClient');
@@ -32,10 +33,10 @@ module.exports = (app) => {
     const { location, date, nights, numPeople, currency, isDemo } = req.query;
     try {
       const housingDetails = isDemo == 'true'
-                            ? await DataCacheUtil.loadCachedHousingResult(location, date, numPeople)
-                            : await airbnb.getPrice(location, date, nights, numPeople, currency);
-      res.status(200).send(housingDetails);                 
-    } catch(error) {
+        ? await DataCacheUtil.loadCachedHousingResult(location, date, numPeople)
+        : await airbnb.getPrice(location, date, nights, numPeople, currency);
+      res.status(200).send(housingDetails);
+    } catch (error) {
       res.status(500).send(error);
     }
   })
@@ -44,10 +45,10 @@ module.exports = (app) => {
     const { origin, destination, date, nights, currency, isDemo } = req.query;
     try {
       const flightDetails = isDemo == 'true'
-                              ?  await DataCacheUtil.loadCachedFlightResult(origin,destination)
-                              :  await flights.getFlightPrices(origin, destination, date, nights, currency);
+        ? await DataCacheUtil.loadCachedFlightResult(origin, destination)
+        : await flights.getFlightPrices(origin, destination, date, nights, currency);
       res.status(200).send(flightDetails);
-    } catch(error){
+    } catch (error) {
       res.status(500).send(error);
     }
   });
@@ -56,8 +57,8 @@ module.exports = (app) => {
     const { eventName, currency, isDemo } = req.query;
     try {
       const eventDetails = isDemo == 'true'
-                              ? await DataCacheUtil.loadCachedEventResult(eventName)
-                              : await events.lookUpEvent(eventName,currency);
+        ? await DataCacheUtil.loadCachedEventResult(eventName)
+        : await events.lookUpEvent(eventName, currency);
       res.status(200).send(eventDetails);
     } catch (err) {
       res.status(500).send(err);
@@ -71,9 +72,10 @@ module.exports = (app) => {
   });
 
   app.get("/api/location", (req, res) => {
-    location.findLocaton().then(location => {
-      res.send(location);
-    })
+    googleMaps.getLocationBasedOnCoordinates({ lat: req.query.lat, lng: req.query.lng }).then(location => {
+      console.log(location)
+      res.send({ location })
+    }).catch(err => console.err(err))
   });
 
 }

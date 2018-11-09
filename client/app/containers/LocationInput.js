@@ -16,26 +16,22 @@ class LocationInput extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { location: 'location_off', locationField: '' };
-        this.errorMessage = 'Please enter the name of the city you\'re travelling from';
         this.locationOn = 'location_on';
         this.locationOff = 'location_off';
+        this.state = { location: this.locationOff, locationField: '' };
+        this.errorMessage = 'Please enter the name of the city you\'re travelling from';
     }
 
     toggleLocation() {
-        if(!navigator.geolocation) {
-            console.log(navigator.geolocation);
-            navigator.geolocation.getCurrentPosition(showPosition);
+        if (this.state.location === this.locationOn) {
+            this.setState({ autoLocate: false, location: this.locationOff });
+        } else {
+            this.props.dispatch(getLocation());
+            this.setState({ location: this.locationOn });
+            setTimeout(() => {
+                this.setState({ locationField: this.props.location });
+            }, 400);
         }
-        // if (this.state.autoLocate === true) {
-        //     this.setState({ autoLocate: false, location: this.locationOff });
-        // } else {
-        //     this.props.dispatch(getLocation());
-        //     this.setState({ autoLocate: true, location: this.locationOn });
-        //     setTimeout(() => {
-        //         this.setState({ locationField: this.props.location });
-        //     }, 400);
-        // }
     }
 
     updateLocationField(e) {

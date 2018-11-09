@@ -5,27 +5,17 @@ const CurrencyConverter = require('./currencies');
 const Formatter = require('./formatter');
 const DataCacheUtil = require('./cachedDataLoader');
 const KIWI_API_BASE_URL = 'https://api.skypicker.com/flights?partner=picky';
-const googleMaps = require('@google/maps').createClient({
-  key: config.googleMapsKey
-});
+const GoogleMaps = require('./maps')
 
 
-// Gets latitude and longitude of location
-const _getCoordinates = location => {
-  return new Promise((resolve, reject) => {
-    googleMaps.geocode({ address: location }, (err, response) => {
-      const { geometry: { location: { lat, lng } } } = response.json.results[0];
-      resolve({ lat, lng });
-    });
-  });
-}
+
 
 
 // Returns a 3-letter code of city, where nearest airport is located
 const getIATACode = location => {
   return new Promise(async (resolve, reject) => {
     try {
-      const { lat, lng } = await _getCoordinates(location);
+      const { lat, lng } = await GoogleMaps.getCoordinates(location);
       const data = await fetch(`${amadeusAPI}&latitude=${lat}&longitude=${lng}`).then(res => res.json());
       const { city } = data[0];
       resolve(city);

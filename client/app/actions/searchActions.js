@@ -63,10 +63,8 @@ export const searchFestival = (origin, festivalName, nights, numPeople, currency
 export const getTotalPrice = (eventDetails, flightDetails, housingDetails, nights, numPeople) => {
   const { flightPriceCurrency, flightPriceAmount } = flightDetails;
   const { avgPrice: accommodationAvgPrice } = housingDetails;
-  const eventTicketPrice = eventDetails.price;
   const { soldOut, price: eventPrice } = eventDetails;
 
-  debugger;
   const totalPrice = !soldOut
     ? eventPrice + flightPriceAmount + accommodationAvgPrice * nights
     : flightPriceAmount + accommodationAvgPrice * nights;
@@ -101,12 +99,14 @@ const _increaseLoader = (dispatch, loadedValue) => {
 }
 
 export const getLocation = () => {
-  return async dispatch => {
-    try {
-      const location = await fetch(`${APPLICATION_API_BASE_URL}api/location`).then(data => data.json());
-      const { city, country } = location;
-      dispatch({ type: 'SEARCHING_LOCATION_FINISH', payload: `${city},${country}` });
-    } catch (err) { console.log(err) }
+  return dispatch => {
+    navigator.geolocation.getCurrentPosition(async geoLocation => {
+      const reverseGeolocation = await fetch(`${APPLICATION_API_BASE_URL}api/location?lat=${geoLocation.coords.latitude}&lng=${geoLocation.coords.longitude}`).then(data => data.json());
+      dispatch({
+        type: 'SEARCHING_LOCATION_FINISH',
+        location: reverseGeolocation.location
+      })
+    })
   }
 }
 
