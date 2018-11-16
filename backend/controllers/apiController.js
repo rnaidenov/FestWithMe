@@ -6,8 +6,6 @@ const flights = require('../helpers/flights');
 const airbnb = require('../helpers/airbnb');
 const currencies = require('../helpers/currencies');
 const googleMaps = require('../helpers/maps');
-const location = require('../helpers/iplocation');
-const SearchResults = require('../models/searchResultsModel');
 const MongoClient = require('../helpers/mongoClient');
 const DataCacheUtil = require('../helpers/cachedDataLoader');
 
