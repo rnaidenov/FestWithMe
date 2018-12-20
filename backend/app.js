@@ -10,7 +10,7 @@ const MONGO_DB_URL = config.getDBConnectionString();
 const app = express();
 app.use(cors());
 
-var port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
 mongoose.connect(MONGO_DB_URL);
 setupController(app);
