@@ -32,8 +32,8 @@ class FestivalInput extends React.Component {
     render () {
 
         const { festivalName } = this.state;
-        const { inputStyle, errorStyle, festivals, missingFestival } = this.props;
-
+        const { value, inputStyle, errorStyle, festivals, missingFestival } = this.props;
+        
         return (
             <Paper zDepth={1} className='searchContainer' id="festivalField">
                 <AutoComplete
@@ -46,6 +46,7 @@ class FestivalInput extends React.Component {
                     hintStyle={inputStyle}
                     errorText={(missingFestival && !festivalName.length) && this.errorMessage}
                     errorStyle={errorStyle}
+                    searchText={ value || festivalName }
                     onUpdateInput={(festivalName) => { this.updateFestivalField(festivalName) }}
                 />
             </Paper>

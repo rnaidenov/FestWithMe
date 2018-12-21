@@ -30,6 +30,7 @@ class Search extends React.Component {
     this.state = { doneSearch: false, nightsOfStay: '3', numPeople: 6, missingFestival: false, missingLocation: false, festivalName: '', locationOrigin: '' }
   }
 
+
   updateWindowWidth() {
     this.setState({ width: window.innerWidth });
   }
@@ -47,7 +48,6 @@ class Search extends React.Component {
   }
 
   updateLocationInput(locationOrigin) {
-    debugger;
     this.setState({ locationOrigin });
   }
 
@@ -79,10 +79,8 @@ class Search extends React.Component {
     setTimeout(() => {
       if (!missingLocation && !missingFestival) {
         this.setState({ festivalToSearch: festivalName, doneSearch: true });
-        const isDemo = this.isDemo();
         const { searchResults: { currency }, dispatch } = this.props;
-        debugger;
-        dispatch(searchFestival(locationOrigin, festivalName, nightsOfStay, numPeople, currency, isDemo));
+        dispatch(searchFestival(locationOrigin, festivalName, nightsOfStay, numPeople, currency, this.state.demo));
       }
     }, 500);
   }
@@ -90,6 +88,9 @@ class Search extends React.Component {
   componentDidMount() {
     this.updateWindowWidth();
     window.addEventListener('resize', this.updateWindowWidth);
+    if(this.isDemo()){
+      this.setState({ festivalName:'Junction 2', locationOrigin: 'Sofia', demo: true });
+    }
   }
 
   componentWillUnmount() {
@@ -108,8 +109,7 @@ class Search extends React.Component {
   }
 
   render() {
-    const { locationInput, location, festivalHint,
-      locationHint, hintStyle, missingFestival, missingLocation, festivalToSearch, doneSearch, screenSize } = this.state;
+    const { missingFestival, missingLocation, festivalName, locationOrigin, festivalToSearch, doneSearch, screenSize } = this.state;
     const { festivalInput } = this.props;
 
     const isOnline = navigator.onLine;
@@ -143,6 +143,7 @@ class Search extends React.Component {
               updateFestivalInput={(festivalName) => this.updateFestivalInput(festivalName)}
               inputStyle={inputStyle}
               errorStyle={errorStyle}
+              value={festivalName}
               missingFestival={missingFestival}
             />
             <p className="searchText" id="fromLabel">from</p>
@@ -152,6 +153,7 @@ class Search extends React.Component {
               errorStyle={errorStyle}
               missingLocation={missingLocation}
               screenSize={screenSize}
+              value={locationOrigin}
             />
             <p className="searchText" id="forLabel">for</p>
             <NightsSelector

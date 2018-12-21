@@ -52,7 +52,7 @@ class LocationInput extends React.Component {
 
 
         const { locationField, location } = this.state;
-        const { inputStyle, errorStyle, inputFieldStyle, missingLocation, screenSize } = this.props;
+        const { value, inputStyle, errorStyle, inputFieldStyle, missingLocation, screenSize } = this.props;
 
 
         const locationIcon = (
@@ -75,12 +75,12 @@ class LocationInput extends React.Component {
                     onChange={(e) => this.updateLocationField(e)}
                     errorText={(missingLocation && !locationField.length) && this.errorMessage}
                     errorStyle={errorStyle}
-                    value={locationField}
+                    value={value || locationField}
                 />
                 <Tooltip
                     component={locationIcon}
                     text='Click here to automatically detect and add your location'
-                    position = { screenSize === 'desktop' ? 'bottom right' : 'top right' }
+                    position={screenSize === 'desktop' ? 'bottom right' : 'top right'}
                 />
             </Paper>
 
