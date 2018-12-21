@@ -30,14 +30,14 @@ class PeopleSelector extends React.Component {
     render() {
 
         const { numPeople } = this.state;
-        const { inputStyle } = this.props;
+        const { value, inputStyle } = this.props;
         const menuOptionStyle = { ...inputStyle, fontSize:'20px', paddingLeft:'0px' };
         const labelStyle =  {...inputStyle, float:'left' };
         
         const selectOptions = this.getOptions().map((option, idx) => {
             return (<MenuItem
-                key={idx}
-                value={idx}
+                key={idx + 1}
+                value={idx + 1}
                 style={menuOptionStyle}
                 primaryText={option}
             />);
@@ -46,7 +46,7 @@ class PeopleSelector extends React.Component {
         return (
             <Paper zDepth={1} className='searchContainer' id="peopleField">
                 <SelectField
-                    value={numPeople}
+                    value={ value || numPeople}
                     onChange={(event, idx, value) => this.selectNumPeople(event, idx, value)}
                     style={{ width: '100%' }}
                     labelStyle={labelStyle}

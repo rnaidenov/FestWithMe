@@ -25,7 +25,7 @@ class NightsSelector extends React.Component {
     render() {
 
         const { nightsOfStay } = this.state;
-        const { inputStyle } = this.props;
+        const { value, inputStyle } = this.props;
 
         const nightsSelectorField = (
             <Paper zDepth={1} className='searchContainer' id="nightsField">
@@ -35,7 +35,7 @@ class NightsSelector extends React.Component {
                     inputStyle={inputStyle}
                     onChange={(e) => this.changeNumOfNights(e)}
                     underlineShow={false}
-                    value={nightsOfStay}
+                    value={value || nightsOfStay}
                 />
                 <p className='nightsLabel'>{nightsOfStay > 1 ? 'nights' : 'night'}</p>
             </Paper>
@@ -43,7 +43,7 @@ class NightsSelector extends React.Component {
 
         return (
             <Tooltip
-                component={ nightsSelectorField }
+                component={nightsSelectorField}
                 text='By default the number of nights will start one day before the event'
                 position='top center'
             />

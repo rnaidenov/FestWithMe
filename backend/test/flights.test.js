@@ -11,7 +11,6 @@ const checkCityIata = (city, expectedIata) => {
                 expect(cityCode).to.equal(expectedIata, `The IATA code for ${city} should have been '${expectedIata}', but is '${cityCode}'.`);
             })
             .catch(err => {
-                console.log(`Laina ${err}`);
                 assert(false, err.message);
             })
     });

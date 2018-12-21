@@ -71,7 +71,6 @@ module.exports = (app) => {
 
   app.get("/api/location", (req, res) => {
     googleMaps.getLocationBasedOnCoordinates({ lat: req.query.lat, lng: req.query.lng }).then(location => {
-      console.log(location)
       res.send({ location })
     }).catch(err => console.err(err))
   });

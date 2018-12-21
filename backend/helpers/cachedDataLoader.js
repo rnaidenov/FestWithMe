@@ -84,7 +84,7 @@ const loadCachedFlightResult = (origin, destination) => {
     return new Promise((resolve, reject) => {
         SearchResults.findOne({ type: DataType.FLIGHT_DETAILS }, (err, cachedDetails) => {
             const cachedFlightResult = cachedDetails.data.find(data => data.origin.includes(origin) && data.destination.includes(destination));
-            setTimeout(() => resolve(cachedFlightResult.flightPriceDetails), 100);
+            setTimeout(() => resolve(cachedFlightResult.flightPriceDetails), 300);
         })
     });
 }

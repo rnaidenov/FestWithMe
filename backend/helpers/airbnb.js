@@ -69,15 +69,16 @@ const _composeUrl = ({ destination, checkInDate, checkOutDate, numPeople, curren
 const getPrice = (destination, eventDate, nights, numPeople, currencySymbol) => {
   return new Promise((resolve, reject) => {
     const checkInDate = formatter.formatDate(eventDate, { more: false, days: 1 });
-    const checkOutDate = formatter.formatDate(eventDate, { more: true, days: parseInt(nights) });
+    const checkOutDate = formatter.formatDate(eventDate, { more: true, days: parseInt(nights) - 1 });
     const currencyCode = CurrencyConverter.getCurrencyCode(currencySymbol); 
     Promise.all([getPropertiesDetails(destination, checkInDate, checkOutDate, numPeople, currencyCode),
     getAveragePrice(destination, checkInDate, checkOutDate, numPeople, currencyCode)])
       .then(details => {
         const [properties, average_price] = details;
-        const housingDetails = { properties, avgPrice: Math.round(average_price/numPeople) };
+        const url = _composeUrl({ destination, checkInDate, checkOutDate, numPeople, currencyCode })
+        const housingDetails = { properties, avgPrice: Math.round(average_price/numPeople), url };
         DataCacheUtil.cacheResults({ type: DataCacheUtil.DataType.HOUSING_DETAILS, data: { housingDetails, destination, numPeople, date: eventDate }});
-        resolve(Object.assign(housingDetails, { url: _composeUrl({ destination, checkInDate, checkOutDate, numPeople, currencyCode })}));
+        resolve(housingDetails);
       })
       .catch(err => {
         console.error(err);

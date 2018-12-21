@@ -20,14 +20,13 @@ import '../../dist/styles/search.css';
 class Search extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props);
     // change missingFestival and location
     this.SMARTPHONE_MAX_WIDTH_PIXELS = 500;
     this.MOBILE_MAX_WIDTH_PIXELS = 1100;
     this.demoParam = 'demo';
     this.updateWindowWidth = this.updateWindowWidth.bind(this);
     this.updateWindowWidth = this.updateWindowWidth.bind(this);
-    this.state = { doneSearch: false, nightsOfStay: '3', numPeople: 6, missingFestival: false, missingLocation: false, festivalName: '', locationOrigin: '' }
+    this.state = { doneSearch: false, nightsOfStay: 1, numPeople: 1, missingFestival: false, missingLocation: false, festivalName: '', locationOrigin: '' }
   }
 
 
@@ -88,8 +87,8 @@ class Search extends React.Component {
   componentDidMount() {
     this.updateWindowWidth();
     window.addEventListener('resize', this.updateWindowWidth);
-    if(this.isDemo()){
-      this.setState({ festivalName:'Junction 2', locationOrigin: 'Sofia', demo: true });
+    if (this.isDemo()) {
+      this.setState({ festivalName: 'Junction 2 2019', locationOrigin: 'Sofia', numPeople: 3, nightsOfStay: 4, demo: true });
     }
   }
 
@@ -109,7 +108,7 @@ class Search extends React.Component {
   }
 
   render() {
-    const { missingFestival, missingLocation, festivalName, locationOrigin, festivalToSearch, doneSearch, screenSize } = this.state;
+    const { missingFestival, missingLocation, festivalName, locationOrigin, numPeople, nightsOfStay, festivalToSearch, doneSearch, screenSize } = this.state;
     const { festivalInput } = this.props;
 
     const isOnline = navigator.onLine;
@@ -129,6 +128,7 @@ class Search extends React.Component {
 
     if (!screenSize) return null;
 
+
     return (
       <MuiThemeProvider>
         <div>
@@ -137,14 +137,15 @@ class Search extends React.Component {
             <PeopleSelector
               updateNumPeople={(numPeople) => this.updateNumPeople(numPeople)}
               inputStyle={inputStyle}
+              value={numPeople}
             />
             <p className="searchText" id="goingToLabel">going to</p>
             <FestivalInput
               updateFestivalInput={(festivalName) => this.updateFestivalInput(festivalName)}
               inputStyle={inputStyle}
               errorStyle={errorStyle}
-              value={festivalName}
               missingFestival={missingFestival}
+              value={festivalName}
             />
             <p className="searchText" id="fromLabel">from</p>
             <LocationInput
@@ -159,6 +160,7 @@ class Search extends React.Component {
             <NightsSelector
               updateNightsField={(numOfNights) => { this.updateNightsField(numOfNights) }}
               inputStyle={inputStyle}
+              value={nightsOfStay}
             />
             <div className="btnWrap">
               <IconButton className='searchBtn' onClick={() => this.lookUpFestival()}>
