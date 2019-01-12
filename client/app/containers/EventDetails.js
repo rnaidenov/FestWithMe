@@ -68,7 +68,7 @@ class EventDetails extends React.Component {
         )
 
         const activeFestival = (
-            <div className='resultsContainer'>
+            <div className='resultsContainer'> 
                 <h1 className='priceBreakdownHeading'>Festival ticket</h1>
                 <div className='contentWrap'>
                     <div className="mainContent">

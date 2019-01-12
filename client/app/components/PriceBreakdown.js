@@ -90,7 +90,7 @@ class PriceBreakdown extends React.Component {
     ));
 
     const priceBreakdownBigScreen = (
-      <div>{content}</div>
+      <div className='priceBreakdownWrap'>{content}</div>
     )
 
     const priceBreakdownMobileScreen = (

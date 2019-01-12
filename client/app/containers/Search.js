@@ -132,7 +132,9 @@ class Search extends React.Component {
     return (
       <MuiThemeProvider>
         <div>
-          {!isPhone ? appTitle : null}
+          <div className={doneSearch ? 'titleWrap noSearch' : 'titleWrap' }>
+            {!isPhone ? appTitle : null}
+          </div>
           <div className='searchWrap'>
             <PeopleSelector
               updateNumPeople={(numPeople) => this.updateNumPeople(numPeople)}
