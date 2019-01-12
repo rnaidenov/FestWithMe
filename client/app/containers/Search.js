@@ -133,7 +133,7 @@ class Search extends React.Component {
       <MuiThemeProvider>
         <div>
           <div className={doneSearch ? 'titleWrap noSearch' : 'titleWrap' }>
-            {!isPhone ? appTitle : null}
+            {screenSize === 'desktop' ? appTitle : null}
           </div>
           <div className='searchWrap'>
             <PeopleSelector

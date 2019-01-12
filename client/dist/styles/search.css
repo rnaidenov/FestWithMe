@@ -19,6 +19,17 @@ p {
 }
 
 @media screen and (min-width: 500px) and (max-width: 1099px) {
+  
+  .searchWrap{
+    height: 35vh;
+  }
+  .appTitle{
+   font-size: 7vw;
+   padding-top: 2vh; 
+  }
+  .searchText{
+    font-size: 2.8vw;
+  }
   .btnWrap {
     width: 100%;
     order: 7;

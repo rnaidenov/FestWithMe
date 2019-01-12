@@ -154,7 +154,12 @@ body{
 
 
 @media screen and (min-width: 500px) and (max-width:1099px) {
-
+  .finishedResultsWrap{
+    height: 55vh;
+  }
+  .priceBreakdownContainer{
+    height: 65%;
+  }
   .priceBreakdownContainer.selected {
     display: block;
     animation: fadeInDown 2500ms linear both;
@@ -175,6 +180,9 @@ body{
     font-size: 30px;
   }
 
+  .priceLabel{
+    font-size: 5vw;
+  }
 
   .price-update-text{
     font-size: 20px;
@@ -189,13 +197,7 @@ body{
   }
 
   .breakdownContainerWrap{
-    padding-left: 3.5%;
-    padding-right: 3.5%;
-    overflow:hidden;
-  }
-
-  .mainContent{
-    height: 160px !important;
+    height: 100%;
   }
 
   .contentWrap{
@@ -228,7 +230,7 @@ body{
   }
 
   .finishedResultsWrap{
-    height: 70vh;
+    height: 55vh;
   }
 
   .priceBreakdownContainer.selected {
@@ -511,14 +513,7 @@ body{
 }
 
 .contentIcon {
-  height: 130px;
-  display: block;
-  margin: auto;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  margin-left: -65px;
-  margin-top: -65px;
+  height: 15vh;
 }
 
 

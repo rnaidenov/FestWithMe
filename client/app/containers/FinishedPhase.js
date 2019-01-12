@@ -86,7 +86,7 @@ class FinishedPhase extends React.Component {
                         {moreThanOnePerson ? <span className="resultText"> per person</span> : null}
                     </p>
                 <div className="priceBreakdownWrap">
-                    {screenSize !== 'desktop' ? priceBreakdownCarret : null}
+                    {screenSize === 'phone' ? priceBreakdownCarret : null}
                 </div>
             </div>
             <div ref={wrapper => this.priceBreakdownWrap = wrapper} className='breakdownContainerWrap'>

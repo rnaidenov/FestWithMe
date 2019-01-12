@@ -93,6 +93,16 @@ class PriceBreakdown extends React.Component {
       <div className='priceBreakdownWrap'>{content}</div>
     )
 
+    const tablet = (
+      <Paper zDepth={1} className={'priceBreakdownContainer selected'}>
+        <CustomCarousel
+          onClick={this.openResultLink}
+          slideWidth={1}
+          content={priceBreakdownContent}
+        />
+      </Paper>
+    )
+
     const priceBreakdownMobileScreen = (
       <Paper zDepth={1} className={priceBreakdownClass}>
         <CustomCarousel
@@ -105,7 +115,7 @@ class PriceBreakdown extends React.Component {
 
 
     return (
-      screenSize !== 'desktop' ? priceBreakdownMobileScreen : priceBreakdownBigScreen
+      screenSize === 'phone' ? priceBreakdownMobileScreen : tablet
     )
     
   }
