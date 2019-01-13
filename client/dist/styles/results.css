@@ -176,12 +176,13 @@ body{
   .totalPriceLabel {
     font-size: 34px;
   }
+
   .resultText{
     font-size: 30px;
   }
 
   .priceLabel{
-    font-size: 5vw;
+    font-size: 4vw;
   }
 
   .price-update-text{
