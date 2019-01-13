@@ -201,12 +201,18 @@ body{
   }
 
   .contentWrap{
-    height:200px;
+    height:75%;
   }
 
-  .accommodationTypeWrap{
-    margin-top:4%;
+  .mainContent{
+    height: 75% !important;
   }
+
+
+  .accommodationTypeWrap{
+    height: 35% !important;
+  }
+  
 
   .inputWrap{
     padding-top:1% !important;
@@ -256,7 +262,7 @@ body{
     padding-left: 5%;
     padding-right: 5%;
     overflow: hidden;
-    height: 65%;
+    height: 85%;
   } 
 
   .typeAndPrice{

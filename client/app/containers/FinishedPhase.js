@@ -13,6 +13,9 @@ class FinishedPhase extends React.Component {
     }
 
     componentDidMount() {
+        if(this.props.screenSize === 'tablet') {
+            this.setState({ isPricebreakdownSelected: true });
+        }
         document.addEventListener('mousedown', this.closePriceBreakdownMobile);
     }
 

@@ -23,11 +23,12 @@ class PriceBreakdown extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
-    if (newProps.priceDetails !== this.state.priceDetails) {
-      const { priceDetails, currency } = newProps;
+    const { priceDetails, currency, isSelected } = newProps;
+    
+    if (priceDetails !== this.state.priceDetails) {
       this.setState({ priceDetails, currency })
     }
-    this.togglePriceBreakdown(newProps.isSelected);
+    this.togglePriceBreakdown(isSelected);
   }
 
   togglePriceBreakdown(isSelected) {
@@ -93,16 +94,6 @@ class PriceBreakdown extends React.Component {
       <div className='priceBreakdownWrap'>{content}</div>
     )
 
-    const tablet = (
-      <Paper zDepth={1} className={'priceBreakdownContainer selected'}>
-        <CustomCarousel
-          onClick={this.openResultLink}
-          slideWidth={1}
-          content={priceBreakdownContent}
-        />
-      </Paper>
-    )
-
     const priceBreakdownMobileScreen = (
       <Paper zDepth={1} className={priceBreakdownClass}>
         <CustomCarousel
@@ -113,9 +104,8 @@ class PriceBreakdown extends React.Component {
       </Paper>
     )
 
-
     return (
-      screenSize === 'phone' ? priceBreakdownMobileScreen : tablet
+      screenSize !== 'desktop' ? priceBreakdownMobileScreen : priceBreakdownBigScreen
     )
     
   }
