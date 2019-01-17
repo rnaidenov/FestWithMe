@@ -13,9 +13,6 @@ class FinishedPhase extends React.Component {
     }
 
     componentDidMount() {
-        if(this.props.screenSize === 'tablet') {
-            this.setState({ isPricebreakdownSelected: true });
-        }
         document.addEventListener('mousedown', this.closePriceBreakdownMobile);
     }
 
@@ -88,21 +85,21 @@ class FinishedPhase extends React.Component {
                         <span className="totalPriceLabel">{currency}{priceDetails.totalPrice}</span>
                         {moreThanOnePerson ? <span className="resultText"> per person</span> : null}
                     </p>
-                <div className="priceBreakdownWrap">
-                    {screenSize === 'phone' ? priceBreakdownCarret : null}
+                    <div className="priceBreakdownWrap">
+                        {screenSize === 'phone' ? priceBreakdownCarret : null}
+                    </div>
                 </div>
-            </div>
-            <div ref={wrapper => this.priceBreakdownWrap = wrapper} className='breakdownContainerWrap'>
-                <PriceBreakdown
-                    prices={priceDetails}
-                    destination={destination}
-                    isSelected={isPricebreakdownSelected}
-                    currency={currency}
-                    updateTicketPrice={updateTicketPrice}
-                    screenSize={screenSize}
-                    searchDetails={searchDetails}
-                />
-            </div>
+                <div ref={wrapper => this.priceBreakdownWrap = wrapper} className='breakdownContainerWrap'>
+                    <PriceBreakdown
+                        prices={priceDetails}
+                        destination={destination}
+                        isSelected={screenSize === 'tablet' ? true : isPricebreakdownSelected}
+                        currency={currency}
+                        updateTicketPrice={updateTicketPrice}
+                        screenSize={screenSize}
+                        searchDetails={searchDetails}
+                    />
+                </div>
             </div >
 
         )

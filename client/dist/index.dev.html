@@ -705,13 +705,10 @@
                 background-image: url(https://res.cloudinary.com/rado-content-cloud/image/upload/c_scale,w_800/v1521193705/marvin-meyer-190672-unsplash.webp)
             }
             .placeholderWrap {
-                padding-top: 5%;
+                padding-top: 2vh;
             }
             .placeholderTitle {
-                width: 85%;
-                margin-left: 7.5%;
-                margin-right: 7.5%;
-                padding-top: 2.2%;
+                display: none;
             }
             .searchWrap {
                 width: 90%;
@@ -766,16 +763,9 @@
 
 
         @media screen and (min-width:500px) {
-            .placeholderTitle {
-                height: 15vh;
-                padding-top: 0.1%;
-            }
             .placeholderTitle .ph-row .big,
             .ph-row.big div {
                 height: 120px;
-            }
-            .appTitle {
-                font-size: 20vw;
             }
         }
 
@@ -790,8 +780,13 @@
             }
             .placeholderTitle {
                 width: 35%;
+                padding-top: 0;
+                height: 15vh;
                 margin-left: 32.5%;
                 margin-right: 32.5%;
+            }
+            .appTitle {
+                font-size: 20vw;
             }
 
             .searchWrap {
