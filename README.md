@@ -1,22 +1,8 @@
 # FestWithMe
-Web-based app built with MERN stack to calculate price estimates for going to festivals abroad.
+Web-based application built with _React_, _Redux_, _Node_ and _MongoDB_. 
 
+It obtains data from **ResidentAdvisor**, **AirBnb** and **Kiwi.com** to calculate a price estimate for going to a festival / electronic music event abroad.
 
-### Prerequisites (globally installed)
+The web app is available [here](https://fest-with-me.herokuapp.com/?demo=true). 
 
-- node + npm
-- webpack-dev-server
-
-### Starting the application
-
-Backend:
-
-```
-npm run backend
-```
-
-Web app:
-
-```
-npm start
-```
+_Note: I haven't got much time to maintain the app at the moment, so that's why I've only given the demo url.To view the results just click on the search button_ 😁
