@@ -31,6 +31,7 @@ const getAveragePrice = (destination, checkInDate, checkOutDate, numPeople, curr
 const getPropertiesDetails = (destination, checkInDate, checkOutDate, numPeople, currencyCode) => {
   return new Promise((resolve, reject) => {
     const types = ['Shared room', 'Private room', 'Entire home/apt'];
+    // TODO: These icons should be dealt with on the FE
     const icons = ['sharedRoom.svg', 'privateRoom.svg', 'entireHome.svg'];
     const accommodationTypes = [];
     const prices = [];
