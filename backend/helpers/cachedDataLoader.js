@@ -86,8 +86,11 @@ const loadCachedHousingResult = (destination, date, numPeople) => {
         url: "https://www.airbnb.co.uk/s/London--England--United-Kingdom/homes?adults=2&place_id=ChIJdd4hrwug2EcRmSrV3Vo6llI&checkin=2022-06-04&checkout=2022-06-06"
     }
   
-    return Promise.resolve(data)
-
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(data)
+        }, 1800);
+    });
     // return new Promise((resolve, reject) => {
     //     SearchResults.findOne({ type: DataType.HOUSING_DETAILS }, (err, cachedDetails) => {
     //         const cachedHousingResult = cachedDetails.data.find(data => data.destination == destination && data.numPeople == numPeople && data.date == date);  
@@ -97,8 +100,7 @@ const loadCachedHousingResult = (destination, date, numPeople) => {
 }
 
 const loadCachedEventResult = (eventName) => {
-    console.log(1);
-    const eventDetails = {
+    const data = {
         name: 'Junction 2 Festival 2018',
         city: 'London',
         country: 'United Kingdom',
@@ -107,7 +109,12 @@ const loadCachedEventResult = (eventName) => {
         isActive: true,
         url: "https://ra.co/events/1326047"
     }
-    return eventDetails;
+
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(data)
+        }, 1200);
+    });
 
     // return new Promise((resolve, reject) => {
     //     SearchResults.findOne({ type: DataType.EVENT_DETAILS }, (err, cachedDetails) => {
@@ -126,8 +133,12 @@ const loadCachedFlightResult = (origin, destination) => {
         destination: "LON",
         url: "https://www.kiwi.com/en/search/results/sofia-bulgaria/london-united-kingdom/2022-06-04/2022-06-06"
       };
-    return Promise.resolve(data);
 
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(data)
+        }, 1500);
+    });
     // return new Promise((resolve, reject) => {
     //     SearchResults.findOne({ type: DataType.FLIGHT_DETAILS }, (err, cachedDetails) => {
     //         const cachedFlightResult = cachedDetails.data.find(data => data.origin.includes(origin) && data.destination.includes(destination));
