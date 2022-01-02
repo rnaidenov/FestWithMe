@@ -1,6 +1,7 @@
 import React from 'react';
+// TODO: Change to tooltip from material-ui
 import { Popup } from 'semantic-ui-react'
-import '../../../node_modules/semantic-ui-css/components/popup.css';
+import '../../node_modules/semantic-ui-css/components/popup.css';
 
 class Tooltip extends React.Component {
  
