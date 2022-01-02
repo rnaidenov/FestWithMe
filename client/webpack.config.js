@@ -3,27 +3,27 @@ const path = require('path'),
       workboxPlugin = require('workbox-webpack-plugin'),
       outputDir = path.resolve(__dirname,'dist');
 module.exports = {
+    mode: 'development',
     devServer: {
-      inline: true,
-      contentBase: './dist',
+      static: './dist',
       port: 3001,
       proxy: { "/api/**": { target: 'http://localhost:3000', secure: false }  }
     },
-    devtool: 'cheap-module-eval-source-map',
+    devtool: 'eval-cheap-module-source-map',
     entry: path.resolve(__dirname,'app/index.js'),
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.js$/,
                 loader: 'babel-loader',
-                query: {
+                options: {
                   plugins: ['react-html-attrs', 'transform-class-properties', 'transform-decorators-legacy','transform-async-to-generator'],
                 },
                 exclude: /node_modules/
             },
             {
                 test: /\.css$/,
-                loaders: ['style-loader','css-loader']
+                use: ['style-loader','css-loader']
             },
             {
               test: /\.json$/,
@@ -38,23 +38,17 @@ module.exports = {
             }
         ]
     },
-    node: {
-      console: true,
-      fs: 'empty',
-      net: 'empty',
-      tls: 'empty'
-    },
     output: {
         path: outputDir,
         publicPath:'/',
         filename: 'bundle.js'
     },
     plugins: [
-        new webpack.DefinePlugin({
-            "process.env": {
-              NODE_ENV: JSON.stringify(process.env.NODE_ENV || "develop"),
-              APPLICATION_API_BASE_URL: JSON.stringify("http://localhost:3000/")
-            }
-        })
+      new webpack.DefinePlugin({
+          "process.env": {
+            NODE_ENV: JSON.stringify(process.env.NODE_ENV || "develop"),
+            APPLICATION_API_BASE_URL: JSON.stringify("http://localhost:3000/")
+          }
+      })  
     ]
 };
