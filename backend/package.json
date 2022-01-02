@@ -1,0 +1,32 @@
+{
+  "name": "fest-with-me-backend",
+  "version": "1.0.0",
+  "engines": {
+    "node": ">= 7.6.0"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "mocha backend/test/*.test.js"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "@google/maps": "^0.4.3",
+    "body-parser": "^1.17.2",
+    "cheerio": "^1.0.0-rc.1",
+    "compression": "^1.7.2",
+    "cors": "^2.8.1",
+    "cross-env": "^1.0.8",
+    "express": "^4.16.3",
+    "geocoder": "^0.2.3",
+    "html-minifier": "^3.5.11",
+    "money": "^0.2.0",
+    "mongoose": "^4.10.4",
+    "node-fetch": "^1.7.1",
+    "remove-accents": "^0.4.2"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^4.0.1"
+  }
+}

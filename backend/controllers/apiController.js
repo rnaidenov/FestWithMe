@@ -57,6 +57,7 @@ module.exports = (app) => {
       const eventDetails = isDemo == 'true'
         ? await DataCacheUtil.loadCachedEventResult(eventName)
         : await events.lookUpEvent(eventName, currency);
+      
       res.status(200).send(eventDetails);
     } catch (err) {
       res.status(500).send(err);
