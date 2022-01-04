@@ -17,7 +17,8 @@ module.exports = {
                 test: /\.js$/,
                 loader: 'babel-loader',
                 options: {
-                  plugins: ['react-html-attrs', 'transform-class-properties', 'transform-decorators-legacy','transform-async-to-generator'],
+                  // TODO:
+                  // plugins: ['react-html-attrs', 'transform-class-properties', 'transform-decorators-legacy','transform-async-to-generator'],
                 },
                 exclude: /node_modules/
             },
@@ -46,7 +47,6 @@ module.exports = {
     plugins: [
       new webpack.DefinePlugin({
           "process.env": {
-            NODE_ENV: JSON.stringify(process.env.NODE_ENV || "develop"),
             APPLICATION_API_BASE_URL: JSON.stringify("http://localhost:3000/")
           }
       })  
