@@ -1,9 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { loadFestivals, searchFestival, getLocation } from '../actions/searchActions';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import IconButton from 'material-ui/IconButton';
+// import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import IconButton from '@material-ui/core/IconButton';
 import PeopleSelector from './PeopleSelector';
 import NightsSelector from './NightsSelector';
 import FestivalInput from './FestivalInput';
@@ -130,7 +129,7 @@ class Search extends React.Component {
 
 
     return (
-      <MuiThemeProvider>
+      // <MuiThemeProvider>
         <div>
           <div className={doneSearch ? 'titleWrap noSearch' : 'titleWrap' }>
             {screenSize === 'desktop' ? appTitle : null}
@@ -172,7 +171,7 @@ class Search extends React.Component {
           </div>
           <Results festivalName={festivalToSearch} screenSize={screenSize} />
         </div>
-      </MuiThemeProvider>
+      // </MuiThemeProvider>
     )
   }
 

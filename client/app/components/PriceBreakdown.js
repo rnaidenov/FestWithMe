@@ -1,5 +1,5 @@
 import React from 'react';
-import Paper from 'material-ui/Paper';
+import Paper from '@material-ui/core/Paper';
 import EventDetails from '../containers/EventDetails';
 import FlightDetails from './FlightDetails';
 import HousingDetails from '../containers/HousingDetails';

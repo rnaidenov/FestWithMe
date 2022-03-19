@@ -1,8 +1,7 @@
 import React from 'react';
-import SelectField from 'material-ui/SelectField';
-import MenuItem from 'material-ui/MenuItem';
-import Paper from 'material-ui/Paper';
-import TextField from 'material-ui/TextField';
+import MenuItem from '@material-ui/core/MenuItem';
+import Paper from '@material-ui/core/Paper';
+import TextField from '@material-ui/core/TextField';
 import Tooltip from '../components/Tooltip';
 
 class NightsSelector extends React.Component {

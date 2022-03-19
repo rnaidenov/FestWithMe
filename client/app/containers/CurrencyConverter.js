@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import CircularProgress from 'material-ui/CircularProgress';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { changeCurrency } from '../actions/priceBreakdownActions';
 import CurrencyDropdown from '../components/CurrencyDropdown';
 import '../../dist/styles/currencyConverter.css';

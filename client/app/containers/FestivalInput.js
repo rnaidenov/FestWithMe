@@ -1,9 +1,10 @@
 import React from 'react';
-import Paper from 'material-ui/Paper';
-import AutoComplete from 'material-ui/AutoComplete';
+import Paper from '@material-ui/core/Paper';
+// import AutoComplete from '@material-ui/core/Autocomplete';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { loadFestivals } from '../actions/searchActions';
+import { TextField } from '@material-ui/core';
 
 
 @connect(store => {
@@ -36,7 +37,7 @@ class FestivalInput extends React.Component {
         
         return (
             <Paper zDepth={1} className='searchContainer' id="festivalField">
-                <AutoComplete
+                <TextField
                     id='FESTIVAL_INPUT'
                     dataSource={festivals}
                     filter={AutoComplete.caseInsensitiveFilter}

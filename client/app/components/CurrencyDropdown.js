@@ -1,7 +1,7 @@
 import React from 'react';
-import IconMenu from 'material-ui/IconMenu';
-import MenuItem from 'material-ui/MenuItem';
-import IconButton from 'material-ui/IconButton';
+import IconButton from '@material-ui/core/IconButton';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 import FlagIcon from './FlagIcon';
 
 class CurrencyDropdown extends React.Component {
@@ -45,7 +45,7 @@ class CurrencyDropdown extends React.Component {
 
         return (
             <div className='currencyDropdownWrap'>
-                <IconMenu
+                <Select
                     iconButtonElement={<IconButton style={{ marginTop: '-15px', width: '65px' }}>
                         <FlagIcon
                             currencyName={currencyValue.name}
@@ -59,7 +59,7 @@ class CurrencyDropdown extends React.Component {
                     className="currencyMenu"
                 >
                     {currencyChoices}
-                </IconMenu>
+                </Select>
                 <span className="carretWrap">
                     <i class="material-icons currencyCarret">
                         arrow_drop_down

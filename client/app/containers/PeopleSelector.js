@@ -1,7 +1,7 @@
 import React from 'react';
-import SelectField from 'material-ui/SelectField';
-import MenuItem from 'material-ui/MenuItem';
-import Paper from 'material-ui/Paper';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import Paper from '@material-ui/core/Paper';
 // import injectTapEventPlugin from 'react-tap-event-plugin';
 // injectTapEventPlugin();
 
@@ -46,14 +46,15 @@ class PeopleSelector extends React.Component {
 
         return (
             <Paper zDepth={1} className='searchContainer' id="peopleField">
-                <SelectField
-                    value={ value || numPeople}
+                <Select
+                    // TODO:
+                    value={ value || numPeople }
                     onChange={(event, idx, value) => this.selectNumPeople(event, idx, value)}
                     style={{ width: '100%' }}
                     labelStyle={labelStyle}
                 >
                     {selectOptions}
-                </SelectField>
+                </Select>
             </Paper>
         )
     }

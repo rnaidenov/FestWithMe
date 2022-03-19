@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { updateTicketPrice } from '../actions/priceUpdateActions';
-import Paper from 'material-ui/Paper';
-import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
+import Paper from '@material-ui/core/Paper';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 
 @connect(store => {
@@ -58,10 +58,11 @@ class EventDetails extends React.Component {
                                 id='priceInputField'
                             />
                         </Paper>
-                        <RaisedButton
+                        <Button
                             className='price-update-btn'
                             disabled={newPriceMissing}
-                            onClick={this.updateTicketPrice}><p className='price-update-btn-text'>OK</p></RaisedButton>
+                            onClick={this.updateTicketPrice}><p className='price-update-btn-text'>OK</p>
+                        </Button>
                     </div>
                 </div>
             </div>
